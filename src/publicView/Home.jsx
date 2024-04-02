@@ -15,6 +15,7 @@ import Gallery from '../Components/Gallery';
 import Footer from '../Components/Footer';
 
 function Home() {
+  console.log("change ");
   return (
     <>
       <CssBaseline />

@@ -4,14 +4,14 @@ import { Grid, Paper, Container, Typography, styled } from '@mui/material';
 export default function Gallery() {
 
   const galleryItems = [
-    { title: 'Cleaning Drive', image: './src/assets/Gallery_1.png' },
-    { title: 'Pollution Control', image: './src/assets/Gallery_2.png' },
-    { title: '', image: './src/assets/Gallery_3.png' },
-    { title: 'Mountain', image: './src/assets/Gallery_4.png' },
-    { title: 'Use Case', image: './src/assets/Gallery_5.png' },
-    { title: '', image: './src/assets/Gallery_6.png' },
-    { title: '', image: './src/assets/Gallery_7.png' },
-    { title: '', image: './src/assets/Gallery_8.png' },
+    { title: 'Cleaning Drive', image: './assets/Gallery_1.png' },
+    { title: 'Pollution Control', image: './assets/Gallery_2.png' },
+    { title: '', image: './assets/Gallery_3.png' },
+    { title: 'Mountain', image: './assets/Gallery_4.png' },
+    { title: 'Use Case', image: './assets/Gallery_5.png' },
+    { title: '', image: './assets/Gallery_6.png' },
+    { title: '', image: './assets/Gallery_7.png' },
+    { title: '', image: './assets/Gallery_8.png' },
     // Add more items as necessary
   ];
 
@@ -36,7 +36,7 @@ export default function Gallery() {
     position:'absolute', 
     top:'0',
     backgroundColor:'rgba(0,0,0,0.3)',
-    backgroundImage:"url('./src/assets/play_button.png')",
+    backgroundImage:"url('./assets/play_button.png')",
     backgroundRepeat:'no-repeat',
     backgroundPosition:'center'
 }));

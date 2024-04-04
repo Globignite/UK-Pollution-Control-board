@@ -16,7 +16,7 @@ const ServiceHelp = () => {
         </Stack>
       </Box>
       <Box>
-        <img src={'./src/assets/customerCare.png'} alt="important_links" loading='lazy' width="350" heigh="350" />
+        <img src={'./assets/customerCare.png'} alt="important_links" loading='lazy' width="350" heigh="350" />
       </Box>
     </Box>
   );

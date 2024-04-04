@@ -6,32 +6,32 @@ const QuickLinks = () => {
     {
       id: '1',
       title: 'News',
-      img_link: './src/assets/news-report_1.png'
+      img_link: './assets/news-report_1.png'
     },
     {
       id: '2',
       title: 'Recruitments',
-      img_link: './src/assets/recruitments.png'
+      img_link: './assets/recruitments.png'
     },
     {
       id: '3',
       title: 'Tenders',
-      img_link: './src/assets/tenders.png'
+      img_link: './assets/tenders.png'
     },
     {
       id: '4',
       title: 'Important Office Orders / Letters / Directions',
-      img_link: './src/assets/important_office_orders.png'
+      img_link: './assets/important_office_orders.png'
     },
     {
       id: '5',
       title: 'Court/ Tribunal-Judgements Orders',
-      img_link: './src/assets/law_1.png'
+      img_link: './assets/law_1.png'
     },
     {
       id: '6',
       title: 'Download',
-      img_link: './src/assets/download_1.png'
+      img_link: './assets/download_1.png'
     }
   ]
 
@@ -50,7 +50,7 @@ const QuickLinks = () => {
     width: '100%',
     height: '100%',
     position:'absolute',
-    backgroundImage: "url('./src/assets/man_with_mobile.png')",
+    backgroundImage: "url('./assets/man_with_mobile.png')",
     backgroundRepeat:'no-repeat',
     bottom:'-100px',
     right:'-60px'

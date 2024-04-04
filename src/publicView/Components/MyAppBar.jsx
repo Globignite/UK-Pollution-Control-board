@@ -15,8 +15,8 @@ const MyAppBar = () => {
       <Box position="static" sx={{bgcolor:'secondary.main', py:1, height:'50px', display:'flex', alignItems:'center'}} >
           <Container sx={{display:'flex', justifyContent:'space-between'}}  >
             <Box sx={{display:'flex', alignItems:'center'}} >
-              <img src={'./src/assets/ashok_sthambha.png'} alt="" style={{height:'40px'}} />
-              <img src={'./src/assets/akam_logo.png'} alt="" style={{height:'40px', marginLeft:'20px'}} />
+              <img src={'./assets/ashok_sthambha.png'} alt="" style={{height:'40px'}} />
+              <img src={'./assets/akam_logo.png'} alt="" style={{height:'40px', marginLeft:'20px'}} />
             </Box>
 
             {/* <Box sx={{display:'flex', alignItems:'center'}} >
@@ -42,7 +42,7 @@ const MyAppBar = () => {
         <Container maxWidth="lg">
           <Grid container >
             <Grid item xs={9} sx={{display:'flex', alignItems:'center'}}  >
-              <img src={'./src/assets/logo.png'} alt="main_logo" width={90} height={90} />
+              <img src={'./assets/logo.png'} alt="main_logo" width={90} height={90} />
               <Box sx={{ml:1}} >
                 <Typography variant='h2' sx={{fontSize:'1.8rem', fontWeight:'560'}}>
                   UTTARAKHAND POLLUTION CONTROL BOARD

@@ -13,7 +13,7 @@ const NoticesAndUpdates = () => {
             Notices
           </Typography>
           <Paper elevation={24} sx={{ width:'180px', height:'180px', boxShadow:'none', py:2, bgcolor:"background.lightGreen", borderRadius:'10px', display:'flex', flexDirection:'column', justifyContent:'space-around', alignItems:'center'}}>
-            <img src={'./src/assets/notice_1.png'} alt={'link_logo'} loading='lazy' style={{ width: '70px', height: '70px' }} />
+            <img src={'./assets/notice_1.png'} alt={'link_logo'} loading='lazy' style={{ width: '70px', height: '70px' }} />
             <Typography align="center" sx={{fontWeight:'530', fontSize:'0.9rem', px:1, color:'#393838'}} > Notice </Typography>
           </Paper>
         </Grid>

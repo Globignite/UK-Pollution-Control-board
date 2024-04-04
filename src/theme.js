@@ -3,16 +3,25 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: '#155693',
+      footer_links: '#2b5830'
     },
     secondary: {
-      main: '#19857b',
+      main: '#179315',
+      light: '#3da73c',
+      lightest:'#9dda9d'
+    },
+    pdf_text: {
+      main: '#ec4b4b',
     },
     error: {
       main: '#ff0000',
     },
     background: {
       default: '#fff',
+      header: '#f8fcf8',
+      footer: '#d7e8f9',
+      lightGreen: '#f8fcf8'
     },
   },
 });

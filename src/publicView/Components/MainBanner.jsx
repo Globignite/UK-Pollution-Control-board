@@ -7,15 +7,15 @@ export default function MainBanner() {
   const items = [
     {
         name: "Banner1",
-        image: "./src/assets/banner1.png"
+        image: "./assets/banner1.png"
     },
     {
         name: "Banner2",
-        image: "./src/assets/banner1.png"
+        image: "./assets/banner1.png"
     },
     {
         name: "Banner3",
-        image: "./src/assets/banner1.png"
+        image: "./assets/banner1.png"
     },
 
 ];

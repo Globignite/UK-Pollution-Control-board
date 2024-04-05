@@ -1,4 +1,5 @@
 import { Box, Stack, Grid, Paper, Typography, styled } from '@mui/material';
+import React from 'react';
 
 const QuickLinks = () => {
 
@@ -65,12 +66,12 @@ const QuickLinks = () => {
             {
               Links.map(({id, title, img_link}) =>{
                 return(
-                  <>
-                    <Paper key={id} sx={{ width:'180px', height:'180px', boxShadow:'none', m:1, py:2, bgcolor:"background.lightGreen", borderRadius:'10px', display:'flex', flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
+                  <React.Fragment key={id}>
+                    <Paper  sx={{ width:'180px', height:'180px', boxShadow:'none', m:1, py:2, bgcolor:"background.lightGreen", borderRadius:'10px', display:'flex', flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
                       <img src={img_link} alt={'link_logo'} loading='lazy' style={{ width: '70px', height: '70px' }} />
                       <Typography align="center" sx={{fontWeight:'600', color:'secondary.main'}} > {title} </Typography>
                     </Paper>
-                  </>
+                  </React.Fragment>
                 )
               })
             }

@@ -48,30 +48,24 @@ export default function Gallery() {
           Gallery
         </Typography>
         <Grid container spacing={2}> 
-            {galleryItems.map(({title, image}) =>(
-              <>
-                {
-                  title ?
-                  <Grid item xs={12} sm={6} md={3} lg={3} key={image}>
-                    <Paper sx={{boxShadow:'none', position:'relative'}}>
-                      <img src={image} alt={title} loading='lazy' style={{ width: '100%', height: '100%' }} />
-                      <TitleBox > {title} </TitleBox>
-                    </Paper>
-                  </Grid>
-                  :
-                  <Grid item xs={12} sm={6} md={3} lg={3} key={image}>
-                    <Paper sx={{boxShadow:'none', position:'relative'}}>
-                      <img src={image} alt={title} loading='lazy' style={{ width: '100%', height: '100%' }} />
-                      {/* <TitleBox > {title} </TitleBox> */}
-                      <OverlayBox />
-                      
-                    </Paper>
-                  </Grid>
-                }
-              </>
-
-              )
-            )}
+          {
+            galleryItems.map(({ title, image }) => (
+              title ?
+                <Grid item key={image} xs={12} sm={6} md={3} lg={3}>
+                  <Paper sx={{ boxShadow: 'none', position: 'relative' }}>
+                    <img src={image} alt={title} loading='lazy' style={{ width: '100%', height: '100%' }} />
+                    <TitleBox>{title}</TitleBox>
+                  </Paper>
+                </Grid>
+                :
+                <Grid item key={image} xs={12} sm={6} md={3} lg={3}>
+                  <Paper sx={{ boxShadow: 'none', position: 'relative' }}>
+                    <img src={image} alt={title} loading='lazy' style={{ width: '100%', height: '100%' }} />
+                    <OverlayBox />
+                  </Paper>
+                </Grid>
+            ))
+          }
         </Grid>
       </Container>
     </>

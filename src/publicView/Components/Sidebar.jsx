@@ -24,7 +24,7 @@ export default function Sidebar() {
     <>
 
       <List>
-        {SideMenu.menu.map((menuItem, index) => (
+        {SideMenu.menu.map((menuItem,index) => (
           <div key={index}>
             <ListItem button sx={{borderBottom:'1px solid #EEEEEE'}}  onClick={() => handleClick(index)}>
               <ListItemText primary={menuItem.name} />

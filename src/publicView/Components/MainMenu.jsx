@@ -8,7 +8,7 @@ const MenuItem = styled(ListItem)(({ theme }) => ({
     cursor: 'pointer',
     color:'grey',
     '&:hover': {
-      backgroundColor: theme.palette.grey[100], // change background color on hover
+      backgroundColor: theme.palette.grey[100], 
       color: theme.palette.primary.main,
     },
   }));
@@ -18,9 +18,14 @@ const MainMenu = () => {
   const [open, setOpen] = useState({});
   const navBarRef = useRef(null);
 
-  const handleClick = (index) => {
+  const handleClickHover = (index) => {
     // setOpen({ ...open, [index]: !open[index] });
-    setOpen({ [index]: !open[index] });
+    setOpen({ [index]: true });
+    console.log(open)
+};
+
+const handleClickLeave = (index) => {
+    setOpen({ [index]: false });
   };
 
   useEffect(() => {
@@ -41,10 +46,10 @@ const MainMenu = () => {
   return (
     <>
 
-      <List ref={navBarRef} sx={{display:'flex', px:3, mb:1, width:'100%', position:'relative'}} disablePadding >
+      <List ref={navBarRef} sx={{display:'flex', justifyContent:'center', mb:1, width:'100%', position:'relative', fontSize:'0.9rem'}} disablePadding >
         {mainMenu.map((menuItem) => (
           <Box key={menuItem.name} sx={{bgcolor:'background.header'}}>
-            <MenuItem sx={{ px:0}} button  component={RouterLink} to={menuItem.href} onMouseEnter={() => handleClick(menuItem.name)} >
+            <MenuItem sx={{ px:0}} button  component={RouterLink} to={menuItem.href} onMouseEnter={() => handleClickHover(menuItem.name)} onMouseLeave={() => handleClickLeave(menuItem.name)} >
                 <Box sx={{
                     borderRight: menuItem.name === "Public Hearing"?"":'1px solid grey', 
                     display:'flex', 
@@ -52,7 +57,7 @@ const MainMenu = () => {
                     width:'100%'
                     }} >
                         {/* <Typography sx={{ textDecoration:open[menuItem.name]?'underline' :"", textUnderlineOffset:'5px', color:open[menuItem.name]?'primary.main':"", fontWeight:'bold', textDecorationThickness:'2px'}} >  */}
-                        <Box component='div' sx={{ color:open[menuItem.name]?'primary.main':"", fontWeight:'bold'}} > 
+                        <Box component='div' sx={{ color:open[menuItem.name]?'primary.main':""}} > 
                         {menuItem.name}
                         {
                             open[menuItem.name]?
@@ -64,7 +69,7 @@ const MainMenu = () => {
                 </Box>
             </MenuItem>
             {menuItem.subItems && (
-              <Collapse in={open[menuItem.name]} timeout="auto" unmountOnExit sx={{position:'absolute', top:'105%', zIndex:'500', bgcolor:'secondary.navbar'}} >
+              <Collapse in={open[menuItem.name]} timeout="auto" unmountOnExit sx={{position:'absolute', top:'105%', zIndex:'500', bgcolor:'secondary.navbar', minWidth:'150px' }} onMouseEnter={() => handleClickHover(menuItem.name)} onMouseLeave={() => handleClickLeave(menuItem.name)} >
               {/* <Collapse in={open[menuItem.name]} timeout="auto" unmountOnExit sx={{position:'absolute', top:'100%', zIndex:'500', bgcolor:'background.header'}} > */}
               {/* <Collapse > */}
                 <List component="div" disablePadding >

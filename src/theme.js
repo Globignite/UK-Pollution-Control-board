@@ -9,7 +9,8 @@ const theme = createTheme({
     secondary: {
       main: '#179315',
       light: '#3da73c',
-      lightest:'#9dda9d'
+      lightest:'#9dda9d',
+      navbar:'#b1e5b0'
     },
     pdf_text: {
       main: '#ec4b4b',

@@ -38,7 +38,7 @@ const MyAppBar = () => {
       </Box>
       
       {/* main header */}
-      <Box sx={{mb:3,py:5}}>
+      <Box sx={{mb:3,pt:5}}>
         <Container maxWidth="lg">
           <Grid container >
             <Grid item xs={9} sx={{display:'flex', alignItems:'center'}}  >

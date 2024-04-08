@@ -1,13 +1,14 @@
-import * as React from 'react';
-import { List, ListItem, ListItemText, Collapse } from '@mui/material';
+import { useState } from 'react';
+import { List, ListItem, ListItemText, Collapse, Link } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { SideMenu } from '../JsonFiles/SideMenu';
+import { Link as RouterLink } from 'react-router-dom';
 
 
 export default function Sidebar() {
 
-  const [open, setOpen] = React.useState({});
-  const [openSub, setOpenSub] = React.useState({});
+  const [open, setOpen] = useState({});
+  const [openSub, setOpenSub] = useState({});
 
   const handleClick = (index) => {
     setOpen({ ...open, [index]: !open[index] });
@@ -17,55 +18,90 @@ export default function Sidebar() {
     setOpenSub({ ...openSub, [index]: !openSub[index] });
   };
 
-  // console.log(SideMenu.menu)
-
-  // Sample structure, repeat for other items
   return (
     <>
 
       <List>
-        {SideMenu.menu.map((menuItem,index) => (
-          <div key={index}>
-            <ListItem button sx={{borderBottom:'1px solid #EEEEEE'}}  onClick={() => handleClick(index)}>
-              <ListItemText primary={menuItem.name} />
-              {menuItem.subItems && (open[index] ? <ExpandLess /> : <ExpandMore />)}
+        {SideMenu.menu.map((menuItem) => (
+          <div key={menuItem.name}>
+            <ListItem sx={{borderBottom:'1px solid #EEEEEE', cursor:'pointer'}} button  >
+              {/* <ListItemText primary={menuItem.name}  /> */}
+              <Link
+              component={RouterLink}
+              to={menuItem.href}
+              variant="body1"
+              color="textPrimary"
+              sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}
+              underline="none"
+            >
+              {menuItem.name}
+            </Link>
+              {menuItem.subItems && (open[menuItem.name] ? <ExpandLess  onClick={() => handleClick(menuItem.name)} /> : <ExpandMore  onClick={() => handleClick(menuItem.name)} />)}
             </ListItem>
             {menuItem.subItems && (
-              <Collapse in={open[index]} timeout="auto" unmountOnExit>
+              <Collapse in={open[menuItem.name]} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   {menuItem.subItems.map((subItem) => (
-                    <>
+                    <div key={subItem.name}>
                     {
                       subItem?.subItems ?
-                        <ListItem key={subItem.name} sx={{pl:5}}  button onClick={() => handleClickSub(index)}>
-                          <ListItemText primary={subItem.name} />
-                          {subItem.subItems && (openSub[index] ? <ExpandLess /> : <ExpandMore />)}
+                        <ListItem key={subItem.name} sx={{pl:5}}  button >
+                          {/* <ListItemText primary={subItem.name} /> */}
+                          <Link
+                            component={RouterLink}
+                            to={subItem.href}
+                            variant="body1"
+                            color="textPrimary"
+                            sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}
+                            underline="none"
+                          >
+                            {subItem.name}
+                          </Link>
+                          {subItem.subItems && (openSub[subItem.name] ? <ExpandLess onClick={() => handleClickSub(subItem.name)} /> : <ExpandMore onClick={() => handleClickSub(subItem.name)} />)}
                         </ListItem>
                         :
-                        <ListItem key={subItem.name} sx={{pl:5}}  button component="a" href={subItem.href} onClick={() => handleClickSub(index)}>
-                          <ListItemText primary={subItem.name} />
-                          {subItem.subItems && (openSub[index] ? <ExpandLess /> : <ExpandMore />)}
+                        <ListItem key={subItem.name} sx={{pl:5}}  button >
+                          {/* <ListItemText primary={subItem.name} /> */}
+                          <Link
+                            component={RouterLink}
+                            to={subItem.href}
+                            variant="body1"
+                            color="textPrimary"
+                            sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}
+                            underline="none"
+                          >
+                            {subItem.name}
+                          </Link>
+                          {subItem.subItems && (openSub[subItem.name] ? <ExpandLess onClick={() => handleClickSub(subItem.name)} /> : <ExpandMore onClick={() => handleClickSub(subItem.name)} />)}
                         </ListItem>
 
                     }
                     {
                       subItem?.subItems && (
-                        <Collapse in={openSub[index]} timeout="auto" unmountOnExit >
+                        <Collapse in={openSub[subItem.name]} timeout="auto" unmountOnExit >
                           <List component="div" disablePadding > 
                             {
                               subItem.subItems.map((subItem) => (
-                                <>
-                                  <ListItem key={subItem.name} sx={{pl:8}} button component="a" href={subItem.href}>
-                                    <ListItemText primary={subItem.name} />
+                                  <ListItem key={subItem.name} sx={{pl:8}} button >
+                                    {/* <ListItemText primary={subItem.name} /> */}
+                                    <Link
+                                      component={RouterLink}
+                                      to={subItem.href}
+                                      variant="body1"
+                                      color="textPrimary"
+                                      sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}
+                                      underline="none"
+                                    >
+                                      {subItem.name}
+                                    </Link>
                                   </ListItem>
-                                </>
                               ))
                             }
                           </List>
                         </Collapse>
                       )
                     }
-                    </> 
+                    </div> 
                   ))}
                 </List>
               </Collapse>
@@ -74,24 +110,6 @@ export default function Sidebar() {
         ))}
       </List>
 
-
-
-
-    {/* <List component="nav">
-      <ListItem button onClick={handleClick}>
-        <ListItemText primary="Quality Standards" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem button>
-            <ListItemText inset primary="Sub-item 1" />
-          </ListItem>
-
-        </List>
-      </Collapse>
-
-    </List> */}
     </>
   );
 }

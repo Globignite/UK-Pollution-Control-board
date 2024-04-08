@@ -16,12 +16,14 @@ import ServiceHelp from "./Components/ServiceHelp";
 import Gallery from "./Components/Gallery";
 import Footer from "./Components/Footer";
 import RunningText from "./Components/RunningText"; 
+import MainMenu from "./Components/MainMenu";
 
 function PublicLayout() {
 	return (
 		<>
 			<CssBaseline />
 			<MyAppBar />
+			<MainMenu/>
 			<MainBanner />
 			<RunningText />
 			<Container maxWidth="lg">

@@ -21,7 +21,7 @@ const MainMenu = () => {
   const handleClickHover = (index) => {
     // setOpen({ ...open, [index]: !open[index] });
     setOpen({ [index]: true });
-    console.log(open)
+    // console.log(open)
 };
 
 const handleClickLeave = (index) => {

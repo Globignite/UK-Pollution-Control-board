@@ -1,0 +1,11 @@
+*{
+  transition: all 0.2s ease-in-out;
+}
+
+a {
+  text-decoration: none; 
+}
+
+a:hover {
+  color: darkblue; 
+}

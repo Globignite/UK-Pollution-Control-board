@@ -5,7 +5,7 @@ export const mainMenu = [
 	},
 	{
 		name: "About Us",
-		href: "/2-about-us",
+        href: "/about-us",
         subItems:[
             {
                 name: "Constitution of Board",
@@ -68,7 +68,7 @@ export const mainMenu = [
 	},
 	{
 		name: "Contact Us",
-		href: "/contactus",
+        href: "/contact-us",
 	},
 	{
 		name: "Right To Information(RTI)",

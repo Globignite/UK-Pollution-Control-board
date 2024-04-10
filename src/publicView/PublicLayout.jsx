@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 
-import { CssBaseline, Container, Grid, Box } from "@mui/material";
-import MyAppBar from "./Components/MyAppBar";
-import MainBanner from "./Components/MainBanner";
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+
+import MyAppBar from "./Components/MyAppBar"; 
 import Sidebar from "./Components/Sidebar";
 import InfoCards from "./Components/InfoCards";
 import WelcomeText from "./Components/WelcomeText";
@@ -15,16 +18,17 @@ import QuickLinks from "./Components/QuickLinks";
 import ServiceHelp from "./Components/ServiceHelp";
 import Gallery from "./Components/Gallery";
 import Footer from "./Components/Footer";
-import RunningText from "./Components/RunningText"; 
+import RunningText from "./Components/RunningText";
 import MainMenu from "./Components/MainMenu";
 
 function PublicLayout() {
+ 
 	return (
 		<>
 			<CssBaseline />
 			<MyAppBar />
-			<MainMenu/>
-			<MainBanner />
+			<MainMenu /> 
+			{/* <MainBanner /> */}
 			<RunningText />
 			<Container maxWidth="lg">
 				<Grid container spacing={3}>
@@ -33,9 +37,11 @@ function PublicLayout() {
 					<Grid item xs={3} >
 						<Sidebar />
 					</Grid>
-					<Grid item xs={9}>  
-						<Outlet />
-						<InfoCards />
+					<Grid item xs={9}>
+						<Outlet /> 
+						{/* spacing  */}
+						<div style={{marginBlock:"100px"}}></div>
+						<InfoCards  />
 						<EOICard />
 						<UsefulInfo />
 						<EnvironmentLegislation />

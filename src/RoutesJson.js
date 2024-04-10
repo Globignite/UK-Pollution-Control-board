@@ -1,26 +1,22 @@
 import WelcomeText from "./publicView/Components/WelcomeText";
-import About from "./publicView/About";
+import { PDFjson } from "./publicView/JsonFiles/PDFjson";
+import { TableJson } from "./publicView/JsonFiles/TableJson";
+import About from "./publicView/Pages/About";
+import ContactUs from "./publicView/Pages/ContactUs";
+import PhotoGallery from "./publicView/Pages/Photogallery";
+import RelatedLinks from "./publicView/Pages/RelatedLinks";
+import Pdf_ListContainer from "./publicView/Pdf_ListContainer";
+import TableContent from "./publicView/TableContent";
 
-export const pagesRouts = [
-	{
-		name: "home",
-		component: WelcomeText,
-		path: "/",
-	},
-	{
-		name: "about",
-		component: About,
-		path: "about",
-	},
-];
-
-export const LeftSidebarRoutes = [
+export const RoutesJson = [
+	// if hasSubItem true then  contentType & data will be empty
 	{
 		id: 1,
 		name: "Quality Standards",
 		path: "61-quality-standards",
 		hasSubItem: true,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 2,
@@ -28,6 +24,8 @@ export const LeftSidebarRoutes = [
 		path: "71-air-polution",
 		hasSubItem: false,
 		parent_id: 1,
+		component: Pdf_ListContainer,
+		componentProps: { title: "Air Pollution", data: PDFjson["Air Pollution"] }
 	},
 	{
 		id: 3,
@@ -35,6 +33,8 @@ export const LeftSidebarRoutes = [
 		path: "72-water-polution",
 		hasSubItem: false,
 		parent_id: 1,
+		component: Pdf_ListContainer,
+		componentProps: { title: "Water Pollution", data: PDFjson["Water Pollution"] }
 	},
 	{
 		id: 4,
@@ -42,6 +42,8 @@ export const LeftSidebarRoutes = [
 		path: "73-noise--polution",
 		hasSubItem: false,
 		parent_id: 1,
+		component: Pdf_ListContainer,
+		componentProps: { title: "Noise Pollution", data: PDFjson["Noise Pollution"] }
 	},
 	{
 		id: 5,
@@ -49,13 +51,43 @@ export const LeftSidebarRoutes = [
 		path: "74-vehicular-polution",
 		hasSubItem: false,
 		parent_id: 1,
+		component: TableContent,
+		componentProps: { title: "Vehicular Pollution", data: TableJson["Vehicular Pollution"] }
 	},
 	{
 		id: 6,
 		name: "Industry",
 		path: "75-industry",
-		hasSubItem: false,
+		hasSubItem: true,
 		parent_id: 1,
+		component: "",
+	},
+	{
+		id: 6_1,
+		name: "Effluent",
+		path: "76-effluent",
+		hasSubItem: false,
+		parent_id: 6,
+		component: TableContent,
+		componentProps: { title: "Effluent", data: TableJson["Effluent"] }
+	},
+	{
+		id: 6_2,
+		name: "Emission",
+		path: "78-emission",
+		hasSubItem: false,
+		parent_id: 6,
+		component: TableContent,
+		componentProps: { title: "Emission", data: TableJson["Emission"] }
+	},
+	{
+		id: 6_3,
+		name: "General Standards",
+		path: "general-standards",
+		hasSubItem: false,
+		parent_id: 6,
+		component: Pdf_ListContainer,
+		componentProps: { title: "General Standards", data: PDFjson["General Standards"] }
 	},
 	{
 		id: 7,
@@ -63,6 +95,8 @@ export const LeftSidebarRoutes = [
 		path: "151-cetp-inlet-standards-",
 		hasSubItem: false,
 		parent_id: 1,
+		component: Pdf_ListContainer,
+		componentProps: { title: "CETP-Inlet standards", data: PDFjson["CETP-Inlet standards"] }
 	},
 	{
 		id: 8,
@@ -70,6 +104,8 @@ export const LeftSidebarRoutes = [
 		path: "219-brick-klins",
 		hasSubItem: false,
 		parent_id: 1,
+		component: Pdf_ListContainer,
+		componentProps: { title: "Brick Klins", data: PDFjson["Brick Klins"] }
 	},
 	{
 		id: 9,
@@ -77,6 +113,7 @@ export const LeftSidebarRoutes = [
 		path: "62-consent-management",
 		hasSubItem: true,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 10,
@@ -84,6 +121,8 @@ export const LeftSidebarRoutes = [
 		path: "78-fee-consent",
 		hasSubItem: false,
 		parent_id: 9,
+		component: Pdf_ListContainer,
+		componentProps: { title: "Fee Consent", data: PDFjson["Fee Consent"] }
 	},
 	{
 		id: 11,
@@ -91,6 +130,8 @@ export const LeftSidebarRoutes = [
 		path: "82-related-orders",
 		hasSubItem: false,
 		parent_id: 9,
+		component: Pdf_ListContainer,
+		componentProps: { title: "Related Orders", data: PDFjson["Related Orders"] }
 	},
 	{
 		id: 12,
@@ -98,6 +139,7 @@ export const LeftSidebarRoutes = [
 		path: "64-data-bank",
 		hasSubItem: true,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 13,
@@ -105,6 +147,8 @@ export const LeftSidebarRoutes = [
 		path: "95-air-quality-data",
 		hasSubItem: false,
 		parent_id: 12,
+		component: Pdf_ListContainer,
+		componentProps: { title: "Air Quality Data", data: PDFjson["Air Quality Data"] }
 	},
 	{
 		id: 14,
@@ -112,6 +156,7 @@ export const LeftSidebarRoutes = [
 		path: "96-water-quality-data",
 		hasSubItem: true,
 		parent_id: 12,
+		component: "",
 	},
 	{
 		id: 15,
@@ -119,6 +164,8 @@ export const LeftSidebarRoutes = [
 		path: "206-water-quality-of-river-ganga-pre-post-(major-snans)",
 		hasSubItem: false,
 		parent_id: 14,
+		component: Pdf_ListContainer,
+		componentProps: { title: "Water Quality of River Ganga Pre-Post (Major Snans)", data: PDFjson["Water Quality of River Ganga Pre-Post (Major Snans)"] }
 	},
 	{
 		id: 16,
@@ -126,6 +173,8 @@ export const LeftSidebarRoutes = [
 		path: "97-noise-data",
 		hasSubItem: false,
 		parent_id: 12,
+		component: Pdf_ListContainer,
+		componentProps: { title: "Noise Data", data: PDFjson["Noise Data"] }
 	},
 	{
 		id: 17,
@@ -133,6 +182,8 @@ export const LeftSidebarRoutes = [
 		path: "98-aqi-weekly-data",
 		hasSubItem: false,
 		parent_id: 12,
+		component: Pdf_ListContainer,
+		componentProps: { title: "AQI-Weekly Data", data: PDFjson["AQI-Weekly Data"] }
 	},
 	{
 		id: 18,
@@ -140,6 +191,8 @@ export const LeftSidebarRoutes = [
 		path: "100-ground-water",
 		hasSubItem: false,
 		parent_id: 12,
+		component: Pdf_ListContainer,
+		componentProps: { title: "Ground Water", data: PDFjson["Ground Water"] }
 	},
 	{
 		id: 19,
@@ -147,6 +200,8 @@ export const LeftSidebarRoutes = [
 		path: "184-sewage-treatment-plant-(stp)",
 		hasSubItem: false,
 		parent_id: 12,
+		component: Pdf_ListContainer,
+		componentProps: { title: "Sewage Treatment Plant (STP)", data: PDFjson["Sewage Treatment Plant (STP)"] }
 	},
 	{
 		id: 20,
@@ -154,6 +209,7 @@ export const LeftSidebarRoutes = [
 		path: "70-employee",
 		hasSubItem: true,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 21,
@@ -161,6 +217,8 @@ export const LeftSidebarRoutes = [
 		path: "87-head-office",
 		hasSubItem: false,
 		parent_id: 20,
+		component: TableContent,
+		componentProps: { title: "Head Office", data: TableJson["Head Office"] }
 	},
 	{
 		id: 22,
@@ -168,6 +226,7 @@ export const LeftSidebarRoutes = [
 		path: "143-regional-offices",
 		hasSubItem: true,
 		parent_id: 20,
+		component: "",
 	},
 	{
 		id: 23,
@@ -175,6 +234,8 @@ export const LeftSidebarRoutes = [
 		path: "88-regional-office,dehradun",
 		hasSubItem: false,
 		parent_id: 22,
+		component: TableContent,
+		componentProps: { title: "Regional Office,Dehradun", data: TableJson["Regional Office,Dehradun"] }
 	},
 	{
 		id: 24,
@@ -182,6 +243,8 @@ export const LeftSidebarRoutes = [
 		path: "139-regional-office,-kashipur",
 		hasSubItem: false,
 		parent_id: 22,
+		component: TableContent,
+		componentProps: { title: "Regional Office, Kashipur", data: TableJson["Regional Office, Kashipur"] }
 	},
 	{
 		id: 25,
@@ -189,6 +252,8 @@ export const LeftSidebarRoutes = [
 		path: "138-regional-office,-roorkee",
 		hasSubItem: false,
 		parent_id: 22,
+		component: TableContent,
+		componentProps: { title: "Regional Office, Roorkee", data: TableJson["Regional Office, Roorkee"] }
 	},
 	{
 		id: 26,
@@ -196,6 +261,8 @@ export const LeftSidebarRoutes = [
 		path: "89-regional-office,haldwani",
 		hasSubItem: false,
 		parent_id: 22,
+		component: TableContent,
+		componentProps: { title: "Regional Office,Haldwani", data: TableJson["Regional Office,Haldwani"] }
 	},
 	{
 		id: 27,
@@ -203,13 +270,16 @@ export const LeftSidebarRoutes = [
 		path: "35-direction-under-air-water-ep-act",
 		hasSubItem: false,
 		parent_id: null,
+		component: Pdf_ListContainer,
+		componentProps: { title: "Direction under Air/Water/EP Act", data: PDFjson["Direction under Air/Water/EP Act"] }
 	},
 	{
 		id: 28,
 		name: "Photo Gallery",
-		path: "/photogallery",
+		path: "photo-gallery",
 		hasSubItem: false,
 		parent_id: null,
+		component: PhotoGallery,
 	},
 	{
 		id: 29,
@@ -217,6 +287,7 @@ export const LeftSidebarRoutes = [
 		path: "/weblinks",
 		hasSubItem: false,
 		parent_id: null,
+		component: RelatedLinks,
 	},
 	{
 		id: 30,
@@ -224,6 +295,7 @@ export const LeftSidebarRoutes = [
 		path: "/contents/listing/7/145-guidelines",
 		hasSubItem: false,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 31,
@@ -231,6 +303,7 @@ export const LeftSidebarRoutes = [
 		path: "147-list-of-authorized-recyclers",
 		hasSubItem: true,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 32,
@@ -238,6 +311,7 @@ export const LeftSidebarRoutes = [
 		path: "187-e-waste",
 		hasSubItem: false,
 		parent_id: 31,
+		component: "",
 	},
 	{
 		id: 33,
@@ -245,6 +319,7 @@ export const LeftSidebarRoutes = [
 		path: "216-hazardous-waste",
 		hasSubItem: false,
 		parent_id: 31,
+		component: "",
 	},
 	{
 		id: 34,
@@ -252,6 +327,7 @@ export const LeftSidebarRoutes = [
 		path: "222-plastic-waste",
 		hasSubItem: false,
 		parent_id: 31,
+		component: "",
 	},
 	{
 		id: 35,
@@ -259,6 +335,7 @@ export const LeftSidebarRoutes = [
 		path: "10/152-sop-for-recycling-reprocessing-reuse-of-the-materials",
 		hasSubItem: true,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 36,
@@ -266,6 +343,7 @@ export const LeftSidebarRoutes = [
 		path: "223-hazardous-waste_sop-under-rule-9",
 		hasSubItem: false,
 		parent_id: 35,
+		component: "",
 	},
 	{
 		id: 37,
@@ -273,6 +351,7 @@ export const LeftSidebarRoutes = [
 		path: "166-river-rejuvenation-committee,-uttarakhand.",
 		hasSubItem: true,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 38,
@@ -280,6 +359,7 @@ export const LeftSidebarRoutes = [
 		path: "167-action-plan-for-rejuvenation-of-polluted-river-stretch",
 		hasSubItem: false,
 		parent_id: 37,
+		component: "",
 	},
 	{
 		id: 39,
@@ -287,6 +367,7 @@ export const LeftSidebarRoutes = [
 		path: "168-water-quality-of-polluted-river-stretch",
 		hasSubItem: false,
 		parent_id: 37,
+		component: "",
 	},
 	{
 		id: 40,
@@ -294,6 +375,7 @@ export const LeftSidebarRoutes = [
 		path: "169-order-of-honble-ngt",
 		hasSubItem: false,
 		parent_id: 37,
+		component: "",
 	},
 	{
 		id: 41,
@@ -301,6 +383,7 @@ export const LeftSidebarRoutes = [
 		path: "170-letter-notices-etc",
 		hasSubItem: false,
 		parent_id: 37,
+		component: "",
 	},
 	{
 		id: 42,
@@ -308,6 +391,7 @@ export const LeftSidebarRoutes = [
 		path: "182-rrc,-uttarakhand-minutes-of-meeting",
 		hasSubItem: false,
 		parent_id: 37,
+		component: "",
 	},
 	{
 		id: 43,
@@ -315,6 +399,7 @@ export const LeftSidebarRoutes = [
 		path: "203-directions",
 		hasSubItem: false,
 		parent_id: 37,
+		component: "",
 	},
 	{
 		id: 44,
@@ -322,6 +407,7 @@ export const LeftSidebarRoutes = [
 		path: "171-reports-by-spcbs",
 		hasSubItem: true,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 45,
@@ -329,6 +415,7 @@ export const LeftSidebarRoutes = [
 		path: "172-annual-reports-by-state-pollution-control-board",
 		hasSubItem: false,
 		parent_id: 44,
+		component: "",
 	},
 	{
 		id: 46,
@@ -336,6 +423,7 @@ export const LeftSidebarRoutes = [
 		path: "174-annual-reports-under-various-rules",
 		hasSubItem: true,
 		parent_id: 44,
+		component: "",
 	},
 	{
 		id: 47,
@@ -343,6 +431,7 @@ export const LeftSidebarRoutes = [
 		path: "176-bmw-reports",
 		hasSubItem: false,
 		parent_id: 46,
+		component: "",
 	},
 	{
 		id: 48,
@@ -350,6 +439,7 @@ export const LeftSidebarRoutes = [
 		path: "177-msw-reports",
 		hasSubItem: false,
 		parent_id: 46,
+		component: "",
 	},
 	{
 		id: 49,
@@ -357,6 +447,7 @@ export const LeftSidebarRoutes = [
 		path: "178-e-waste",
 		hasSubItem: false,
 		parent_id: 46,
+		component: "",
 	},
 	{
 		id: 50,
@@ -364,6 +455,7 @@ export const LeftSidebarRoutes = [
 		path: "179-plastic-waste",
 		hasSubItem: false,
 		parent_id: 46,
+		component: "",
 	},
 	{
 		id: 51,
@@ -371,6 +463,7 @@ export const LeftSidebarRoutes = [
 		path: "180-hazardous-waste-",
 		hasSubItem: false,
 		parent_id: 46,
+		component: "",
 	},
 	{
 		id: 52,
@@ -378,6 +471,7 @@ export const LeftSidebarRoutes = [
 		path: "209-construction-demolition-waste-",
 		hasSubItem: false,
 		parent_id: 46,
+		component: "",
 	},
 	{
 		id: 53,
@@ -385,6 +479,7 @@ export const LeftSidebarRoutes = [
 		path: "211-battery-waste",
 		hasSubItem: false,
 		parent_id: 46,
+		component: "",
 	},
 	{
 		id: 54,
@@ -392,6 +487,7 @@ export const LeftSidebarRoutes = [
 		path: "175-technical-reports",
 		hasSubItem: false,
 		parent_id: 44,
+		component: "",
 	},
 	{
 		id: 55,
@@ -399,6 +495,7 @@ export const LeftSidebarRoutes = [
 		path: "181-soe-report",
 		hasSubItem: false,
 		parent_id: 44,
+		component: "",
 	},
 	{
 		id: 56,
@@ -406,6 +503,7 @@ export const LeftSidebarRoutes = [
 		path: "183-air-action-plan",
 		hasSubItem: false,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 57,
@@ -413,6 +511,7 @@ export const LeftSidebarRoutes = [
 		path: "185-display-board-for-hazardous-waste-environmental-data",
 		hasSubItem: false,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 58,
@@ -420,6 +519,7 @@ export const LeftSidebarRoutes = [
 		path: "204-reports-by-cpcb",
 		hasSubItem: false,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 59,
@@ -427,6 +527,7 @@ export const LeftSidebarRoutes = [
 		path: "212-inspection-reports-in-compliance-to-court-orders",
 		hasSubItem: true,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 60,
@@ -434,6 +535,7 @@ export const LeftSidebarRoutes = [
 		path: "214-inspection-reports",
 		hasSubItem: true,
 		parent_id: 59,
+		component: "",
 	},
 	{
 		id: 61,
@@ -441,6 +543,7 @@ export const LeftSidebarRoutes = [
 		path: "215-directions-issued",
 		hasSubItem: false,
 		parent_id: 60,
+		component: "",
 	},
 	{
 		id: 62,
@@ -448,6 +551,7 @@ export const LeftSidebarRoutes = [
 		path: "218-draft-district-environment-plan-state-environment-plan",
 		hasSubItem: false,
 		parent_id: null,
+		component: "",
 	},
 	{
 		id: 63,
@@ -455,5 +559,177 @@ export const LeftSidebarRoutes = [
 		path: "227-mission-life",
 		hasSubItem: false,
 		parent_id: null,
+		component: "",
+	},
+
+	// =========================================================================
+	// main menu ===============================================================
+	// {
+	// 	id: 64,
+	// 	name: "Home",
+	// 	path: "/",
+	// 	hasSubItem: false,
+	// 	parent_id: null,
+	// 	component: "",
+	// }, 
+	{
+		id: 65,
+		name: "About Us",
+		path: "about-us",
+		hasSubItem: true,
+		parent_id: null,
+		component: "",
+	},
+	{
+		id: 66,
+		name: "Constitution of Board",
+		path: "133-constitution-of-board",
+		hasSubItem: false,
+		parent_id: 65,
+		component: "",
+	},
+	{
+		id: 67,
+		name: "Duties & Function of Board",
+		path: "134-duties-function-of-board",
+		hasSubItem: false,
+		parent_id: 65,
+		component: "",
+	},
+	{
+		id: 68,
+		name: "Members of Board",
+		path: "135-members-of-board",
+		hasSubItem: false,
+		parent_id: 65,
+		component: "",
+	},
+	{
+		id: 69,
+		name: "Board Offices",
+		path: "136-board-offices",
+		hasSubItem: false,
+		parent_id: 65,
+		component: "",
+	},
+	{
+		id: 70,
+		name: "World Environment Day",
+		path: "7-world-environment-day",
+		hasSubItem: true,
+		parent_id: null,
+		component: "",
+	},
+	{
+		id: 71,
+		name: "World Environment Day 2022",
+		path: "220-world-environment-day-2022",
+		hasSubItem: false,
+		parent_id: 70,
+		component: "",
+	},
+	{
+		id: 72,
+		name: "Board Meetings",
+		path: "53-board-meetings",
+		hasSubItem: true,
+		parent_id: null,
+		component: "",
+	},
+	{
+		id: 73,
+		name: "Orders",
+		path: "210-orders-",
+		hasSubItem: false,
+		parent_id: 72,
+		component: "",
+	},
+	{
+		id: 74,
+		name: "Budget",
+		path: "54-budget",
+		hasSubItem: false,
+		parent_id: null,
+		component: "",
+	},
+	{
+		id: 75,
+		name: "Mission LiFE",
+		path: "55-mission-life",
+		hasSubItem: true,
+		parent_id: null,
+		component: "",
+	},
+	{
+		id: 76,
+		name: "Brouchre  Mission LiFE",
+		path: "225-brouchre--mission-life",
+		hasSubItem: false,
+		parent_id: 75,
+		component: "",
+	},
+	{
+		id: 77,
+		name: "LiFE Theme",
+		path: "226-life-theme",
+		hasSubItem: false,
+		parent_id: 75,
+		component: "",
+	},
+	{
+		id: 78,
+		name: "Contact Us",
+		path: "contact-us",
+		hasSubItem: false,
+		parent_id: null,
+		component: "",
+	},
+	{
+		id: 79,
+		name: "Right To Information(RTI)",
+		path: "111-right-to-information(rti)",
+		hasSubItem: true,
+		parent_id: null,
+		component: "",
+	},
+	{
+		id: 80,
+		name: "RTI Act 2005",
+		path: "112-rti-act-2005",
+		hasSubItem: false,
+		parent_id: 79,
+		component: "",
+	},
+	{
+		id: 81,
+		name: "Information Offices",
+		path: "113-information-offices",
+		hasSubItem: false,
+		parent_id: 79,
+		component: "",
+	},
+	{
+		id: 82,
+		name: "Appellate Authority",
+		path: "114-appellate-authority",
+		hasSubItem: false,
+		parent_id: 79,
+		component: "",
+	},
+	{
+		id: 83,
+		name: "Manuals",
+		path: "115-manuals",
+		hasSubItem: false,
+		parent_id: 79,
+		component: "",
+	},
+	{
+		id: 84,
+		name: "Public Hearing",
+		path: "66-public-hearing",
+		hasSubItem: false,
+		parent_id: null,
+		component: "",
 	},
 ];

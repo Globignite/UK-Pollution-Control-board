@@ -122,7 +122,7 @@ export const SideMenu = {
 		},
 		{
 			name: "Photo Gallery",
-			href: "/photogallery",
+			href: "/photo-gallery",
 		},
 		{
 			name: "Related Links",

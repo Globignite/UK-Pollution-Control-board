@@ -311,7 +311,8 @@ export const RoutesJson = [
 		path: "187-e-waste",
 		hasSubItem: false,
 		parent_id: 31,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: { title: "E-Waste", data: PDFjson["E-Waste"] },
 	},
 	{
 		id: 33,
@@ -319,7 +320,8 @@ export const RoutesJson = [
 		path: "216-hazardous-waste",
 		hasSubItem: false,
 		parent_id: 31,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: { title: "Hazardous Waste", data: PDFjson["Hazardous Waste"] },
 	},
 	{
 		id: 34,
@@ -327,15 +329,17 @@ export const RoutesJson = [
 		path: "222-plastic-waste",
 		hasSubItem: false,
 		parent_id: 31,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: { title: "Plastic Waste", data: PDFjson["Plastic Waste"] },
 	},
 	{
 		id: 35,
 		name: "SOP for Recycling/Reprocessing & Reuse of the Materials",
 		path: "10/152-sop-for-recycling-reprocessing-reuse-of-the-materials",
-		hasSubItem: true,
+		hasSubItem: false,
 		parent_id: null,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: { title: "Standard Operating Procedure", data: PDFjson["Standard Operating Procedure"] },
 	},
 	{
 		id: 36,
@@ -343,7 +347,8 @@ export const RoutesJson = [
 		path: "223-hazardous-waste_sop-under-rule-9",
 		hasSubItem: false,
 		parent_id: 35,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: { title:'SOP under Rule 9 _Hazardous Waste', data: PDFjson["SOP under Rule 9 _Hazardous Waste"]}
 	},
 	{
 		id: 37,
@@ -367,7 +372,8 @@ export const RoutesJson = [
 		path: "168-water-quality-of-polluted-river-stretch",
 		hasSubItem: false,
 		parent_id: 37,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Water Quality of Polluted River Stretch", data: PDFjson["Water Quality of Polluted River Stretch"]}
 	},
 	{
 		id: 40,
@@ -375,7 +381,8 @@ export const RoutesJson = [
 		path: "169-order-of-honble-ngt",
 		hasSubItem: false,
 		parent_id: 37,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Order of Hon'ble NGT", data: PDFjson["Order of Hon'ble NGT"]}
 	},
 	{
 		id: 41,
@@ -383,7 +390,8 @@ export const RoutesJson = [
 		path: "170-letter-notices-etc",
 		hasSubItem: false,
 		parent_id: 37,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Letter/Notices etc", data: PDFjson["Letter/Notices etc"]}
 	},
 	{
 		id: 42,
@@ -391,7 +399,8 @@ export const RoutesJson = [
 		path: "182-rrc,-uttarakhand-minutes-of-meeting",
 		hasSubItem: false,
 		parent_id: 37,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"RRC, Uttarakhand-Minutes of Meeting", data: PDFjson["RRC, Uttarakhand-Minutes of Meeting"]}
 	},
 	{
 		id: 43,
@@ -399,7 +408,8 @@ export const RoutesJson = [
 		path: "203-directions",
 		hasSubItem: false,
 		parent_id: 37,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Directions", data: PDFjson["Directions"]}
 	},
 	{
 		id: 44,
@@ -415,7 +425,8 @@ export const RoutesJson = [
 		path: "172-annual-reports-by-state-pollution-control-board",
 		hasSubItem: false,
 		parent_id: 44,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Anual Report", data: PDFjson["Anual Report"]}
 	},
 	{
 		id: 46,
@@ -431,7 +442,8 @@ export const RoutesJson = [
 		path: "176-bmw-reports",
 		hasSubItem: false,
 		parent_id: 46,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Bio-Medical Waste Management Reports", data: PDFjson["Bio-Medical Waste Management Reports"]}
 	},
 	{
 		id: 48,
@@ -439,7 +451,8 @@ export const RoutesJson = [
 		path: "177-msw-reports",
 		hasSubItem: false,
 		parent_id: 46,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Municipal Solid Waste Reports", data: PDFjson["Municipal Solid Waste Reports"]}
 	},
 	{
 		id: 49,
@@ -447,7 +460,8 @@ export const RoutesJson = [
 		path: "178-e-waste",
 		hasSubItem: false,
 		parent_id: 46,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"E-Waste Reports", data: PDFjson["E-Waste Reports"]}
 	},
 	{
 		id: 50,
@@ -455,7 +469,8 @@ export const RoutesJson = [
 		path: "179-plastic-waste",
 		hasSubItem: false,
 		parent_id: 46,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Plastic Waste Reports", data: PDFjson["Plastic Waste Reports"]}
 	},
 	{
 		id: 51,
@@ -463,7 +478,8 @@ export const RoutesJson = [
 		path: "180-hazardous-waste-",
 		hasSubItem: false,
 		parent_id: 46,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Hazardous Waste Reports", data: PDFjson["Hazardous Waste Reports"]}
 	},
 	{
 		id: 52,
@@ -471,7 +487,8 @@ export const RoutesJson = [
 		path: "209-construction-demolition-waste-",
 		hasSubItem: false,
 		parent_id: 46,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Construction and Demolition Waste", data: PDFjson["Construction and Demolition Waste"]}
 	},
 	{
 		id: 53,
@@ -479,7 +496,8 @@ export const RoutesJson = [
 		path: "211-battery-waste",
 		hasSubItem: false,
 		parent_id: 46,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Battery Waste", data: PDFjson["Battery Waste"]}
 	},
 	{
 		id: 54,
@@ -487,7 +505,8 @@ export const RoutesJson = [
 		path: "175-technical-reports",
 		hasSubItem: false,
 		parent_id: 44,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Reports Prepared By State Pollution Control Board", data: PDFjson["Reports Prepared By State Pollution Control Board"]}
 	},
 	{
 		id: 55,
@@ -495,7 +514,8 @@ export const RoutesJson = [
 		path: "181-soe-report",
 		hasSubItem: false,
 		parent_id: 44,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"SoE Report", data: PDFjson["SoE Report"]}
 	},
 	{
 		id: 56,
@@ -503,7 +523,8 @@ export const RoutesJson = [
 		path: "183-air-action-plan",
 		hasSubItem: false,
 		parent_id: null,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"City Air Action Plan", data: PDFjson["City Air Action Plan"]}
 	},
 	{
 		id: 57,
@@ -511,7 +532,8 @@ export const RoutesJson = [
 		path: "185-display-board-for-hazardous-waste-environmental-data",
 		hasSubItem: false,
 		parent_id: null,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Environmental Data for Haz. Display Board", data: PDFjson["Environmental Data for Haz. Display Board"]}
 	},
 	{
 		id: 58,
@@ -519,7 +541,8 @@ export const RoutesJson = [
 		path: "204-reports-by-cpcb",
 		hasSubItem: false,
 		parent_id: null,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Reports prepared by CPCB", data: PDFjson["Reports prepared by CPCB"]}
 	},
 	{
 		id: 59,
@@ -535,7 +558,8 @@ export const RoutesJson = [
 		path: "214-inspection-reports",
 		hasSubItem: true,
 		parent_id: 59,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Inspection Reports", data: PDFjson["Inspection Reports"]}
 	},
 	{
 		id: 61,
@@ -543,7 +567,8 @@ export const RoutesJson = [
 		path: "215-directions-issued",
 		hasSubItem: false,
 		parent_id: 60,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Directions Issued", data: PDFjson["Directions Issued"]}
 	},
 	{
 		id: 62,
@@ -551,7 +576,8 @@ export const RoutesJson = [
 		path: "218-draft-district-environment-plan-state-environment-plan",
 		hasSubItem: false,
 		parent_id: null,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Draft-District Environment Plan/State Environment Plan", data: PDFjson["Draft-District Environment Plan/State Environment Plan"]}
 	},
 	{
 		id: 63,
@@ -559,9 +585,10 @@ export const RoutesJson = [
 		path: "227-mission-life",
 		hasSubItem: false,
 		parent_id: null,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Mission LiFE", data: PDFjson["Mission LiFE"]}
 	},
-
+	
 	// =========================================================================
 	// main menu ===============================================================
 	// {
@@ -586,7 +613,8 @@ export const RoutesJson = [
 		path: "133-constitution-of-board",
 		hasSubItem: false,
 		parent_id: 65,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Constitution of Board", data: PDFjson["Constitution of Board"]}
 	},
 	{
 		id: 67,
@@ -626,15 +654,17 @@ export const RoutesJson = [
 		path: "220-world-environment-day-2022",
 		hasSubItem: false,
 		parent_id: 70,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"World Environment Day", data: PDFjson["World Environment Day"]}
 	},
 	{
 		id: 72,
 		name: "Board Meetings",
 		path: "53-board-meetings",
-		hasSubItem: true,
+		hasSubItem: false,
 		parent_id: null,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Minutes of Meeting", data: PDFjson["Minutes of Meeting"]}
 	},
 	{
 		id: 73,
@@ -642,7 +672,8 @@ export const RoutesJson = [
 		path: "210-orders-",
 		hasSubItem: false,
 		parent_id: 72,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Board Meeting Office Orders", data: PDFjson["Board Meeting Office Orders"]}
 	},
 	{
 		id: 74,
@@ -650,7 +681,8 @@ export const RoutesJson = [
 		path: "54-budget",
 		hasSubItem: false,
 		parent_id: null,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Board Meeting Office Orders", data: PDFjson["Board Meeting Office Orders"]}
 	},
 	{
 		id: 75,
@@ -662,11 +694,12 @@ export const RoutesJson = [
 	},
 	{
 		id: 76,
-		name: "Brouchre  Mission LiFE",
+		name: "Brouchre Mission LiFE",
 		path: "225-brouchre--mission-life",
 		hasSubItem: false,
 		parent_id: 75,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Broucher", data: PDFjson["Broucher"]}
 	},
 	{
 		id: 77,
@@ -674,7 +707,8 @@ export const RoutesJson = [
 		path: "226-life-theme",
 		hasSubItem: false,
 		parent_id: 75,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"Mission LiFE", data: PDFjson["Mission LiFE"]}
 	},
 	{
 		id: 78,
@@ -698,7 +732,8 @@ export const RoutesJson = [
 		path: "112-rti-act-2005",
 		hasSubItem: false,
 		parent_id: 79,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"RTI Act 2005", data: PDFjson["RTI Act 2005"]}
 	},
 	{
 		id: 81,
@@ -722,7 +757,8 @@ export const RoutesJson = [
 		path: "115-manuals",
 		hasSubItem: false,
 		parent_id: 79,
-		component: "",
+		component: Pdf_ListContainer,
+		componentProps: {title:"RTI Manuals", data: PDFjson["RTI Manuals"]}
 	},
 	{
 		id: 84,

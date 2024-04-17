@@ -235,249 +235,249 @@ export const TableJson = {
 	"Head Office": [
 		{
 			title: "Head Office, Dehradun [ HO ]",
-			data: [ 
+			data: [
 				{
-					"Name": "R.K.Sudhanshu, IAS",
+					Name: "R.K.Sudhanshu, IAS",
 					Designation: "Chairman",
 					"Contact Number": "",
 				},
 				{
-					"Name": "Dr. Parag Madhukar Dhakate,  IFS",
+					Name: "Dr. Parag Madhukar Dhakate,  IFS",
 					Designation: "Member Secretary",
 					"Contact Number": "",
 				},
 				{
-					"Name": "Chandan Singh Rawat",
+					Name: "Chandan Singh Rawat",
 					Designation: "Chief Environment Officer",
 					"Contact Number": "9412056733",
 				},
 				{
-					"Name": "P.K. Joshi",
+					Name: "P.K. Joshi",
 					Designation: "Environment Engineer",
 					"Contact Number": "9412085472",
 				},
 				{
-					"Name": "Dr. Ankur Kansal",
+					Name: "Dr. Ankur Kansal",
 					Designation: "Environment Engineer",
 					"Contact Number": "9412992375",
 				},
 				{
-					"Name": "Anurag Negi",
+					Name: "Anurag Negi",
 					Designation: "Environment Engineer",
 					"Contact Number": "9897074903",
 				},
 				{
-					"Name": "Rajendra Singh",
+					Name: "Rajendra Singh",
 					Designation: "Scientific Officer",
 					"Contact Number": "9412383118",
 				},
 				{
-					"Name": "Amit Pokhriyal",
+					Name: "Amit Pokhriyal",
 					Designation: "Environment Engineer",
 					"Contact Number": "9837156720",
 				},
 				{
-					"Name": "Subash Panwar",
+					Name: "Subash Panwar",
 					Designation: "Asst. Environment Engineer",
 					"Contact Number": "9410393545",
 				},
 				{
-					"Name": "Harish Chandra Bhatt",
+					Name: "Harish Chandra Bhatt",
 					Designation: "Account Officer",
 					"Contact Number": "",
 				},
 				{
-					"Name": "Rikheshwar Prasad",
+					Name: "Rikheshwar Prasad",
 					Designation: "Principal Assistant",
 					"Contact Number": "9411363692",
 				},
 				{
-					"Name": "Rajesh Kumar",
+					Name: "Rajesh Kumar",
 					Designation: "Senior Assistant",
 					"Contact Number": "9411110858",
 				},
 				{
-					"Name": "Pradeep Chauhan",
+					Name: "Pradeep Chauhan",
 					Designation: "Junior Lab Assistant",
 					"Contact Number": "8410558241",
 				},
 				{
-					"Name": "Surendra Gusain",
+					Name: "Surendra Gusain",
 					Designation: "Driver",
 					"Contact Number": "9411170189",
 				},
 				{
-					"Name": "Ummed Singh Chauhan",
+					Name: "Ummed Singh Chauhan",
 					Designation: "Peon",
 					"Contact Number": "9719724256",
 				},
 				{
-					"Name": "Kirti Dutt Chamoli",
+					Name: "Kirti Dutt Chamoli",
 					Designation: "Driver",
 					"Contact Number": "9410354674",
 				},
 				{
-					"Name": "Nikhil Rangarh (NICSI)",
+					Name: "Nikhil Rangarh (NICSI)",
 					Designation: "System Software Support , Level 2",
 					"Contact Number": "9891825686",
 				},
 				{
-					"Name": "Sumit Kulasari(NICSI)",
+					Name: "Sumit Kulasari(NICSI)",
 					Designation: "System Software & Data Base Support Engineer",
 					"Contact Number": "7906716696",
 				},
 				{
-					"Name": "Vivek Tiwari",
+					Name: "Vivek Tiwari",
 					Designation: "GIS Expert",
 					"Contact Number": "7535047709",
 				},
 				{
-					"Name": "BMW Inventory",
+					Name: "BMW Inventory",
 					Designation: "",
 					"Contact Number": "",
 				},
 				{
-					"Name": "EIACP PROJECT",
+					Name: "EIACP PROJECT",
 					Designation: "",
 					"Contact Number": "",
 				},
 				{
-					"Name": "Niharika Dimri",
+					Name: "Niharika Dimri",
 					Designation: "Information Officer",
 					"Contact Number": "9411189390",
 				},
 				{
-					"Name": "Rachna Nautiyal",
+					Name: "Rachna Nautiyal",
 					Designation: "IT Officer",
 					"Contact Number": "8077684877",
 				},
 				{
-					"Name": "OUTSOURCE",
+					Name: "OUTSOURCE",
 					Designation: "",
 					"Contact Number": "",
 				},
 				{
-					"Name": "Vinay Mohan Uniyal",
+					Name: "Vinay Mohan Uniyal",
 					Designation: "Accountant",
 					"Contact Number": "",
 				},
 				{
-					"Name": "Jaideep Patwal",
+					Name: "Jaideep Patwal",
 					Designation: "Assistant Accountant",
 					"Contact Number": "8954006777",
 				},
 				{
-					"Name": "Pooja Padiyar",
+					Name: "Pooja Padiyar",
 					Designation: "Data Entry Operator",
 					"Contact Number": "7895421909",
 				},
 				{
-					"Name": "Poonam Godiyal",
+					Name: "Poonam Godiyal",
 					Designation: "Data Entry Operator",
 					"Contact Number": "8126203159",
 				},
 				{
-					"Name": "Deepak Negi",
+					Name: "Deepak Negi",
 					Designation: "Data Entry Operator",
 					"Contact Number": "9761574785",
 				},
 				{
-					"Name": "Aarchana Negi",
+					Name: "Aarchana Negi",
 					Designation: "Stenographer",
 					"Contact Number": "7895028375",
 				},
 				{
-					"Name": "Kailash Singh",
+					Name: "Kailash Singh",
 					Designation: "Peon",
 					"Contact Number": "9927076747",
 				},
 				{
-					"Name": "Anil Dhyani",
+					Name: "Anil Dhyani",
 					Designation: "Peon",
 					"Contact Number": "9897674392",
 				},
 				{
-					"Name": "Ramesh",
+					Name: "Ramesh",
 					Designation: "Driver",
 					"Contact Number": "7037548593",
 				},
 				{
-					"Name": "Chandra Shekher Nainwal",
+					Name: "Chandra Shekher Nainwal",
 					Designation: "Driver",
 					"Contact Number": "9410557166",
 				},
 				{
-					"Name": "NMCG Project",
+					Name: "NMCG Project",
 					Designation: "",
 					"Contact Number": "",
 				},
 				{
-					"Name": "Akansha Negi",
+					Name: "Akansha Negi",
 					Designation: "Junior Research Fellow",
 					"Contact Number": "8630016791",
 				},
 				{
-					"Name": "Ashish Rana",
+					Name: "Ashish Rana",
 					Designation: "Junior Research Fellow",
 					"Contact Number": "8755956355",
 				},
 				{
-					"Name": "Pramod Bhandari",
+					Name: "Pramod Bhandari",
 					Designation: "Junior Lab Assistant",
 					"Contact Number": "9675045263",
 				},
 				{
-					"Name": "Shweta Shukla",
+					Name: "Shweta Shukla",
 					Designation: "Junior Lab Assistant",
 					"Contact Number": "9634120217",
 				},
 				{
-					"Name": "Ganga Rawat",
+					Name: "Ganga Rawat",
 					Designation: "Junior Lab Assistant",
 					"Contact Number": "8077649771",
 				},
 				{
-					"Name": "Neelam Badoni",
+					Name: "Neelam Badoni",
 					Designation: "Junior Lab Assistant",
 					"Contact Number": "9997002910",
 				},
 				{
-					"Name": "Madan Bhandari",
+					Name: "Madan Bhandari",
 					Designation: "Field Attendant",
 					"Contact Number": "8077747089",
 				},
 				{
-					"Name": "Vinay",
+					Name: "Vinay",
 					Designation: "Attendant",
 					"Contact Number": "",
 				},
 				{
-					"Name": "Deepak",
+					Name: "Deepak",
 					Designation: "Attendant",
 					"Contact Number": "",
 				},
 				{
-					"Name": "Santosh",
+					Name: "Santosh",
 					Designation: "Attendant",
 					"Contact Number": "",
 				},
 				{
-					"Name": "NCAP Project",
+					Name: "NCAP Project",
 					Designation: "",
 					"Contact Number": "",
 				},
 				{
-					"Name": "Tarangini",
+					Name: "Tarangini",
 					Designation: "Junior Research Fellow",
 					"Contact Number": "9897868589",
 				},
 				{
-					"Name": "NAMP Project",
+					Name: "NAMP Project",
 					Designation: "",
 					"Contact Number": "",
 				},
 				{
-					"Name": "Malti Arya",
+					Name: "Malti Arya",
 					Designation: "Scientific Assistant",
 					"Contact Number": "",
 				},
@@ -1055,6 +1055,466 @@ export const TableJson = {
 			],
 		},
 	],
+	"Water (Prevention & Control of Pollution) Act 1974": [
+		{
+			title: "",
+			data: [
+				{
+					"no.": "4(1)",
+					Rule: "Every municipal authority shall be responsible for the implementation of the provisions of these rules and and for any infrastructure development for collection, storage, segregation, transportation, processing and disposal of municipal solid waste.",
+				},
+				{
+					"no.": "4(2)",
+					Rule: "The municipal authority shall make an application for grant of authorization to SPCB for setting up waste processing and disposal site.",
+				},
+				{
+					"no.": "4(3)",
+					Rule: "The municipal authority shall comply with these rules as per the implementation programme as per Schedule I.",
+				},
+				{
+					"no.": "4(4)",
+					Rule: "The municipal authority shall furnish its annual report to SPCB, Secretary-in charge Urban Development, District Magistrate before the 30th day of June every year.",
+				},
+				{
+					"no.": "6(1)",
+					Rule: "SPCB shall monitor the compliance of the standards regarding ground water, ambient air, leachate quality and the compost quality including incineration standards.",
+				},
+				{
+					"no.": "6(2)",
+					Rule: "The State Board or the Committee, after the receipt of application from the municipal authority or the operator of a facility in Form I, for grant of authorization for setting up waste processing and disposal facility including landfills, shall examine the proposal taking into consideration the views of other agencies like the State Urban Development Department, the Town and Country Planning Department, Air Port or Air Base Authority, the Ground Water Board or any such other agency prior to issuing the authorization.",
+				},
+				{
+					"no.": "8",
+					Rule: "The State Boards shall prepare and submit to the Central Pollution Control Board an annual report with regard to the implementation of these rules by the 15th of September every year.",
+				},
+			],
+		},
+	],
+	"Air (Prevention & Control of Pollution) Act 1981": [
+		{
+			title: "",
+			data: [
+				{
+					"no.": "4(1)",
+					Rule: "Every municipal authority shall be responsible for the implementation of the provisions of these rules and for any infrastructure development for collection, storage, segregation, transportation, processing and disposal of municipal solid waste.",
+				},
+				{
+					"no.": "4(2)",
+					Rule: "The municipal authority shall make an application for grant of authorization to SPCB for setting up waste processing and disposal site.",
+				},
+				{
+					"no.": "4(3)",
+					Rule: "The municipal authority shall comply with these rules as per the implementation programme as per Schedule I.",
+				},
+				{
+					"no.": "4(4)",
+					Rule: "The municipal authority shall furnish its annual report to SPCB, Secretary-in charge Urban Development, District Magistrate before the 30th day of June every year.",
+				},
+				{
+					"no.": "6(1)",
+					Rule: "SPCB shall monitor the compliance of the standards regarding ground water, ambient air, leachate quality and the compost quality including incineration standards.",
+				},
+				{
+					"no.": "6(2)",
+					Rule: "The State Board or the Committee, after the receipt of application from the municipal authority or the operator of a facility in Form I, for grant of authorization for setting up waste processing and disposal facility including landfills, shall examine the proposal taking into consideration the views of other agencies like the State Urban Development Department, the Town and Country Planning Department, Air Port or Air Base Authority, the Ground Water Board or any such other agency prior to issuing the authorization.",
+				},
+				{
+					"no.": "8",
+					Rule: "The State Boards shall prepare and submit to the Central Pollution Control Board an annual report with regard to the implementation of these rules by the 15th of September every year.",
+				},
+			],
+		},
+	],
+	"Hazardous Wastes (Management and Handling) Rules, 1998": [
+		{
+			title: "",
+			data: [
+				{
+					"no.": "4(1)",
+					Rule: "Every municipal authority shall be responsible for the implementation of the provisions of these rules and for any infrastructure development for collection, storage, segregation, transportation, processing and disposal of municipal solid waste.",
+				},
+				{
+					"no.": "4(2)",
+					Rule: "The municipal authority shall make an application for grant of authorization to SPCB for setting up waste processing and disposal site.",
+				},
+				{
+					"no.": "4(3)",
+					Rule: "The municipal authority shall comply with these rules as per the implementation programme as per Schedule I.",
+				},
+				{
+					"no.": "4(4)",
+					Rule: "The municipal authority shall furnish its annual report to SPCB, Secretary-in charge Urban Development, District Magistrate before the 30th day of June every year.",
+				},
+				{
+					"no.": "6(1)",
+					Rule: "SPCB shall monitor the compliance of the standards regarding ground water, ambient air, leachate quality and the compost quality including incineration standards.",
+				},
+				{
+					"no.": "6(2)",
+					Rule: "The State Board or the Committee, after the receipt of application from the municipal authority or the operator of a facility in Form I, for grant of authorization for setting up waste processing and disposal facility including landfills, shall examine the proposal taking into consideration the views of other agencies like the State Urban Development Department, the Town and Country Planning Department, Air Port or Air Base Authority, the Ground Water Board or any such other agency prior to issuing the authorization.",
+				},
+				{
+					"no.": "8",
+					Rule: "The State Boards shall prepare and submit to the Central Pollution Control Board an annual report with regard to the implementation of these rules by the 15th of September every year.",
+				},
+			],
+		},
+	],
+	"Bio-Medical Waste (Management and Handling) Rules, 1998": [
+		{
+			title: "",
+			data: [
+				{
+					"no.": "4(1)",
+					Rule: "Every municipal authority shall be responsible for the implementation of the provisions of these rules and for any infrastructure development for collection, storage, segregation, transportation, processing and disposal of municipal solid waste.",
+				},
+				{
+					"no.": "4(2)",
+					Rule: "The municipal authority shall make an application for grant of authorization to SPCB for setting up waste processing and disposal site.",
+				},
+				{
+					"no.": "4(3)",
+					Rule: "The municipal authority shall comply with these rules as per the implementation programme as per Schedule I.",
+				},
+				{
+					"no.": "4(4)",
+					Rule: "The municipal authority shall furnish its annual report to SPCB, Secretary-in charge Urban Development, District Magistrate before the 30th day of June every year.",
+				},
+				{
+					"no.": "6(1)",
+					Rule: "SPCB shall monitor the compliance of the standards regarding ground water, ambient air, leachate quality and the compost quality including incineration standards.",
+				},
+				{
+					"no.": "6(2)",
+					Rule: "The State Board or the Committee, after the receipt of application from the municipal authority or the operator of a facility in Form I, for grant of authorization for setting up waste processing and disposal facility including landfills, shall examine the proposal taking into consideration the views of other agencies like the State Urban Development Department, the Town and Country Planning Department, Air Port or Air Base Authority, the Ground Water Board or any such other agency prior to issuing the authorization.",
+				},
+				{
+					"no.": "8",
+					Rule: "The State Boards shall prepare and submit to the Central Pollution Control Board an annual report with regard to the implementation of these rules by the 15th of September every year.",
+				},
+			],
+		},
+	],
+	"Municipal Solid Wastes (Management and Handling) Rules, 2000": [
+		{
+			title: "",
+			data: [
+				{
+					"no.": "4(1)",
+					Rule: "Every municipal authority shall be responsible for the implementation of the provisions of these rules and for any infrastructure development for collection, storage, segregation, transportation, processing and disposal of municipal solid waste.",
+				},
+				{
+					"no.": "4(2)",
+					Rule: "The municipal authority shall make an application for grant of authorization to SPCB for setting up waste processing and disposal site.",
+				},
+				{
+					"no.": "4(3)",
+					Rule: "The municipal authority shall comply with these rules as per the implementation programme as per Schedule I.",
+				},
+				{
+					"no.": "4(4)",
+					Rule: "The municipal authority shall furnish its annual report to SPCB, Secretary-in charge Urban Development, District Magistrate before the 30th day of June every year.",
+				},
+				{
+					"no.": "6(1)",
+					Rule: "SPCB shall monitor the compliance of the standards regarding ground water, ambient air, leachate quality and the compost quality including incineration standards.",
+				},
+				{
+					"no.": "6(2)",
+					Rule: "The State Board or the Committee, after the receipt of application from the municipal authority or the operator of a facility in Form I, for grant of authorization for setting up waste processing and disposal facility including landfills, shall examine the proposal taking into consideration the views of other agencies like the State Urban Development Department, the Town and Country Planning Department, Air Port or Air Base Authority, the Ground Water Board or any such other agency prior to issuing the authorization.",
+				},
+				{
+					"no.": "8",
+					Rule: "The State Boards shall prepare and submit to the Central Pollution Control Board an annual report with regard to the implementation of these rules by the 15th of September every year.",
+				},
+			],
+		},
+	],
+	"Noise Pollution (Regulation and Control) Rules, 2000": [
+		{
+			title: "",
+			data: [
+				{
+					"no.": "2(c)",
+					Rule: '"authority" means any authority or officer authorized by the State Government in accordance with the laws in force and includes a District Magistrate, Police Commissioner, or any other officer designated for the maintenance of the ambient air quality standards in respect of noise under any law for the time being in force.',
+				},
+				{
+					"no.": "3(1)",
+					Rule: "The ambient air quality standards in respect of noise for different areas/zones shall be such as specified in the Schedule annexed to these rules.",
+				},
+				{
+					"no.": "3(2)",
+					Rule: "The State Government shall categorize the areas into industrial, commercial, residential or silence areas/zones for the purpose of implementation of noise standards for different areas.",
+				},
+				{
+					"no.": "3(3)",
+					Rule: "The State Government shall take measures for abatement of noise including noise emanating from vehicular movements and ensure that the existing noise levels do not exceed the ambient air quality standards specified under these rules.",
+				},
+				{
+					"no.": "3(4)",
+					Rule: "All development authorities, local bodies and other concerned authorities while planning developmental activity or carrying out functions relating to town and country planning shall take into consideration all aspects of noise pollution as a parameter of quality of life to avoid noise menace and to achieve the objective of maintaining the ambient air quality standards in respect of noise.",
+				},
+				{
+					"no.": "3(5)",
+					Rule: "An area comprising not less than 100 meters around hospitals, educational institutions and courts may be declared as silence area/zone for the purpose of these rules.",
+				},
+				{
+					"no.": "4(2)",
+					Rule: "The authority shall be responsible for the enforcement of noise pollution control measures and the due compliance of the ambient air quality standards in respect of noise.",
+				},
+				{
+					"no.": "5(1)",
+					Rule: "A loud speaker or a public address system shall not be used except after obtaining written permission from the authority.",
+				},
+				{
+					"no.": "5(2)",
+					Rule: "A loud speaker or a public address system shall not be used at night (between 10.00 p.m. to 6.00 a.m.) except in closed premises for communication within, e.g. auditoria, conference rooms, community halls and banquet halls.",
+				},
+				{
+					"no.": "5(3)",
+					Rule: "The State Government may subject to such terms and conditions as are necessary to reduce noise pollution, permit use of loud speakers or public address system during night hours between 10:00 PM to 12:00 midnight on or during cultural or religious festive occasion of a limited duration not exceeding 15 days in all during a calendar year.",
+				},
+				{
+					"no.": "7(1)",
+					Rule: "A person may, if the noise level exceeds the ambient noise standards by 10 dB(A) or more given in the corresponding columns against any area/zone, make a complaint to the authority.",
+				},
+			],
+		},
+	],
+	"The Environment (Protection) Act 1986": [
+		{
+			title: "",
+			data: [
+				{
+					"no.": "5",
+					Rule: "In the exercise of its powers and performance of its functions under this act, issue directions in writing to any person, officer or any authority and such person, officer, or authority shall be bound to comply with such direction. Power to issue direction under this section includes the power to direct-The closure, prohibition or regulation of any industry, operation or process; or Stoppage or regulation of the supply of electricity or water or any other service.",
+				},
+				{
+					"no.": "7",
+					Rule: "No person carrying on any industry, operation or process shall discharge or emit or permit to be discharged or emitted any environmental pollutants in excess of such standards as may be prescribed.",
+				},
+				{
+					"no.": "8",
+					Rule: "No person shall handle or cause to be handled any hazardous substance except in accordance with such procedure and after complying with such safeguards as may be prescribed.",
+				},
+				{
+					"no.": "15",
+					Rule: "Whoever fails to comply with any of provision of this act or directions issued thereunder, shall be punishable with imprisonment for a term which may extend to five years with a fine which may extend to one lakh rupees or with both.",
+				},
+			],
+		},
+	],
+	committeeMembers: [
+		{
+			name: "Principal Secretary, Forest & Environment Department",
+			role: "Chairman",
+		},
+		{
+			name: "Principal Chief Conservator of Forest",
+			role: "Member",
+		},
+		{
+			name: "Additional Secretary, Urban Development Department",
+			role: "Member",
+		},
+		{
+			name: "Additional Secretary, Industrial Development",
+			role: "Member",
+		},
+		{
+			name: "Chief Engineer, Jal Nigam",
+			role: "Member",
+		},
+		{
+			name: "Mukhya Nagar Adhikari, Dehradun",
+			role: "Member",
+		},
+		{
+			name: "Mukhya Nagar Adhikari, Haridwar",
+			role: "Member",
+		},
+		{
+			name: "Vice Chairman, MDDA",
+			role: "Member",
+		},
+		{
+			name: "Administrator, Nagar Palika, Kashipur",
+			role: "Member",
+		},
+		{
+			name: "Member of Uttarakhand Chamber of Commerce",
+			role: "Member",
+		},
+		{
+			name: "Vice Chairman, Haridwar Development Authority",
+			role: "Member",
+		},
+		{
+			name: "Sh. Jagdish Dhiman, Councilor Nagar Nigam, New Park Road",
+			role: "Member",
+		},
+		{
+			name: "Smt. Beena Bisht, Councilor Nagar Nigam, Ballupur Road",
+			role: "Member",
+		},
+		{
+			name: "Sh. Kushlanand Joshi, Senior Advocate, Vijay Colony",
+			role: "Member",
+		},
+	],
+	"Members of Board": [
+		{
+			title: "",
+			data: [
+				{
+					name: "Principal Secretary, Forest & Environment Department",
+					role: "Chairman",
+				},
+				{
+					name: "Principal Chief Conservator of Forest",
+					role: "Member",
+				},
+				{
+					name: "Additional Secretary, Urban Development Department",
+					role: "Member",
+				},
+				{
+					name: "Additional Secretary, Industrial Development",
+					role: "Member",
+				},
+				{
+					name: "Chief Engineer, Jal Nigam",
+					role: "Member",
+				},
+				{
+					name: "Mukhya Nagar Adhikari, Dehradun",
+					role: "Member",
+				},
+				{
+					name: "Mukhya Nagar Adhikari, Haridwar",
+					role: "Member",
+				},
+				{
+					name: "Vice Chairman, MDDA",
+					role: "Member",
+				},
+				{
+					name: "Administrator, Nagar Palika, Kashipur",
+					role: "Member",
+				},
+				{
+					name: "Member of Uttarakhand Chamber of Commerce",
+					role: "Member",
+				},
+				{
+					name: "Vice Chairman, Haridwar Development Authority",
+					role: "Member",
+				},
+				{
+					name: "Sh. Jagdish Dhiman, Councilor Nagar Nigam, New Park Road",
+					role: "Member",
+				},
+				{
+					name: "Smt. Beena Bisht, Councilor Nagar Nigam, Ballupur Road",
+					role: "Member",
+				},
+				{
+					name: "Sh. Kushlanand Joshi, Senior Advocate, Vijay Colony",
+					role: "Member",
+				},
+			],
+		},
+	],
+	"Board Offices": [
+		{
+			title: "Head Office",
+			data: [
+				{
+					name: "Head Office",
+					address:
+						"Uttarakhand Pollution Control Board, Gaura Devi Paryavaran Bhawan, 46 B IT Park, Sehstradhara Road, Dehradun (UTTARAKHAND)",
+					phone: "(0135)-2658086",
+					fax: "(0135)-2718092",
+				},
+			],
+		},
+		{
+			title: "Regional Offices Garhwal",
+			data: [
+				{
+					Address: "E-115 Nehru Colony, Dehradun",
+					"Regional Officer (I/ c)": "Dr. R.K. Chaturvedi, ",
+					mobile: "9411101556",
+				},
+				{
+					Address: "Irrigation Design Building, Canal Road, Roorkee (Haridwar)",
+					"Regional Officer (I/ c)": "Sh. Subash Panwar",
+					mobile: "9410393545",
+				},
+			],
+		},
+		{
+			title: "Regional Offices Kumaon",
+			data: [
+				{
+					Address: "Awas Vikas Colony Nainital Road, Haldwani (Nainital)",
+					"Regional Officer (I/ c)": "Dr. D.K. Joshi",
+					mobile: "(05946)-221532,225618  , 9412998572",
+				},
+				{
+					Address: "Chamunda Complex, Ramnagar Road, Kashipur (U.S. Nagar)",
+					"Regional Officer (I/ c)": "Sh. Naresh Goswami",
+					mobile: "9412130888",
+				},
+			],
+		},
+	],
+	"Information Offices": [
+		{
+			title: "Public Information Officer",
+			data: [
+				{
+					title: "Head Office- Environment Engineer",
+					name: "Sh. Anurag Negi",
+					address: "46 B, IT Park, Sahastradara Road, Dehradun",
+				},
+				{
+					title: "Regional Office, Dehradun–Regional Officer",
+					name: "Dr. Rajkumar Chaturvedi",
+					address: "E-115 Nehru Colony, Dehradun",
+				},
+				{
+					title: "Regional Office, Haldwani- Regional Officer",
+					name: "Dr. D.K. Joshi",
+					address: "Awas Vikas Colony, Nainital Road, Haldwani",
+				},
+				{
+					title: "Regional Office, Kashipur- Regional Officer",
+					name: "Sh. Naresh Goswami",
+					address: "Chamunda Complex, Ramnagar Road, Kashipur",
+				},
+				{
+					title: "Regional Office, Roorkee- Regional Officer",
+					name: "Sh. S.P. Singh",
+					address: "Irrigation Design Building, Canal Road, Roorkee",
+				},
+			],
+		},
+	],
+	"Appellate Authority": [
+		{
+			title: "",
+			data: [
+				{
+					"title": "Environment Engineer",
+					"name": "Mr. P.K.Joshi",
+					"address": "27 A, Prakash Lok Colony, Phase 3, Shimla Bypass Road, Majra, Dehradun",
+					"mobileNo": "9412085472"
+				}
+			]
+		}
+	],
+ 
 
 	// template ==============
 	// "Regional": [

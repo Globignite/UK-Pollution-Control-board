@@ -6,7 +6,7 @@ const InfoCards = () => {
   const ImageBox1 = styled(Box)(({theme}) => ({
     width: '100%',
     height:'55%',
-    backgroundImage:"url('./assets/OBJECTS.png')",
+    backgroundImage:"url('/assets/OBJECTS.png')",
     backgroundRepeat:'no-repeat',
     position:'absolute',
     bottom:'0px',
@@ -15,7 +15,7 @@ const InfoCards = () => {
   const ImageBox2 = styled(Box)(({theme}) => ({
     width: '100%',
     height:'55%',
-    backgroundImage:"url('./assets/Group.png')",
+    backgroundImage:"url('/assets/Group.png')",
     backgroundRepeat:'no-repeat',
     position:'absolute',
     bottom:'0px',

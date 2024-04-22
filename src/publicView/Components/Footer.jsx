@@ -91,19 +91,19 @@ export default function Footer() {
 
               <Stack spacing={4} direction="row" sx={{mt:4, display:'flex', flexWrap:'wrap' }} >
                 <Link href="#" > 
-                    <img src={'./assets/img_link_1.jpg'} alt="important_links" loading='lazy'/>
+                    <img src={'/assets/img_link_1.jpg'} alt="important_links" loading='lazy'/>
                 </Link>
                 <Link href="#" > 
-                    <img src={'./assets/img_link_2.jpg'} alt="important_links" loading='lazy'/>
+                    <img src={'/assets/img_link_2.jpg'} alt="important_links" loading='lazy'/>
                 </Link>
                 <Link href="#" > 
-                    <img src={'./assets/img_link_3.jpg'} alt="important_links" loading='lazy'/>
+                    <img src={'/assets/img_link_3.jpg'} alt="important_links" loading='lazy'/>
                 </Link>
                 <Link href="#" > 
-                    <img src={'./assets/img_link_4.jpg'} alt="important_links" loading='lazy'/>
+                    <img src={'/assets/img_link_4.jpg'} alt="important_links" loading='lazy'/>
                 </Link>
                 <Link href="#" > 
-                    <img src={'./assets/img_link_5.jpg'} alt="important_links" loading='lazy'/>
+                    <img src={'/assets/img_link_5.jpg'} alt="important_links" loading='lazy'/>
                 </Link>
 
               </Stack>
@@ -123,7 +123,7 @@ export default function Footer() {
             For any quires regarding this website please contact <Link sx={{cursor:'pointer', fontWeight:'600'}} >Web Information manager</Link>. <br />
             [at] Environment Protection and Pollution Control Board, Government Of Uttarakhand, India.
           </Typography>
-          <img src={'./assets/logo.png'} alt="logo" width={70} height={70}  />
+          <img src={'/assets/logo.png'} alt="logo" width={70} height={70}  />
         </Box> 
 
 

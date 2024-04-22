@@ -14,7 +14,7 @@ const NoticesAndUpdates = () => {
           </Typography>
           <Paper elevation={24} sx={{ width:{lg:'180px', xs:'70px'}, height:{lg:'180px', xs:'70px'}, boxShadow:'none', py:2, bgcolor:"background.lightGreen", borderRadius:'10px', display:'flex', flexDirection:'column', justifyContent:'space-around', alignItems:'center'}}>
           <Box sx={{width:{lg:'70px', xs:'40px'}, height:{lg:'70px', xs:'40px'}}} >
-            <img src={'./assets/notice_1.png'} alt={'link_logo'} loading='lazy' style={{ width: '100%', height: '100%' }} />
+            <img src={'/assets/notice_1.png'} alt={'link_logo'} loading='lazy' style={{ width: '100%', height: '100%' }} />
           </Box>
             <Typography align="center" sx={{fontWeight:'530', fontSize:'0.9rem', px:1, color:'#393838'}} > Notice </Typography>
           </Paper>

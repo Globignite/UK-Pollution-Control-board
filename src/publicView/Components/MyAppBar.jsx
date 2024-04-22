@@ -1,59 +1,31 @@
-import {useState} from 'react';
-import { AppBar, Toolbar, Grid, Typography, Box, Container, FormControl, Select, MenuItem } from '@mui/material';
+import {Grid, Typography, Box, Container } from '@mui/material';
 
 const MyAppBar = () => {
 
-  const [language, setLanguage] = useState('English');
-
-  const handleChange = (event) => {
-    setLanguage(event.target.value);
-  };
 
 
   return (
     <>
-      <Box position="static" sx={{bgcolor:'secondary.main', py:1, height:'50px', display:'flex', alignItems:'center'}} >
-          <Container sx={{display:'flex', justifyContent:'space-between'}}  >
-            <Box sx={{display:'flex', alignItems:'center'}} >
-              <img src={'./assets/ashok_sthambha.png'} alt="" style={{height:'40px'}} />
-              <img src={'./assets/akam_logo.png'} alt="" style={{height:'40px', marginLeft:'20px'}} />
-            </Box>
-
-            {/* <Box sx={{display:'flex', alignItems:'center'}} >
-              <FormControl sx={{ p:0, color:"#fff" }}>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={language}
-                  // label="Language"
-                  onChange={handleChange}
-                >
-                  <MenuItem value={'English'}>English</MenuItem>
-                  <MenuItem value={'Hindi'}>Hindi</MenuItem>
-                </Select>
-              </FormControl>
-            </Box> */}
-
-          </Container>
-      </Box>
-      
+     
       {/* main header */}
-      <Box sx={{mb:3,pt:5}}>
+      <Box sx={{mb:3,pt:{lg:5, xs:1}}}>
         <Container maxWidth="lg">
           <Grid container >
-            <Grid item xs={9} sx={{display:'flex', alignItems:'center'}}  >
-              <img src={'./assets/logo.png'} alt="main_logo" width={90} height={90} />
+            <Grid item xs={12} lg={9} sx={{display:'flex', alignItems:'center'}}  >
+              <Box width={{lg:90, xs:50}} height={{lg:90, xs:50}} >
+                <img src={'./assets/logo.png'} alt="main_logo" width="100%" height="100%" />
+              </Box>
               <Box sx={{ml:1}} >
-                <Typography variant='h2' sx={{fontSize:'1.8rem', fontWeight:'560'}}>
+                <Typography variant='h2' sx={{fontSize:{lg:'1.8rem', xs:'0.9rem'}, fontWeight:'560'}}>
                   UTTARAKHAND POLLUTION CONTROL BOARD
                 </Typography>
-                <Typography sx={{fontSize:'1.2rem', fontWeight:'500'}} >
+                <Typography sx={{fontSize:{lg:'1.8rem', xs:'0.7rem'}, fontWeight:'500'}} >
                   Government Of Uttarakhand
                 </Typography>
               </Box>
             </Grid>
 
-            <Grid item xs={3} >
+            <Grid item xs={12} lg={3} >
 
             </Grid>
 

@@ -1,14 +1,17 @@
-import { useState } from 'react';
-import { List, ListItem, ListItemText, Collapse, Link } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { List, ListItem, ListItemText, Collapse, Link, Box } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { SideMenu } from '../JsonFiles/SideMenu';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 
 export default function Sidebar() {
 
   const [open, setOpen] = useState({});
   const [openSub, setOpenSub] = useState({});
+  const [mobileView, setMobileView] = useState(false);
+  const [toggleNav, setToggleNav] = useState(false);
+  const location = useLocation();
 
   const handleClick = (index) => {
     setOpen({ ...open, [index]: !open[index] });
@@ -18,10 +21,23 @@ export default function Sidebar() {
     setOpenSub({ ...openSub, [index]: !openSub[index] });
   };
 
+  const handleNavOpen = () =>{
+    setToggleNav(true)
+  }
+
+  const handleNavClose = () =>{
+    setToggleNav(false)
+  }
+
+  useEffect(() => {
+    handleNavClose()
+  }, [location]);
+
   return (
     <>
 
-      <List>
+     <Box sx={{display:'flex', width:'100%',  position:{lg:'relative', xs:'fixed'}, transition:'all 0.5s liner' ,left:{lg:'0%', xs: toggleNav ? '0%': '-100%'}, top:"0%", zIndex:1000 }}>
+      <List sx={{display:'block', width:{lg:'100%', md:'70%', xs:'80%'}, bgcolor:'background.header'}} >
         {SideMenu.menu.map((menuItem) => (
           <div key={menuItem.name}>
             <ListItem sx={{borderBottom:'1px solid #EEEEEE', cursor:'pointer'}} button  >
@@ -109,7 +125,16 @@ export default function Sidebar() {
           </div>
         ))}
       </List>
+      <Box sx={{  display:{lg:'none', xs:'flex'}, width:{lg:"0%", md:'30%', xs:'20%'}, bgcolor:'rgba(0,0,0,0.2)' }} onClick={handleNavClose}  >
 
+      </Box>
+
+      </Box>
+      <Box sx={{ display:{lg:'none', xs: toggleNav? 'none':'flex'}, justifyContent:'center', alignItems:'start', py:5, position:'fixed', width:'30px', height:'100%', left:'0px', top:'10%', zIndex:1000 }}>
+        <Box sx={{ transform:'rotate(-90deg)', shadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',  width:'150px', py:0.5, px:2, bgcolor:'background.footer', fontSize:'0.9rem' }}  onClick={handleNavOpen} >
+            SIDE&nbsp;BAR
+        </Box>
+      </Box>
     </>
   );
 }

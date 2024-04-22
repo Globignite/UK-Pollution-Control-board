@@ -23,18 +23,22 @@ const UserInfoItems = [
 const UsefulInfo = () => {
   return (
     <Box padding={2}>
-    <Typography variant="h5" sx={{my:3, fontWeight:'600', fontSize: '1.8rem', color:'primary.main'}} >
-      User Information
-    </Typography>
-      <Stack direction={'row'} spacing={4} sx={{display:'flex', flexDirection:'row', flexWrap:'wrap'}} >
-        {UserInfoItems.map(({title, icon}) => (
-            <Paper key={title} elevation={24} sx={{ width:'180px', height:'180px', boxShadow:'none', py:2, bgcolor:"background.lightGreen", borderRadius:'10px', display:'flex', flexDirection:'column', justifyContent:'space-around', alignItems:'center'}}>
-              <img src={icon} alt={'link_logo'} loading='lazy' style={{ width: '70px', height: '70px' }} />
-              <Typography align="center" sx={{fontWeight:'530', fontSize:'0.9rem', px:1, color:'#393838'}} > {title} </Typography>
-            </Paper>
-        ))}
-      </Stack>
-  </Box>
+        <Typography variant="h5" sx={{my:3, fontWeight:'600', fontSize:{ lg:'1.8rem', xs:'1rem'}, color:'primary.main'}} >
+        User Information
+        </Typography>
+        {/* <Grid container spacing={2}> */}
+          <Stack direction={'row'} spacing={{lg:4, xs:1}} sx={{display:'flex', pb:2, overflow:{lg:'hidden', xs:'scroll'},  flexDirection:'row', flexWrap:'no-wrap'}} >
+            {UserInfoItems.map(({title, icon}) => (
+                <Paper key={title} elevation={24} sx={{ width:{lg:'180px', xs:'150px'}, height:{lg:'180px', xs:'130px'}, m:{lg:0, xs:5},  boxShadow:'none', py:2, bgcolor:"background.lightGreen", borderRadius:'10px', display:'flex', flexDirection:'column', justifyContent:'space-around', alignItems:'center'}}>
+                  <Box sx={{width:{lg:"70px", xs:'50px'}, height:{lg:'70px', xs:'50px'} }} >
+                    <img src={icon} alt={'link_logo'} loading='lazy' style={{ width: '100%', height: '100%' }} />
+                  </Box>
+                  <Typography align="center" sx={{fontWeight:'530', fontSize:{lg:'0.9rem', xs:'0.7rem'}, px:1, color:'#393838'}} > {title} </Typography>
+                </Paper>
+            ))}
+          </Stack>
+        {/* </Grid> */}
+      </Box>
   );
 };
 

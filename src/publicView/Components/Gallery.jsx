@@ -24,7 +24,7 @@ export default function Gallery() {
     color: "#fff",
     backgroundColor: theme.palette.secondary.light,
     fontWeight:'bolder',
-    fontSize:'1.5rem',
+    fontSize:{lg:'1.5rem', sm:'1rem'},
     display:'flex',
     alignItems: 'center',
     justifyContent:'center'
@@ -43,7 +43,7 @@ export default function Gallery() {
 
   return (
     <>
-      <Container sx={{pb:8, pt:10}} >
+      <Container sx={{pb:8, pt:{lg:10, xs:5}}} >
         <Typography variant="h5" align='center' sx={{fontWeight: 600, fontSize: '1.8rem', pb: 5, color: 'primary.main'}} >
           Gallery
         </Typography>
@@ -51,14 +51,14 @@ export default function Gallery() {
           {
             galleryItems.map(({ title, image }) => (
               title ?
-                <Grid item key={image} xs={12} sm={6} md={3} lg={3}>
+                <Grid item key={image} xs={6} sm={6} md={3} lg={3}>
                   <Paper sx={{ boxShadow: 'none', position: 'relative' }}>
                     <img src={image} alt={title} loading='lazy' style={{ width: '100%', height: '100%' }} />
                     <TitleBox>{title}</TitleBox>
                   </Paper>
                 </Grid>
                 :
-                <Grid item key={image} xs={12} sm={6} md={3} lg={3}>
+                <Grid item key={image} xs={6} sm={6} md={3} lg={3}>
                   <Paper sx={{ boxShadow: 'none', position: 'relative' }}>
                     <img src={image} alt={title} loading='lazy' style={{ width: '100%', height: '100%' }} />
                     <OverlayBox />

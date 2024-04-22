@@ -23,7 +23,7 @@ export default function MainBanner() {
   return (
     <Carousel >
       {items.map(({name,image}) => (
-        <Paper key={name} sx={{height:'400px'}} >
+        <Paper key={name} sx={{height:{lg:'400px', xs:'200px'}}} >
           <img src={image} alt={name} width="100%" height="100%" />
         </Paper> 
       ))}

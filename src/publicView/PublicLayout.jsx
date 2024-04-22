@@ -31,28 +31,28 @@ function PublicLayout() {
 			{/* <MainBanner /> */}
 			<RunningText />
 			<Container maxWidth="lg">
-				<Grid container spacing={3}>
-					{/* <Grid item xs={12}>
+        <Grid container spacing={3}>
+          {/* <Grid item xs={12}>
           </Grid> */}
-					<Grid item xs={3} >
-						<Sidebar />
-					</Grid>
-					<Grid item xs={9}>
-						<Outlet /> 
-						{/* spacing  */}
-						<div style={{marginBlock:"100px"}}></div>
-						<InfoCards  />
-						<EOICard />
-						<UsefulInfo />
-						<EnvironmentLegislation />
-						<NoticesAndUpdates />
-						<QuickLinks />
-						<ServiceHelp />
-					</Grid>
-				</Grid>
-			</Container>
-			<Gallery />
-			<Footer />
+          <Grid item lg={3} sm={0} xs={0} >
+            <Sidebar />
+          </Grid>
+          <Grid item lg={9} sm={12} xs={12}>
+            <Outlet />
+            <Box sx={{display:{lg:'flex', md:'flex', sm:'none', xs:'none'}}} >
+              <InfoCards />
+            </Box>
+            <EOICard />
+            <UsefulInfo />
+            <EnvironmentLegislation />
+            <NoticesAndUpdates />
+            <QuickLinks />
+          </Grid>
+        </Grid>
+      </Container>
+      <ServiceHelp />
+      <Gallery />
+      <Footer />
 		</>
 	);
 }

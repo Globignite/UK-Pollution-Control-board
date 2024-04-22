@@ -3,19 +3,19 @@ import { Box, Grid, Paper, Typography, Stack } from '@mui/material';
 const legislationItems = [
   { 
     title: 'Environmental Act', 
-    icon: './assets/evvironment_act.png'
+    icon: '/assets/evvironment_act.png'
   },
   { 
     title: 'Environmental Rules', 
-    icon: './assets/environment_rules.png'
+    icon: '/assets/environment_rules.png'
   },
   { 
     title: 'Environmental Notification', 
-    icon: './assets/environment_act2.png'
+    icon: '/assets/environment_act2.png'
   },
   { 
     title: 'Environmental Program', 
-    icon: './assets/Awarness_program.png'
+    icon: '/assets/Awarness_program.png'
   },
   // Add more items as necessary
 ];

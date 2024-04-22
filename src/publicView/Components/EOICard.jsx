@@ -6,7 +6,7 @@ const EOICard = () => {
 const UserInfoItems = [
   { 
     title: 'Addendum to Expression of Interest (EOI) ', 
-    icon: './assets/EOI.png'
+    icon: '/assets/EOI.png'
   },
   // Add more items as necessary
 ];

@@ -14,8 +14,8 @@ const TopBar = () => {
         <Box position="static" sx={{bgcolor:'secondary.main', py:1, height:'50px', display:'flex', alignItems:'center'}} >
           <Container sx={{display:'flex', justifyContent:'space-between'}}  >
             <Box sx={{display:'flex', alignItems:'center'}} >
-              <img src={'./assets/ashok_sthambha.png'} alt="" style={{height:'40px'}} />
-              <img src={'./assets/akam_logo.png'} alt="" style={{height:'40px', marginLeft:'20px'}} />
+              <img src={'/assets/ashok_sthambha.png'} alt="" style={{height:'40px'}} />
+              <img src={'/assets/akam_logo.png'} alt="" style={{height:'40px', marginLeft:'20px'}} />
             </Box>
 
             {/* <Box sx={{display:'flex', alignItems:'center'}} >

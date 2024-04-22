@@ -3,19 +3,19 @@ import { Box, Grid, Paper, Typography, Stack } from '@mui/material';
 const UserInfoItems = [
   { 
     title: 'General Information', 
-    icon: './assets/general_information.png'
+    icon: '/assets/general_information.png'
   },
   { 
     title: 'Notice for General Environment Improvement', 
-    icon: './assets/notice_general_environment_improvement.png'
+    icon: '/assets/notice_general_environment_improvement.png'
   },
   { 
     title: 'Uttarkhand Right to service Act, 2011', 
-    icon: './assets/uttarakhand_right_to_service_Act.png'
+    icon: '/assets/uttarakhand_right_to_service_Act.png'
   },
   { 
     title: 'steps for covid 19 BMW Android Based App', 
-    icon: './assets/steps_for_covid_19_BMW.png'
+    icon: '/assets/steps_for_covid_19_BMW.png'
   },
   // Add more items as necessary
 ];

@@ -13,7 +13,7 @@ const MyAppBar = () => {
           <Grid container >
             <Grid item xs={12} lg={9} sx={{display:'flex', alignItems:'center'}}  >
               <Box width={{lg:90, xs:50}} height={{lg:90, xs:50}} >
-                <img src={'./assets/logo.png'} alt="main_logo" width="100%" height="100%" />
+                <img src={'/assets/logo.png'} alt="main_logo" width="100%" height="100%" />
               </Box>
               <Box sx={{ml:1}} >
                 <Typography variant='h2' sx={{fontSize:{lg:'1.8rem', xs:'0.9rem'}, fontWeight:'560'}}>

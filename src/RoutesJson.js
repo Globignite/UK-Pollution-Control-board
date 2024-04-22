@@ -878,7 +878,7 @@ export const RoutesJson = [
 	{
 		id: 73,
 		name: "Orders",
-		path: "210-orders-",
+		path: "210-orders",
 		hasSubItem: false,
 		parent_id: 72,
 		component: Pdf_ListContainer,

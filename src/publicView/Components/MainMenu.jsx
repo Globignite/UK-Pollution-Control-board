@@ -2,7 +2,8 @@ import { useState, useEffect, useRef  } from 'react';
 import { List, ListItem, ListItemText, Collapse, Box, styled } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { mainMenu } from '../JsonFiles/MainMenu';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const MenuItem = styled(ListItem)(({ theme }) => ({
     cursor: 'pointer',
@@ -16,13 +17,30 @@ const MenuItem = styled(ListItem)(({ theme }) => ({
 const MainMenu = () => {   
 
   const [open, setOpen] = useState({});
+  const [toggle, setToggle] = useState({});
   const navBarRef = useRef(null);
+  const [mobileView, setMobileView] = useState(false);
+  const [toggleNav, setToggleNav] = useState(false);
+
+  const location = useLocation();
 
   const handleClickHover = (index) => {
     // setOpen({ ...open, [index]: !open[index] });
     setOpen({ [index]: true });
     // console.log(open)
 };
+
+  const handleClick = (index) => {
+    setToggle({ ...toggle, [index]: !toggle[index] });
+  };
+
+  const handleNavOpen = () =>{
+    setToggleNav(true)
+  }
+
+  const handleNavClose = () =>{
+    setToggleNav(false)
+  }
 
 const handleClickLeave = (index) => {
     setOpen({ [index]: false });
@@ -42,22 +60,35 @@ const handleClickLeave = (index) => {
     };
   }, []);
 
+  useEffect(() => {
+    const isMobile = window.matchMedia('(max-width: 1199px)').matches;
+    if(isMobile){
+      setMobileView(true)
+    }else{
+      setMobileView(false)
+    }
+
+  },[window.innerWidth]);
+
+  useEffect(() => {
+    handleNavClose()
+  }, [location]);
 
   return (
     <>
-
-      <List ref={navBarRef} sx={{display:'flex', justifyContent:'center', mb:1, width:'100%', position:'relative', fontSize:'0.9rem'}} disablePadding >
+    <Box sx={{display:'flex', width:'100%', position:{lg:'relative', xs:'fixed'}, transition:'all 0.5s liner' ,left:{lg:'0%', xs: toggleNav ? '0%': '-100%'}, top:"0%", height:{lg:'100%', xs:'110dvh'}, zIndex:1010 }}>
+      <List ref={navBarRef} sx={{display:'flex', position:{lg:'relative'}, bgcolor:'background.header', flexDirection:{lg:'row', xs:'column'}, justifyContent:{lg:'center', xs:'start'}, mb:1, width:'100%', fontSize:'0.9rem', py:{lg:0, xs:5}}} disablePadding >
         {mainMenu.map((menuItem) => (
-          <Box key={menuItem.name} sx={{bgcolor:'background.header'}}>
-            <MenuItem sx={{ px:0}} button  component={RouterLink} to={menuItem.href} onMouseEnter={() => handleClickHover(menuItem.name)} onMouseLeave={() => handleClickLeave(menuItem.name)} >
+          <Box key={menuItem.name} sx={{bgcolor:'background.header'}}> 
+            <MenuItem sx={{ px:0}}  onMouseEnter={() => handleClickHover(menuItem.name)} onMouseLeave={() => handleClickLeave(menuItem.name)} >
                 <Box sx={{
-                    borderRight: menuItem.name === "Public Hearing"?"":'1px solid grey', 
+                    borderRight: menuItem.name === "Public Hearing"?"": mobileView ? '' :'1px solid grey', 
                     display:'flex', 
                     px:2, 
                     width:'100%'
                     }} >
                         {/* <Typography sx={{ textDecoration:open[menuItem.name]?'underline' :"", textUnderlineOffset:'5px', color:open[menuItem.name]?'primary.main':"", fontWeight:'bold', textDecorationThickness:'2px'}} >  */}
-                        <Box component='div' sx={{ color:open[menuItem.name]?'primary.main':""}} > 
+                        <Box component={RouterLink} to={menuItem.href} sx={{ color:'#000'}} > 
                         {menuItem.name}
                         {
                             open[menuItem.name]?
@@ -65,26 +96,53 @@ const handleClickLeave = (index) => {
                             : <div style={{height:'3px'}} ></div>
                         }
                          </Box>
-                        {menuItem.subItems && (open[menuItem.name] ? <ExpandLess  sx={{ml:1, color:open[menuItem.name]?'primary.main':""}} /> : <ExpandMore sx={{ml:1}} />)}
+                         {
+                          mobileView? 
+                          menuItem.subItems && (toggle[menuItem.name] ? <ExpandLess onClick={() => handleClick(menuItem.name)}  sx={{ml:1, color:open[menuItem.name]?'primary.main':""}} /> : <ExpandMore sx={{ml:1}} onClick={() => handleClick(menuItem.name)} />)
+                          :
+                          menuItem.subItems && (open[menuItem.name] ? <ExpandLess sx={{ml:1, color:open[menuItem.name]?'primary.main':""}} /> : <ExpandMore sx={{ml:1}} />)
+                        }
                 </Box>
             </MenuItem>
             {menuItem.subItems && (
-              <Collapse in={open[menuItem.name]} timeout="auto" unmountOnExit sx={{position:'absolute', top:'105%', zIndex:'500', bgcolor:'secondary.navbar', minWidth:'150px' }} onMouseEnter={() => handleClickHover(menuItem.name)} onMouseLeave={() => handleClickLeave(menuItem.name)} >
-              {/* <Collapse in={open[menuItem.name]} timeout="auto" unmountOnExit sx={{position:'absolute', top:'100%', zIndex:'500', bgcolor:'background.header'}} > */}
-              {/* <Collapse > */}
-                <List component="div" disablePadding >
-                  {menuItem.subItems.map((subItem) => (
-                    <ListItem key={subItem.name} button component={RouterLink} to={subItem.href} sx={{ bgcolor:''}}  >
-                        <ListItemText primary={subItem.name} />
-                    </ListItem>
-                  ))}
-                </List>
-              </Collapse>
+
+              <>
+              {
+                mobileView ? 
+                  <Collapse in={toggle[menuItem.name]} timeout="auto" unmountOnExit >
+                    <List component="div" disablePadding >
+                      {menuItem.subItems.map((subItem) => (
+                        <ListItem key={subItem.name} button component={RouterLink} to={subItem.href}  sx={{ pl:4}}  >
+                            <ListItemText primary={subItem.name} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Collapse>
+                  :
+                  <Collapse in={open[menuItem.name]} timeout="auto"  unmountOnExit sx={{position:'absolute', top:'105%', zIndex:'500', bgcolor:'secondary.navbar', minWidth:'150px' }} onMouseEnter={() => handleClickHover(menuItem.name)} onMouseLeave={() => handleClickLeave(menuItem.name)} >
+                    <List component="div" disablePadding >
+                      {menuItem.subItems.map((subItem) => (
+                        <ListItem key={subItem.name} button component={RouterLink} to={subItem.href} sx={{ bgcolor:''}}  >
+                            <ListItemText primary={subItem.name}  />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Collapse>
+              }
+
+              {/* <Collapse in={toggle[menuItem.name]} timeout="auto" unmountOnExit > */}
+              </>
             )}
           </Box>
         ))}
       </List>
-
+      <Box sx={{  display:{lg:'none', xs:'flex'}, width:{lg:"0%", md:'30%', xs:'20%'}, bgcolor:'rgba(0,0,0,0.2)' }} onClick={handleNavClose} >
+    
+      </Box>
+    </Box>
+    <Box sx={{bgcolor:'', width:'100%', display:{xs:'flex', lg:'none'}, justifyContent:'end', px:1, py:2}}  >
+      <MenuIcon sx={{color:'secondary.main'}} onClick={handleNavOpen} />
+    </Box>
     </>
   );
 }

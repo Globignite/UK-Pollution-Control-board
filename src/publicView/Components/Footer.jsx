@@ -32,12 +32,12 @@ export default function Footer() {
 
 
   return (
-    <Box component="footer" sx={{ bgcolor: 'background.footer', pb:1, pt: 10 }}>
+    <Box component="footer" sx={{ bgcolor: 'background.footer', pb:1, pt:{xs:0, lg:10} }}>
       <Container >
 
-        <Grid container spacing={5} >
+        <Grid container spacing={5} sx={{flexDirection:{xs:'column-reverse', lg:'row'}}} >
           {/* left  */}
-          <Grid item lg={5} sm={12} container >
+          <Grid item lg={5} sm={12} sx={{display:'flex', justifyContent:'space-between'}} container >
             <Grid item xs={6} container direction="column" >
               <Typography sx={{fontWeight: 600}} >
                 Get to know
@@ -117,17 +117,17 @@ export default function Footer() {
           Site designed, developed and hosted by
         </Typography>
 
-        <Box sx={{my:6, display: 'flex', justifyContent:'space-between', alignItems: 'center'}} >
-          <Typography  sx={{fontSize: 12}} >
+        <Box sx={{my:6, display: 'flex', mt:{lg:3, xs:2}, flexDirection:{xs:'column', lg:'row'} ,  justifyContent:'space-between', alignItems: 'center'}} >
+          <Typography  sx={{fontSize: 12, mb:{xs:6, lg:0}}} >
             Content of this website is published and managed by Uttarakhand Pollution Control Board, Govement Of Uttarakhand, India. <br />
             For any quires regarding this website please contact <Link sx={{cursor:'pointer', fontWeight:'600'}} >Web Information manager</Link>. <br />
             [at] Environment Protection and Pollution Control Board, Government Of Uttarakhand, India.
           </Typography>
-          <img src={'./assets/logo.png'} alt="logo" width={70} height={70} sx={{width:'50px', height: '50px'}}  />
-        </Box>
+          <img src={'./assets/logo.png'} alt="logo" width={70} height={70}  />
+        </Box> 
 
 
-        <Typography variant="body2" color="text.secondary" align="center">
+        <Typography variant="body2" color="text.secondary" align="center" sx={{fontSize:{xs:10, lg:15}}} >
           {'Copyright © '}
           <Link color="inherit" href="https://your-website.com/" >
           UTTARAKHAND POLLUTION CONTROL BOARD 

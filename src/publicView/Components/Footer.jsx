@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Box, Typography, Link, Grid, Container, styled, Input, Button, Stack  } from '@mui/material';
+import { Box, Typography, Grid, Container, styled, Input, Button, Stack  } from '@mui/material';
+import { Link } from 'react-router-dom';
 // import { styled } from '@mui/system';
 
 export default function Footer() {
@@ -59,12 +60,12 @@ export default function Footer() {
                 Quick Links
               </Typography>
 
-              <FooterLinks href="#" >Home</FooterLinks>
-              <FooterLinks href="#" >About Us</FooterLinks>
-              <FooterLinks href="#" >Right To Information</FooterLinks>
-              <FooterLinks href="#" >Contact Us</FooterLinks>
-              <FooterLinks href="#" >Sitemap</FooterLinks>
-              <FooterLinks href="#" >Help</FooterLinks>
+              <FooterLinks to="/" >Home</FooterLinks>
+              <FooterLinks to="/about-us" >About Us</FooterLinks>
+              <FooterLinks to="/111-right-to-information(rti)" >Right To Information</FooterLinks>
+              <FooterLinks to="/contact-us" >Contact Us</FooterLinks>
+              <FooterLinks to="#" >Sitemap</FooterLinks>
+              <FooterLinks to="#" >Help</FooterLinks>
 
             </Grid>
           </Grid>

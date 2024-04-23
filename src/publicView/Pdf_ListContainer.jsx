@@ -7,8 +7,8 @@ import DownloadIcon from "@mui/icons-material/Download";
 
 function PdfListContainer({ title, data }) {
   return (
-    <Box padding={2}>
-      <Typography variant="h5" sx={{ my: 2, color: "blue" }}>
+    <Box padding={{lg:2, xs:0}}>
+      <Typography variant="h5" sx={{ my:3, fontWeight:'600', fontSize:{ lg:'1.8rem', xs:'1rem'}, color:'primary.main' }}>
         {title}
       </Typography>
 

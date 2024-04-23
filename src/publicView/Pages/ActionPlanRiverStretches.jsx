@@ -16,7 +16,7 @@ function ActionPlanRiverStretches() {
 
   return (
     <>
-      <Typography variant="h5" sx={{ my: 2, color: "blue" }}>
+      <Typography variant="h5" sx={{ my:3, fontWeight:'600', fontSize:{ lg:'1.8rem', xs:'1rem'}, color:'primary.main' }}>
         Action Plan for Rejuvenation of Polluted River Stretches
       </Typography>
       <TableContainer component={Paper}>

@@ -36,8 +36,8 @@ export default function Sidebar() {
   return (
     <>
 
-     <Box sx={{display:'flex', width:'100%',  position:{lg:'relative', xs:'fixed'}, transition:'all 0.5s liner' ,left:{lg:'0%', xs: toggleNav ? '0%': '-100%'}, top:"0%", zIndex:1000 }}>
-      <List sx={{display:'block', width:{lg:'100%', md:'70%', xs:'80%'}, bgcolor:'background.header'}} >
+     <Box sx={{display:'flex', width:'100%', position:{lg:'relative', xs:'fixed'},  transition:'all 0.5s liner' ,left:{lg:'0%', xs: toggleNav ? '0%': '-100%'}, top:"0%", zIndex:1000 }}>
+      <List sx={{display:'block', width:{lg:'100%', md:'70%', xs:'80%'}, bgcolor:'background.header', height:{lg:'100%',xs:'100dvh'}, overflow:{lg:'hidden',xs:'scroll'}, py:5 }} >
         {SideMenu.menu.map((menuItem) => (
           <div key={menuItem.name}>
             <ListItem sx={{borderBottom:'1px solid #EEEEEE', cursor:'pointer'}} button  >
@@ -132,7 +132,7 @@ export default function Sidebar() {
       </Box>
       <Box sx={{ display:{lg:'none', xs: toggleNav? 'none':'flex'}, justifyContent:'center', alignItems:'start', py:5, position:'fixed', width:'30px', height:'100%', left:'0px', top:'10%', zIndex:1000 }}>
         <Box sx={{ transform:'rotate(-90deg)', shadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',  width:'150px', py:0.5, px:2, bgcolor:'background.footer', fontSize:'0.9rem' }}  onClick={handleNavOpen} >
-            SIDE&nbsp;BAR
+            MENU
         </Box>
       </Box>
     </>

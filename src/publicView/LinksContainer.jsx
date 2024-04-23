@@ -12,8 +12,8 @@ const LinksContainer = ({ itemData }) => {
 	// console.log("itemData", itemData);
 	// console.log("submenuItems", submenuItems);
 	return (
-		<Box padding={2}>
-			<Typography variant='h5' sx={{ my: 2, color: "blue" }}>{itemData.name} </Typography>
+		<Box padding={{lg:2, xs:0}}>
+			<Typography variant='h5' sx={{my:3, fontWeight:'600', fontSize:{ lg:'1.8rem', xs:'1rem'}, color:'primary.main'}}>{itemData.name} </Typography>
 			{submenuItems.map((item) => {
 				return (
 					<Link to={`/${item.path}`} key={item.path}  >

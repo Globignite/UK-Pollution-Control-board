@@ -32,7 +32,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 // Dynamic Table Component
 const TableComponent = ({ title, tblData }) => {
   return (
-    <TableContainer component={Card} elevation={5} sx={{ margin: '20px', overflowX: 'auto' }}>
+    <TableContainer component={Card} elevation={5} sx={{ margin:{lg: '20px', xs:0}, overflowX: 'auto' }}>
       <Typography variant="h6" sx={{ margin: '10px' }}>{title}</Typography>
       <Table aria-label="simple table">
         <TableHead>
@@ -59,8 +59,8 @@ const TableComponent = ({ title, tblData }) => {
 // Table Container Component
 export default function TableContent({ title, data }) {
   return (
-    <Box padding={2}>
-      <Typography variant='h5' sx={{ my: 2, color: "blue" }}>{title} </Typography>
+    <Box padding={{lg:2, xs:0}}>
+      <Typography variant='h5' sx={{my:3, fontWeight:'600', fontSize:{ lg:'1.8rem', xs:'1rem'}, color:'primary.main'}}>{title} </Typography>
       {data.map((table, index) => (
         <TableComponent key={index} title={table.title} tblData={table.data} />
       ))}

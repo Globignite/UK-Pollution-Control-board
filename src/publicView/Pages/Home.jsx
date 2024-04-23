@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { Paper } from "@mui/material";
 
 import MyAppBar from "../Components/MyAppBar";
 import MainBanner from "../Components/MainBanner";
@@ -23,7 +24,28 @@ import RunningText from "../Components/RunningText";
 import MainMenu from "../Components/MainMenu";
 import TopBar from "../Components/TopBar";
 
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+
 function Home() {
+
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY > document.documentElement.clientHeight / 2) {
+      setShowScrollButton(true);
+    } else {
+      setShowScrollButton(false);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -62,8 +84,12 @@ function Home() {
         </Grid>
       </Container>
       <ServiceHelp />
-      <Gallery />
-      <Footer />
+      <Gallery /> 
+      <Footer /> 
+      <Paper elevation={24} onClick={scrollToTop} 
+      sx={{ position:'fixed', display: showScrollButton ? 'flex' : 'none', alignItems:'center', justifyContent:'center', width:'50px', height:'50px', borderRadius:'50%', bgcolor:'secondary.main', color:'#fff', top:'85%', left:{lg:'93%', xs:'80%'}, zIndex:1100, cursor:'pointer' }} >
+        <KeyboardArrowUpIcon  sx={{ fontSize:'1.5rem' }} />  
+      </Paper>
     </>
   );
 }

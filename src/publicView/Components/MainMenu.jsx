@@ -72,11 +72,14 @@ const handleClickLeave = (index) => {
 
   useEffect(() => {
     handleNavClose()
+    window.scrollTo(0, 0)
   }, [location]);
 
   return (
     <>
-    <Box sx={{display:'flex', width:'100%', position:{lg:'relative', xs:'fixed'}, transition:'all 0.5s liner' ,left:{lg:'0%', xs: toggleNav ? '0%': '-100%'}, top:"0%", height:{lg:'100%', xs:'110dvh'}, zIndex:1010 }}>
+    <Box sx={{display:'flex', width:'100%', position:{lg:'relative', xs:'fixed'}, transition:'all 0.5s liner' ,left:{lg:'0%', xs: toggleNav ? '0%': '100%'}, top:"0%", height:{lg:'100%', xs:'110dvh'}, zIndex:1010 }}>
+    <Box sx={{  display:{lg:'none', xs:'flex'}, width:{lg:"0%", md:'30%', xs:'20%'}, bgcolor:'rgba(0,0,0,0.2)' }} onClick={handleNavClose} >
+    </Box>
       <List ref={navBarRef} sx={{display:'flex', position:{lg:'relative'}, bgcolor:'background.header', flexDirection:{lg:'row', xs:'column'}, justifyContent:{lg:'center', xs:'start'}, mb:1, width:'100%', fontSize:'0.9rem', py:{lg:0, xs:5}}} disablePadding >
         {mainMenu.map((menuItem) => (
           <Box key={menuItem.name} sx={{bgcolor:'background.header'}}> 
@@ -136,9 +139,6 @@ const handleClickLeave = (index) => {
           </Box>
         ))}
       </List>
-      <Box sx={{  display:{lg:'none', xs:'flex'}, width:{lg:"0%", md:'30%', xs:'20%'}, bgcolor:'rgba(0,0,0,0.2)' }} onClick={handleNavClose} >
-    
-      </Box>
     </Box>
     <Box sx={{bgcolor:'', width:'100%', display:{xs:'flex', lg:'none'}, justifyContent:'end', px:1, py:2}}  >
       <MenuIcon sx={{color:'secondary.main'}} onClick={handleNavOpen} />

@@ -12,7 +12,7 @@ const UserInfoItems = [
 ];
 
   return (
-    <Box padding={2}>
+    <Box padding={{lg:2, xs:0}}>
     <Typography variant="h5" sx={{my:3, fontWeight:'600', fontSize:{ lg:'1.8rem', xs:'1rem'}, color:'primary.main'}} >
       Expression of Interest (EOI)
     </Typography>

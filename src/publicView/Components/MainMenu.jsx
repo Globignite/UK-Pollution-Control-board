@@ -78,7 +78,7 @@ const handleClickLeave = (index) => {
   return (
     <>
     <Box sx={{display:'flex', width:'100%', position:{lg:'relative', xs:'fixed'}, transition:'all 0.5s liner' ,left:{lg:'0%', xs: toggleNav ? '0%': '100%'}, top:"0%", height:{lg:'100%', xs:'110dvh'}, zIndex:1010 }}>
-    <Box sx={{  display:{lg:'none', xs:'flex'}, width:{lg:"0%", md:'30%', xs:'20%'}, bgcolor:'rgba(0,0,0,0.2)' }} onClick={handleNavClose} >
+    <Box sx={{  display:{lg:'none', xs:'flex'}, width:{lg:"0%", md:'50%', xs:'50%'}, bgcolor:'rgba(0,0,0,0.2)' }} onClick={handleNavClose} >
     </Box>
       <List ref={navBarRef} sx={{display:'flex', position:{lg:'relative'}, bgcolor:'background.header', flexDirection:{lg:'row', xs:'column'}, justifyContent:{lg:'center', xs:'start'}, mb:1, width:'100%', fontSize:'0.9rem', py:{lg:0, xs:5}}} disablePadding >
         {mainMenu.map((menuItem) => (
@@ -86,7 +86,8 @@ const handleClickLeave = (index) => {
             <MenuItem sx={{ px:0}}  onMouseEnter={() => handleClickHover(menuItem.name)} onMouseLeave={() => handleClickLeave(menuItem.name)} >
                 <Box sx={{
                     borderRight: menuItem.name === "Public Hearing"?"": mobileView ? '' :'1px solid grey', 
-                    display:'flex', 
+                    display:'flex',
+                    justifyContent:'space-between', 
                     px:2, 
                     width:'100%'
                     }} >

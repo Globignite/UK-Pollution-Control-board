@@ -3,6 +3,7 @@ import { List, ListItem, ListItemText, Collapse, Link, Box } from '@mui/material
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { SideMenu } from '../JsonFiles/SideMenu';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 
 export default function Sidebar() {
@@ -130,9 +131,10 @@ export default function Sidebar() {
       </Box>
 
       </Box>
-      <Box sx={{ display:{lg:'none', xs: toggleNav? 'none':'flex'}, justifyContent:'center', alignItems:'start', py:5, position:'fixed', width:'30px', height:'100%', left:'0px', top:'10%', zIndex:1000 }}>
-        <Box sx={{ transform:'rotate(-90deg)', shadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',  width:'150px', py:0.5, px:2, bgcolor:'background.footer', fontSize:'0.9rem' }}  onClick={handleNavOpen} >
+      <Box sx={{ display:{lg:'none', xs: toggleNav? 'none':'flex'}, justifyContent:'center', alignItems:'start', py:5, position:'fixed', width:'30px', height:'100%', left:'0px', top:'40%', zIndex:1000 }}>
+        <Box sx={{ transform:'rotate(-90deg)', shadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',  width:'150px', py:0.5, pl:1, bgcolor:'background.footer', fontSize:'0.9rem', display:'flex', alignItems:'center', justifyContent:'space-evenly', borderRadius:'0px 0px 5px 5px'   }}  onClick={handleNavOpen} >
             MENU
+            <KeyboardArrowDownIcon sx={{p:0, m:0}} />
         </Box>
       </Box>
     </>

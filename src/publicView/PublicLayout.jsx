@@ -72,7 +72,10 @@ function PublicLayout() {
             <Sidebar />
           </Grid>
           <Grid item lg={9} sm={12} xs={12}>
-            <Outlet />
+            <Box sx={{borderBottom:{lg:'none', xs:'1px solid grey'} }} ></Box>
+            <Box sx={{borderBottom:'1px solid grey', pb:3 }} >
+              <Outlet />  
+            </Box>
             <Box sx={{display:{lg:'flex', md:'flex', sm:'none', xs:'none'}}} >
               <InfoCards />
             </Box>

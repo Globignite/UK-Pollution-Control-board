@@ -58,7 +58,7 @@ const QuickLinks = () => {
   }));
 
   return (
-    <Grid container direction="row" sx={{bgcolor:'secondary.light'}} >
+    <Grid container direction="row" sx={{bgcolor:'secondary.light' }} >
       {/* left links */} 
         <Grid item lg={6} xs={12} container  sx={{py:3, pr:{lg:2, xs:0}, pl:{lg:2, xs:0} }} > 
           <Stack sx={{display:'flex', flexWrap:'wrap', alignItems:'center', justifyContent:'space-evenly', flexDirection:'row'}}  >

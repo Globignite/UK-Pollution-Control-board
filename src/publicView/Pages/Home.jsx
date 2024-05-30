@@ -75,6 +75,7 @@ function Home() {
             <Box sx={{display:{lg:'flex', md:'flex', sm:'none', xs:'none'}}} >
               <InfoCards />
             </Box>
+            <WelcomeText/>
             <EOICard />
             <UsefulInfo />
             <EnvironmentLegislation />

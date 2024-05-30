@@ -1,5 +1,5 @@
 import WelcomeText from "./publicView/Components/WelcomeText";
-import { PDFjson } from "./publicView/JsonFiles/PDFjson";
+// import { PDFjson } from "./publicView/JsonFiles/PDFjson";
 import { TableJson } from "./publicView/JsonFiles/TableJson";
 import About from "./publicView/Pages/About";
 import ActionPlanRiverStretches from "./publicView/Pages/ActionPlanRiverStretches";
@@ -10,6 +10,35 @@ import RelatedLinks from "./publicView/Pages/RelatedLinks";
 import Pdf_ListContainer from "./publicView/Pdf_ListContainer";
 import TableContent from "./publicView/TableContent";
 
+// const PDFjson = `${import.meta.env.VITE_APP_PDFJSONFILE_URL}`
+
+// const PDFjson = async() =>{
+// 	try {
+// 		const res = await fetch(`${import.meta.env.VITE_APP_PDFJSONFILE_URL}`, {
+// 		  method: 'GET',
+// 		  headers: {
+// 			"Content-Type": "application/json",
+// 		  },
+// 		  credentials: 'include',
+// 		});
+  
+// 		if (!res.ok) {
+// 		  throw new Error('Failed to upload file');
+// 		}
+  
+// 		const data = await res.json();
+
+// 		console.log(res.status, data)
+// 		if(res.status === 200) {
+// 			return data
+// 		}
+// 	  } catch (error) {
+// 		console.error('Error uploading file:', error);
+// 	  }
+// }
+
+// console.log("pdf data => ",PDFjson())
+
 export const RoutesJson = [
 	// if hasSubItem true then  contentType & data will be empty
 	{
@@ -18,7 +47,7 @@ export const RoutesJson = [
 		path: "61-quality-standards",
 		hasSubItem: true,
 		parent_id: null,
-		component: "",
+		component: "", 
 	},
 	{
 		id: 2,
@@ -27,7 +56,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 1,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Air Pollution", data: PDFjson["Air Pollution"] },
+		componentProps: { title: "Air Pollution", data: "Air Pollution" },
 	},
 	{
 		id: 3,
@@ -38,7 +67,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Water Pollution",
-			data: PDFjson["Water Pollution"],
+			data: "Water Pollution",
 		},
 	},
 	{
@@ -50,7 +79,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Noise Pollution",
-			data: PDFjson["Noise Pollution"],
+			data: "Noise Pollution", 
 		},
 	},
 	{
@@ -100,7 +129,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "General Standards",
-			data: PDFjson["General Standards"],
+			data: "General Standards",
 		},
 	},
 	{
@@ -112,7 +141,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "CETP-Inlet standards",
-			data: PDFjson["CETP-Inlet standards"],
+			data: "CETP-Inlet standards",
 		},
 	},
 	{
@@ -122,7 +151,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 1,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Brick Klins", data: PDFjson["Brick Klins"] },
+		componentProps: { title: "Brick Klins", data: "Brick Klins" },
 	},
 	{
 		id: 9,
@@ -139,7 +168,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 9,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Fee Consent", data: PDFjson["Fee Consent"] },
+		componentProps: { title: "Fee Consent", data: "Fee Consent" },
 	},
 	{
 		id: 11,
@@ -150,7 +179,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Related Orders",
-			data: PDFjson["Related Orders"],
+			data: "Related Orders",
 		},
 	},
 	{
@@ -170,7 +199,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Air Quality Data",
-			data: PDFjson["Air Quality Data"],
+			data: "Air Quality Data",
 		},
 	},
 	{
@@ -190,7 +219,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Water Quality of River Ganga Pre-Post (Major Snans)",
-			data: PDFjson["Water Quality of River Ganga Pre-Post (Major Snans)"],
+			data: "Water Quality of River Ganga Pre-Post (Major Snans)",
 		},
 	},
 	{
@@ -200,7 +229,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 12,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Noise Data", data: PDFjson["Noise Data"] },
+		componentProps: { title: "Noise Data", data: "Noise Data" },
 	},
 	{
 		id: 17,
@@ -211,7 +240,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "AQI-Weekly Data",
-			data: PDFjson["AQI-Weekly Data"],
+			data: "AQI-Weekly Data",
 		},
 	},
 	{
@@ -221,7 +250,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 12,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Ground Water", data: PDFjson["Ground Water"] },
+		componentProps: { title: "Ground Water", data: "Ground Water" },
 	},
 	{
 		id: 19,
@@ -232,7 +261,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Sewage Treatment Plant (STP)",
-			data: PDFjson["Sewage Treatment Plant (STP)"],
+			data: "Sewage Treatment Plant (STP)",
 		},
 	},
 	{
@@ -317,7 +346,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Direction under Air/Water/EP Act",
-			data: PDFjson["Direction under Air/Water/EP Act"],
+			data: "Direction under Air/Water/EP Act",
 		},
 	},
 	{
@@ -343,7 +372,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: null,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Guidelines", data: PDFjson["Guidelines"] },
+		componentProps: { title: "Guidelines", data: "Guidelines" },
 	},
 	{
 		id: 31,
@@ -360,7 +389,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 31,
 		component: Pdf_ListContainer,
-		componentProps: { title: "E-Waste", data: PDFjson["E-Waste"] },
+		componentProps: { title: "E-Waste", data: "E-Waste"},
 	},
 	{
 		id: 33,
@@ -371,7 +400,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Hazardous Waste",
-			data: PDFjson["Hazardous Waste"],
+			data: "Hazardous Waste",
 		},
 	},
 	{
@@ -381,7 +410,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 31,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Plastic Waste", data: PDFjson["Plastic Waste"] },
+		componentProps: { title: "Plastic Waste", data: "Plastic Waste" },
 	},
 	{
 		id: 35,
@@ -392,7 +421,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Standard Operating Procedure",
-			data: PDFjson["Standard Operating Procedure"],
+			data: "Standard Operating Procedure",
 		},
 	},
 	{
@@ -404,7 +433,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "SOP under Rule 9 _Hazardous Waste",
-			data: PDFjson["SOP under Rule 9 _Hazardous Waste"],
+			data: "SOP under Rule 9 _Hazardous Waste",
 		},
 	},
 	{
@@ -432,7 +461,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Water Quality of Polluted River Stretch",
-			data: PDFjson["Water Quality of Polluted River Stretch"],
+			data: "Water Quality of Polluted River Stretch",
 		},
 	},
 	{
@@ -444,7 +473,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Order of Hon'ble NGT",
-			data: PDFjson["Order of Hon'ble NGT"],
+			data: "Order of Hon'ble NGT",
 		},
 	},
 	{
@@ -456,7 +485,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Letter/Notices etc",
-			data: PDFjson["Letter/Notices etc"],
+			data: "Letter/Notices etc",
 		},
 	},
 	{
@@ -468,7 +497,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "RRC, Uttarakhand-Minutes of Meeting",
-			data: PDFjson["RRC, Uttarakhand-Minutes of Meeting"],
+			data: "RRC, Uttarakhand-Minutes of Meeting",
 		},
 	},
 	{
@@ -478,7 +507,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 37,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Directions", data: PDFjson["Directions"] },
+		componentProps: { title: "Directions", data: "Directions" },
 	},
 	{
 		id: 44,
@@ -495,7 +524,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 44,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Anual Report", data: PDFjson["Anual Report"] },
+		componentProps: { title: "Anual Report", data: "Anual Report" },
 	},
 	{
 		id: 46,
@@ -514,7 +543,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Bio-Medical Waste Management Reports",
-			data: PDFjson["Bio-Medical Waste Management Reports"],
+			data: "Bio-Medical Waste Management Reports",
 		},
 	},
 	{
@@ -526,7 +555,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Municipal Solid Waste Reports",
-			data: PDFjson["Municipal Solid Waste Reports"],
+			data: "Municipal Solid Waste Reports",
 		},
 	},
 	{
@@ -538,7 +567,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "E-Waste Reports",
-			data: PDFjson["E-Waste Reports"],
+			data: "E-Waste Reports",
 		},
 	},
 	{
@@ -550,7 +579,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Plastic Waste Reports",
-			data: PDFjson["Plastic Waste Reports"],
+			data: "Plastic Waste Reports",
 		},
 	},
 	{
@@ -562,7 +591,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Hazardous Waste Reports",
-			data: PDFjson["Hazardous Waste Reports"],
+			data: "Hazardous Waste Reports",
 		},
 	},
 	{
@@ -574,7 +603,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Construction and Demolition Waste",
-			data: PDFjson["Construction and Demolition Waste"],
+			data: "Construction and Demolition Waste",
 		},
 	},
 	{
@@ -584,7 +613,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 46,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Battery Waste", data: PDFjson["Battery Waste"] },
+		componentProps: { title: "Battery Waste", data: "Battery Waste" },
 	},
 	{
 		id: 54,
@@ -595,7 +624,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Reports Prepared By State Pollution Control Board",
-			data: PDFjson["Reports Prepared By State Pollution Control Board"],
+			data: "Reports Prepared By State Pollution Control Board",
 		},
 	},
 	{
@@ -605,7 +634,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 44,
 		component: Pdf_ListContainer,
-		componentProps: { title: "SoE Report", data: PDFjson["SoE Report"] },
+		componentProps: { title: "SoE Report", data: "SoE Report" },
 	},
 	{
 		id: 56,
@@ -616,7 +645,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "City Air Action Plan",
-			data: PDFjson["City Air Action Plan"],
+			data: "City Air Action Plan",
 		},
 	},
 	{
@@ -628,7 +657,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Environmental Data for Haz. Display Board",
-			data: PDFjson["Environmental Data for Haz. Display Board"],
+			data: "Environmental Data for Haz. Display Board",
 		},
 	},
 	{
@@ -640,7 +669,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Reports prepared by CPCB",
-			data: PDFjson["Reports prepared by CPCB"],
+			data: "Reports prepared by CPCB",
 		},
 	},
 	{
@@ -660,7 +689,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Inspection Reports",
-			data: PDFjson["Inspection Reports"],
+			data: "Inspection Reports",
 		},
 	},
 	{
@@ -672,7 +701,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Directions Issued",
-			data: PDFjson["Directions Issued"],
+			data: "Directions Issued",
 		},
 	},
 	{
@@ -684,7 +713,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Draft-District Environment Plan/State Environment Plan",
-			data: PDFjson["Draft-District Environment Plan/State Environment Plan"],
+			data: "Draft-District Environment Plan/State Environment Plan",
 		},
 	},
 	{
@@ -694,7 +723,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: null,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Mission LiFE", data: PDFjson["Mission LiFE"] },
+		componentProps: { title: "Mission LiFE", data: "Mission LiFE" },
 	},
 
 	// =========================================================================
@@ -724,7 +753,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Constitution of Board",
-			data: PDFjson["Constitution of Board"],
+			data: "Constitution of Board",
 		},
 	},
 	{
@@ -860,19 +889,19 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "World Environment Day",
-			data: PDFjson["World Environment Day"],
+			data: "World Environment Day",
 		},
 	},
 	{
 		id: 72,
-		name: "Board Meetings",
+		name: "Board Meeting",
 		path: "53-board-meetings",
 		hasSubItem: false,
 		parent_id: null,
 		component: Pdf_ListContainer,
 		componentProps: {
-			title: "Minutes of Meeting",
-			data: PDFjson["Minutes of Meeting"],
+			title: "Board Meeting",
+			data: "Board Meeting",
 		},
 	},
 	{
@@ -884,7 +913,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Board Meeting Office Orders",
-			data: PDFjson["Board Meeting Office Orders"],
+			data: "Board Meeting Office Orders",
 		},
 	},
 	{
@@ -896,7 +925,7 @@ export const RoutesJson = [
 		component: Pdf_ListContainer,
 		componentProps: {
 			title: "Board Meeting Office Orders",
-			data: PDFjson["Board Meeting Office Orders"],
+			data: "Board Meeting Office Orders",
 		},
 	},
 	{
@@ -914,7 +943,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 75,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Broucher", data: PDFjson["Broucher"] },
+		componentProps: { title: "Broucher", data: "Broucher" },
 	},
 	{
 		id: 77,
@@ -923,7 +952,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 75,
 		component: Pdf_ListContainer,
-		componentProps: { title: "Mission LiFE", data: PDFjson["Mission LiFE"] },
+		componentProps: { title: "Mission LiFE", data: "Mission LiFE" },
 	},
 	{
 		id: 78,
@@ -948,7 +977,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 79,
 		component: Pdf_ListContainer,
-		componentProps: { title: "RTI Act 2005", data: PDFjson["RTI Act 2005"] },
+		componentProps: { title: "RTI Act 2005", data: "RTI Act 2005" },
 	},
 	{
 		id: 81,
@@ -981,7 +1010,7 @@ export const RoutesJson = [
 		hasSubItem: false,
 		parent_id: 79,
 		component: Pdf_ListContainer,
-		componentProps: { title: "RTI Manuals", data: PDFjson["RTI Manuals"] },
+		componentProps: { title: "RTI Manuals", data: "RTI Manuals" },
 	},
 	{
 		id: 84,

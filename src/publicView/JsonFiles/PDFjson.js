@@ -1,4 +1,4 @@
-export const PDFjson = {
+const PDFData = {
 	"Air Pollution": [
 		{
 			name: "National_Ambient_Air_Quality_Standards",
@@ -1794,7 +1794,7 @@ export const PDFjson = {
 			href:"/files/World_Environment_Day_2022._1.pdf"
 		},
 	],
-	"Minutes of Meeting":[
+	"Board Meeting":[
 		{
 			name:"Minutes of 31st Board Meeting dated 10.08.2023",
 			href:"/upload/contents/File-158.pdf"
@@ -2034,56 +2034,56 @@ export const PDFjson = {
 	],
 	"Guidelines": [
 		{
-			"name": "Guidelines for Assessment of Environmental Compensation to be levied for violation of Plastic Waste Management Rules, 2016 - September 2022",
-			"href": "/upload/contents/File-157_hi.pdf"
+			name: "Guidelines for Assessment of Environmental Compensation to be levied for violation of Plastic Waste Management Rules, 2016 - September 2022",
+			href: "/upload/contents/File-157_hi.pdf"
 		},
 		{
-			"name": "CPCB Guidelines for Poultry Farms",
-			"href": "/upload/contents/File-150.pdf"
+			name: "CPCB Guidelines for Poultry Farms",
+			href: "/upload/contents/File-150.pdf"
 		},
 		{
-			"name": "CPCB-Guidelines for Environmental Management in Dairy and Gaushalas - July 2021",
-			"href": "/upload/contents/File-137.pdf"
+			name: "CPCB-Guidelines for Environmental Management in Dairy and Gaushalas - July 2021",
+			href: "/upload/contents/File-137.pdf"
 		},
 		{
-			"name": "Guidelines of UKPCB for Gold Assaying and Hallmarking Centres",
-			"href": "/upload/contents/File-126.pdf"
+			name: "Guidelines of UKPCB for Gold Assaying and Hallmarking Centres",
+			href: "/upload/contents/File-126.pdf"
 		},
 		{
-			"name": "Guidelines for Environmental Management of Dairy Farms and Gaushalas",
-			"href": "/upload/contents/File-119.pdf"
+			name: "Guidelines for Environmental Management of Dairy Farms and Gaushalas",
+			href: "/upload/contents/File-119.pdf"
 		},
 		{
-			"name": "World Environment Day-2018",
-			"href": "/upload/contents/File-99.pdf"
+			name: "World Environment Day-2018",
+			href: "/upload/contents/File-99.pdf"
 		},
 		{
-			"name": "CPCB-Guidelines-Dust Mitigation Measures in handling Construction material & C&D Wastes - November 2017 (26.12.2017)",
-			"href": "/upload/contents/File-94.pdf"
+			name: "CPCB-Guidelines-Dust Mitigation Measures in handling Construction material & C&D Wastes - November 2017 (26.12.2017)",
+			href: "/upload/contents/File-94.pdf"
 		},
 		{
-			"name": "CPCB-Guidelines-Cleaner Production Electroplating Sector-2013 (11.09.2017)",
-			"href": "/upload/contents/File-88.pdf"
+			name: "CPCB-Guidelines-Cleaner Production Electroplating Sector-2013 (11.09.2017)",
+			href: "/upload/contents/File-88.pdf"
 		},
 		{
-			"name": "Draft-Action-Plan-Solid Waste Management-NGT-Mar-2015",
-			"href": "/upload/contents/File-54.pdf"
+			name: "Draft-Action-Plan-Solid Waste Management-NGT-Mar-2015",
+			href: "/upload/contents/File-54.pdf"
 		},
 		{
-			"name": "NGT Order Dtd.15/1/2015 in Almitra H Patel matter related to submission of State's Action Plan for management of municipal solid wastes",
-			"href": "/upload/contents/File-52.pdf"
+			name: "NGT Order Dtd.15/1/2015 in Almitra H Patel matter related to submission of State's Action Plan for management of municipal solid wastes",
+			href: "/upload/contents/File-52.pdf"
 		},
 		{
-			"name": "CPCB Emission Regulations-Part-3",
-			"href": "/files/CPCB-Emission_Regulations-Part-3.pdf"
+			name: "CPCB Emission Regulations-Part-3",
+			href: "/files/CPCB-Emission_Regulations-Part-3.pdf"
 		},
 		{
-			"name": "MSW Form-IV Annual Report 2013-14",
-			"href": "/upload/contents/File-49.pdf"
+			name: "MSW Form-IV Annual Report 2013-14",
+			href: "/upload/contents/File-49.pdf"
 		},
 		{
-			"name": "NGT ORDER Dated 17.11.2014 regarding Industrial Pollution",
-			"href": "/upload/contents/File-50.pdf"
+			name: "NGT ORDER Dated 17.11.2014 regarding Industrial Pollution",
+			href: "/upload/contents/File-50.pdf"
 		}
 	]
 

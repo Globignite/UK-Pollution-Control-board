@@ -26,7 +26,7 @@ const LinksContainer = ({ itemData }) => {
 								cursor: "pointer",
 							}}
 						>
-							<Typography variant="body1" > {item.name} </Typography>
+							<Typography variant="body1" color="red" > {item.name} </Typography>
 							<ArrowRightAltIcon />
 						</Card>
 					</Link>

@@ -2,7 +2,7 @@ import { Box, Typography, Stack, Button } from '@mui/material';
 
 const ServiceHelp = () => {
   return (
-    <Box sx={{pt:{lg:6, xs:2}, pb:{lg:3, xs:3}, pl:{lg:5, xs:2}, width:{xs:"90%", md:'95%', lg:"65%"}, marginLeft:{lg:'auto', xs:1}, mx:{xs:2},  marginRight:{xs:'0%', lg:'7%'}, mt:5, border: '1px solid grey', borderRadius:'25px 0px 0px 25px', borderRightColor:'#fff', display: 'flex', justifyContent:'space-between'}} >
+    <Box sx={{pt:2, pb:{lg:0, xs:2}, pl:{lg:5, xs:2}, width:{xs:"90%", md:'95%', lg:"65%"}, marginLeft:{lg:'auto', xs:1}, mx:{xs:2},  marginRight:{xs:'0%', lg:'7%'}, mt:5, border: '1px solid grey', borderRadius:'25px 0px 0px 25px', borderRightColor:'#fff', display: 'flex', justifyContent:'space-between'}} >
       <Box sx={{width:{lg:'50%', xs:'60%'}}} >
         <Typography color={'primary.main'} sx={{fontWeight: '500', fontSize:{lg:'2rem', md:'1.5rem', xs:'1rem'}}} gutterBottom >
           Need help with a service?

@@ -1,4 +1,6 @@
 import { Box, Grid, Paper, Typography, Stack } from '@mui/material';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const UserInfoItems = [
   { 
@@ -26,6 +28,10 @@ const UsefulInfo = () => {
         <Typography variant="h5" sx={{my:3, fontWeight:'600', fontSize:{ lg:'1.8rem', xs:'1rem'}, color:'primary.main'}} >
         User Information
         </Typography>
+        {/* <Carousel arrows={false} showDots={true} renderDotsOutside={renderButtonGroupOutside}>
+    <ItemOne>       
+    <ItemTwo>
+  </Carousel> */}
         {/* <Grid container spacing={2}> */}
           <Stack direction={'row'} spacing={{lg:4, xs:1}} sx={{ pb:2, overflow:{lg:'hidden', xs:'scroll'},  flexDirection:'row', flexWrap:'no-wrap'}} >
             {UserInfoItems.map(({title, icon}) => (

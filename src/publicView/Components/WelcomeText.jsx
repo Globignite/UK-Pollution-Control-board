@@ -1,11 +1,27 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Link, Card } from "@mui/material";
+import { Link as RouterLink } from 'react-router-dom';
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import DownloadIcon from "@mui/icons-material/Download";
 
 const WelcomeText = () => {
+
+	const data = [
+		{
+			name:'Quality Standards - Industry',
+			href:'/files/Cement.pdf'
+		},
+		{
+			name:'User Manual -For industries & Units seeking consent/noc under Air,Water & Haz Rules',
+			href:'/files/ONLINE_CONSENT_MANAGEMENT_GUIDELINE.pdf'
+		},
+	]
+
 	return (
 		<Box padding={2}>
-			<Typography variant="h4" gutterBottom>
+			<Typography sx={{color:'primary.main', fontSize:{ lg:'1.8rem', xs:'1rem'}, fontWeight:'bold'}} gutterBottom>
 				Welcome Uttarakhand Pollution Control Board
       </Typography>
+	  <Link component={RouterLink} sx={{color:'#b54a4a', textDecoration:'underline', fontWeight:'bold', '&:hover':{color:'#b54a4a'}}} >Air Quality Index</Link>
       <br />
       <br />
 			<Typography variant="body1">
@@ -30,6 +46,29 @@ const WelcomeText = () => {
 				changed to Uttarakhand Pollution Control Board.
 			</Typography>
 			{/* Add additional content or styling here */}
+			
+			<Box sx={{mt:5}} >
+				{data.map((item, index) => (
+				<Card
+				key={index}
+				sx={{
+					display: "flex",
+					justifyContent: "start",
+					gap: "20px", 
+					textDecoration: "none",
+					backgroundColor: "#20ff9410",
+					mb: "20px",
+					p: 2,
+					cursor: "pointer",
+				}}
+				>
+				<PictureAsPdfIcon   />
+				<Typography variant="body1" color="red">{item?.name}</Typography>
+				<DownloadIcon sx={{   marginLeft: "auto" }} />
+				</Card>
+
+			))}
+			</Box>
 		</Box>
 	);
 };

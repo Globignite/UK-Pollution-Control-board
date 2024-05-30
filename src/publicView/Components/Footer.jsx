@@ -7,8 +7,10 @@ export default function Footer() {
 
   const FooterLinks = styled(Link)(({theme}) => ({
     color: theme.palette.primary.footer_links,
-    textDecorationColor: theme.palette.primary.footer_links,
-    fontWeight:'500',
+    // textDecorationColor: theme.palette.primary.footer_links,
+    textDecoration: 'underline',
+    textDecorationColor: 'grey',
+    fontWeight:'600',
     fontSize: 15,
     padding: '3px 0px',
     '&:hover':{
@@ -40,7 +42,7 @@ export default function Footer() {
           {/* left  */}
           <Grid item lg={5} sm={12} sx={{display:'flex', justifyContent:'space-between'}} container >
             <Grid item xs={6} container direction="column" >
-              <Typography sx={{fontWeight: 600}} >
+              <Typography sx={{fontWeight: 600, color:'primary.footer_links'}} >
                 Get to know
               </Typography>
               
@@ -56,7 +58,7 @@ export default function Footer() {
             </Grid>
 
             <Grid item xs={6}  container direction="column" >
-              <Typography sx={{fontWeight: 600}} >
+              <Typography sx={{fontWeight: 600, color:'primary.footer_links'}} >
                 Quick Links
               </Typography>
 
@@ -66,6 +68,7 @@ export default function Footer() {
               <FooterLinks to="/contact-us" >Contact Us</FooterLinks>
               <FooterLinks to="#" >Sitemap</FooterLinks>
               <FooterLinks to="#" >Help</FooterLinks>
+              <FooterLinks to="/signIn" >Login</FooterLinks>
 
             </Grid>
           </Grid>

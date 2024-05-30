@@ -24,9 +24,10 @@ const InfoCards = () => {
 
   return (
     <Box sx={{my:2, mx:{lg:0, xs:1}}} >
-        <Stack spacing={{lg:3, xs:1}} direction="row" >
+        <Stack direction={'row'} spacing={{lg:4, xs:1}} sx={{ pb:2,
+          px:{lg:0, xs:1}, width:{lg:"100%", md:'100%', sm:'100%', xs:'100vw'}, overflow:'auto',  flexDirection:'row', flexWrap:'no-wrap'}} >
 
-            <Paper elevation={3} sx={{width:{lg:'300px', md:'50%', sm:"40%", xs:'50%'}, height:{lg:"150px"}, borderRadius:'15px', bgcolor:'secondary.main', color:'#fff' }} >
+            <Paper elevation={3} sx={{minWidth:{lg:'280px', md:'200px', sm:'200px', xs:'200px'}, maxWidth:{lg:'280px', md:'200px', sm:'200px', xs:'200px'}, height:{lg:"150px"}, borderRadius:'15px', bgcolor:'secondary.main', color:'#fff' }} >
               <Grid container direction="row">
                 <Grid item xs={6} sx={{position:'relative'}} >
                   <ImageBox1 />
@@ -39,7 +40,7 @@ const InfoCards = () => {
               </Grid>
             </Paper>
 
-            <Paper elevation={3} sx={{width:{lg:'300px', md:'50%', sm:'40%', xs:'50%'},height:{lg:"150px"}, borderRadius:'15px', bgcolor:'primary.main', color:'#fff' }} >
+            <Paper elevation={3} sx={{minWidth:{lg:'280px', md:'200px', sm:'200px', xs:'200px'}, maxWidth:{lg:'280px', md:'200px', sm:'200px', xs:'200px'}, height:{lg:"150px"}, borderRadius:'15px', bgcolor:'primary.main', color:'#fff' }} >
               <Grid container direction="row">
                 <Grid item xs={6} sx={{position:'relative'}} >
                   <ImageBox2 />
@@ -51,9 +52,15 @@ const InfoCards = () => {
                 </Grid>
               </Grid>
             </Paper>
+
+            <Paper elevation={3} sx={{minWidth:{lg:'280px', md:'200px', sm:'200px', xs:'200px'}, maxWidth:{lg:'280px', md:'200px', sm:'200px', xs:'200px'}, height:{lg:"150px"}, borderRadius:'15px', bgcolor:'background.footer', color:'primary.main', display:'flex', alignItems:'center', justifyContent:'center' }} >
+              <Typography sx={{fontSize:"0.7rem", textAlign:'center', fontWeight:'bold'}} >" EIA Notification_Dated 20.07.2022_Cold Rolled <br /> Stainless Steel Manufacturing Industries "</Typography>
+            </Paper>
         </Stack>
     </Box>
   );
 };
 
 export default InfoCards;
+
+// {lg:'200px', md:'50%', sm:"40%", xs:'50%'}

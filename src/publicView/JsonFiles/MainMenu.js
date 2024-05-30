@@ -38,7 +38,7 @@ export const mainMenu = [
         ]
 	},
 	{
-		name: "Board Meetings",
+		name: "Board Meeting",
 		href: "/53-board-meetings",
         subItems:[
             {

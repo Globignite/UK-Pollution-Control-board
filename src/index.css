@@ -1,5 +1,5 @@
 *{
-  transition: all 0.2s ease-in-out;
+  /* transition: all 0.2s ease-in-out; */
 }
 
 a {
@@ -9,3 +9,33 @@ a {
 a:hover {
   color: darkblue; 
 }
+
+.lang_select{
+  padding: 5px 8px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid #f8fcf8;
+  color:#f8fcf8;
+  cursor: pointer;
+}
+
+.lang_select option{
+  color: #000;
+}
+
+.select:focus{
+  outline: none !important;
+  border: none !important;
+}
+
+input[type="search"]{
+  border-radius: 15px;
+  padding: 8px 30px;
+  border: 1px solid #d7e8f9;
+  background-color: #f8fcf8;
+}
+
+input[type="search"]:focus{
+  outline: none;
+}
+

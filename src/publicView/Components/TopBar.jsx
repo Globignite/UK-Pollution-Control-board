@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { Box, Container, FormControl, Select, MenuItem } from '@mui/material';
 
 
@@ -10,6 +10,25 @@ const TopBar = () => {
       setLanguage(event.target.value);
     };
 
+    const googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: "en",
+          autoDisplay: false
+        },
+        "google_translate_element"
+      );
+    };
+    useEffect(() => {
+      var addScript = document.createElement("script");
+      addScript.setAttribute(
+        "src",
+        "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+      );
+      document.body.appendChild(addScript);
+      window.googleTranslateElementInit = googleTranslateElementInit;
+    }, []);
+
   return (     
         <Box position="static" sx={{bgcolor:'secondary.main', py:1, height:'50px', display:'flex', alignItems:'center'}} >
           <Container sx={{display:'flex', justifyContent:'space-between'}}  >
@@ -18,20 +37,14 @@ const TopBar = () => {
               <img src={'/assets/akam_logo.png'} alt="" style={{height:'40px', marginLeft:'20px'}} />
             </Box>
 
-            {/* <Box sx={{display:'flex', alignItems:'center'}} >
-              <FormControl sx={{ p:0, color:"#fff" }}>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={language}
-                  // label="Language"
-                  onChange={handleChange}
-                >
-                  <MenuItem value={'English'}>English</MenuItem>
-                  <MenuItem value={'Hindi'}>Hindi</MenuItem>
-                </Select>
-              </FormControl>
-            </Box> */}
+            <Box sx={{display:'flex', alignItems:'center'}} >
+              <select name="language" id="lang" className='lang_select' >
+                <option value="en">English</option>
+                <option value="hindi">Hindi</option>
+              </select>
+            </Box>
+
+            {/* <div id="google_translate_element"></div> */}
 
           </Container>
       </Box>

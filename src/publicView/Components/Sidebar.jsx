@@ -34,26 +34,27 @@ export default function Sidebar() {
     handleNavClose()
   }, [location]);
 
+  // console.log(window.location.pathname)
+
   return (
     <>
 
      <Box sx={{display:'flex', width:'100%', position:{lg:'relative', xs:'fixed'},  transition:'all 0.5s liner' ,left:{lg:'0%', xs: toggleNav ? '0%': '-100%'}, top:"0%", zIndex:1000 }}>
-      <List sx={{display:'block', width:{lg:'100%', md:'70%', xs:'80%'}, bgcolor:'background.header', height:{lg:'100%',xs:'100dvh'}, overflow:{lg:'hidden',xs:'scroll'}, py:5 }} >
+      <List sx={{display:'block', width:{lg:'100%', md:'70%', xs:'80%'},  bgcolor:'background.header', height:{lg:'100%',xs:'100dvh'}, overflow:{lg:'hidden',xs:'scroll'}, py:5, '&:hover':{color:'pink'} }} >
         {SideMenu.menu.map((menuItem) => (
-          <div key={menuItem.name}>
-            <ListItem sx={{borderBottom:'1px solid #EEEEEE', cursor:'pointer'}} button  >
+          <Box key={menuItem.name}   >
+            <ListItem sx={{borderBottom:'1px solid #EEEEEE', cursor:'pointer', bgcolor: window.location.pathname == menuItem.href? 'primary.main': 'background.header', }} button  >
               {/* <ListItemText primary={menuItem.name}  /> */}
               <Link
               component={RouterLink}
               to={menuItem.href}
-              variant="body1"
-              color="textPrimary"
-              sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}
+              // variant="body1"
+              sx={{ width: '100%', display: 'flex', justifyContent: 'space-between', fontSize:{lg:'1.2rem'}, color: window.location.pathname == menuItem.href ? '#fff' : 'primary.main'}}
               underline="none"
             >
               {menuItem.name}
             </Link>
-              {menuItem.subItems && (open[menuItem.name] ? <ExpandLess  onClick={() => handleClick(menuItem.name)} /> : <ExpandMore  onClick={() => handleClick(menuItem.name)} />)}
+              {menuItem.subItems && (open[menuItem.name] ? <ExpandLess sx={{color:window.location.pathname == menuItem.href ? '#fff' : 'primary.main'}}  onClick={() => handleClick(menuItem.name)} /> : <ExpandMore sx={{color:window.location.pathname == menuItem.href ? '#fff' : 'primary.main'}} onClick={() => handleClick(menuItem.name)} />)}
             </ListItem>
             {menuItem.subItems && (
               <Collapse in={open[menuItem.name]} timeout="auto" unmountOnExit>
@@ -68,8 +69,7 @@ export default function Sidebar() {
                             component={RouterLink}
                             to={subItem.href}
                             variant="body1"
-                            color="textPrimary"
-                            sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}
+                            sx={{ width: '100%', display: 'flex', justifyContent: 'space-between', color:'red' }}
                             underline="none"
                           >
                             {subItem.name}
@@ -83,7 +83,7 @@ export default function Sidebar() {
                             component={RouterLink}
                             to={subItem.href}
                             variant="body1"
-                            color="textPrimary"
+                            color="red"
                             sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}
                             underline="none"
                           >
@@ -105,7 +105,7 @@ export default function Sidebar() {
                                       component={RouterLink}
                                       to={subItem.href}
                                       variant="body1"
-                                      color="textPrimary"
+                                      color="red"
                                       sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}
                                       underline="none"
                                     >
@@ -123,7 +123,7 @@ export default function Sidebar() {
                 </List>
               </Collapse>
             )}
-          </div>
+          </Box>
         ))}
       </List>
       <Box sx={{  display:{lg:'none', xs:'flex'}, width:{lg:"0%", md:'30%', xs:'20%'}, bgcolor:'rgba(0,0,0,0.2)' }} onClick={handleNavClose}  >

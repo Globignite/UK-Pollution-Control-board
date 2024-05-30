@@ -4,6 +4,7 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { mainMenu } from '../JsonFiles/MainMenu';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
 
 const MenuItem = styled(ListItem)(({ theme }) => ({
     cursor: 'pointer',
@@ -92,10 +93,10 @@ const handleClickLeave = (index) => {
                     width:'100%'
                     }} >
                         {/* <Typography sx={{ textDecoration:open[menuItem.name]?'underline' :"", textUnderlineOffset:'5px', color:open[menuItem.name]?'primary.main':"", fontWeight:'bold', textDecorationThickness:'2px'}} >  */}
-                        <Box component={RouterLink} to={menuItem.href} sx={{ color:'#000'}} > 
+                        <Box component={RouterLink} to={menuItem.href} sx={{ color: window.location.pathname === menuItem.href ? 'primary.main' : '#000'}} > 
                         {menuItem.name}
                         {
-                            open[menuItem.name]?
+                            open[menuItem.name] || window.location.pathname === menuItem.href?
                             <div style={{width:"40%", height:'3px',backgroundColor:'#155693'}} ></div>
                             : <div style={{height:'3px'}} ></div>
                         }
@@ -141,7 +142,11 @@ const handleClickLeave = (index) => {
         ))}
       </List>
     </Box>
-    <Box sx={{bgcolor:'', width:'100%', display:{xs:'flex', lg:'none'}, justifyContent:'end', px:1, py:2}}  >
+    <Box sx={{bgcolor:'', width:'100%', display:{xs:'flex', lg:'none'}, justifyContent:'space-between', px:1, py:2}}  >
+      <Box sx={{ position:'relative'}} >
+        <SearchIcon sx={{position:'absolute', top:'5px', left:'5px', color:'grey'}} /> 
+        <input type="search" />
+      </Box>
       <MenuIcon sx={{color:'secondary.main'}} onClick={handleNavOpen} />
     </Box>
     </>

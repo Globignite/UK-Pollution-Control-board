@@ -33,7 +33,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const TableComponent = ({ title, tblData }) => {
   return (
-    <TableContainer component={Card} elevation={5} sx={{ margin: { lg: '20px', xs: 0 }, overflowX: 'auto' }}>
+    <TableContainer component={Card} elevation={5} sx={{ maxHeight:'100vh', overflow:'auto', margin: { lg: '20px', xs: 0 }, overflowX: 'auto' }}>
       <Typography variant="h6" sx={{ margin: '10px' }}>{title}</Typography>
       <Table aria-label="simple table">
         <TableHead>

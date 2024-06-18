@@ -10,7 +10,6 @@ export default function Sidebar() {
 
   const [open, setOpen] = useState({});
   const [openSub, setOpenSub] = useState({});
-  const [mobileView, setMobileView] = useState(false);
   const [toggleNav, setToggleNav] = useState(false);
   const location = useLocation();
 

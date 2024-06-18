@@ -10,6 +10,7 @@ import SignIn from "./publicView/Pages/SignIn";
 import UploadFiles from "./publicView/Pages/Dashboard/UploadFiles";
 import AddHeadings from "./publicView/Pages/Dashboard/AddHeadings";
 import { Toaster } from 'sonner';
+import ExcelPreview from "./publicView/Pages/Dashboard/ExcelPreview";
 
 function App() {
 
@@ -49,6 +50,10 @@ function App() {
 								}
 							})}
 						</Route>
+						<Route
+							path="/excel-preview"
+							element={<ExcelPreview/>} 
+						/>
 						<Route
 							path="/signIn"
 							element={<SignIn/>} 

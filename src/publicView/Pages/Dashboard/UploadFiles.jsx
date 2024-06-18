@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Autocomplete, TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button, Popper, Container, Alert } from '@mui/material';
+import { Autocomplete, TextField, Box, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button, Popper, Container, Alert, Typography } from '@mui/material';
 import DashboardNavbar from './DashboardNavbar';
 import { SideMenu } from '../../JsonFiles/SideMenu';
 import { toast } from "sonner";
 import axios from 'axios';
 import { AdminNavbar } from './DashboardNavbar';
+import ExcelPreview from './ExcelPreview';
+import { Link } from 'react-router-dom';
 
 const formats = ['Excel', 'PDF', 'Photo', 'Video'];  
 
@@ -55,6 +57,7 @@ const MyComponent = () => {
   const [customFileName, setCustomFileName] = useState('');
   const [loading, setLoading] = useState(false);
   const [storedFileName, setStoredFileName] = useState(null);
+  const [togglePreviewExcel, setTogglePreviewExcel] = useState(false);
 
   useEffect(() => {
     const hasSubheadings = selectedHeading?.subItems ? Object.keys(selectedSubheadings).length > 0 : true;
@@ -118,10 +121,12 @@ const MyComponent = () => {
           'Content-Type': 'multipart/form-data' 
         } 
       });
-      console.log(response.data); // Handle success response
-      toast.success("successful!!", { duration: 1500 });
-      setStoredFileName(response.data?.filename)
-      return response.data?.filename
+      // console.log("res => ",response.data.data); // Handle success response
+      if(response?.data?.data?.filename !== undefined){
+        toast.success("successful!!", { duration: 1500 });
+        setStoredFileName(response.data?.filename)
+        return response.data?.data?.filename
+      }
     } catch (error) {
       console.error(error); // Handle error
       return false
@@ -139,7 +144,8 @@ const MyComponent = () => {
 
 
 
-      const upload_res = uploadFile(file)
+      const upload_res = await uploadFile(file)
+      // console.log(upload_res)
     
       if(upload_res){
 
@@ -152,7 +158,7 @@ const MyComponent = () => {
 
         let newPDF = {
           name: customFileName,
-          href: `/assets/${upload_res}`,
+          href: `/assets/${selectedFormat}/${upload_res}`,
         }
         // console.log(category)
         // console.log("checking => ", PDFjson()[category])
@@ -161,7 +167,7 @@ const MyComponent = () => {
         //   updatePDFjson(PDFjson()); // Call the update function
         //   console.log(PDFjson()[category])
 
-        console.log(selectedHeading, selectedSubheadings, lastElement.name);
+        // console.log(selectedHeading, selectedSubheadings, lastElement.name);
 
         try {
           const res = await fetch(`${import.meta.env.VITE_APP_BASE_UPLOAD_URL}/update/pdf-file`, {
@@ -195,6 +201,21 @@ const MyComponent = () => {
     }
   };
 
+  const handleFormatChange = (event)=>{
+    event.preventDefault();
+    setFile(null);
+    setFileURL(null);
+    setError('');
+    setSelectedFormat(event.target.value)
+
+        // Clear the input file field value
+        const inputFileField = document.querySelector('input[type="file"]');
+        if (inputFileField) {
+          inputFileField.value = '';
+        }
+
+  }
+
   const handleClear = () => {
     setSelectedHeading(null);
     setSelectedSubheadings({});
@@ -202,6 +223,7 @@ const MyComponent = () => {
     setFile(null);
     setFileURL(null);
     setCustomFileName('');
+    setError('');
 
       // Clear the input file field value
   const inputFileField = document.querySelector('input[type="file"]');
@@ -209,6 +231,8 @@ const MyComponent = () => {
     inputFileField.value = '';
   }
   };
+
+  // console.log(fileURL)
 
   return (
     <>
@@ -238,7 +262,7 @@ const MyComponent = () => {
           <RadioGroup
             row
             value={selectedFormat}
-            onChange={(event) => setSelectedFormat(event.target.value)}
+            onChange={handleFormatChange}
           >
             {formats.map((format) => (
               <FormControlLabel
@@ -270,14 +294,32 @@ const MyComponent = () => {
         </FormControl>
 
         {error && <Alert severity="error">{error}</Alert>}
-        {fileURL && <div><a href={fileURL} target="_blank" rel="noopener noreferrer">Preview File</a></div>}
+        {fileURL !== null ? 
+          selectedFormat !== 'Excel' ?
+          <div>
+          <a href={fileURL} target="_blank" >Preview File</a>
+          </div>
+          :
+          <>
+            <Link onClick={()=>setTogglePreviewExcel((perv) => !perv)} > {togglePreviewExcel ? "Hide Preview" : "Preview File"}  </Link>
+            {
+              togglePreviewExcel &&
+              <Box sx={{ mt:3, border:'1px solid grey'}} >
+                <ExcelPreview file={file} />
+              </Box>
+            }
+          </>
+          :''
+        }
 
-        <Button variant="outlined" sx={{ width: '45%', mt: 2, mr: 1 }} onClick={handleClear}>
-          Clear
-        </Button>
-        <Button variant="contained" sx={{ width: '45%', mt: 2, ml: 1 }} onClick={handleSubmit} disabled={isSubmitDisabled}>
-          Submit
-        </Button>
+        <Box>
+          <Button variant="outlined" sx={{ width: '45%', mt: 2, mr: 1 }} onClick={handleClear}>
+            Clear
+          </Button>
+          <Button variant="contained" sx={{ width: '45%', mt: 2, ml: 1 }} onClick={handleSubmit} disabled={isSubmitDisabled}>
+            Submit
+          </Button>
+        </Box>
       </Container>
     </>
   );

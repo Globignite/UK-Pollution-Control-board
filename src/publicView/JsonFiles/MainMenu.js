@@ -22,39 +22,39 @@ export const mainMenu = [
     subItems: [
       {
         name: "Constitution of Board",
-        href: "/constitution-of-board",
+        href: "/about-us/constitution-of-board",
       },
       {
         name: "Duties & Function of Board",
-        href: "/duties-function-of-board",
+        href: "/about-us/duties-function-of-board",
       },
       {
         name: "Board Members",
-        href: "/board-members",
+        href: "/about-us/board-members",
       },
       {
         name: "Board Offices",
-        href: "/board-offices",
+        href: "/about-us/board-offices",
       },
       {
         name: "Employee",
-        href: "/employee",
+        href: "/about-us/employee",
       },
       {
         name: "Organizational Structure",
-        href: "/organizational-structure",
+        href: "/about-us/organizational-structure",
       },
       {
         name: "Messages",
-        href: "/messages",
+        href: "/about-us/messages",
         subItems: [
           {
             name: "Message from Chairman",
-            href: "/message-from-chairman",
+            href: "/about-us/messages/message-from-chairman",
           },
           {
             name: "Message from Member Secretary",
-            href: "/message-from-member-secretary",
+            href: "/about-us/messages/message-from-member-secretary",
           },
         ],
       },
@@ -66,41 +66,41 @@ export const mainMenu = [
     subItems: [
       {
         name: "Air Data",
-        href: "/air-data",
+        href: "/environmental-data-bank/air-data",
         subItems: [
           {
             name: "AQI Data",
-            href: "/aqi-data",
+            href: "/environmental-data-bank/air-data/aqi-data",
           },
           {
             name: "Ambient Air Quality Data",
-            href: "/ambient-air-quality-data",
+            href: "/environmental-data-bank/air-data/ambient-air-quality-data",
           },
         ],
       },
       {
         name: "Water Data",
-        href: "/water-data",
+        href: "/environmental-data-bank/water-data",
       },
       {
         name: "Noise Data",
-        href: "/noise-data",
+        href: "/environmental-data-bank/noise-data",
       },
       {
         name: "STP Data",
-        href: "/stp-data",
+        href: "/environmental-data-bank/stp-data",
       },
       {
         name: "Ground Water",
-        href: "/ground-water",
+        href: "/environmental-data-bank/ground-water",
       },
       {
         name: "Diwali Monitoring Report",
-        href: "/diwali-monitoring-report",
+        href: "/environmental-data-bank/diwali-monitoring-report",
       },
       {
         name: "CETP",
-        href: "/cetp",
+        href: "/environmental-data-bank/cetp",
       },
     ],
   },
@@ -110,11 +110,11 @@ export const mainMenu = [
     subItems: [
       {
         name: "Minutes",
-        href: "/minutes",
+        href: "/board-meetings/minutes",
       },
       {
         name: "Orders",
-        href: "/orders",
+        href: "/board-meetings/orders",
       },
     ],
   },
@@ -124,67 +124,67 @@ export const mainMenu = [
     subItems: [
       {
         name: "Court Cases/Directions",
-        href: "/court-cases-directions",
+        href: "/court-cases-directions/court-cases-directions",
         subItems: [
           {
             name: "Supreme Court",
-            href: "/supreme-court-cases",
+            href: "/court-cases-directions/court-cases-directions/supreme-court-cases",
           },
           {
             name: "High Court",
-            href: "/high-court-cases",
+            href: "/court-cases-directions/court-cases-directions/high-court-cases",
           },
           {
             name: "NGT Cases",
-            href: "/ngt-cases",
+            href: "/court-cases-directions/court-cases-directions/ngt-cases",
           },
           {
             name: "Compliance Case",
-            href: "/compliance-case",
+            href: "/court-cases-directions/court-cases-directions/compliance-case",
           },
           {
             name: "Designated Court",
-            href: "/designated-court",
+            href: "/court-cases-directions/court-cases-directions/designated-court",
           },
           {
             name: "Action Taken Report by PCB’s",
-            href: "/action-taken-report-pcbs",
+            href: "/court-cases-directions/court-cases-directions/action-taken-report-pcbs",
           },
         ],
       },
       {
         name: "Directions",
-        href: "/directions",
+        href: "/court-cases-directions/directions",
         subItems: [
           {
             name: "Issued by CPCB",
-            href: "/directions-issued-cpcb",
+            href: "/court-cases-directions/directions/directions-issued-cpcb",
           },
           {
             name: "Issued by SPCB",
-            href: "/directions-issued-spcb",
+            href: "/court-cases-directions/directions/directions-issued-spcb",
           },
           {
             name: "To Authorities",
-            href: "/directions-to-authorities",
+            href: "/court-cases-directions/directions/directions-to-authorities",
           },
         ],
       },
       {
         name: "Compliances/Corrective Measures",
-        href: "/compliances-corrective-measures",
+        href: "/court-cases-directions/compliances-corrective-measures",
       },
       {
         name: "Show Cause Notices",
-        href: "/show-cause-notices",
+        href: "/court-cases-directions/show-cause-notices",
       },
       {
         name: "For Environment Clearance",
-        href: "/for-environment-clearance",
+        href: "/court-cases-directions/for-environment-clearance",
       },
       {
         name: "Closure",
-        href: "/closure",
+        href: "/court-cases-directions/closure",
       },
     ],
   },
@@ -194,23 +194,23 @@ export const mainMenu = [
     subItems: [
       {
         name: "Consent Status",
-        href: "/consent-status",
+        href: "/consent-management/consent-status",
       },
       {
         name: "SOP’s for Processing & Filing Applications",
-        href: "/sops-processing-filing-applications",
+        href: "/consent-management/sops-processing-filing-applications",
       },
       {
         name: "Application Form",
-        href: "/application-form",
+        href: "/consent-management/application-form",
       },
       {
         name: "Fee Structure",
-        href: "/fee-structure",
+        href: "/consent-management/fee-structure",
       },
       {
         name: "Classification of Industries/Categorization of Industries (R,O,G)",
-        href: "/classification-industries-categorization",
+        href: "/consent-management/classification-industries-categorization",
       },
     ],
   },
@@ -220,11 +220,11 @@ export const mainMenu = [
     subItems: [
       {
         name: "Old EC (before 31.12.2021)",
-        href: "/old-ec",
+        href: "/public-hearings/old-ec",
       },
       {
         name: "Undergoing EC",
-        href: "/undergoing-ec",
+        href: "/public-hearings/undergoing-ec",
       },
     ],
   },
@@ -234,71 +234,71 @@ export const mainMenu = [
     subItems: [
       {
         name: "Standards",
-        href: "/standards",
+        href: "/environmental-standards/standards",
         subItems: [
           {
             name: "Industries Specific Standards",
-            href: "/industries-specific-standards",
+            href: "/environmental-standards/standards/industries-specific-standards",
           },
           {
             name: "Effluent/Emission- Scheule I of EP Rules",
-            href: "/effluent-emission-schedule-i-ep-rules",
+            href: "/environmental-standards/standards/effluent-emission-schedule-i-ep-rules",
           },
           {
             name: "General Standard",
-            href: "/general-standard",
+            href: "/environmental-standards/standards/general-standard",
           },
         ],
       },
       {
         name: "Air Quality Standards",
-        href: "/air-quality-standards",
+        href: "/environmental-standards/air-quality-standards",
         subItems: [
           {
             name: "NAAQM Standards",
-            href: "/naaqm-standards",
+            href: "/environmental-standards/air-quality-standards/naaqm-standards",
           },
         ],
       },
       {
         name: "Water Quality Standards",
-        href: "/water-quality-standards",
+        href: "/environmental-standards/water-quality-standards",
         subItems: [
           {
             name: "Designated Best Use Standards",
-            href: "/designated-best-use-standards",
+            href: "/environmental-standards/water-quality-standards/designated-best-use-standards",
           },
         ],
       },
       {
         name: "Noise",
-        href: "/noise",
+        href: "/environmental-standards/noise",
         subItems: [
           {
             name: "General Noise Standards",
-            href: "/general-noise-standards",
+            href: "/environmental-standards/noise/general-noise-standards",
           },
           {
             name: "Noise Limits for Vehicles & Airport",
-            href: "/noise-limits-vehicles-airport",
+            href: "/environmental-standards/noise/noise-limits-vehicles-airport",
           },
           {
             name: "Noise Limits for Generator set",
-            href: "/noise-limits-generator-set",
+            href: "/environmental-standards/noise/noise-limits-generator-set",
           },
           {
             name: "Fire Cracker Noise Rules",
-            href: "/fire-cracker-noise-rules",
+            href: "/environmental-standards/noise/fire-cracker-noise-rules",
           },
         ],
       },
       {
         name: "Vehicular",
-        href: "/vehicular",
+        href: "/environmental-standards/vehicular",
       },
       {
         name: "CETP-Inlet Standards",
-        href: "/cetp-inlet-standards",
+        href: "/environmental-standards/cetp-inlet-standards",
       },
     ],
   },

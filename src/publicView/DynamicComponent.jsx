@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; 
 
 function DynamicComponent({ parentMenu, currentMenu }) {
   return (
@@ -6,6 +6,7 @@ function DynamicComponent({ parentMenu, currentMenu }) {
       <div>DynamicComponent</div>
       <p>{parentMenu}</p>
       <p>{currentMenu}</p>
+ 
     </>
   );
 }

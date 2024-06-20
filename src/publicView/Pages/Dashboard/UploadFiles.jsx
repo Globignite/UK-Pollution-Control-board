@@ -8,7 +8,7 @@ import { AdminNavbar } from './DashboardNavbar';
 import ExcelPreview from './ExcelPreview';
 import { Link } from 'react-router-dom';
 
-const formats = ['Excel', 'PDF', 'Photo', 'Video'];  
+const formats = ['Excel', 'PDF'];  
 
 const CustomPopper = (props) => {
   return <Popper {...props} style={{ zIndex: 1 }} placement="bottom-start" />;
@@ -94,8 +94,8 @@ const MyComponent = () => {
     const validExtensions = {
       Excel: ['xlsx', 'xls', 'csv'],
       PDF: ['pdf'],
-      Photo: ['jpg', 'jpeg', 'png'],
-      Video: ['mp4', 'avi', 'mov']
+      // Photo: ['jpg', 'jpeg', 'png'],
+      // Video: ['mp4', 'avi', 'mov']
     };
 
     const fileExtension = file.name.split('.').pop().toLowerCase();

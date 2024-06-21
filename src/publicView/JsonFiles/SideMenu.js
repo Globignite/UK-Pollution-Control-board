@@ -209,7 +209,7 @@ export const SideMenu = {
           href: "/river-rejuvenation-pollution/order-honble-ngt",
         },
         {
-          name: "Letter/Notices etc",
+          name: "Letter | Notices etc",
           href: "/river-rejuvenation-pollution/letters-notices",
         },
       ],

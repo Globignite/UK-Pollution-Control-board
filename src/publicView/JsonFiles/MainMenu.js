@@ -119,36 +119,36 @@ export const mainMenu = [
     ],
   },
   {
-    name: "Court Cases/Directions",
+    name: "Court Cases | Directions",
     href: "/court-cases-directions",
     subItems: [
       {
-        name: "Court Cases/Directions",
-        href: "/court-cases-directions/court-cases-directions",
+        name: "Court Cases",
+        href: "/court-cases-directions/court-cases",
         subItems: [
           {
             name: "Supreme Court",
-            href: "/court-cases-directions/court-cases-directions/supreme-court-cases",
+            href: "/court-cases-directions/court-cases/supreme-court-cases",
           },
           {
             name: "High Court",
-            href: "/court-cases-directions/court-cases-directions/high-court-cases",
+            href: "/court-cases-directions/court-cases/high-court-cases",
           },
           {
             name: "NGT Cases",
-            href: "/court-cases-directions/court-cases-directions/ngt-cases",
+            href: "/court-cases-directions/court-cases/ngt-cases",
           },
           {
             name: "Compliance Case",
-            href: "/court-cases-directions/court-cases-directions/compliance-case",
+            href: "/court-cases-directions/court-cases/compliance-case",
           },
           {
             name: "Designated Court",
-            href: "/court-cases-directions/court-cases-directions/designated-court",
+            href: "/court-cases-directions/court-cases/designated-court",
           },
           {
             name: "Action Taken Report by PCB’s",
-            href: "/court-cases-directions/court-cases-directions/action-taken-report-pcbs",
+            href: "/court-cases-directions/court-cases/action-taken-report-pcbs",
           },
         ],
       },
@@ -158,33 +158,33 @@ export const mainMenu = [
         subItems: [
           {
             name: "Issued by CPCB",
-            href: "/court-cases-directions/directions/directions-issued-cpcb",
+            href: "/court-cases-directions/directions/issued-cpcb",
           },
           {
             name: "Issued by SPCB",
-            href: "/court-cases-directions/directions/directions-issued-spcb",
+            href: "/court-cases-directions/directions/issued-spcb",
           },
           {
             name: "To Authorities",
-            href: "/court-cases-directions/directions/directions-to-authorities",
+            href: "/court-cases-directions/directions/to-authorities",
+          },
+          {
+            name: "Compliances | Corrective Measures",
+            href: "/court-cases-directions/directions/compliances-corrective-measures",
+          },
+          {
+            name: "Show Cause Notices",
+            href: "/court-cases-directions/directions/show-cause-notices",
+          },
+          {
+            name: "For Environment Clearance",
+            href: "/court-cases-directions/directions/for-environment-clearance",
+          },
+          {
+            name: "Closure",
+            href: "/court-cases-directions/directions/closure",
           },
         ],
-      },
-      {
-        name: "Compliances/Corrective Measures",
-        href: "/court-cases-directions/compliances-corrective-measures",
-      },
-      {
-        name: "Show Cause Notices",
-        href: "/court-cases-directions/show-cause-notices",
-      },
-      {
-        name: "For Environment Clearance",
-        href: "/court-cases-directions/for-environment-clearance",
-      },
-      {
-        name: "Closure",
-        href: "/court-cases-directions/closure",
       },
     ],
   },
@@ -209,7 +209,7 @@ export const mainMenu = [
         href: "/consent-management/fee-structure",
       },
       {
-        name: "Classification of Industries/Categorization of Industries (R,O,G)",
+        name: "Classification of Industries | Categorization of Industries (R,O,G)",
         href: "/consent-management/classification-industries-categorization",
       },
     ],
@@ -230,75 +230,71 @@ export const mainMenu = [
   },
   {
     name: "Environmental Standards",
-    href: "/environmental-standards",
+    href: "/environmental-Standards",
     subItems: [
       {
-        name: "Standards",
-        href: "/environmental-standards/standards",
+        name: "Industries Specific Standards",
+        href: "/environmental-Standards/industries-specific-standards",
         subItems: [
           {
-            name: "Industries Specific Standards",
-            href: "/environmental-standards/standards/industries-specific-standards",
-          },
-          {
-            name: "Effluent/Emission- Scheule I of EP Rules",
-            href: "/environmental-standards/standards/effluent-emission-schedule-i-ep-rules",
+            name: "Effluent | Emission- Schedule 1 of EP Rules",
+            href: "/environmental-Standards/industries-specific-standards/effluent-emission-schedule1",
           },
           {
             name: "General Standard",
-            href: "/environmental-standards/standards/general-standard",
+            href: "/environmental-Standards/industries-specific-standards/general-standard",
           },
         ],
       },
       {
         name: "Air Quality Standards",
-        href: "/environmental-standards/air-quality-standards",
+        href: "/environmental-Standards/air-quality-standards",
         subItems: [
           {
             name: "NAAQM Standards",
-            href: "/environmental-standards/air-quality-standards/naaqm-standards",
+            href: "/environmental-Standards/air-quality-standards/naaqm-standards",
           },
         ],
       },
       {
         name: "Water Quality Standards",
-        href: "/environmental-standards/water-quality-standards",
+        href: "/environmental-Standards/water-quality-standards",
         subItems: [
           {
             name: "Designated Best Use Standards",
-            href: "/environmental-standards/water-quality-standards/designated-best-use-standards",
+            href: "/environmental-Standards/water-quality-standards/designated-best-use-standards",
           },
         ],
       },
       {
         name: "Noise",
-        href: "/environmental-standards/noise",
+        href: "/environmental-Standards/noise-standards",
         subItems: [
           {
             name: "General Noise Standards",
-            href: "/environmental-standards/noise/general-noise-standards",
+            href: "/environmental-Standards/noise-standards/general-noise-standards",
           },
           {
             name: "Noise Limits for Vehicles & Airport",
-            href: "/environmental-standards/noise/noise-limits-vehicles-airport",
+            href: "/environmental-Standards/noise-standards/noise-limits-vehicles-airport",
           },
           {
-            name: "Noise Limits for Generator set",
-            href: "/environmental-standards/noise/noise-limits-generator-set",
+            name: "Noise Limits for Generator Set",
+            href: "/environmental-Standards/noise-standards/noise-limits-generator-set",
           },
           {
             name: "Fire Cracker Noise Rules",
-            href: "/environmental-standards/noise/fire-cracker-noise-rules",
+            href: "/environmental-Standards/noise-standards/fire-cracker-noise-rules",
           },
         ],
       },
       {
         name: "Vehicular",
-        href: "/environmental-standards/vehicular",
+        href: "/environmental-Standards/vehicular-standards",
       },
       {
         name: "CETP-Inlet Standards",
-        href: "/environmental-standards/cetp-inlet-standards",
+        href: "/environmental-Standards/cetp-inlet-standards",
       },
     ],
   },

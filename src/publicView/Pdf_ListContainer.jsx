@@ -2,15 +2,20 @@ import { useState, useEffect, useRef } from "react";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import DownloadIcon from "@mui/icons-material/Download";
 
-import { useReactToPrint } from "react-to-print";
+import useDownloader from 'react-use-downloader';
 
-function PdfListContainer({ title, data }) {
+// import { useReactToPrint } from "react-to-print";
+
+function PdfListContainer({ data }) {
   const [PDFjson, setPDFjson] = useState([]);
   const componentRef = useRef();
+  const { size, elapsed, percentage, download, cancel, error, isInProgress } =
+  useDownloader();
 
   const fetchData = async () => {
     try {
@@ -63,21 +68,21 @@ function PdfListContainer({ title, data }) {
         }
     `;
 
-  const handlePrint = useReactToPrint({
-    documentTitle: `${title}: Uttarakhand Pollution Control Board , Government Of Uttarakhand, India`,
-    copyStyles: true,
-    pageStyle: pageStyle,
-    content: () => componentRef.current,
-  });
+  // const handlePrint = useReactToPrint({
+  //   documentTitle: `${title}: Uttarakhand Pollution Control Board , Government Of Uttarakhand, India`,
+  //   copyStyles: true,
+  //   pageStyle: pageStyle,
+  //   content: () => componentRef.current,
+  // });
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
     // console.log(PDFjson[data])
   }, []);
 
   return (
     <Box ref={componentRef}>
-      <Box
+      {/* <Box
         sx={{
           display: "flex",
           alignItems: "center",
@@ -115,12 +120,12 @@ function PdfListContainer({ title, data }) {
             Print
           </Typography>
         </Box>
-      </Box>
+      </Box> */}
 
       <Box id="pdf-content" sx={{ maxHeight: "100vh", overflow: "auto" }}>
-        {PDFjson[data]?.map((item, index) => (
+        {/* {PDFjson[data]?.map((item, index) => (
+        ))} */}
           <Card
-            key={index}
             sx={{
               display: "flex",
               justifyContent: "start",
@@ -132,17 +137,24 @@ function PdfListContainer({ title, data }) {
               cursor: "pointer",
             }}
           >
-            <PictureAsPdfIcon />
-            <Typography
-              variant="body1"
-              sx={{ width: "75%", overflow: "hidden", bgcolor: "" }}
-              color="red"
-            >
-              {item.name}
-            </Typography>
-            <DownloadIcon sx={{ marginLeft: "auto" }} />
+            <Box component={Link}          
+             to={`${import.meta.env.VITE_APP_FILE_BASE_URL}${data.href}`}
+            target="_blank"
+            sx={{width:'100%', display:'flex' }} >
+              <PictureAsPdfIcon sx={{'&:hover':{color:'#000'}, color:'#000', mr:2}} />
+              <Typography
+                variant="body1"
+                sx={{ width: "75%", overflow: "hidden", }}
+                color="red"
+              >
+                {data.name}
+              </Typography>
+            </Box>
+            <Box >
+              {console.log(`${data.name}.${data.href.split('.')[1]}`)}
+              <DownloadIcon onClick={() => download(import.meta.env.VITE_APP_FILE_BASE_URL+data.href, `${data.name}.${data.href.split('.')[1]}`)} sx={{ marginLeft: "auto" }} />
+            </Box>
           </Card>
-        ))}
       </Box>
       <Box id="footer" sx={{ display: "none" }}>
         Source: Uttarakhand Pollution Control Board, Government Of Uttarakhand,

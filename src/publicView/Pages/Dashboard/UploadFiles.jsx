@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Autocomplete, TextField, Box, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button, Popper, Container, Alert, Typography } from '@mui/material';
 import DashboardNavbar from './DashboardNavbar';
 import { SideMenu } from '../../JsonFiles/SideMenu';
+import { mainMenu } from '../../JsonFiles/MainMenu';
 import { toast } from "sonner";
 import axios from 'axios';
 import { AdminNavbar } from './DashboardNavbar';
 import ExcelPreview from './ExcelPreview';
 import { Link } from 'react-router-dom';
 
-const formats = ['Excel', 'PDF', 'Photo', 'Video'];  
+const formats = ['Excel', 'PDF'];  
 
 const CustomPopper = (props) => {
   return <Popper {...props} style={{ zIndex: 1 }} placement="bottom-start" />;
@@ -69,24 +70,17 @@ const MyComponent = () => {
     setSelectedSubheadings({});
   };
 
-  // const handleSubheadingChange = (level, subheading) => {
-  //   setSelectedSubheadings((prev) => ({
-  //     ...prev,
-  //     [level]: subheading
-  //   }));
-  // };
-
   const handleSubheadingChange = (level, subheading) => {
-   // Update the selected subheading at the current level
-   setSelectedSubheadings((prev) => ({
-    // ...prev,
-    [level]: subheading
-  }));
+    // Update the selected subheading at the current level
+    setSelectedSubheadings((prev) => ({
+      ...prev,
+      [level]: subheading
+    }));
 
-  // Remove all higher-level subheadings
-  for (let i = level + 1; i <= Object.keys(selectedSubheadings).length; i++) {
-    delete selectedSubheadings[i];
-  }
+    // Remove all higher-level subheadings
+    for (let i = level + 1; i <= Object.keys(selectedSubheadings).length; i++) {
+      delete selectedSubheadings[i];
+    }
   };
 
   const handleFileChange = (event) => {
@@ -94,8 +88,6 @@ const MyComponent = () => {
     const validExtensions = {
       Excel: ['xlsx', 'xls', 'csv'],
       PDF: ['pdf'],
-      Photo: ['jpg', 'jpeg', 'png'],
-      Video: ['mp4', 'avi', 'mov']
     };
 
     const fileExtension = file.name.split('.').pop().toLowerCase();
@@ -121,15 +113,14 @@ const MyComponent = () => {
           'Content-Type': 'multipart/form-data' 
         } 
       });
-      // console.log("res => ",response.data.data); // Handle success response
       if(response?.data?.data?.filename !== undefined){
         toast.success("successful!!", { duration: 1500 });
         setStoredFileName(response.data?.filename)
         return response.data?.data?.filename
       }
     } catch (error) {
-      console.error(error); // Handle error
-      return false
+      console.error(error);
+      return false;
     }
   };
 
@@ -139,35 +130,20 @@ const MyComponent = () => {
       formData.append('heading', selectedHeading.name);
       formData.append('customFileName', customFileName);
       formData.append('format', selectedFormat);
-      // formData.append('file', file);
 
-
-
-
-      const upload_res = await uploadFile(file)
-      // console.log(upload_res)
+      const upload_res = await uploadFile(file);
     
-      if(upload_res){
+      if (upload_res) {
+        const lastTwoKeys = Object.keys(selectedSubheadings).slice(-2);
+        const lastTwoSubheadings = lastTwoKeys.map(key => selectedSubheadings[key].name).join('/');
 
-        // const lastKey = Object.keys(selectedSubheadings)[Object.keys(selectedSubheadings).length - 1];
-        // const lastSubheading = selectedSubheadings[lastKey];
-        // const category = lastSubheading ? lastSubheading.name : selectedHeading.name;
+        console.log(lastTwoSubheadings)
 
-        const lastKey = Object.keys(selectedSubheadings)[Object.keys(selectedSubheadings).length - 1];
-        let lastElement = selectedSubheadings[lastKey];
-
-        let newPDF = {
+        const newPDF = {
           name: customFileName,
           href: `/assets/${selectedFormat}/${upload_res}`,
-        }
-        // console.log(category)
-        // console.log("checking => ", PDFjson()[category])
-        //   // const newData = [...PDFjson(), newPDF]; // Example: Add a new item
-        //   PDFjson()[category].push(newPDF)
-        //   updatePDFjson(PDFjson()); // Call the update function
-        //   console.log(PDFjson()[category])
-
-        // console.log(selectedHeading, selectedSubheadings, lastElement.name);
+          type: selectedFormat
+        };
 
         try {
           const res = await fetch(`${import.meta.env.VITE_APP_BASE_UPLOAD_URL}/update/pdf-file`, {
@@ -177,7 +153,7 @@ const MyComponent = () => {
             },
             credentials: 'include',
             body: JSON.stringify({
-              newPDF, category: lastElement.name
+              newPDF, category: lastTwoSubheadings
             }),
           });
     
@@ -187,34 +163,29 @@ const MyComponent = () => {
     
           const data = await res.json();
           toast.success(data?.message, { duration: 1500 });
-          handleClear()
+          handleClear();
         } catch (error) {
           console.error('Error uploading file:', error);
           toast.error('Failed to upload file', { duration: 1500 });
         }
-      
       }
-  
-
     } else {
       console.log('Form is incomplete');
     }
   };
 
-  const handleFormatChange = (event)=>{
+  const handleFormatChange = (event) => {
     event.preventDefault();
     setFile(null);
     setFileURL(null);
     setError('');
-    setSelectedFormat(event.target.value)
+    setSelectedFormat(event.target.value);
 
-        // Clear the input file field value
-        const inputFileField = document.querySelector('input[type="file"]');
-        if (inputFileField) {
-          inputFileField.value = '';
-        }
-
-  }
+    const inputFileField = document.querySelector('input[type="file"]');
+    if (inputFileField) {
+      inputFileField.value = '';
+    }
+  };
 
   const handleClear = () => {
     setSelectedHeading(null);
@@ -225,22 +196,20 @@ const MyComponent = () => {
     setCustomFileName('');
     setError('');
 
-      // Clear the input file field value
-  const inputFileField = document.querySelector('input[type="file"]');
-  if (inputFileField) {
-    inputFileField.value = '';
-  }
+    const inputFileField = document.querySelector('input[type="file"]');
+    if (inputFileField) {
+      inputFileField.value = '';
+    }
   };
 
-  // console.log(fileURL)
+  const combinedOptions = [...mainMenu.slice(1,-1), ...SideMenu.menu ];
 
   return (
     <>
-      {/* <DashboardNavbar /> */}
       <AdminNavbar />
       <Container sx={{ width: { lg: '60%', xs: '100%' }, p: 1, bgcolor: '', mt: 5 }}>
         <Autocomplete
-          options={SideMenu.menu}
+          options={combinedOptions}
           value={selectedHeading}
           getOptionLabel={(option) => option.name}
           onChange={handleHeadingChange}
@@ -297,19 +266,21 @@ const MyComponent = () => {
         {fileURL !== null ? 
           selectedFormat !== 'Excel' ?
           <div>
-          <a href={fileURL} target="_blank" >Preview File</a>
+            <a href={fileURL} target="_blank">Preview File</a>
           </div>
           :
           <>
-            <Link onClick={()=>setTogglePreviewExcel((perv) => !perv)} > {togglePreviewExcel ? "Hide Preview" : "Preview File"}  </Link>
+            <Link onClick={() => setTogglePreviewExcel((prev) => !prev)}>
+              {togglePreviewExcel ? "Hide Preview" : "Preview File"}
+            </Link>
             {
               togglePreviewExcel &&
-              <Box sx={{ mt:3, border:'1px solid grey'}} >
+              <Box sx={{ mt: 3, border: '1px solid grey' }}>
                 <ExcelPreview file={file} />
               </Box>
             }
           </>
-          :''
+          : ''
         }
 
         <Box>

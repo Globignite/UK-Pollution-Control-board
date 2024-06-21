@@ -134,10 +134,10 @@ function DynamicComponent({ parentMenu, currentMenu }) {
             <Box
               id="content-box"
               sx={{
-                maxHeight: '70vh',
+                height: '90vh', 
                 overflow: 'auto',
                 '@media print': {
-                  maxHeight: 'none !important',
+                  height: 'none !important',
                 },
               }}
             >

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Autocomplete, TextField, Box, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button, Popper, Container, Alert, Typography } from '@mui/material';
+import { toast } from "sonner";
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import DashboardNavbar from './DashboardNavbar';
 import { SideMenu } from '../../JsonFiles/SideMenu';
 import { mainMenu } from '../../JsonFiles/MainMenu';
-import { toast } from "sonner";
-import axios from 'axios';
 import { AdminNavbar } from './DashboardNavbar';
 import ExcelPreview from './ExcelPreview';
-import { Link } from 'react-router-dom';
+import Spinner from '../../Components/Spinner';
 
 const formats = ['Excel', 'PDF'];  
 
@@ -15,13 +16,17 @@ const CustomPopper = (props) => {
   return <Popper {...props} style={{ zIndex: 1 }} placement="bottom-start" />;
 };
 
-const RecursiveSubheading = ({ subheadings, level, onChange }) => {
+const RecursiveSubheading = ({ subheadings, level, onChange, selectedSubheadings }) => {
   const [selectedSubheading, setSelectedSubheading] = useState(null);
 
   const handleSubheadingChange = (event, newValue) => {
     setSelectedSubheading(newValue);
     onChange(level, newValue);
   };
+
+  useEffect(() => {
+    setSelectedSubheading(selectedSubheadings[level] || null);
+  }, [selectedSubheadings, level]);
 
   return (
     <>
@@ -41,6 +46,7 @@ const RecursiveSubheading = ({ subheadings, level, onChange }) => {
           subheadings={selectedSubheading.subItems}
           level={level + 1}
           onChange={onChange}
+          selectedSubheadings={selectedSubheadings}
         />
       )}
     </>
@@ -71,16 +77,15 @@ const MyComponent = () => {
   };
 
   const handleSubheadingChange = (level, subheading) => {
-    // Update the selected subheading at the current level
-    setSelectedSubheadings((prev) => ({
-      ...prev,
-      [level]: subheading
-    }));
-
-    // Remove all higher-level subheadings
-    for (let i = level + 1; i <= Object.keys(selectedSubheadings).length; i++) {
-      delete selectedSubheadings[i];
-    }
+    setSelectedSubheadings((prev) => {
+      const newSubheadings = { ...prev, [level]: subheading };
+      Object.keys(newSubheadings).forEach((key) => {
+        if (parseInt(key) > level) {
+          delete newSubheadings[key];
+        }
+      });
+      return newSubheadings;
+    });
   };
 
   const handleFileChange = (event) => {
@@ -114,7 +119,7 @@ const MyComponent = () => {
         } 
       });
       if(response?.data?.data?.filename !== undefined){
-        toast.success("successful!!", { duration: 1500 });
+        // toast.success("successful!!", { duration: 1500 });
         setStoredFileName(response.data?.filename)
         return response.data?.data?.filename
       }
@@ -125,6 +130,7 @@ const MyComponent = () => {
   };
 
   const handleSubmit = async () => {
+    setLoading(true)
     if (file && selectedHeading && customFileName) {
       const formData = new FormData();
       formData.append('heading', selectedHeading.name);
@@ -134,17 +140,23 @@ const MyComponent = () => {
       const upload_res = await uploadFile(file);
     
       if (upload_res) {
-        const lastTwoKeys = Object.keys(selectedSubheadings).slice(-2);
-        const lastTwoSubheadings = lastTwoKeys.map(key => selectedSubheadings[key].name).join('/');
-
-        console.log(lastTwoSubheadings)
-
+        let combinedHeadings = [selectedHeading.name, ...Object.values(selectedSubheadings).map(subheading => subheading.name)];
+        let lastTwoSubheadings;
+  
+        if (combinedHeadings.length >= 2) {
+          lastTwoSubheadings = combinedHeadings.slice(-2).join('/');
+        } else {
+          lastTwoSubheadings = `null/${combinedHeadings[0]}`;
+        }
+  
+        console.log(lastTwoSubheadings);
+  
         const newPDF = {
           name: customFileName,
           href: `/assets/${selectedFormat}/${upload_res}`,
           type: selectedFormat
         };
-
+  
         try {
           const res = await fetch(`${import.meta.env.VITE_APP_BASE_UPLOAD_URL}/update/pdf-file`, {
             method: 'POST',
@@ -156,11 +168,11 @@ const MyComponent = () => {
               newPDF, category: lastTwoSubheadings
             }),
           });
-    
+  
           if (!res.ok) {
             throw new Error('Failed to upload file');
           }
-    
+  
           const data = await res.json();
           toast.success(data?.message, { duration: 1500 });
           handleClear();
@@ -172,6 +184,7 @@ const MyComponent = () => {
     } else {
       console.log('Form is incomplete');
     }
+    setLoading(false)
   };
 
   const handleFormatChange = (event) => {
@@ -206,6 +219,7 @@ const MyComponent = () => {
 
   return (
     <>
+      <Spinner loading={loading} />
       <AdminNavbar />
       <Container sx={{ width: { lg: '60%', xs: '100%' }, p: 1, bgcolor: '', mt: 5 }}>
         <Autocomplete
@@ -223,6 +237,7 @@ const MyComponent = () => {
             subheadings={selectedHeading.subItems}
             level={1}
             onChange={handleSubheadingChange}
+            selectedSubheadings={selectedSubheadings}
           />
         )}
 
@@ -256,13 +271,16 @@ const MyComponent = () => {
           <FormLabel>Upload File</FormLabel>
           <input
             type="file"
-            name="file"
+            accept={
+              selectedFormat === 'Excel'
+                ? '.xlsx,.xls,.csv'
+                : '.pdf'
+            }
             onChange={handleFileChange}
-            style={{ display: 'block', marginBottom: '16px' }}
           />
         </FormControl>
 
-        {error && <Alert severity="error">{error}</Alert>}
+         {error && <Alert severity="error">{error}</Alert>}
         {fileURL !== null ? 
           selectedFormat !== 'Excel' ?
           <div>
@@ -297,3 +315,4 @@ const MyComponent = () => {
 };
 
 export default MyComponent;
+

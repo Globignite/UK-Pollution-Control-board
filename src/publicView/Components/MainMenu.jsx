@@ -268,7 +268,7 @@ const MainMenu = () => {
                                                                                         width: '100%',
                                                                                         display: 'flex',
                                                                                         justifyContent: 'space-between',
-                                                                                        color: isActive(nestedSubItem.href) ? 'primary.main' : '#000',
+                                                                                        color: isActive(nestedSubItem.href.substring(1,nestedSubItem.href.length-1)) ? 'primary.main' : '#000',
                                                                                         '&:hover': {
                                                                                             color: 'primary.dark',
                                                                                         },

@@ -14,13 +14,13 @@ const ExcelContent = ({ excelData }) => {
     const fetchFile = async () => {
       if (excelData) {
         try {
-          const response = await fetch(`${import.meta.env.VITE_APP_FILE_BASE_URL}${excelData.href}`);
+          const response = await fetch(`${import.meta.env.VITE_APP_FILE_BASE_URL}${excelData?.href}`);
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
           const data = await response.arrayBuffer();
           const workbook = read(new Uint8Array(data), { type: 'array' });
-          const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+          const firstSheet = workbook?.Sheets[workbook?.SheetNames[0]];
           const jsonData = utils.sheet_to_json(firstSheet, { header: 1 });
 
           if (jsonData.length > 0) {
@@ -28,7 +28,7 @@ const ExcelContent = ({ excelData }) => {
             const rowsData = jsonData.slice(1).map((row, rowIndex) => {
               let rowObj = {};
               row.forEach((cell, cellIndex) => {
-                rowObj[cols[cellIndex].name] = cell;
+                rowObj[cols[cellIndex]?.name] = cell;
               });
               return { id: rowIndex.toString(), ...rowObj };
             });
@@ -39,7 +39,7 @@ const ExcelContent = ({ excelData }) => {
             setError('No data found in the Excel file.');
           }
         } catch (error) {
-          setError('Failed to fetch the file. ' + error.message);
+          setError('Failed to fetch the file. ' + error?.message);
         }
       }
     };
@@ -73,7 +73,7 @@ const ExcelContent = ({ excelData }) => {
 
     const workbook = utils.book_new();
     utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    writeFile(workbook, `${excelData.name}.xlsx`);
+    writeFile(workbook, `${excelData?.name}.xlsx`);
   };
 
   return (
@@ -82,23 +82,23 @@ const ExcelContent = ({ excelData }) => {
       {rows.length > 0 && (
         <>
         <Box sx={{display:'flex', justifyContent: 'space-between', alignItems:'center'}} >
-          <Typography variant="h6" fontWeight={'bolder'} color="initial"> {excelData.name} </Typography>
+          <Typography variant="h6" fontWeight={'bolder'} color="initial"> {excelData?.name} </Typography>
           <DownloadIcon onClick={handleDownload} sx={{cursor:'pointer', '@media print':{display:'none'}}} />
         </Box>
           <TableContainer component={Paper} sx={{ marginBottom: 2 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  {columns.map((column) => (
+                  {columns?.map((column) => (
                     <TableCell sx={{ fontWeight: 'bolder' }} key={column.key}>{column.name}</TableCell>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)?.map((row) => (
                   <TableRow key={row.id}>
-                    {columns.map((column) => (
-                      <TableCell key={`${row.id}-${column.key}`}>{row[column.name]}</TableCell>
+                    {columns?.map((column) => (
+                      <TableCell key={`${row?.id}-${column?.key}`}>{row[column?.name]}</TableCell>
                     ))}
                   </TableRow>
                 ))}
@@ -108,7 +108,7 @@ const ExcelContent = ({ excelData }) => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25, 50]}
             component="div"
-            count={rows.length}
+            count={rows?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

@@ -144,7 +144,8 @@ const MyComponent = () => {
         let lastTwoSubheadings;
   
         if (combinedHeadings.length >= 2) {
-          lastTwoSubheadings = combinedHeadings.slice(-2).join('/');
+          // lastTwoSubheadings = combinedHeadings.slice(-2).join('/');
+          lastTwoSubheadings = combinedHeadings.join('/'); 
         } else {
           lastTwoSubheadings = `null/${combinedHeadings[0]}`;
         }

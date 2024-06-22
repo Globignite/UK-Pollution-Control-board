@@ -141,7 +141,7 @@ function DynamicComponent({ parentMenu, currentMenu }) {
                 },
               }}
             >
-              <ul>
+              <Box>
                 {dataToDisplay.map((value, index) => (
                   <div key={index}>
                     {value.type === 'PDF' ? (
@@ -151,7 +151,7 @@ function DynamicComponent({ parentMenu, currentMenu }) {
                     )}
                   </div>
                 ))}
-              </ul>
+              </Box>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mt: 2 }}>
               {/* <FormControl variant="outlined">

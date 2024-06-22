@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout';
 
@@ -25,7 +25,7 @@ export const AdminNavbar = () => {
       <Box sx={{ display:'flex', bgcolor:'background.header', height:'50px', justifyContent:'space-between', px:2, alignItems:'center' }} >
         <Box sx={{width:'50%', display:'flex', alignItems:'center', fontWeight:'bold'}} >
           <img src="/assets/logo.png" alt="" width="30px" height="30px" style={{marginRight:'5px'}} />
-          UKPCB Admin
+           <Typography variant="body1" sx={{fontWeight:'bold'}} >UKPCB Admin</Typography> 
         </Box>
         <Box sx={{ width:'50%', display:'flex', justifyContent:'flex-end', mr:{lg:5, xs:1}, alignItems:'center', bgcolor:'' }} >
           {
@@ -33,8 +33,8 @@ export const AdminNavbar = () => {
             <Link to='/' > Home </Link>
             :
             <>
-              <Box component={Link} sx={{display:'flex', alignItems:'center', color: window.location.pathname==='/dashboard/upload-files'? 'primary.main':'black', fontWeight:window.location.pathname==='/dashboard/upload-files'?'bold':'light'}} to='/dashboard/upload-files' > Upload File </Box>
-              <Box component={Link} sx={{display:'flex', alignItems:'center', ml:{lg:4, xs:2},  color:'black' }} to='/signIn' >  Logout </Box>
+              {/* <Box component={Link} sx={{display:'flex', alignItems:'center', color: window.location.pathname==='/dashboard/upload-files'? 'primary.main':'black', fontWeight:window.location.pathname==='/dashboard/upload-files'?'bold':'light'}} to='/dashboard/upload-files' > Upload File </Box> */}
+              {/* <Box component={Link} sx={{display:'flex', alignItems:'center', ml:{lg:4, xs:2},  color:'black' }} to='/signIn' >  Logout </Box> */}
             </>
           }
         </Box>

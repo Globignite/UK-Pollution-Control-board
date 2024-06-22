@@ -299,7 +299,7 @@ const MainMenu = () => {
                                         >
                                             <List component="div" sx={{ position: 'relative' }} disablePadding>
                                                 {menuItem.subItems.map((subItem) => (
-                                                    <ListItem key={subItem.name} button>
+                                                    <ListItem key={subItem.name} sx={{p:0, minWidth:'200px'}} button>
                                                         <div key={subItem.name} style={{ width: '100%' }}>
                                                             {subItem?.subItems ? (
                                                                 <ListItem key={subItem.name} button>
@@ -338,7 +338,7 @@ const MainMenu = () => {
                                                                             width: '100%',
                                                                             display: 'flex',
                                                                             justifyContent: 'space-between',
-                                                                            py: 0,
+                                                                            p: 0,
                                                                             color: isActive(subItem.href) ? 'primary.main' : '#000',
                                                                             '&:hover': {
                                                                                 color: 'primary.dark',
@@ -361,7 +361,7 @@ const MainMenu = () => {
                                                                 >
                                                                     <List component="div" disablePadding>
                                                                         {subItem.subItems.map((nestedSubItem) => (
-                                                                            <ListItem key={nestedSubItem.name} sx={{ pl: 5 }} button>
+                                                                            <ListItem key={nestedSubItem.name} sx={{ }} button>
                                                                                 <Link
                                                                                     component={RouterLink}
                                                                                     to={nestedSubItem.href}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Autocomplete, TextField, Button, Popper, Container, Alert, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel } from '@mui/material';
-import DashboardNavbar from './DashboardNavbar';
+import DashboardNavbar from './Components/DashboardNavbar';
 
 const formats = ['Excel', 'PDF', 'Photo', 'Video'];
 const CustomPopper = (props) => {

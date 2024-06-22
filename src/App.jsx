@@ -11,6 +11,7 @@ import UploadFiles from "./publicView/Pages/Dashboard/UploadFiles";
 import AddHeadings from "./publicView/Pages/Dashboard/AddHeadings";
 import { Toaster } from 'sonner';
 import ExcelPreview from "./publicView/Pages/Dashboard/ExcelPreview";
+import DashboardHome from "./publicView/Pages/Dashboard/DashboardHome";
 
 function App() {
 
@@ -60,7 +61,7 @@ function App() {
 						/>
 						<Route
 							path="/dashboard/upload-files"
-							element={<UploadFiles/>} 
+							element={<DashboardHome/>} 
 						/>
 						<Route
 							path="/dashboard/add-heading"

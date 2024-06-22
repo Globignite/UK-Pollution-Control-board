@@ -3,10 +3,10 @@ import { Autocomplete, TextField, Box, Radio, RadioGroup, FormControlLabel, Form
 import { toast } from "sonner";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import DashboardNavbar from './DashboardNavbar';
+import DashboardNavbar from './Components/DashboardNavbar';
 import { SideMenu } from '../../JsonFiles/SideMenu';
 import { mainMenu } from '../../JsonFiles/MainMenu';
-import { AdminNavbar } from './DashboardNavbar';
+import { AdminNavbar } from './Components/DashboardNavbar';
 import ExcelPreview from './ExcelPreview';
 import Spinner from '../../Components/Spinner';
 
@@ -53,7 +53,7 @@ const RecursiveSubheading = ({ subheadings, level, onChange, selectedSubheadings
   );
 };
 
-const MyComponent = () => {
+const UploadFiles = () => {
   const [selectedHeading, setSelectedHeading] = useState(null);
   const [selectedSubheadings, setSelectedSubheadings] = useState({});
   const [selectedFormat, setSelectedFormat] = useState('Excel');
@@ -223,7 +223,7 @@ const MyComponent = () => {
   return (
     <>
       <Spinner loading={loading} />
-      <AdminNavbar />
+      {/* <AdminNavbar /> */}
       <Container sx={{ width: { lg: '60%', xs: '100%' }, p: 1, bgcolor: '', mt: 5 }}>
         <Autocomplete
           options={combinedOptions}
@@ -317,5 +317,5 @@ const MyComponent = () => {
   );
 };
 
-export default MyComponent;
+export default UploadFiles;
 

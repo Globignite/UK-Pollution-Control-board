@@ -114,15 +114,13 @@ const PDFData = {
   "null/NCAP Portal": [],
   "null/OCEMS Portal": [],
   "null/Related Links": [],
-
-  "null/River Rejuvenation": [],
-  "River Rejuvenation/River Rejuvenation & Pollution": [],
-  "River Rejuvenation/River Rejuvenation & Pollution/Action Plan for Rejuvenation of Polluted River Stretch":
+  "null/River Rejuvenation & Pollution": [],
+  "River Rejuvenation & Pollution/Action Plan for Rejuvenation of Polluted River Stretch":
     [],
-  "River Rejuvenation/River Rejuvenation & Pollution/Water Quality of Polluted River Stretch":
+  "River Rejuvenation & Pollution/Water Quality of Polluted River Stretch":
     [],
-  "River Rejuvenation/River Rejuvenation & Pollution/Order of Hon’ble NGT": [],
-  "River Rejuvenation/River Rejuvenation & Pollution/Letter | Notices etc": [],
+  "River Rejuvenation & Pollution/Order of Hon’ble NGT": [],
+  "River Rejuvenation & Pollution/Letter | Notices etc": [],
 
   "null/Act & Rules | Guidelines": [],
   "null/Important Office Orders": [],

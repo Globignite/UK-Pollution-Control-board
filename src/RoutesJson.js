@@ -140,7 +140,7 @@ export const RoutesJson = [
     parent_id: 9,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Messages",
+      parentMenu: "About Us/Messages",
       currentMenu: "Message from Chairman",
     },
   },
@@ -152,7 +152,7 @@ export const RoutesJson = [
     parent_id: 9,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Messages",
+      parentMenu: "About Us/Messages",
       currentMenu: "Message from Member Secretary",
     },
   },
@@ -187,7 +187,7 @@ export const RoutesJson = [
     hasSubItem: false,
     parent_id: 13,
     component: DynamicComponent,
-    componentProps: { parentMenu: "Air Data", currentMenu: "AQI Data" },
+    componentProps: { parentMenu: "Environmental Data Bank/Air Data", currentMenu: "AQI Data" },
   },
   {
     id: 15,
@@ -197,7 +197,7 @@ export const RoutesJson = [
     parent_id: 13,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Air Data",
+      parentMenu: "Environmental Data Bank/Air Data",
       currentMenu: "Ambient Air Quality Data",
     },
   },
@@ -321,7 +321,7 @@ export const RoutesJson = [
     component: DynamicComponent,
     componentProps: {
       parentMenu: "Court Cases | Directions",
-      currentMenu: "Court Cases | Directions",
+      currentMenu: "Court Cases",
     },
   },
   {
@@ -332,7 +332,7 @@ export const RoutesJson = [
     parent_id: 26,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Court Cases | Directions",
+      parentMenu: "Court Cases | Directions/Court Cases",
       currentMenu: "Supreme Court",
     },
   },
@@ -344,7 +344,7 @@ export const RoutesJson = [
     parent_id: 26,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Court Cases | Directions",
+      parentMenu: "Court Cases | Directions/Court Cases",
       currentMenu: "High Court",
     },
   },
@@ -356,7 +356,7 @@ export const RoutesJson = [
     parent_id: 26,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Court Cases | Directions",
+      parentMenu: "Court Cases | Directions/Court Cases",
       currentMenu: "NGT Cases",
     },
   },
@@ -368,7 +368,7 @@ export const RoutesJson = [
     parent_id: 26,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Court Cases | Directions",
+      parentMenu: "Court Cases | Directions/Court Cases",
       currentMenu: "Compliance Case",
     },
   },
@@ -380,7 +380,7 @@ export const RoutesJson = [
     parent_id: 26,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Court Cases | Directions",
+      parentMenu: "Court Cases | Directions/Court Cases",
       currentMenu: "Designated Court",
     },
   },
@@ -392,7 +392,7 @@ export const RoutesJson = [
     parent_id: 26,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Court Cases | Directions",
+      parentMenu: "Court Cases | Directions/Court Cases",
       currentMenu: "Action Taken Report by PCB’s",
     },
   },
@@ -415,7 +415,7 @@ export const RoutesJson = [
     hasSubItem: false,
     parent_id: 33,
     component: DynamicComponent,
-    componentProps: { parentMenu: "Directions", currentMenu: "Issued by CPCB" },
+    componentProps: { parentMenu: "Court Cases | Directions/Directions", currentMenu: "Issued by CPCB" },
   },
   {
     id: 35,
@@ -424,7 +424,7 @@ export const RoutesJson = [
     hasSubItem: false,
     parent_id: 33,
     component: DynamicComponent,
-    componentProps: { parentMenu: "Directions", currentMenu: "Issued by SPCB" },
+    componentProps: { parentMenu: "Court Cases | Directions/Directions", currentMenu: "Issued by SPCB" },
   },
   {
     id: 36,
@@ -433,7 +433,7 @@ export const RoutesJson = [
     hasSubItem: false,
     parent_id: 33,
     component: DynamicComponent,
-    componentProps: { parentMenu: "Directions", currentMenu: "To Authorities" },
+    componentProps: { parentMenu: "Court Cases | Directions/Directions", currentMenu: "To Authorities" },
   },
   {
     id: 37,
@@ -443,7 +443,7 @@ export const RoutesJson = [
     parent_id: 25,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Directions",
+      parentMenu: "Court Cases | Directions/Directions",
       currentMenu: "Compliances | Corrective Measures",
     },
   },
@@ -455,7 +455,7 @@ export const RoutesJson = [
     parent_id: 25,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Directions",
+      parentMenu: "Court Cases | Directions/Directions",
       currentMenu: "Show Cause Notices",
     },
   },
@@ -467,7 +467,7 @@ export const RoutesJson = [
     parent_id: 25,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Directions",
+      parentMenu: "Court Cases | Directions/Directions",
       currentMenu: "For Environment Clearance",
     },
   },
@@ -479,7 +479,7 @@ export const RoutesJson = [
     parent_id: 25,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Directions",
+      parentMenu: "Court Cases | Directions/Directions",
       currentMenu: "Closure",
     },
   },
@@ -618,7 +618,7 @@ export const RoutesJson = [
     parent_id: 51,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Industries Specific Standards",
+      parentMenu: "Environmental Standards/Industries Specific Standards",
       currentMenu: "Effluent | Emission- Schedule 1 of EP Rules",
     },
   },
@@ -630,7 +630,7 @@ export const RoutesJson = [
     parent_id: 51,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Industries Specific Standards",
+      parentMenu: "Environmental Standards/Industries Specific Standards",
       currentMenu: "General Standard",
     },
   },
@@ -654,7 +654,7 @@ export const RoutesJson = [
     parent_id: 54,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Air Quality Standards",
+      parentMenu: "Environmental Standards/Air Quality Standards",
       currentMenu: "NAAQM Standards",
     },
   },
@@ -678,7 +678,7 @@ export const RoutesJson = [
     parent_id: 56,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Water Quality Standards",
+      parentMenu: "Environmental Standards/Water Quality Standards",
       currentMenu: "Designated Best Use Standards",
     },
   },
@@ -702,7 +702,7 @@ export const RoutesJson = [
     parent_id: 58,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Noise",
+      parentMenu: "Environmental Standards/Noise",
       currentMenu: "General Noise Standards",
     },
   },
@@ -714,7 +714,7 @@ export const RoutesJson = [
     parent_id: 58,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Noise",
+      parentMenu: "Environmental Standards/Noise",
       currentMenu: "Noise Limits for Vehicles & Airport",
     },
   },
@@ -726,7 +726,7 @@ export const RoutesJson = [
     parent_id: 58,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Noise",
+      parentMenu: "Environmental Standards/Noise",
       currentMenu: "Noise Limits for Generator Set",
     },
   },
@@ -738,7 +738,7 @@ export const RoutesJson = [
     parent_id: 58,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Noise",
+      parentMenu: "Environmental Standards/Noise",
       currentMenu: "Fire Cracker Noise Rules",
     },
   },
@@ -816,7 +816,7 @@ export const RoutesJson = [
     parent_id: 69,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Environment Protection",
+      parentMenu: "Environmental Acts & Rules/Environment Protection",
       currentMenu: "Acts",
     },
   },
@@ -828,7 +828,7 @@ export const RoutesJson = [
     parent_id: 69,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Environment Protection",
+      parentMenu: "Environmental Acts & Rules/Environment Protection",
       currentMenu: "Rules",
     },
   },
@@ -852,7 +852,7 @@ export const RoutesJson = [
     parent_id: 72,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Water Pollution",
+      parentMenu: "Environmental Acts & Rules/Water Pollution",
       currentMenu: "Acts",
     },
   },
@@ -864,7 +864,7 @@ export const RoutesJson = [
     parent_id: 72,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Water Pollution",
+      parentMenu: "Environmental Acts & Rules/Water Pollution",
       currentMenu: "U.P. Water Rules",
     },
   },
@@ -888,7 +888,7 @@ export const RoutesJson = [
     parent_id: 75,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Air Pollution",
+      parentMenu: "Environmental Acts & Rules/Air Pollution",
       currentMenu: "Acts",
     },
   },
@@ -900,7 +900,7 @@ export const RoutesJson = [
     parent_id: 75,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Air Pollution",
+      parentMenu: "Environmental Acts & Rules/Air Pollution",
       currentMenu: "U.P. Air Rules",
     },
   },
@@ -925,7 +925,7 @@ export const RoutesJson = [
     parent_id: 78,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Noise Pollution",
+      parentMenu: "Environmental Acts & Rules/Noise Pollution",
       currentMenu: "Rules 2000",
     },
   },
@@ -949,7 +949,7 @@ export const RoutesJson = [
     parent_id: 80,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Waste Management",
+      parentMenu: "Environmental Acts & Rules/Waste Management",
       currentMenu: "Hazardous Waste",
     },
   },
@@ -961,7 +961,7 @@ export const RoutesJson = [
     parent_id: 80,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Waste Management",
+      parentMenu: "Environmental Acts & Rules/Waste Management",
       currentMenu: "Municipal Solid Waste",
     },
   },
@@ -973,7 +973,7 @@ export const RoutesJson = [
     parent_id: 80,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Waste Management",
+      parentMenu: "Environmental Acts & Rules/Waste Management",
       currentMenu: "Bio-medical Waste",
     },
   },
@@ -985,7 +985,7 @@ export const RoutesJson = [
     parent_id: 80,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Waste Management",
+      parentMenu: "Environmental Acts & Rules/Waste Management",
       currentMenu: "E-Waste",
     },
   },
@@ -997,7 +997,7 @@ export const RoutesJson = [
     parent_id: 80,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Waste Management",
+      parentMenu: "Environmental Acts & Rules/Waste Management",
       currentMenu: "Plastic Waste",
     },
   },
@@ -1009,7 +1009,7 @@ export const RoutesJson = [
     parent_id: 80,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Waste Management",
+      parentMenu: "Environmental Acts & Rules/Waste Management",
       currentMenu: "Construction & Demolition Waste",
     },
   },
@@ -1105,7 +1105,7 @@ export const RoutesJson = [
     parent_id: 93,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Reports",
+      parentMenu: "Reports & Publications/Reports",
       currentMenu: "Annual Reports",
     },
   },
@@ -1117,7 +1117,7 @@ export const RoutesJson = [
     parent_id: 93,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Reports",
+      parentMenu: "Reports & Publications/Reports",
       currentMenu: "Technical Reports",
     },
   },
@@ -1129,7 +1129,7 @@ export const RoutesJson = [
     parent_id: 93,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Reports",
+      parentMenu: "Reports & Publications/Reports",
       currentMenu: "SOE Report",
     },
   },
@@ -1153,7 +1153,7 @@ export const RoutesJson = [
     parent_id: 97,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Publications",
+      parentMenu: "Reports & Publications/Publications",
       currentMenu: "Research Publication",
     },
   },
@@ -1165,7 +1165,7 @@ export const RoutesJson = [
     parent_id: 97,
     component: DynamicComponent,
     componentProps: {
-      parentMenu: "Publications",
+      parentMenu: "Reports & Publications/Publications",
       currentMenu: "Newsletters",
     },
   },
@@ -1206,36 +1206,36 @@ export const RoutesJson = [
     },
   },
 
+  // {
+  //   id: 103,
+  //   name: "River Rejuvenation",
+  //   path: "/river-rejuvenation",
+  //   hasSubItem: true,
+  //   parent_id: null,
+  //   component: DynamicComponent,
+  //   componentProps: {
+  //     parentMenu: null,
+  //     currentMenu: "River Rejuvenation",
+  //   },
+  // },
   {
     id: 103,
-    name: "River Rejuvenation",
-    path: "/river-rejuvenation",
+    name: "River Rejuvenation & Pollution",
+    path: "/river-rejuvenation-pollution",
     hasSubItem: true,
     parent_id: null,
     component: DynamicComponent,
     componentProps: {
       parentMenu: null,
-      currentMenu: "River Rejuvenation",
-    },
-  },
-  {
-    id: 104,
-    name: "River Rejuvenation & Pollution",
-    path: "/river-rejuvenation-pollution",
-    hasSubItem: true,
-    parent_id: 103,
-    component: DynamicComponent,
-    componentProps: {
-      parentMenu: "River Rejuvenation",
       currentMenu: "River Rejuvenation & Pollution",
     },
   },
   {
-    id: 105,
+    id: 104,
     name: "Action Plan for Rejuvenation of Polluted River Stretch",
     path: "/river-rejuvenation-pollution/action-plan-rejuvenation-polluted-river",
     hasSubItem: false,
-    parent_id: 104,
+    parent_id: 103,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "River Rejuvenation & Pollution",
@@ -1243,11 +1243,11 @@ export const RoutesJson = [
     },
   },
   {
-    id: 106,
+    id: 105,
     name: "Water Quality of Polluted River Stretch",
     path: "/river-rejuvenation-pollution/water-quality-polluted-river",
     hasSubItem: false,
-    parent_id: 104,
+    parent_id: 103,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "River Rejuvenation & Pollution",
@@ -1255,11 +1255,11 @@ export const RoutesJson = [
     },
   },
   {
-    id: 107,
+    id: 106,
     name: "Order of Hon’ble NGT",
     path: "/river-rejuvenation-pollution/order-honble-ngt",
     hasSubItem: false,
-    parent_id: 104,
+    parent_id: 103,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "River Rejuvenation & Pollution",
@@ -1267,11 +1267,11 @@ export const RoutesJson = [
     },
   },
   {
-    id: 108,
+    id: 107,
     name: "Letter | Notices etc",
     path: "/river-rejuvenation-pollution/letters-notices",
     hasSubItem: false,
-    parent_id: 104,
+    parent_id: 103,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "River Rejuvenation & Pollution",
@@ -1279,7 +1279,7 @@ export const RoutesJson = [
     },
   },
   {
-    id: 109,
+    id: 108,
     name: "Act & Rules | Guidelines",
     path: "/act-rules-guidelines",
     hasSubItem: false,
@@ -1291,7 +1291,7 @@ export const RoutesJson = [
     },
   },
   {
-    id: 110,
+    id: 109,
     name: "Important Office Orders",
     path: "/important-office-orders",
     hasSubItem: false,
@@ -1303,7 +1303,7 @@ export const RoutesJson = [
     },
   },
   {
-    id: 111,
+    id: 110,
     name: "Projects",
     path: "/projects",
     hasSubItem: false,
@@ -1315,7 +1315,7 @@ export const RoutesJson = [
     },
   },
   {
-    id: 112,
+    id: 111,
     name: "Tenders",
     path: "/tenders",
     hasSubItem: false,
@@ -1327,7 +1327,7 @@ export const RoutesJson = [
     },
   },
   {
-    id: 113,
+    id: 112,
     name: "Media",
     path: "/media",
     hasSubItem: true,
@@ -1339,11 +1339,11 @@ export const RoutesJson = [
     },
   },
   {
-    id: 114,
+    id: 113,
     name: "Photos",
     path: "/media/photos",
     hasSubItem: false,
-    parent_id: 113,
+    parent_id: 112,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "Media",
@@ -1351,11 +1351,11 @@ export const RoutesJson = [
     },
   },
   {
-    id: 115,
+    id: 114,
     name: "Videos",
     path: "/media/videos",
     hasSubItem: false,
-    parent_id: 113,
+    parent_id: 112,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "Media",
@@ -1363,11 +1363,11 @@ export const RoutesJson = [
     },
   },
   {
-    id: 116,
+    id: 115,
     name: "News",
     path: "/media/news",
     hasSubItem: false,
-    parent_id: 113,
+    parent_id: 112,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "Media",
@@ -1375,11 +1375,11 @@ export const RoutesJson = [
     },
   },
   {
-    id: 117,
+    id: 116,
     name: "Press Release",
     path: "/media/press-release",
     hasSubItem: false,
-    parent_id: 113,
+    parent_id: 112,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "Media",
@@ -1387,7 +1387,7 @@ export const RoutesJson = [
     },
   },
   {
-    id: 118,
+    id: 117,
     name: "Upcoming Plan & State Initiative Plan",
     path: "/upcoming-plan-state-initiative-plan",
     hasSubItem: false,
@@ -1399,7 +1399,7 @@ export const RoutesJson = [
     },
   },
   {
-    id: 119,
+    id: 118,
     name: "AQI Plan & Statistics",
     path: "/aqi-plan-statistics",
     hasSubItem: false,
@@ -1411,7 +1411,7 @@ export const RoutesJson = [
     },
   },
   {
-    id: 120,
+    id: 119,
     name: "Registered Recyclers",
     path: "/registered-recyclers",
     hasSubItem: false,
@@ -1423,7 +1423,7 @@ export const RoutesJson = [
     },
   },
   {
-    id: 121,
+    id: 120,
     name: "Waste Management",
     path: "/waste-management",
     hasSubItem: true,
@@ -1435,11 +1435,11 @@ export const RoutesJson = [
     },
   },
   {
-    id: 122,
+    id: 121,
     name: "Municipal Solid Waste",
     path: "/waste-management/municipal-solid-waste",
     hasSubItem: false,
-    parent_id: 121,
+    parent_id: 120,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "Waste Management",
@@ -1447,11 +1447,11 @@ export const RoutesJson = [
     },
   },
   {
-    id: 123,
+    id: 122,
     name: "Bio-Medical Waste",
     path: "/waste-management/bio-medical-waste",
     hasSubItem: false,
-    parent_id: 121,
+    parent_id: 120,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "Waste Management",
@@ -1459,11 +1459,11 @@ export const RoutesJson = [
     },
   },
   {
-    id: 124,
+    id: 123,
     name: "Hazardous Waste",
     path: "/waste-management/hazardous-waste",
     hasSubItem: false,
-    parent_id: 121,
+    parent_id: 120,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "Waste Management",
@@ -1475,7 +1475,7 @@ export const RoutesJson = [
     name: "E-Waste",
     path: "/waste-management/e-waste",
     hasSubItem: false,
-    parent_id: 121,
+    parent_id: 120,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "Waste Management",
@@ -1487,7 +1487,7 @@ export const RoutesJson = [
     name: "Plastic Waste",
     path: "/waste-management/plastic-waste",
     hasSubItem: false,
-    parent_id: 121,
+    parent_id: 120,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "Waste Management",
@@ -1499,7 +1499,7 @@ export const RoutesJson = [
     name: "Battery Waste",
     path: "/waste-management/battery-waste",
     hasSubItem: false,
-    parent_id: 121,
+    parent_id: 1210,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "Waste Management",
@@ -1511,7 +1511,7 @@ export const RoutesJson = [
     name: "C&D Waste",
     path: "/waste-management/c-and-d-waste",
     hasSubItem: false,
-    parent_id: 121,
+    parent_id: 120,
     component: DynamicComponent,
     componentProps: {
       parentMenu: "Waste Management",

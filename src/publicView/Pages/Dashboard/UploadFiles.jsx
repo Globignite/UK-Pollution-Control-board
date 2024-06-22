@@ -142,6 +142,8 @@ const MyComponent = () => {
       if (upload_res) {
         let combinedHeadings = [selectedHeading.name, ...Object.values(selectedSubheadings).map(subheading => subheading.name)];
         let lastTwoSubheadings;
+
+        console.log(combinedHeadings)
   
         if (combinedHeadings.length >= 2) {
           // lastTwoSubheadings = combinedHeadings.slice(-2).join('/');

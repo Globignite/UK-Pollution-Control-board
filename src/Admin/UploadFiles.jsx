@@ -4,11 +4,11 @@ import { toast } from "sonner";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import DashboardNavbar from './Components/DashboardNavbar';
-import { SideMenu } from '../../JsonFiles/SideMenu';
-import { mainMenu } from '../../JsonFiles/MainMenu';
+import { SideMenu } from '../publicView/JsonFiles/SideMenu';
+import { mainMenu } from '../publicView/JsonFiles/MainMenu';
 import { AdminNavbar } from './Components/DashboardNavbar';
 import ExcelPreview from './ExcelPreview';
-import Spinner from '../../Components/Spinner';
+import Spinner from '../publicView/Components/Spinner';
 
 const formats = ['Excel', 'PDF'];  
 

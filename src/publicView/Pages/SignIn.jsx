@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Spinner from '../Components/Spinner';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import TopBar from '../Components/TopBar';
-import { AdminNavbar } from './Dashboard/Components/DashboardNavbar';
+import { AdminNavbar } from '../../Admin/Components/DashboardNavbar';
 
 
 

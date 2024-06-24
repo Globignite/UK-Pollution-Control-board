@@ -1,6 +1,6 @@
 import { Box } from "@mui/material"
-import { AdminNavbar } from "../../../Admin/Components/DashboardNavbar"
-import DashboardSidebar from "../../../Admin/Components/DashboardSidebar"
+import { AdminNavbar } from "./Components/DashboardNavbar"
+import DashboardSidebar from "./Components/DashboardSidebar"
 import UploadFiles from "./UploadFiles"
 
 const DashboardHome = () => {

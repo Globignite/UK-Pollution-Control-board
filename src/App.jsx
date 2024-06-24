@@ -8,7 +8,7 @@ import Home from "./publicView/Pages/Home";
 import { RoutesJson } from "./RoutesJson";
 import SignIn from "./publicView/Pages/SignIn";
 import UploadFiles from "./publicView/Pages/Dashboard/UploadFiles";
-import AddHeadings from "./Admin/AddHeadings";
+import AddHeadings from "./publicView/Pages/Dashboard/AddHeadings";
 import { Toaster } from 'sonner';
 import ExcelPreview from "./publicView/Pages/Dashboard/ExcelPreview";
 import DashboardHome from "./publicView/Pages/Dashboard/DashboardHome";
@@ -65,10 +65,6 @@ function App() {
 						/>
 						<Route
 							path="/dashboard/add-heading"
-							element={<AddHeadings/>} 
-						/>
-						<Route
-							path="/dashboard/add-notifications"
 							element={<AddHeadings/>} 
 						/>
 					</Routes>

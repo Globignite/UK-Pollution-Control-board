@@ -1,35 +1,158 @@
-import { Box, Typography } from "@mui/material"
-import { Link as RouterLink } from "react-router-dom"
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import React from "react";
+import { Box, Typography, Collapse } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import styled from "styled-components";
 
-const DashboardSidebar = () => {
+// Import your custom MUI theme
+import theme from "../../theme";
 
+const StyledBox = styled(Box)`
+  height: 90vh;
+  padding: 5px;
+  background-color: "#f8fcf8";
+  width: 100%;
+`;
 
-  const isActive = (href) => {
-    return location.pathname.startsWith(href);
+const StyledLinkBox = styled(Box)`
+  background-color: "#ffff";
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  color: ${({ isActive }) => (isActive ? "#000" : "grey")};
+  width: 100%;
+`;
+
+const StyledChevronRightIcon = styled(ChevronRightIcon)`
+  margin-right: 5px;
+  font-size: small;
+  color: ${({ isActive, theme }) => (isActive ? "#fff" : "#3da73c")};
+  background-color: ${({ isActive, theme }) =>
+    isActive ? "#3da73c" : "transparent"};
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  border-radius: 5px;
+`;
+
+const ExpandIcon = styled(({ expanded, ...props }) =>
+  expanded ? <ExpandLessIcon {...props} /> : <ExpandMoreIcon {...props} />
+)`
+  color: ${({ theme }) => "#3da73c"};
+`;
+
+const DropdownMenu = ({ title, items, isActive, basePath }) => {
+  return (
+    <>
+      <StyledLinkBox sx={{ bgcolor: "#3da73c", p: 1, borderRadius: 1 }}>
+        <Typography variant="body1" sx={{ color: "white" }}>
+          {title}
+        </Typography>
+      </StyledLinkBox>
+      {items.map((item) => (
+        <StyledLinkBox
+          key={item.path}
+          component={RouterLink}
+          to={`${basePath}/${item.path}`}
+          isActive={isActive(`${basePath}/${item.path}`)}
+        >
+          {item.icon}
+          <Typography variant="body1">{item.label}</Typography>
+        </StyledLinkBox>
+      ))}
+    </>
+  );
 };
 
-  return (
-    <Box sx={{height:'75vh', display:'flex', flexDirection:'column', alignItems:'center', py:5, bgcolor:'background.header', width:'100%'}} >
-        <Box sx={{width:'80%'}} >
-          <Box component={RouterLink} to={'/dashboard/upload-files'} 
-          sx={{bgcolor:'', 
-            '&:hover':{color:'secondary.light'},
-           py:2, display:'flex', alignItems:'center', color: isActive('/dashboard/upload-files')?'#000':'grey'}} >
-            <InsertDriveFileIcon sx={{mr:1, fontSize:'small', color:'secondary.light', width:'20px', height:'20px'}} />
-            <Typography variant="body1" sx={{fontWeight:'bold'}} >File Upload </Typography>
-          </Box>
-          <Box component={RouterLink} to={'/signIn'} 
-          sx={{bgcolor:'', 
-            '&:hover':{color:'secondary.light'},
-           py:2, display:'flex', alignItems:'center', fontWeight:'bold', color: isActive('/signIn')?'#000':'grey'}} >
-            <RocketLaunchIcon sx={{mr:1, fontSize:'small', bgcolor:isActive('/signIn')?'secondary.light':'', color:isActive('/signIn')?'#fff':'secondary.light', width:'20px', height:'20px', p:'2px', borderRadius:'5px'}} />
-            <Typography variant="body1">Logout</Typography>
-          </Box>
-        </Box>
-    </Box>
-  )
-}
+const DashboardSidebar = () => {
+  const isActive = (href) => {
+    return window.location.pathname.startsWith(href);
+  };
 
-export default DashboardSidebar
+  const menuItems = [
+    {
+      title: "File Management",
+      items: [
+        {
+          label: "Add File",
+          path: "upload-files",
+          icon: <StyledChevronRightIcon />,
+        },
+        {
+          label: "Manage File",
+          path: "manage-file",
+          icon: <StyledChevronRightIcon />,
+        },
+      ],
+    },
+    {
+      title: "Menu Management",
+      items: [
+        {
+          label: "Add Menu",
+          path: "add-menu",
+          icon: <StyledChevronRightIcon />,
+        },
+        {
+          label: "Edit Menu",
+          path: "edit-menu",
+          icon: <StyledChevronRightIcon />,
+        },
+      ],
+    },
+    {
+      title: "Notice Board",
+      items: [
+        { label: "Add", path: "add", icon: <StyledChevronRightIcon /> },
+        { label: "Manage", path: "manage", icon: <StyledChevronRightIcon /> },
+      ],
+    },
+    {
+      title: "Media",
+      items: [
+        { label: "Add", path: "add", icon: <StyledChevronRightIcon /> },
+        { label: "Manage", path: "manage", icon: <StyledChevronRightIcon /> },
+      ],
+    },
+    {
+      title: "Manage",
+      items: [
+        { label: "Enquiry", path: "enquiry", icon: <StyledChevronRightIcon /> },
+        {
+          label: "Complaints",
+          path: "complains",
+          icon: <StyledChevronRightIcon />,
+        },
+      ],
+    },
+  ];
+
+  return (
+    <StyledBox>
+      <Box sx={{ width: "80%" }}>
+        {menuItems.map((menu, index) => (
+          <DropdownMenu
+            key={index}
+            title={menu.title}
+            items={menu.items}
+            isActive={isActive}
+            basePath="/dashboard"
+          />
+        ))}
+        <StyledLinkBox
+          component={RouterLink}
+          to={"/signIn"}
+          isActive={isActive("/signIn")}
+          fontWeight="bold"
+        >
+          <StyledChevronRightIcon isActive={isActive("/signIn")} />
+          <Typography variant="body1">Logout</Typography>
+        </StyledLinkBox>
+      </Box>
+    </StyledBox>
+  );
+};
+
+export default DashboardSidebar;

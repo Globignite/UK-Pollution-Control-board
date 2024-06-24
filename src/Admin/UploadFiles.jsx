@@ -3,10 +3,10 @@ import { Autocomplete, TextField, Box, Radio, RadioGroup, FormControlLabel, Form
 import { toast } from "sonner";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import DashboardNavbar from './Components/DashboardNavbar';
+import DashboardNavbar from '../../../Admin/Components/DashboardNavbar';
 import { SideMenu } from '../../JsonFiles/SideMenu';
 import { mainMenu } from '../../JsonFiles/MainMenu';
-import { AdminNavbar } from './Components/DashboardNavbar';
+import { AdminNavbar } from '../../../Admin/Components/DashboardNavbar';
 import ExcelPreview from './ExcelPreview';
 import Spinner from '../../Components/Spinner';
 

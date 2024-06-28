@@ -82,44 +82,64 @@ const DashboardSidebar = () => {
         },
         {
           label: "Manage File",
-          path: "manage-file",
+          path: "manage-files",
           icon: <StyledChevronRightIcon />,
         },
       ],
     },
-    {
-      title: "Menu Management",
-      items: [
-        {
-          label: "Add Menu",
-          path: "add-menu",
-          icon: <StyledChevronRightIcon />,
-        },
-        {
-          label: "Edit Menu",
-          path: "edit-menu",
-          icon: <StyledChevronRightIcon />,
-        },
-      ],
-    },
+    // {
+    //   title: "Menu Management",
+    //   items: [
+    //     {
+    //       label: "Add Menu",
+    //       path: "add-menu",
+    //       icon: <StyledChevronRightIcon />,
+    //     },
+    //     {
+    //       label: "Edit Menu",
+    //       path: "edit-menu",
+    //       icon: <StyledChevronRightIcon />,
+    //     },
+    //   ],
+    // },
     {
       title: "Notice Board",
       items: [
-        { label: "Add", path: "add", icon: <StyledChevronRightIcon /> },
-        { label: "Manage", path: "manage", icon: <StyledChevronRightIcon /> },
+        {
+          label: "Add Notice",
+          path: "add-notice",
+          icon: <StyledChevronRightIcon />,
+        },
+        {
+          label: "Manage Notice",
+          path: "manage-notice",
+          icon: <StyledChevronRightIcon />,
+        },
       ],
     },
     {
-      title: "Media",
+      title: "Media/Events",
       items: [
-        { label: "Add", path: "add", icon: <StyledChevronRightIcon /> },
-        { label: "Manage", path: "manage", icon: <StyledChevronRightIcon /> },
+        {
+          label: "Add Media",
+          path: "add-media",
+          icon: <StyledChevronRightIcon />,
+        },
+        {
+          label: "Manage Media",
+          path: "manage-media",
+          icon: <StyledChevronRightIcon />,
+        },
       ],
     },
     {
       title: "Manage",
       items: [
-        { label: "Enquiry", path: "enquiry", icon: <StyledChevronRightIcon /> },
+        {
+          label: "Enquiries",
+          path: "enquiries",
+          icon: <StyledChevronRightIcon />,
+        },
         {
           label: "Complaints",
           path: "complains",

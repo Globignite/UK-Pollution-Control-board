@@ -7,17 +7,23 @@ import LinksContainer from "./publicView/LinksContainer";
 import Home from "./publicView/Pages/Home";
 import { RoutesJson } from "./RoutesJson";
 import SignIn from "./publicView/Pages/SignIn";
-import UploadFiles from "./Admin/UploadFiles";
+import UploadFiles from "./Admin/FileManagement/UploadFiles";
 import AddHeadings from "./Admin/AddHeadings";
 import { Toaster } from "sonner";
 import ExcelPreview from "./Admin/ExcelPreview";
 import DashboardHome from "./Admin/DashboardHome";
 import NotFoundPage from "./publicView/Pages/NotFoundPage";
+import FileManagement from "./Admin/FileManagement/FileManagement";
+import AddNotice from "./Admin/NoticeBoard/AddNotice";
+import ManageNotice from "./Admin/NoticeBoard/ManageNotice";
+import AddMedia from "./Admin/Media/AddMedia";
+import Enquiries from "./Admin/Enquiry/Enquiries";
+import ViewEnquiry from "./Admin/Enquiry/ViewEnquiry";
 
 function App() {
-//   useEffect(() => {
-//     console.log("Checking!!");
-//   }, []);
+  //   useEffect(() => {
+  //     console.log("Checking!!");
+  //   }, []);
 
   return (
     <>
@@ -52,6 +58,12 @@ function App() {
             </Route>
             <Route path="/dashboard" element={<DashboardHome />}>
               <Route path="upload-files" element={<UploadFiles />} />
+              <Route path="manage-files" element={<FileManagement />} />
+              <Route path="add-notice" element={<AddNotice />} />
+              <Route path="manage-notice" element={<ManageNotice />} />
+              <Route path="add-media" element={<AddMedia />} />
+              <Route path="enquiries" element={<Enquiries />} />
+              <Route path="enquiry" element={<ViewEnquiry />} />
               {/* <Route path="/add-heading" element={<AddHeadings />} /> */}
             </Route>
             <Route path="/excel-preview" element={<ExcelPreview />} />

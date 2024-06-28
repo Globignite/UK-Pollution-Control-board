@@ -15,7 +15,8 @@ import {
 import DashboardNavbar from "./Components/DashboardNavbar";
 
 const formats = ["Excel", "PDF", "Photo", "Video"];
-const CustomPopper = (props) => {
+
+export const CustomPopper = (props) => {
   return <Popper {...props} style={{ zIndex: 1 }} placement="bottom-start" />;
 };
 

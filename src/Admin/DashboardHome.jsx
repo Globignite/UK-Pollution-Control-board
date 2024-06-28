@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { AdminNavbar } from "./Components/DashboardNavbar";
 import DashboardSidebar from "./Components/DashboardSidebar";
-import UploadFiles from "./UploadFiles";
+import UploadFiles from "./FileManagement/UploadFiles";
 import { Outlet } from "react-router-dom";
 
 const DashboardHome = () => {

@@ -17,12 +17,12 @@ import {
 import { toast } from "sonner";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import DashboardNavbar from "./Components/DashboardNavbar";
-import { SideMenu } from "../publicView/JsonFiles/SideMenu";
-import { mainMenu } from "../publicView/JsonFiles/MainMenu";
-import { AdminNavbar } from "./Components/DashboardNavbar";
-import ExcelPreview from "./ExcelPreview";
-import Spinner from "../publicView/Components/Spinner";
+import DashboardNavbar from "../Components/DashboardNavbar";
+import { SideMenu } from "../../publicView/JsonFiles/SideMenu";
+import { mainMenu } from "../../publicView/JsonFiles/MainMenu";
+import { AdminNavbar } from "../Components/DashboardNavbar";
+import ExcelPreview from "../ExcelPreview";
+import Spinner from "../../publicView/Components/Spinner";
 
 const formats = ["Excel", "PDF"];
 
@@ -30,7 +30,7 @@ const CustomPopper = (props) => {
   return <Popper {...props} style={{ zIndex: 1 }} placement="bottom-start" />;
 };
 
-const RecursiveSubheading = ({
+export const RecursiveSubheading = ({
   subheadings,
   level,
   onChange,

@@ -235,12 +235,8 @@ export const SideMenu = {
       href: "/media",
       subItems: [
         {
-          name: "Photos",
-          href: "/media/photos",
-        },
-        {
-          name: "Videos",
-          href: "/media/videos",
+          name: "Events",
+          href: "/media/events",
         },
         {
           name: "News",

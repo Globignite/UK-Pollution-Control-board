@@ -17,6 +17,7 @@ function ViewEnquiry() {
 
     const data = {
         Date: '13/12/2023',
+        enquiryNumber: '345456547567567567',
         Subject: 'My subject',
         Name: 'Suraj',
         Email: 'suraj@gmail.com',
@@ -28,7 +29,7 @@ function ViewEnquiry() {
   return (
     <Container>
       <Typography variant="h6" gutterBottom>
-        Enquiries
+        Enquiry
       </Typography>
       <TableContainer >
         <Table>

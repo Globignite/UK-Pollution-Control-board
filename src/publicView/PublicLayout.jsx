@@ -77,7 +77,14 @@ function PublicLayout() {
             <Box
               sx={{ borderBottom: { lg: "none", xs: "1px solid grey" } }}
             ></Box>
-            <Box sx={{ borderBottom: "1px solid grey", pb: 3 }}>
+            <Box
+              sx={{
+                borderBottom: "1px solid grey",
+                pt: "50px",
+                pb: "100px",
+                minHeight: "70vh",
+              }}
+            >
               <Outlet />
             </Box>
             <Box

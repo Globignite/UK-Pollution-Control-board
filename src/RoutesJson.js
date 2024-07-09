@@ -12,6 +12,8 @@ import Pdf_ListContainer from "./publicView/Pdf_ListContainer";
 import TableContent from "./publicView/TableContent";
 import Enquiry from "./publicView/Enquiry";
 import Complain from "./publicView/Complain";
+import Events from "./publicView/Pages/Events";
+import EventGallery from "./publicView/Pages/EventGallery";
 
 export const RoutesJson = [
   {
@@ -1183,11 +1185,7 @@ export const RoutesJson = [
     path: "/related-links",
     hasSubItem: false,
     parent_id: null,
-    component: DynamicComponent,
-    componentProps: {
-      parentMenu: null,
-      currentMenu: "Related Links",
-    },
+    component: RelatedLinks,
   },
 
   // {
@@ -1324,27 +1322,19 @@ export const RoutesJson = [
   },
   {
     id: 113,
-    name: "Photos",
-    path: "/media/photos",
+    name: "Events Gallery",
+    path: "/media/events",
     hasSubItem: false,
     parent_id: 112,
-    component: DynamicComponent,
-    componentProps: {
-      parentMenu: "Media",
-      currentMenu: "Photos",
-    },
+    component: Events,
   },
   {
-    id: 114,
-    name: "Videos",
-    path: "/media/videos",
+    id: 113,
+    name: "Event Gallery",
+    path: "/media/event-gallery/id",
     hasSubItem: false,
     parent_id: 112,
-    component: DynamicComponent,
-    componentProps: {
-      parentMenu: "Media",
-      currentMenu: "Videos",
-    },
+    component: EventGallery,
   },
   {
     id: 115,

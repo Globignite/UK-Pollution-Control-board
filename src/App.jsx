@@ -19,6 +19,8 @@ import ManageNotice from "./Admin/NoticeBoard/ManageNotice";
 import AddMedia from "./Admin/Media/AddMedia";
 import Enquiries from "./Admin/Enquiry/Enquiries";
 import ViewEnquiry from "./Admin/Enquiry/ViewEnquiry";
+import Complaints from "./Admin/Complaint/complaints";
+import ViewComplaint from "./Admin/Complaint/ViewComplaint";
 
 function App() {
   //   useEffect(() => {
@@ -64,6 +66,8 @@ function App() {
               <Route path="add-media" element={<AddMedia />} />
               <Route path="enquiries" element={<Enquiries />} />
               <Route path="enquiry" element={<ViewEnquiry />} />
+              <Route path="complaints" element={<Complaints />} />
+              <Route path="complaint" element={<ViewComplaint />} />
               {/* <Route path="/add-heading" element={<AddHeadings />} /> */}
             </Route>
             <Route path="/excel-preview" element={<ExcelPreview />} />

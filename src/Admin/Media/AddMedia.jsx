@@ -18,6 +18,7 @@ import ImageContainer from "../Components/ImageContainer";
 const AddMedia = () => {
   const [format, setFormat] = useState("Excel");
   const [eventName, setEventName] = useState("");
+  const [eventDate, setEventDate] = useState("");
   const [file, setFile] = useState(null);
 
   const handleFormatChange = (event) => {
@@ -103,12 +104,24 @@ const AddMedia = () => {
         Upload Photos and Videos
       </Typography> 
 
-      <TextField
+        <TextField
         fullWidth
         label="Event Name"
         value={eventName}
         sx={{ mb: 2 }}
-      />
+        />
+
+        <TextField
+          type="date"
+          value={eventDate}
+          onChange={(e) => setEventDate(e.target.value)}
+          label="Event Date"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          style={{ flex: 1 }}
+          sx={{my:5}}
+        />
 
       <Typography variant="body1" sx={{ mb: 2 }}>
         Event Description

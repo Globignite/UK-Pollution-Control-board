@@ -1322,14 +1322,14 @@ export const RoutesJson = [
   },
   {
     id: 113,
-    name: "Events Gallery",
+    name: "Events",
     path: "/media/events",
     hasSubItem: false,
     parent_id: 112,
     component: Events,
   },
   {
-    id: 113,
+    id: 114,
     name: "Event Gallery",
     path: "/media/event-gallery/id",
     hasSubItem: false,

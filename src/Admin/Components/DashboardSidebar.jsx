@@ -1,10 +1,11 @@
-import React from "react";
-import { Box, Typography, Collapse } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import styled from "styled-components";
+import filemanagement from "../../../public/assets/filemanagement.svg";
+import notice from "../../../public/assets/notice.svg";
+import media from "../../../public/assets/media.svg";
+import sharp from "../../../public/assets/sharp.svg";
 
 // Import your custom MUI theme
 import theme from "../../theme";
@@ -28,30 +29,35 @@ const StyledLinkBox = styled(Box)`
 const StyledChevronRightIcon = styled(ChevronRightIcon)`
   margin-right: 5px;
   font-size: small;
-  color: ${({ isActive, theme }) => (isActive ? "#fff" : "#3da73c")};
-  background-color: ${({ isActive, theme }) =>
-    isActive ? "#3da73c" : "transparent"};
+  color: ${({ isActive }) => (isActive ? "#fff" : "#3da73c")};
+  background-color: ${({ isActive }) => (isActive ? "#3da73c" : "transparent")};
   width: 20px;
   height: 20px;
   padding: 2px;
   border-radius: 5px;
 `;
 
-const ExpandIcon = styled(({ expanded, ...props }) =>
-  expanded ? <ExpandLessIcon {...props} /> : <ExpandMoreIcon {...props} />
-)`
-  color: ${({ theme }) => "#3da73c"};
-`;
+const DropdownMenu = ({ title, items, isActive, basePath, svg }) => {
+  const isRender = items.some(item => isActive(`${basePath}/${item.path}`));
 
-const DropdownMenu = ({ title, items, isActive, basePath }) => {
   return (
     <>
-      <StyledLinkBox sx={{ bgcolor: "#3da73c", p: 1, borderRadius: 1 }}>
-        <Typography variant="body1" sx={{ color: "white" }}>
+      <StyledLinkBox
+        sx={{ bgcolor: isRender ? "#ffffff" : "", py: 1, borderRadius: 3, boxShadow:isRender ? 2 : 0 }}
+      >
+        <Box
+          sx={{ bgcolor:"#3da73c", p: 1, borderRadius: 3, display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+        >
+          <img src={svg} alt={title}/>
+        </Box>
+        <Typography
+          variant="body1"
+          sx={{ color:"#2D3748", pl: 3, fontWeight: 'bold' }}
+        >
           {title}
         </Typography>
       </StyledLinkBox>
-      {items.map((item) => (
+      {items?.map((item) => (
         <StyledLinkBox
           key={item.path}
           component={RouterLink}
@@ -67,13 +73,16 @@ const DropdownMenu = ({ title, items, isActive, basePath }) => {
 };
 
 const DashboardSidebar = () => {
+  const location = useLocation();
+
   const isActive = (href) => {
-    return window.location.pathname.startsWith(href);
+    return location.pathname.startsWith(href);
   };
 
   const menuItems = [
     {
       title: "File Management",
+      svg: filemanagement,
       items: [
         {
           label: "Add File",
@@ -87,23 +96,9 @@ const DashboardSidebar = () => {
         },
       ],
     },
-    // {
-    //   title: "Menu Management",
-    //   items: [
-    //     {
-    //       label: "Add Menu",
-    //       path: "add-menu",
-    //       icon: <StyledChevronRightIcon />,
-    //     },
-    //     {
-    //       label: "Edit Menu",
-    //       path: "edit-menu",
-    //       icon: <StyledChevronRightIcon />,
-    //     },
-    //   ],
-    // },
     {
       title: "Notice Board",
+      svg: notice,
       items: [
         {
           label: "Add Notice",
@@ -119,6 +114,7 @@ const DashboardSidebar = () => {
     },
     {
       title: "Media/Events",
+      svg: media,
       items: [
         {
           label: "Add Media",
@@ -134,6 +130,7 @@ const DashboardSidebar = () => {
     },
     {
       title: "Manage",
+      svg: sharp,
       items: [
         {
           label: "Enquiries",
@@ -142,7 +139,7 @@ const DashboardSidebar = () => {
         },
         {
           label: "Complaints",
-          path: "complains",
+          path: "complaints",
           icon: <StyledChevronRightIcon />,
         },
       ],
@@ -157,13 +154,14 @@ const DashboardSidebar = () => {
             key={index}
             title={menu.title}
             items={menu.items}
+            svg={menu.svg}
             isActive={isActive}
             basePath="/dashboard"
           />
         ))}
         <StyledLinkBox
           component={RouterLink}
-          to={"/signIn"}
+          to="/signIn"
           isActive={isActive("/signIn")}
           fontWeight="bold"
         >
@@ -176,3 +174,4 @@ const DashboardSidebar = () => {
 };
 
 export default DashboardSidebar;
+

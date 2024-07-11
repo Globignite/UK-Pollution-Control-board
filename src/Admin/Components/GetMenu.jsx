@@ -46,7 +46,7 @@ const GetMenu = ({ combinedOptions }) => {
           <TextField {...params} fullWidth label="Heading" />
         )}
         PopperComponent={CustomPopper}
-        sx={{ width: "100%", mb: 2 }}
+        sx={{ width: "250px", mb: 2 }}
       />
       {selectedHeading?.subItems && (
         <RecursiveSubheading

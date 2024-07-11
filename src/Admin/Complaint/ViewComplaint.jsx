@@ -48,7 +48,7 @@ function ViewComplaint() {
         {
           date: "2023-06-20",
           Note: "loreEx quis incididunt occaecat nostrud nostrud in excepteur anim. Cillum sunt mollit sit qui occaecat veniam. Labore culpa occaecat consectetur esse commodo aliqua sit deserunt ad voluptate nisi reprehenderit veniam laborum. Amet do eu magna fugiat cillum. Non nisi voluptate ipsum magna qui."
-        },z
+        },
       ];
     
     
@@ -128,7 +128,7 @@ function ViewComplaint() {
         <Table>
           <TableBody>
           {Object.entries(data).map(([key, value]) => (
-            key=='Image'?(<> <TableCell component="th" scope="row">{key}</TableCell><TableCell><img src={value} key={key} alt={key} width={300} height={200}/></TableCell></>):(<TableRow key={key}>
+            key=='Image'?(<> <TableCell component="th" scope="row">{key}</TableCell><TableCell><img src={value} key={key} alt={key} width={300} height={"auto"}/></TableCell></>):(<TableRow key={key}>
               <TableCell component="th" scope="row">{key}</TableCell>
               <TableCell>{value}</TableCell>
             </TableRow>)

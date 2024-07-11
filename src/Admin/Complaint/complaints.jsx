@@ -49,7 +49,7 @@ const Complaints = () => {
           phoneNumber: "9876543210",
           progressStartDate: "2023-07-02",
           resolvedDate: "2023-07-05",
-          enquiryNumber: "CPN001",
+          complaintNumber: "CPN001",
         },
         {
           status: "In Progress",
@@ -60,7 +60,7 @@ const Complaints = () => {
           phoneNumber: "9876501234",
           progressStartDate: "2023-06-26",
           resolvedDate: "",
-          enquiryNumber: "CPN002",
+          complaintNumber: "CPN002",
         },
         {
           status: "Resolved",
@@ -71,7 +71,7 @@ const Complaints = () => {
           phoneNumber: "9876201234",
           progressStartDate: "2023-06-21",
           resolvedDate: "2023-06-30",
-          enquiryNumber: "CPN003",
+          complaintNumber: "CPN003",
         },
       ];
       setData(fetchedData);
@@ -230,7 +230,7 @@ const Complaints = () => {
                   <TableCell>{file.progressStartDate}</TableCell>
                   <TableCell>{file.resolvedDate}</TableCell>
                   <TableCell>
-                    <Link to={`/dashboard/enquiry/${file.enquiryNumber}`}>
+                    <Link to={`/dashboard/complaint/${file.complaintNumber}`}>
                       View
                     </Link>
                   </TableCell>

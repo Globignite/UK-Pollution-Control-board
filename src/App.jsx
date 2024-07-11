@@ -65,9 +65,9 @@ function App() {
               <Route path="manage-notice" element={<ManageNotice />} />
               <Route path="add-media" element={<AddMedia />} />
               <Route path="enquiries" element={<Enquiries />} />
-              <Route path="enquiry" element={<ViewEnquiry />} />
+              <Route path="enquiry/:enq" element={<ViewEnquiry />} />
               <Route path="complaints" element={<Complaints />} />
-              <Route path="complaint" element={<ViewComplaint />} />
+              <Route path="complaint/:cpn" element={<ViewComplaint />} />
               {/* <Route path="/add-heading" element={<AddHeadings />} /> */}
             </Route>
             <Route path="/excel-preview" element={<ExcelPreview />} />

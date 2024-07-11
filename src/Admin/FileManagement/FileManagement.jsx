@@ -30,13 +30,10 @@ const FileManagement = () => {
   return (
     <Box sx={{ width: "100%", padding: "20px" }}>
       <Typography variant="h6" gutterBottom>
-        Find Files
+        Manage Files
       </Typography>
       {/* component for getting menu and sub menu  */}
       <GetMenu />
-      <Typography variant="h6" gutterBottom>
-        Quality Standards
-      </Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

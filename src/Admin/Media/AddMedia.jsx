@@ -100,7 +100,7 @@ const AddMedia = () => {
 
   return (
     <Container>
-      <Typography variant="h5" sx={{ mb: 2 }}>
+      <Typography variant="h5" sx={{ mb: 1 }}>
         Upload Photos and Videos
       </Typography> 
 
@@ -108,7 +108,7 @@ const AddMedia = () => {
         fullWidth
         label="Event Name"
         value={eventName}
-        sx={{ mb: 2 }}
+        sx={{ mb: 1 }}
         />
 
         <TextField
@@ -120,15 +120,15 @@ const AddMedia = () => {
             shrink: true,
           }}
           style={{ flex: 1 }}
-          sx={{my:5}}
+          sx={{my:2}}
         />
 
-      <Typography variant="body1" sx={{ mb: 2 }}>
+      <Typography variant="body1" sx={{ mb: 1 }}>
         Event Description
       </Typography>
       <Textarea aria-label="minimum height" minRows={3} />
 
-      <FormControl fullWidth sx={{ my: 3 }}>
+      <FormControl fullWidth sx={{ my: 2 }}>
         <FormLabel component="legend">Upload </FormLabel>
         <input
           id="file-upload"
@@ -151,7 +151,7 @@ const AddMedia = () => {
       </Button>
       <Button
         variant="contained"
-        sx={{ width: "45%", mt: 2, ml: 1 }}
+        sx={{ width: "45%", mt: 1, ml: 1 }}
         onClick={handleSubmit}
       >
         Submit

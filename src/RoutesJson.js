@@ -1331,9 +1331,9 @@ export const RoutesJson = [
   {
     id: 114,
     name: "Event Gallery",
-    path: "/media/event-gallery/:id", 
+    path: "/media/event-gallery/:id",
     hasSubItem: false,
-    parent_id: 112,
+    parent_id: null,
     component: EventGallery,
   },
   {

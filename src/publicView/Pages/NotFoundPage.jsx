@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import { Box, Typography, Button } from "@mui/material";
 
 const NotFoundPage = (props) => {
@@ -39,6 +39,12 @@ const NotFoundPage = (props) => {
       </Button>
     </Box>
   );
+};
+
+NotFoundPage.propTypes = {
+  history: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default NotFoundPage;

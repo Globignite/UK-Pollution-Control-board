@@ -1,4 +1,4 @@
-import { Box, Grid, Paper, Typography, Stack } from '@mui/material';
+import { Box,  Paper, Typography } from '@mui/material';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 

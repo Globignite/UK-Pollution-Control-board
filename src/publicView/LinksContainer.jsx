@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import PropTypes from 'prop-types';
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
@@ -25,9 +26,9 @@ const LinksContainer = ({ itemData }) => {
             #print_icon {
                 display: none !important;
             }
-				      h5{
-        font-size: 1.3rem !important; 
-      }
+            h5{
+              font-size: 1.3rem !important; 
+            }
             #footer {
                 display: block;
                 position: fixed;
@@ -112,6 +113,13 @@ const LinksContainer = ({ itemData }) => {
       </Box>
     </Box>
   );
+};
+
+LinksContainer.propTypes = {
+  itemData: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default LinksContainer;

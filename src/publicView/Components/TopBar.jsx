@@ -1,14 +1,11 @@
 import {useState, useEffect} from 'react';
-import { Box, Container, FormControl, Select, MenuItem } from '@mui/material';
+import { Box, Container, } from '@mui/material';
 
 
 const TopBar = () => {
+ 
 
-    const [language, setLanguage] = useState('English');
-
-    const handleChange = (event) => {
-      setLanguage(event.target.value);
-    };
+    
 
     const googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(

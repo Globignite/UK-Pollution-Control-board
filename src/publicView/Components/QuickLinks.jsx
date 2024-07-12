@@ -47,7 +47,7 @@ const QuickLinks = () => {
       borderRadius: '50%'
   }));
 
-  const ImageBox = styled(Box)(({theme}) => ({
+  const ImageBox = styled(Box)(() => ({
     width: '100%',
     height: '100%',
     position:'absolute',

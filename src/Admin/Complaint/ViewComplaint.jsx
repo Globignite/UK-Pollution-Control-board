@@ -21,18 +21,19 @@ import {
 import { styled } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 
-function ViewEnquiry() {
+function ViewComplaint() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const data = {
         Date: '13/12/2023',
-        enquiryNumber: '345456547567567567',
+        complaintNumber: '345456547567567567',
         Subject: 'My subject',
         Name: 'Suraj',
         Email: 'suraj@gmail.com',
         Phone: '9876543210', 
-        Enquiry : "loreEx quis incididunt occaecat nostrud nostrud in excepteur anim. Cillum sunt mollit sit qui occaecat veniam. Labore culpa occaecat consectetur esse commodo aliqua sit deserunt ad voluptate nisi reprehenderit veniam laborum. Amet do eu magna fugiat cillum. Non nisi voluptate ipsum magna qui."
+        Complaint : "loreEx quis incididunt occaecat nostrud nostrud in excepteur anim. Cillum sunt mollit sit qui occaecat veniam. Labore culpa occaecat consectetur esse commodo aliqua sit deserunt ad voluptate nisi reprehenderit veniam laborum. Amet do eu magna fugiat cillum. Non nisi voluptate ipsum magna qui.",
+        Image: "https://images.unsplash.com/photo-1604699229817-27301bdfed68?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       };
 
       const table_data = [
@@ -121,16 +122,17 @@ function ViewEnquiry() {
   return (
     <Container>
       <Typography variant="h6" gutterBottom>
-        Enquiry
+        Complaint
       </Typography>
       <TableContainer >
         <Table>
           <TableBody>
           {Object.entries(data).map(([key, value]) => (
-            <TableRow key={key}>
+            key=='Image'?(<> <TableCell component="th" scope="row">{key}</TableCell><TableCell><img src={value} key={key} alt={key} width={300} height={"auto"}/></TableCell></>):(<TableRow key={key}>
               <TableCell component="th" scope="row">{key}</TableCell>
               <TableCell>{value}</TableCell>
-            </TableRow>
+            </TableRow>)
+            
           ))}
         </TableBody>
         </Table>
@@ -196,4 +198,4 @@ function ViewEnquiry() {
   );
 }
 
-export default ViewEnquiry;
+export default ViewComplaint;

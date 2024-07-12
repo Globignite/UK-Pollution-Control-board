@@ -21,7 +21,7 @@ import {
 
 import { Link } from "react-router-dom";
 
-const Enquiries = () => {
+const Complaints = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -49,7 +49,7 @@ const Enquiries = () => {
           phoneNumber: "9876543210",
           progressStartDate: "2023-07-02",
           resolvedDate: "2023-07-05",
-          enquiryNumber: "ENQ001",
+          complaintNumber: "CPN001",
         },
         {
           status: "In Progress",
@@ -60,7 +60,7 @@ const Enquiries = () => {
           phoneNumber: "9876501234",
           progressStartDate: "2023-06-26",
           resolvedDate: "",
-          enquiryNumber: "ENQ002",
+          complaintNumber: "CPN002",
         },
         {
           status: "Resolved",
@@ -71,7 +71,7 @@ const Enquiries = () => {
           phoneNumber: "9876201234",
           progressStartDate: "2023-06-21",
           resolvedDate: "2023-06-30",
-          enquiryNumber: "ENQ003",
+          complaintNumber: "CPN003",
         },
       ];
       setData(fetchedData);
@@ -143,7 +143,7 @@ const Enquiries = () => {
   return (
     <Container>
       <Typography variant="h6" gutterBottom>
-        Enquiries
+        Complaints
       </Typography>
       <Box
         display="flex"
@@ -208,10 +208,10 @@ const Enquiries = () => {
           <TableHead>
             <TableRow>
               <TableCell>Status</TableCell>
-              <TableCell>Enquiry Number</TableCell>
+              <TableCell>Complaint Number</TableCell>
               <TableCell>Subject</TableCell>
               <TableCell>Name</TableCell>
-              <TableCell>Enquiry Date</TableCell>
+              <TableCell>Complaint Date</TableCell>
               <TableCell>Progress Start Date</TableCell>
               <TableCell>Resolved Date</TableCell>
               <TableCell>Action</TableCell>
@@ -230,7 +230,7 @@ const Enquiries = () => {
                   <TableCell>{file.progressStartDate}</TableCell>
                   <TableCell>{file.resolvedDate}</TableCell>
                   <TableCell>
-                    <Link to={`/dashboard/enquiry/${file.enquiryNumber}`}>
+                    <Link to={`/dashboard/complaint/${file.complaintNumber}`}>
                       View
                     </Link>
                   </TableCell>
@@ -254,4 +254,4 @@ const Enquiries = () => {
   );
 };
 
-export default Enquiries;
+export default Complaints;

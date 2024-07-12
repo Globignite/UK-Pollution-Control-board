@@ -18,28 +18,29 @@ import AddIcon from "@mui/icons-material/Add";
 import GetMenu from "../Components/GetMenu";
 
 const files = [
-  { name: "Quality Standards - Industry...", date: "03/12/2023" },
-  { name: "User Manual - For industries & Unit...", date: "03/12/2023" },
-  { name: "Chakra Soft UI Version", date: "03/12/2023" },
-  { name: "Chakra Soft UI Version", date: "03/12/2023" },
-  { name: "Chakra Soft UI Version", date: "03/12/2023" },
-  { name: "Chakra Soft UI Version", date: "03/12/2023" },
+  { name: "Quality Standards - Industry...",type:"pdf", date: "03/12/2023" },
+  { name: "User Manual - For industries & Unit...",type:"pdf", date: "03/12/2023" },
+  { name: "Chakra Soft UI Version",type:"pdf", date: "03/12/2023" },
+  { name: "Chakra Soft UI Version",type:"pdf", date: "03/12/2023" },
+  { name: "Chakra Soft UI Version",type:"pdf", date: "03/12/2023" },
+  { name: "Chakra Soft UI Version",type:"pdf", date: "03/12/2023" },
 ];
 
 const ManageNotice = () => {
   return (
-    <Container>
+    <Container >
       <Typography variant="h6" gutterBottom>
         Manage Notices
       </Typography>
       {/* component for getting menu and sub menu  */}
       <GetMenu /> 
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={{width:'60vw'}}>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>Files</TableCell>
               <TableCell>Uploaded</TableCell>
+              <TableCell>File Type</TableCell>
               <TableCell>Remove</TableCell>
             </TableRow>
           </TableHead>
@@ -50,6 +51,7 @@ const ManageNotice = () => {
                   <Link href="#">{file.name}</Link>
                 </TableCell>
                 <TableCell>{file.date}</TableCell>
+                <TableCell>{file.type}</TableCell>
                 <TableCell>
                   <IconButton color="primary">
                     <DeleteIcon />

@@ -155,7 +155,7 @@ const UploadFiles = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_APP_BASE_UPLOAD_URL}/upload/e-files`,
+        `https://delightfulbroadband.com/api/filesUpload/upload/e-files`,
         formData,
         {
           headers: {
@@ -184,7 +184,7 @@ const UploadFiles = () => {
 
       const upload_res = await uploadFile(file);
 
-      if (upload_res && upload_res.length > 0){
+      if (upload_res && upload_res.length > 0) {
         let combinedHeadings = [
           selectedHeading.name,
           ...Object.values(selectedSubheadings).map(
@@ -212,7 +212,7 @@ const UploadFiles = () => {
 
         try {
           const res = await fetch(
-            `${import.meta.env.VITE_APP_BASE_UPLOAD_URL}/update/pdf-file`,
+            `https://delightfulbroadband.com/update/pdf-file`,
             {
               method: "POST",
               headers: {

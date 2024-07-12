@@ -272,8 +272,8 @@ const GetMenu = ({menuItems}) => {
     }
   };
 
-  // const combinedOptions = [...mainMenu.slice(1, -1), ...SideMenu.menu];
-  const combinedOptions = menuItems;
+  const combinedOptions = [...mainMenu.slice(1, -1), ...SideMenu.menu];
+  // const combinedOptions = menuItems;
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React from "react";
 import {
   Container,
   Typography,
@@ -16,8 +16,6 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import GetMenu from "../Components/GetMenu";
-import { SideMenu } from "../../publicView/JsonFiles/SideMenu";
-import { mainMenu } from "../../publicView/JsonFiles/MainMenu";
 
 const files = [
   { name: "Quality Standards - Industry...", date: "03/12/2023" },
@@ -35,10 +33,7 @@ const FileManagement = () => {
         Manage Files
       </Typography>
       {/* component for getting menu and sub menu  */}
-      <GetMenu menuItems={[...mainMenu.slice(1, -1), ...SideMenu.menu]} />
-      <Typography variant="h6" gutterBottom>
-        Quality Standards
-      </Typography>
+      <GetMenu  />
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

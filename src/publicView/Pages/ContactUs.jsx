@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import React from 'react'
+import Typography from '@mui/material/Typography' 
 
 function ContactUs() {
   return (
@@ -9,7 +8,7 @@ function ContactUs() {
 
       <Typography variant="body1" sx={{my:3}}>Uttarakhand Pollution Control Board</Typography>
 
-      <Typography variant="body1" sx={{my:3}}>Gaura Devi Bhawan, 46 B IT Park Sahastradhara, Dehradun, Uttarakhand"</Typography>
+      <Typography variant="body1" sx={{my:3}}>Gaura Devi Bhawan, 46 B IT Park Sahastradhara, Dehradun, Uttarakhand</Typography>
 
       <Typography variant="body1" sx={{my:3}}>Pincode- 248001 Ph No- 0135-2976157 ,0135- 2607092</Typography>
 

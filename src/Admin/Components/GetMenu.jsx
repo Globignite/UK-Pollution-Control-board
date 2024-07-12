@@ -76,7 +76,7 @@ export const RecursiveSubheading = ({
   );
 };
 
-const GetMenu = ({menuItems}) => {
+const GetMenu = () => {
   const [selectedHeading, setSelectedHeading] = useState(null);
   const [selectedSubheadings, setSelectedSubheadings] = useState({});
   const [selectedFormat, setSelectedFormat] = useState("Excel");
@@ -155,7 +155,7 @@ const GetMenu = ({menuItems}) => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_APP_BASE_UPLOAD_URL}/upload/e-files`,
+        `https://delightfulbroadband.com/upload/e-files`,
         formData,
         {
           headers: {
@@ -212,7 +212,7 @@ const GetMenu = ({menuItems}) => {
 
         try {
           const res = await fetch(
-            `${import.meta.env.VITE_APP_BASE_UPLOAD_URL}/update/pdf-file`,
+            `https://delightfulbroadband.com/update/pdf-file`,
             {
               method: "POST",
               headers: {
@@ -276,8 +276,7 @@ const GetMenu = ({menuItems}) => {
   // const combinedOptions = menuItems;
 
   return (
-    <>
-      <Typography variant="h5">Add Files</Typography>
+    <> 
       <Spinner loading={loading} />
       {/* <AdminNavbar /> */}
       <Container

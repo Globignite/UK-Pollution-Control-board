@@ -14,7 +14,7 @@ import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAuto
 import axios from "axios";
 import ImageContainer from "../Components/ImageContainer";
 
-const AddMedia = () => {
+const AddBanner = () => {
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [description, setDescription] = useState("");
@@ -137,37 +137,8 @@ const AddMedia = () => {
   return (
     <Container>
       <Typography variant="h5" sx={{ mb: 1 }}>
-        Upload Photos and Videos
+        Upload Banners
       </Typography>
-
-      <TextField
-        fullWidth
-        label="Event Name"
-        value={eventName}
-        onChange={(e) => setEventName(e.target.value)}
-        sx={{ mb: 1 }}
-      />
-
-      <TextField
-        type="date"
-        value={eventDate}
-        onChange={(e) => setEventDate(e.target.value)}
-        label="Event Date"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        sx={{ my: 2 }}
-      />
-
-      <Typography variant="body1" sx={{ mb: 1 }}>
-        Event Description
-      </Typography>
-      <Textarea
-        aria-label="minimum height"
-        minRows={3}
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
 
       <FormControl fullWidth sx={{ my: 2 }}>
         {/* <FormLabel component="legend">Upload</FormLabel> */}
@@ -263,4 +234,4 @@ const AddMedia = () => {
   );
 };
 
-export default AddMedia;
+export default AddBanner;

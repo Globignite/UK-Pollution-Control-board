@@ -1,43 +1,231 @@
+// import React, { useState } from "react";
+// import {
+//   Container,
+//   TextField,
+//   Button,
+//   Radio,
+//   RadioGroup,
+//   FormControlLabel,
+//   FormControl,
+//   FormLabel,
+//   Typography,
+// } from "@mui/material";
+// import { styled } from "@mui/system";
+// import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
+// import GetMenu from "../Components/GetMenu";
+// import ImageContainer from "../Components/ImageContainer";
+
+// const AddMedia = () => {
+//   const [format, setFormat] = useState("Excel");
+//   const [eventName, setEventName] = useState("");
+//   const [eventDate, setEventDate] = useState("");
+//   const [file, setFile] = useState(null);
+
+//   const handleFormatChange = (event) => {
+//     setFormat(event.target.value);
+//   };
+
+//   const handleFileChange = (event) => {
+//     setFile(event.target.files[0]);
+//   };
+
+//   const handleSubmit = () => {
+//     console.log("Submitting:", { format, eventName, file });
+//     // Add your submit logic here
+//   };
+
+//   const handleClear = () => {
+//     setFormat("Excel");
+//     setEventName("");
+//     setFile(null);
+//     document.getElementById("file-upload").value = "";
+//   };
+
+//   const blue = {
+//     100: "#DAECFF",
+//     200: "#b6daff",
+//     400: "#3399FF",
+//     500: "#007FFF",
+//     600: "#0072E5",
+//     900: "#003A75",
+//   };
+
+//   const grey = {
+//     50: "#F3F6F9",
+//     100: "#E5EAF2",
+//     200: "#DAE2ED",
+//     300: "#C7D0DD",
+//     400: "#B0B8C4",
+//     500: "#9DA8B7",
+//     600: "#6B7A90",
+//     700: "#434D5B",
+//     800: "#303740",
+//     900: "#1C2025",
+//   };
+
+//   const Textarea = styled(BaseTextareaAutosize)(
+//     ({ theme }) => `
+//     box-sizing: border-box;
+//     width: 320px;
+//     font-family: 'IBM Plex Sans', sans-serif;
+//     font-size: 0.875rem;
+//     font-weight: 400;
+//     line-height: 1.5;
+//     padding: 8px 12px;
+//     border-radius: 8px;
+//     color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
+//     background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
+//     border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+//     box-shadow: 0px 2px 2px ${
+//       theme.palette.mode === "dark" ? grey[900] : grey[50]
+//     };
+
+//     &:hover {
+//       border-color: ${blue[400]};
+//     }
+
+//     &:focus {
+//       border-color: ${blue[400]};
+//       box-shadow: 0 0 0 3px ${
+//         theme.palette.mode === "dark" ? blue[600] : blue[200]
+//       };
+//     }
+
+//     // firefox
+//     &:focus-visible {
+//       outline: 0;
+//     }
+//   `
+//   );
+
+//   return (
+//     <Container>
+//       <Typography variant="h5" sx={{ mb: 1 }}>
+//         Upload Photos and Videos
+//       </Typography> 
+
+//         <TextField
+//         fullWidth
+//         label="Event Name"
+//         value={eventName}
+//         sx={{ mb: 1 }}
+//         />
+
+//         <TextField
+//           type="date"
+//           value={eventDate}
+//           onChange={(e) => setEventDate(e.target.value)}
+//           label="Event Date"
+//           InputLabelProps={{
+//             shrink: true,
+//           }}
+//           style={{ flex: 1 }}
+//           sx={{my:2}}
+//         />
+
+//       <Typography variant="body1" sx={{ mb: 1 }}>
+//         Event Description
+//       </Typography>
+//       <Textarea aria-label="minimum height" minRows={3} />
+
+//       <FormControl fullWidth sx={{ my: 2 }}>
+//         <FormLabel component="legend">Upload </FormLabel>
+//         <input
+//           id="file-upload"
+//           type="file"
+//           accept={
+//             ".png,.jpeg,.jpg,.gif,.bmp,.tiff,.svg,.webp,.mp4,.avi,.mov,.wmv,.flv,.mkv"
+//           }
+//           onChange={handleFileChange}
+//         />
+//       </FormControl>
+
+//       <ImageContainer imageUrl={"/assets/Gallery_3.png"} />
+
+//       <Button
+//         variant="outlined"
+//         sx={{ width: "45%", mt: 2, mr: 1 }}
+//         onClick={handleClear}
+//       >
+//         Clear
+//       </Button>
+//       <Button
+//         variant="contained"
+//         sx={{ width: "45%", mt: 1, ml: 1 }}
+//         onClick={handleSubmit}
+//       >
+//         Submit
+//       </Button>
+//     </Container>
+//   );
+// };
+
+// export default AddMedia;
+
+
 import React, { useState } from "react";
 import {
   Container,
   TextField,
   Button,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
+  Typography,
   FormControl,
   FormLabel,
-  Typography,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
-import GetMenu from "../Components/GetMenu";
+import axios from "axios";
 import ImageContainer from "../Components/ImageContainer";
 
 const AddMedia = () => {
-  const [format, setFormat] = useState("Excel");
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
-  const [file, setFile] = useState(null);
-
-  const handleFormatChange = (event) => {
-    setFormat(event.target.value);
-  };
+  const [description, setDescription] = useState("");
+  const [files, setFiles] = useState([]);
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+    setFiles(event.target.files);
   };
 
-  const handleSubmit = () => {
-    console.log("Submitting:", { format, eventName, file });
-    // Add your submit logic here
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    Array.from(files).forEach((file) => {
+      formData.append("files", file);
+    });
+    formData.append("name", eventName);
+    formData.append("description", description);
+
+    console.log(formData);
+
+    try {
+      const token = localStorage.getItem('token'); // Get token from storage
+      const response = await axios.post(
+        "https://delightfulbroadband.com/api/media/upload/media-file",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Success:", response.data);
+      alert("Media added successfully");
+      handleClear();
+    } catch (error) {
+      console.error("Error uploading media:", error);
+      alert(
+        error.response?.data?.error ||
+        "Oops, something went wrong"
+      );
+    }
   };
 
   const handleClear = () => {
-    setFormat("Excel");
     setEventName("");
-    setFile(null);
+    setEventDate("");
+    setDescription("");
+    setFiles([]);
     document.getElementById("file-upload").value = "";
   };
 
@@ -102,31 +290,36 @@ const AddMedia = () => {
     <Container>
       <Typography variant="h5" sx={{ mb: 1 }}>
         Upload Photos and Videos
-      </Typography> 
+      </Typography>
 
-        <TextField
+      <TextField
         fullWidth
         label="Event Name"
         value={eventName}
+        onChange={(e) => setEventName(e.target.value)}
         sx={{ mb: 1 }}
-        />
+      />
 
-        <TextField
-          type="date"
-          value={eventDate}
-          onChange={(e) => setEventDate(e.target.value)}
-          label="Event Date"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          style={{ flex: 1 }}
-          sx={{my:2}}
-        />
+      <TextField
+        type="date"
+        value={eventDate}
+        onChange={(e) => setEventDate(e.target.value)}
+        label="Event Date"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        sx={{ my: 2 }}
+      />
 
       <Typography variant="body1" sx={{ mb: 1 }}>
         Event Description
       </Typography>
-      <Textarea aria-label="minimum height" minRows={3} />
+      <Textarea
+        aria-label="minimum height"
+        minRows={3}
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
 
       <FormControl fullWidth sx={{ my: 2 }}>
         <FormLabel component="legend">Upload </FormLabel>
@@ -136,6 +329,7 @@ const AddMedia = () => {
           accept={
             ".png,.jpeg,.jpg,.gif,.bmp,.tiff,.svg,.webp,.mp4,.avi,.mov,.wmv,.flv,.mkv"
           }
+          multiple
           onChange={handleFileChange}
         />
       </FormControl>

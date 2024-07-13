@@ -3,28 +3,15 @@ import {
   Autocomplete,
   TextField,
   Box,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
   Button,
   Popper,
   Container,
-  Alert,
-  Typography,
 } from "@mui/material";
 import { toast } from "sonner";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import DashboardNavbar from "../Components/DashboardNavbar";
 import { SideMenu } from "../../publicView/JsonFiles/SideMenu";
 import { mainMenu } from "../../publicView/JsonFiles/MainMenu";
-import { AdminNavbar } from "../Components/DashboardNavbar";
-import ExcelPreview from "../ExcelPreview";
 import Spinner from "../../publicView/Components/Spinner";
-
-const formats = ["Excel", "PDF"];
 
 const CustomPopper = (props) => {
   return <Popper {...props} style={{ zIndex: 1 }} placement="bottom-start" />;
@@ -86,22 +73,12 @@ const GetMenu = () => {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [customFileName, setCustomFileName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [storedFileName, setStoredFileName] = useState(null);
-  const [togglePreviewExcel, setTogglePreviewExcel] = useState(false);
 
   useEffect(() => {
     const hasSubheadings = selectedHeading?.subItems
       ? Object.keys(selectedSubheadings).length > 0
       : true;
-    setIsSubmitDisabled(
-      !(
-        selectedHeading &&
-        hasSubheadings &&
-        selectedFormat &&
-        file &&
-        customFileName
-      )
-    );
+    setIsSubmitDisabled(!(selectedHeading && hasSubheadings));
   }, [
     selectedHeading,
     selectedSubheadings,
@@ -164,7 +141,6 @@ const GetMenu = () => {
         }
       );
       if (response?.data?.data?.filename !== undefined) {
-        // toast.success("successful!!", { duration: 1500 });
         setStoredFileName(response.data?.filename);
         return response.data?.data?.filename;
       }
@@ -196,7 +172,6 @@ const GetMenu = () => {
         console.log(combinedHeadings);
 
         if (combinedHeadings.length >= 2) {
-          // lastTwoSubheadings = combinedHeadings.slice(-2).join('/');
           lastTwoSubheadings = combinedHeadings.join("/");
         } else {
           lastTwoSubheadings = `null/${combinedHeadings[0]}`;
@@ -273,12 +248,10 @@ const GetMenu = () => {
   };
 
   const combinedOptions = [...mainMenu.slice(1, -1), ...SideMenu.menu];
-  // const combinedOptions = menuItems;
 
   return (
-    <> 
+    <>
       <Spinner loading={loading} />
-      {/* <AdminNavbar /> */}
       <Container
         sx={{ width: { lg: "100%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}
       >
@@ -303,61 +276,6 @@ const GetMenu = () => {
           />
         )}
 
-        <FormControl component="fieldset" sx={{ mb: 2, width: "100%" }}>
-          <FormLabel component="legend">Format</FormLabel>
-          <RadioGroup row value={selectedFormat} onChange={handleFormatChange}>
-            {formats.map((format) => (
-              <FormControlLabel
-                key={format}
-                value={format}
-                control={<Radio />}
-                label={format}
-              />
-            ))}
-          </RadioGroup>
-        </FormControl>
-
-        <TextField
-          label="Custom File Name"
-          value={customFileName}
-          onChange={(event) => setCustomFileName(event.target.value)}
-          fullWidth
-          sx={{ mb: 2 }}
-        />
-
-        <FormControl fullWidth sx={{ mb: 2 }}>
-          <FormLabel>Upload File</FormLabel>
-          <input
-            type="file"
-            accept={selectedFormat === "Excel" ? ".xlsx,.xls,.csv" : ".pdf"}
-            onChange={handleFileChange}
-          />
-        </FormControl>
-
-        {error && <Alert severity="error">{error}</Alert>}
-        {fileURL !== null ? (
-          selectedFormat !== "Excel" ? (
-            <div>
-              <a href={fileURL} target="_blank">
-                Preview File
-              </a>
-            </div>
-          ) : (
-            <>
-              <Link onClick={() => setTogglePreviewExcel((prev) => !prev)}>
-                {togglePreviewExcel ? "Hide Preview" : "Preview File"}
-              </Link>
-              {togglePreviewExcel && (
-                <Box sx={{ mt: 3, border: "1px solid grey" }}>
-                  <ExcelPreview file={file} />
-                </Box>
-              )}
-            </>
-          )
-        ) : (
-          ""
-        )}
-
         <Box>
           <Button
             variant="outlined"
@@ -372,7 +290,7 @@ const GetMenu = () => {
             onClick={handleSubmit}
             disabled={isSubmitDisabled}
           >
-            Submit
+            Search
           </Button>
         </Box>
       </Container>

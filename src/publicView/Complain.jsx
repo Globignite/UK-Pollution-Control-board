@@ -27,7 +27,7 @@ function Complain() {
       URL.createObjectURL(file)
     );
     setFiles((prevFiles) => prevFiles.concat(fileArray));
-    // clean up the object url
+    // Clean up the object URL
     event.target.value = null;
   };
 
@@ -37,34 +37,54 @@ function Complain() {
   };
 
   const clearFormData = () => {
-    setSubject("");
-    setName("");
-    setEmail("");
-    setPhone("");
-    setComplain("");
     setFiles([]);
+    fileInputRef.current.value = null;
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    // Append files to formData
+
+    const formData = {
+      subject: event.currentTarget.subject.value,
+      name: event.currentTarget.name.value,
+      email: event.currentTarget.email.value,
+      phone: event.currentTarget.phone.value,
+      complaint: event.currentTarget.complain.value,
+      files: []
+    };
+
+    // Create a FormData to read files and append to the request
     Array.from(fileInputRef.current.files).forEach((file, index) => {
-      formData.append(`files[${index}]`, file);
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        formData.files.push({
+          name: file.name,
+          href: reader.result,
+          type: file.type
+        });
+
+        // If last file is read, send the request
+        if (index === fileInputRef.current.files.length - 1) {
+          sendRequest(formData);
+        }
+      };
     });
 
+    // If no files, send the request immediately
+    if (fileInputRef.current.files.length === 0) {
+      sendRequest(formData);
+    }
+  };
+
+  const sendRequest = async (formData) => {
     try {
       const response = await axios.post(
-        "https://your-api-url.com/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        `${import.meta.env.VITE_APP_BASE_COMPLAIANT_URL}/add-complaints`,  
+        formData
       );
       console.log(response.data);
-      // setComplaintNumber(response.data.complaintNumber); // Assume the response has a complaintNumber
+      // setComplaintNumber(response.data.complaintNumber);
       setComplaintNumber(123434);
       clearFormData(); // Clear form data on success
       setOpen(true); // Open success dialog on successful upload
@@ -204,3 +224,4 @@ function Complain() {
 }
 
 export default Complain;
+

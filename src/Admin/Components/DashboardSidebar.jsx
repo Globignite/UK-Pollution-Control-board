@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { Link as RouterLink, useLocation,useNavigate } from "react-router-dom";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import styled from "styled-components";
 import filemanagement from "../../../public/assets/filemanagement.svg";
@@ -74,9 +74,15 @@ const DropdownMenu = ({ title, items, isActive, basePath, svg }) => {
 
 const DashboardSidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (href) => {
     return location.pathname.startsWith(href);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/signin');
   };
 
   const menuItems = [
@@ -159,13 +165,17 @@ const DashboardSidebar = () => {
             basePath="/dashboard"
           />
         ))}
-        <StyledLinkBox
+        {/* <StyledLinkBox
           component={RouterLink}
           to="/signIn"
           isActive={isActive("/signIn")}
           fontWeight="bold"
         >
           <StyledChevronRightIcon isActive={isActive("/signIn")} />
+          <Typography variant="body1">Logout</Typography>
+        </StyledLinkBox> */}
+        <StyledLinkBox onClick={handleLogout} sx={{ cursor: 'pointer' }}>
+          <StyledChevronRightIcon />
           <Typography variant="body1">Logout</Typography>
         </StyledLinkBox>
       </Box>

@@ -14,6 +14,14 @@ import Enquiry from "./publicView/Enquiry";
 import Complain from "./publicView/Complain";
 import Events from "./publicView/Pages/Events";
 import EventGallery from "./publicView/Pages/EventGallery";
+import DownloadsAndPlugins from "./publicView/Pages/DownloadsPlugins";
+import AccessibilityStatement from "./publicView/Pages/AccessibilityStatement";
+import PrivacyPolicy from "./publicView/Components/PrivacyPolicy";
+import HyperlinkingPolicy from "./publicView/Pages/HyperlinkingPolicy";
+import CopyrightPolicy from "./publicView/Pages/CopyrightPolicy";
+import TermsConditions from "./publicView/Pages/TermsConditions";
+import Disclaimer from "./publicView/Pages/Disclaimer";
+import Help from "./publicView/Pages/Help";
 
 export const RoutesJson = [
   {
@@ -1684,7 +1692,7 @@ export const RoutesJson = [
       parentMenu: null,
       currentMenu: "Draft EIA 2020",
     },
-  }, 
+  },
   {
     id: 146,
     name: "Recruitments",
@@ -1804,5 +1812,69 @@ export const RoutesJson = [
       parentMenu: null,
       currentMenu: "Download",
     },
+  },
+  {
+    id: 156,
+    name: "Downloads And Plugins",
+    path: "/Downloads-And-Plugins",
+    hasSubItem: null,
+    parent_id: null,
+    component: DownloadsAndPlugins,
+  },
+  {
+    id: 157,
+    name: "Accessibility Statement",
+    path: "/Accessibility-Statement",
+    hasSubItem: null,
+    parent_id: null,
+    component: AccessibilityStatement,
+  },
+  {
+    id: 158,
+    name: "Privacy Policy",
+    path: "/Privacy-Policy",
+    hasSubItem: null,
+    parent_id: null,
+    component: PrivacyPolicy,
+  },
+  {
+    id: 159,
+    name: "Hyperlinking Policy",
+    path: "/Hyperlinking-Policy",
+    hasSubItem: null,
+    parent_id: null,
+    component: HyperlinkingPolicy,
+  },
+  {
+    id: 160,
+    name: "Copyright Policy",
+    path: "/Copyright-Policy",
+    hasSubItem: null,
+    parent_id: null,
+    component: CopyrightPolicy,
+  },
+  {
+    id: 161,
+    name: "Terms & Conditions",
+    path: "/Terms-Conditions",
+    hasSubItem: null,
+    parent_id: null,
+    component: TermsConditions,
+  },
+  {
+    id: 162,
+    name: "Disclaimer",
+    path: "/Disclaimer",
+    hasSubItem: null,
+    parent_id: null,
+    component: Disclaimer,
+  },
+  {
+    id: 163,
+    name: "Help",
+    path: "/Help",
+    hasSubItem: null,
+    parent_id: null,
+    component: Help,
   },
 ];

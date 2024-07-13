@@ -268,5 +268,81 @@ export const SideMenu = {
       name: "Complain",
       href: "/complain",
     },
+    {
+      name: "Notices",
+      href: "/notices",
+    },
+    {
+      name: "Recent Updates",
+      href: "/recent-updates",
+    },
+    {
+      name: "Addendum to Expression of Interest (EOI)",
+      href: "/addendum-to-expression-of-interest",
+    },
+    {
+      name: "General Information",
+      href: "/general-information",
+    },
+    {
+      name: "Notice for General Environment Improvement",
+      href: "/notice-for-general-environment-improvement",
+    },
+    {
+      name: "Uttarakhand Right to service Act, 2011",
+      href: "/uttarakhand-right-to-service-Act-2011",
+    },
+    {
+      name: "steps for covid 19 BMW Android Based App",
+      href: "/steps-for-covid-19-bmw-android-based-app",
+    },
+    {
+      name: "Combustion Temperatures of Common Biomedical Waste Treatment and Disposal Facilities",
+      href: "/combustion-temperatures-of-common-biomedical-waste-treatment-and-disposal-facilities",
+    },
+    {
+      name: "SUP Grievance Portal of Central Government",
+      href: "/sup-grievance-portal-of-central-government",
+    },
+    {
+      name: "Environmental Act",
+      href: "/environmental-act",
+    },
+    {
+      name: "Environmental Rules",
+      href: "/environmental-rules",
+    },
+    {
+      name: "Environmental Notification",
+      href: "/environmental-notification",
+    },
+    {
+      name: "Environmental Program",
+      href: "/environmental-program",
+    },
+    {
+      name: "Draft EIA 2020",
+      href: "/draft-eia-2020",
+    },
+    {
+      name: "Recruitments",
+      href: "/recruitments",
+    },
+    {
+      name: "Tenders",
+      href: "/tenders",
+    },
+    {
+      name: "Important Office Orders / Letters / Directions",
+      href: "/important-office-orders-letters-directions",
+    },
+    {
+      name: "Court/ Tribunal-Judgements Orders",
+      href: "/court-tribunal-judgements-orders",
+    },
+    {
+      name: "Download",
+      href: "/download",
+    },
   ],
 };

@@ -71,9 +71,7 @@ export default function Footer() {
 
               <Link to="/">Home</Link>
               <Link to="/about-us">About Us</Link>
-              <Link to="/rti">
-                Right To Information
-              </Link>
+              <Link to="/rti">Right To Information</Link>
               <Link to="/contact-us">Contact Us</Link>
               {/* <Link to="#">Sitemap</Link> */}
               <Link to="/Help">Help</Link>

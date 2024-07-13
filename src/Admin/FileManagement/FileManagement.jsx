@@ -33,7 +33,7 @@ const FileManagement = () => {
         Manage Files
       </Typography>
       {/* component for getting menu and sub menu  */}
-      <GetMenu />
+      <GetMenu  />
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

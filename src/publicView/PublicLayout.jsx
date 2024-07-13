@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Outlet,
-} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { Paper } from "@mui/material";
+import Paper from "@mui/material/Paper";
 
 import MyAppBar from "./Components/MyAppBar";
 import Sidebar from "./Components/Sidebar";
 import InfoCards from "./Components/InfoCards";
-import WelcomeText from "./Components/WelcomeText";
 import EOICard from "./Components/EOICard";
 import UsefulInfo from "./Components/UsefulInfo";
 import EnvironmentLegislation from "./Components/EnvironmentLegislation";
@@ -61,15 +55,12 @@ function PublicLayout() {
       <Box sx={{ display: { lg: "flex", xs: "none" } }}>
         <MainMenu />
       </Box>
-      {/* <MainBanner /> */}
       <RunningText />
       <Box sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}>
         <InfoCards />
       </Box>
       <Container maxWidth="lg">
         <Grid container spacing={3}>
-          {/* <Grid item xs={12}>
-          </Grid> */}
           <Grid item lg={3} sm={0} xs={0}>
             <Sidebar />
           </Grid>

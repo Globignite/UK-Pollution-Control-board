@@ -81,7 +81,13 @@ function Complain() {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_APP_BASE_COMPLAIANT_URL}/add-complaints`,  
-        formData
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+        
       );
       console.log(response.data);
       // setComplaintNumber(response.data.complaintNumber);

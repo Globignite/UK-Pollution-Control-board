@@ -14,6 +14,14 @@ import Enquiry from "./publicView/Enquiry";
 import Complain from "./publicView/Complain";
 import Events from "./publicView/Pages/Events";
 import EventGallery from "./publicView/Pages/EventGallery";
+import DownloadsAndPlugins from "./publicView/Pages/DownloadsPlugins";
+import AccessibilityStatement from "./publicView/Pages/AccessibilityStatement";
+import PrivacyPolicy from "./publicView/Components/PrivacyPolicy";
+import HyperlinkingPolicy from "./publicView/Pages/HyperlinkingPolicy";
+import CopyrightPolicy from "./publicView/Pages/CopyrightPolicy";
+import TermsConditions from "./publicView/Pages/TermsConditions";
+import Disclaimer from "./publicView/Pages/Disclaimer";
+import Help from "./publicView/Pages/Help";
 
 export const RoutesJson = [
   {
@@ -1331,9 +1339,9 @@ export const RoutesJson = [
   {
     id: 114,
     name: "Event Gallery",
-    path: "/media/event-gallery/:id", 
+    path: "/media/event-gallery/:id",
     hasSubItem: false,
-    parent_id: 112,
+    parent_id: null,
     component: EventGallery,
   },
   {
@@ -1515,5 +1523,358 @@ export const RoutesJson = [
       parentMenu: "Complain",
       currentMenu: "Complain",
     },
+  },
+  {
+    id: 131,
+    name: "Notices",
+    path: "/notices",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Notices",
+    },
+  },
+  {
+    id: 132,
+    name: "Recent Updates",
+    path: "/recent-updates",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Recent Updates",
+    },
+  },
+  {
+    id: 133,
+    name: "Addendum to Expression of Interest (EOI)",
+    path: "/addendum-to-expression-of-interest",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Addendum to Expression of Interest (EOI)",
+    },
+  },
+  {
+    id: 134,
+    name: "General Information",
+    path: "/general-information",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "General Information",
+    },
+  },
+  {
+    id: 135,
+    name: "Notice for General Environment Improvement",
+    path: "/notice-for-general-environment-improvement",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Notice for General Environment Improvement",
+    },
+  },
+  {
+    id: 136,
+    name: "Uttarakhand Right to service Act, 2011",
+    path: "/uttarakhand-right-to-service-Act-2011",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Uttarakhand Right to service Act, 2011",
+    },
+  },
+  {
+    id: 137,
+    name: "steps for covid 19 BMW Android Based App",
+    path: "/steps-for-covid-19-bmw-android-based-app",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "steps for covid 19 BMW Android Based App",
+    },
+  },
+  {
+    id: 138,
+    name: "Combustion Temperatures of Common Biomedical Waste Treatment and Disposal Facilities",
+    path: "/combustion-temperatures-of-common-biomedical-waste-treatment-and-disposal-facilities",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu:
+        "Combustion Temperatures of Common Biomedical Waste Treatment and Disposal Facilities",
+    },
+  },
+  {
+    id: 139,
+    name: "SUP Grievance Portal of Central Government",
+    path: "/sup-grievance-portal-of-central-government",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "SUP Grievance Portal of Central Government",
+    },
+  },
+  {
+    id: 140,
+    name: "Environmental Act",
+    path: "/environmental-act",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Environmental Act",
+    },
+  },
+  {
+    id: 141,
+    name: "Environmental Rules",
+    path: "/environmental-rules",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Environmental Rules",
+    },
+  },
+  {
+    id: 142,
+    name: "Environmental Notification",
+    path: "/environmental-notification",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Environmental Notification",
+    },
+  },
+  {
+    id: 143,
+    name: "Environmental Program",
+    path: "/environmental-program",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Environmental Program",
+    },
+  },
+  {
+    id: 144,
+    name: "Draft EIA 2020",
+    path: "/draft-eia-2020",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Draft EIA 2020",
+    },
+  },
+  {
+    id: 146,
+    name: "Recruitments",
+    path: "/recruitments",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Recruitments",
+    },
+  },
+  {
+    id: 147,
+    name: "Tenders",
+    path: "/tenders",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Tenders",
+    },
+  },
+  {
+    id: 148,
+    name: "Important Office Orders / Letters / Directions",
+    path: "/important-office-orders-letters-directions",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Important Office Orders / Letters / Directions",
+    },
+  },
+  {
+    id: 149,
+    name: "Court/ Tribunal-Judgements Orders",
+    path: "/court-tribunal-judgements-orders",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Court/ Tribunal-Judgements Orders",
+    },
+  },
+  {
+    id: 150,
+    name: "Download",
+    path: "/download",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Download",
+    },
+  },
+  {
+    id: 151,
+    name: "Recruitments",
+    path: "/recruitments",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Recruitments",
+    },
+  },
+  {
+    id: 152,
+    name: "Tenders",
+    path: "/tenders",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Tenders",
+    },
+  },
+  {
+    id: 153,
+    name: "Important Office Orders / Letters / Directions",
+    path: "/important-office-orders-letters-directions",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Important Office Orders / Letters / Directions",
+    },
+  },
+  {
+    id: 154,
+    name: "Court/ Tribunal-Judgements Orders",
+    path: "/court-tribunal-judgements-orders",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Court/ Tribunal-Judgements Orders",
+    },
+  },
+  {
+    id: 155,
+    name: "Download",
+    path: "/download",
+    hasSubItem: null,
+    parent_id: null,
+    component: DynamicComponent,
+    componentProps: {
+      parentMenu: null,
+      currentMenu: "Download",
+    },
+  },
+  {
+    id: 156,
+    name: "Downloads And Plugins",
+    path: "/Downloads-And-Plugins",
+    hasSubItem: null,
+    parent_id: null,
+    component: DownloadsAndPlugins,
+  },
+  {
+    id: 157,
+    name: "Accessibility Statement",
+    path: "/Accessibility-Statement",
+    hasSubItem: null,
+    parent_id: null,
+    component: AccessibilityStatement,
+  },
+  {
+    id: 158,
+    name: "Privacy Policy",
+    path: "/Privacy-Policy",
+    hasSubItem: null,
+    parent_id: null,
+    component: PrivacyPolicy,
+  },
+  {
+    id: 159,
+    name: "Hyperlinking Policy",
+    path: "/Hyperlinking-Policy",
+    hasSubItem: null,
+    parent_id: null,
+    component: HyperlinkingPolicy,
+  },
+  {
+    id: 160,
+    name: "Copyright Policy",
+    path: "/Copyright-Policy",
+    hasSubItem: null,
+    parent_id: null,
+    component: CopyrightPolicy,
+  },
+  {
+    id: 161,
+    name: "Terms & Conditions",
+    path: "/Terms-Conditions",
+    hasSubItem: null,
+    parent_id: null,
+    component: TermsConditions,
+  },
+  {
+    id: 162,
+    name: "Disclaimer",
+    path: "/Disclaimer",
+    hasSubItem: null,
+    parent_id: null,
+    component: Disclaimer,
+  },
+  {
+    id: 163,
+    name: "Help",
+    path: "/Help",
+    hasSubItem: null,
+    parent_id: null,
+    component: Help,
   },
 ];

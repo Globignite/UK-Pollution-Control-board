@@ -1,46 +1,75 @@
-*{
+* {
   /* transition: all 0.2s ease-in-out; */
 }
 
-body{
+body {
   padding: 0;
   margin: 0;
 }
 
 a {
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 a:hover {
-  color: darkblue; 
+  color: darkblue;
 }
 
-.lang_select{
+.lang_select {
   padding: 5px 8px;
   border-radius: 5px;
   background-color: transparent;
   border: 1px solid #f8fcf8;
-  color:#f8fcf8;
+  color: #f8fcf8;
   cursor: pointer;
 }
 
-.lang_select option{
+.lang_select option {
   color: #000;
 }
 
-.select:focus{
+.select:focus {
   outline: none !important;
   border: none !important;
 }
 
-input[type="search"]{
+input[type="search"] {
   border-radius: 15px;
   padding: 8px 30px;
   border: 1px solid #d7e8f9;
   background-color: #f8fcf8;
 }
 
-input[type="search"]:focus{
+input[type="search"]:focus {
   outline: none;
 }
 
+/* notices  ==============*/
+.custom-marquee {
+  /* background-color: #f0f0f0; */
+}
+
+.custom-marquee-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.custom-marquee-item {
+  font-size: 18px;
+  padding-block: 5px;
+  text-decoration: none;
+  width: 100%;
+  display: block; /* Ensure the items take full width */
+  text-wrap: nowrap;
+}
+
+.custom-marquee-item:hover {
+  text-decoration: underline;
+}
+
+.marquee-container:not(.horizontal)::before {
+  background: none !important;
+}
+.marquee-container:not(.horizontal)::after {
+  background: none !important;
+}

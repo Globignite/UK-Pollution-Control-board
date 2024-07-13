@@ -17,12 +17,12 @@ import {
 import { toast } from "sonner";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import DashboardNavbar from "../Components/DashboardNavbar";
-import { SideMenu } from "../../publicView/JsonFiles/SideMenu";
-import { mainMenu } from "../../publicView/JsonFiles/MainMenu";
-import { AdminNavbar } from "../Components/DashboardNavbar";
-import ExcelPreview from "../ExcelPreview";
-import Spinner from "../../publicView/Components/Spinner";
+import DashboardNavbar from "./Components/DashboardNavbar";
+import { SideMenu } from "../publicView/JsonFiles/SideMenu";
+import { mainMenu } from "../publicView/JsonFiles/MainMenu";
+import { AdminNavbar } from "./Components/DashboardNavbar";
+import ExcelPreview from "./ExcelPreview";
+import Spinner from "../publicView/Components/Spinner";
 
 const formats = ["Excel", "PDF"];
 
@@ -30,7 +30,7 @@ const CustomPopper = (props) => {
   return <Popper {...props} style={{ zIndex: 1 }} placement="bottom-start" />;
 };
 
-export const RecursiveSubheading = ({
+const RecursiveSubheading = ({
   subheadings,
   level,
   onChange,
@@ -76,7 +76,7 @@ export const RecursiveSubheading = ({
   );
 };
 
-const GetMenu = () => {
+const UploadFiles = () => {
   const [selectedHeading, setSelectedHeading] = useState(null);
   const [selectedSubheadings, setSelectedSubheadings] = useState({});
   const [selectedFormat, setSelectedFormat] = useState("Excel");
@@ -155,7 +155,7 @@ const GetMenu = () => {
 
     try {
       const response = await axios.post(
-        `https://delightfulbroadband.com/upload/e-files`,
+        `https://delightfulbroadband.com/api/filesUpload/upload/e-files`,
         formData,
         {
           headers: {
@@ -184,7 +184,7 @@ const GetMenu = () => {
 
       const upload_res = await uploadFile(file);
 
-      if (upload_res) {
+      if (upload_res && upload_res.length > 0) {
         let combinedHeadings = [
           selectedHeading.name,
           ...Object.values(selectedSubheadings).map(
@@ -273,14 +273,14 @@ const GetMenu = () => {
   };
 
   const combinedOptions = [...mainMenu.slice(1, -1), ...SideMenu.menu];
-  // const combinedOptions = menuItems;
 
   return (
-    <> 
+    <>
+      <Typography variant="h5">Add Files</Typography>
       <Spinner loading={loading} />
       {/* <AdminNavbar /> */}
       <Container
-        sx={{ width: { lg: "100%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}
+        sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}
       >
         <Autocomplete
           options={combinedOptions}
@@ -380,4 +380,4 @@ const GetMenu = () => {
   );
 };
 
-export default GetMenu;
+export default UploadFiles;

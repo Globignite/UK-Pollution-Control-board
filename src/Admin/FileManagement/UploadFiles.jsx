@@ -155,7 +155,7 @@ const UploadFiles = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_APP_BASE_UPLOAD_URL}/upload/e-files`,
+        `https://delightfulbroadband.com/upload/e-files`,
         formData,
         {
           headers: {
@@ -212,7 +212,7 @@ const UploadFiles = () => {
 
         try {
           const res = await fetch(
-            `${import.meta.env.VITE_APP_BASE_UPLOAD_URL}/update/pdf-file`,
+            `https://delightfulbroadband.com/update/pdf-file`,
             {
               method: "POST",
               headers: {
@@ -274,6 +274,7 @@ const UploadFiles = () => {
 
   const combinedOptions = [...mainMenu.slice(1, -1), ...SideMenu.menu];
 
+  console.log("menus ", selectedHeading, selectedSubheadings);
   return (
     <>
       <Typography variant="h5">Add Files</Typography>

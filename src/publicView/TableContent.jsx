@@ -1,4 +1,5 @@
-import React, { useRef } from 'react'; 
+import { useRef } from 'react'; 
+import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -6,8 +7,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { Box, Card, Typography, Button } from '@mui/material';
+import { Box, Card, Typography } from '@mui/material';
 import { useReactToPrint } from 'react-to-print';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -22,14 +22,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: "gray",
-  },
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
+ 
 
 const TableComponent = ({ title, tblData }) => {
   return (
@@ -55,6 +48,11 @@ const TableComponent = ({ title, tblData }) => {
       </Table>
     </TableContainer>
   );
+};
+
+TableComponent.propTypes = {
+  title: PropTypes.string.isRequired,
+  tblData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const TableContent = ({ title, data }) => {
@@ -138,6 +136,16 @@ const TableContent = ({ title, data }) => {
       </Box>
     </Box>
   );
+};
+
+TableContent.propTypes = {
+  title: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      data: PropTypes.arrayOf(PropTypes.object),
+    })
+  ).isRequired,
 };
 
 export default TableContent;

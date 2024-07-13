@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Container,
   TextField,
@@ -9,11 +9,11 @@ import {
   FormControl,
   FormLabel,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
 
 const AddNotice = () => {
-  const [format, setFormat] = useState('Excel');
-  const [customFileName, setCustomFileName] = useState('');
+  const [format, setFormat] = useState("Excel");
+  const [customFileName, setCustomFileName] = useState("");
   const [file, setFile] = useState(null);
 
   const handleFormatChange = (event) => {
@@ -25,31 +25,32 @@ const AddNotice = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Submitting:', { format, customFileName, file });
+    console.log("Submitting:", { format, customFileName, file });
     // Add your submit logic here
   };
 
   const handleClear = () => {
-    setFormat('Excel');
-    setCustomFileName('');
+    setFormat("Excel");
+    setCustomFileName("");
     setFile(null);
-    document.getElementById('file-upload').value = '';
+    document.getElementById("file-upload").value = "";
   };
 
   return (
     <Container>
-      <Typography variant="h5" sx={{ mb: 2 }}>Add Notice</Typography>
-       
+      <Typography variant="h5" sx={{ mb: 2 }}>
+        Add Notice
+      </Typography>
 
       <FormControl component="fieldset" sx={{ mb: 2 }}>
-        <FormLabel component="legend">Format</FormLabel>
-        <RadioGroup
-          row
-          value={format}
-          onChange={handleFormatChange}
-        >
-          <FormControlLabel value="Excel" control={<Radio />} label="Excel" />
-          <FormControlLabel value="PDF" control={<Radio />} label="PDF" />
+        {/* <FormLabel component="legend">Format</FormLabel> */}
+        <RadioGroup row value={format} onChange={handleFormatChange}>
+          <FormControlLabel
+            value="PDF"
+            defaultChecked
+            control={<Radio />}
+            label="PDF"
+          />
         </RadioGroup>
       </FormControl>
 
@@ -66,7 +67,7 @@ const AddNotice = () => {
         <input
           id="file-upload"
           type="file"
-          accept={format === 'Excel' ? ".xlsx,.xls,.csv" : ".pdf"}
+          accept={format === "Excel" ? ".xlsx,.xls,.csv" : ".pdf"}
           onChange={handleFileChange}
         />
       </FormControl>

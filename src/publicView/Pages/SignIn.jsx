@@ -8,6 +8,12 @@ import Typography from '@mui/material/Typography';
 import Spinner from '../Components/Spinner';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { AdminNavbar } from '../../Admin/Components/DashboardNavbar';
+import axios from "axios";
+
+
+
+
+// TODO remove, this demo shouldn't need to reset the theme.
 
 export default function SignIn() {
     const [loading, setLoading] = useState(false);
@@ -33,7 +39,9 @@ export default function SignIn() {
       password: data.get('password').trim(),
     };
 
-    const { email, password } = loginData;
+    const { email , password } = loginData
+
+   
 
     setUserDataError({
       email: !email || !isEmail(email),
@@ -42,10 +50,28 @@ export default function SignIn() {
 
     let isValid = [!email || !isEmail(email), !password || String(password).length < 6];
     
-    let allTrue = isValid.every(value => value === false);
+    let allTrue = isValid.every(value => value === false)
+   
+    console.log(loginData)
     if(allTrue){
-        navigate('/dashboard/upload-files');
-    } else {
+      axios.post('https://delightfulbroadband.com/api/user/signIn',loginData,{ 
+        headers: {
+        'Content-Type': 'application/json',
+    }
+  }).then(response => {
+    const token = response.data.token;
+     localStorage.setItem('token', token);
+     navigate('/dashboard/upload-files');
+  }).catch(error => {
+    console.error('There was an error signing in!', error);
+    setUserDataError({
+        email: true,
+        password: true,
+    });
+  }).finally(() => {
+    setLoading(false);
+});
+    }else{
         setUserDataError({
             email: true,
             password: true,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TextField,
   TextareaAutosize,
@@ -7,28 +7,52 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 
 function Enquiry() {
   const today = new Date().toISOString().split("T")[0]; // Format today's date as YYYY-MM-DD
+  const [open, setOpen] = useState(false);
+  const [enquiryNumber, setEnquiryNumber] = useState(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    console.log({
+
+    const enquiryData = {
       date: formData.get("date"),
       subject: formData.get("subject"),
       name: formData.get("name"),
       email: formData.get("email"),
       phone: formData.get("phone"),
       enquiry: formData.get("enquiry"),
-    });
-    // Add form submission logic here
+    };
+    await sendRequest(enquiryData);
+  };
+
+  const sendRequest = async (enquiryData) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_APP_BASE_ENQUIRIES_URL}/add-enquiries`,
+        enquiryData
+      );
+      console.log(response.data);
+      setEnquiryNumber(response.data.enquiryNumber);
+      clearFormData(); // Clear form data on success
+      setOpen(true); // Open success dialog on successful upload
+    } catch (error) {
+      console.error("Error submitting enquiry: ", error);
+      clearFormData();
+    }
+  };
+
+  const clearFormData = () => {
+    document.getElementById("enquiry-form").reset();
   };
 
   return (
     <Container component="main" maxWidth="sm">
       <Typography variant="h4">Enquiry</Typography>
-      <form onSubmit={handleSubmit}>
+      <form id="enquiry-form" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           {/* Hidden date field */}
           <Grid item xs={12}>

@@ -6,6 +6,7 @@ import {
   Typography,
   FormControl,
   FormLabel,
+  Box,
   Grid,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -15,9 +16,7 @@ import axios from "axios";
 import ImageContainer from "../Components/ImageContainer";
 
 const AddBanner = () => {
-  const [eventName, setEventName] = useState("");
-  const [eventDate, setEventDate] = useState("");
-  const [description, setDescription] = useState("");
+  const [bannerName, setBannerName] = useState("");
   const [files, setFiles] = useState([]);
   const [uploadedMedia, setUploadedMedia] = useState([]);
   const fileInputRef = useRef(null);
@@ -42,15 +41,14 @@ const AddBanner = () => {
   const handleSubmit = async () => {
     const formData = new FormData();
     files.forEach((fileObj) => {
-      formData.append("files", fileObj.file);
+      formData.append("file", fileObj.file);
     });
-    formData.append("name", eventName);
-    formData.append("description", description);
+    formData.append("name", bannerName);
 
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "https://delightfulbroadband.com/api/media/upload/media-file",
+        "https://delightfulbroadband.com/api/banner/upload/e-files",
         formData,
         {
           headers: {
@@ -59,9 +57,9 @@ const AddBanner = () => {
           },
         }
       );
-      console.log("Success:", response.data);
-      alert("Media added successfully");
-      setUploadedMedia(response.data.uploadedFiles); // Assuming the API response contains an array of uploaded files
+      console.log("Success:", response);
+      // alert("Media added successfully");
+      // setUploadedMedia(response.data.uploadedFiles); // Assuming the API response contains an array of uploaded files
       handleClear();
     } catch (error) {
       console.error("Error uploading media:", error);
@@ -70,8 +68,7 @@ const AddBanner = () => {
   };
 
   const handleClear = () => {
-    setEventName("");
-    setEventDate("");
+    setBannerName("");
     setDescription("");
     setFiles([]);
     document.getElementById("file-upload").value = "";
@@ -195,22 +192,27 @@ const AddBanner = () => {
         ))}
       </Grid>
 
-      <Button
-        variant="outlined"
-        sx={{ width: "45%", mt: 2, mr: 1 }}
-        onClick={handleClear}
-      >
-        Clear
-      </Button>
-      <Button
-        variant="contained"
-        sx={{ width: "45%", mt: 1, ml: 1 }}
-        onClick={handleSubmit}
-      >
-        Submit
-      </Button>
+      <TextField id="outlined-basic" onChange={(e)=> setBannerName(e.target.value)} label="Banner name" variant="outlined" sx={{mt:2}} />
 
-      {uploadedMedia.length > 0 && (
+      <Box>
+        <Button
+          variant="outlined"
+          sx={{ width: "45%", mt: 2, mr: 1 }}
+          onClick={handleClear}
+        >
+          Clear
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ width: "45%", mt: 1, ml: 1 }}
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
+      </Box>
+
+
+      {/* {uploadedMedia.length > 0 && (
         <Container sx={{ mt: 4 }}>
           <Typography variant="h6">Uploaded Media</Typography>
           <Grid container spacing={2}>
@@ -229,7 +231,7 @@ const AddBanner = () => {
             ))}
           </Grid>
         </Container>
-      )}
+      )} */}
     </Container>
   );
 };

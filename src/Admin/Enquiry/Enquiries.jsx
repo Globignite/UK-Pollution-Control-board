@@ -33,7 +33,7 @@ const Enquiries = () => {
 
   const fetchEnquiries = async () => {
     try {
-      const token = localStorage.getItem('token'); // Get token from storage
+      const token = localStorage.getItem("token"); // Get token from storage
       const response = await axios.get(
         "https://delightfulbroadband.com/api/enquiries/fetch-enquiries",
         {

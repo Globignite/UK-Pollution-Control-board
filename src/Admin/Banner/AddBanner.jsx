@@ -6,6 +6,7 @@ import {
   Typography,
   FormControl,
   FormLabel,
+  Box,
   Grid,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -14,10 +15,8 @@ import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAuto
 import axios from "axios";
 import ImageContainer from "../Components/ImageContainer";
 
-const AddMedia = () => {
-  const [eventName, setEventName] = useState("");
-  const [eventDate, setEventDate] = useState("");
-  const [description, setDescription] = useState("");
+const AddBanner = () => {
+  const [bannerName, setBannerName] = useState("");
   const [files, setFiles] = useState([]);
   const [uploadedMedia, setUploadedMedia] = useState([]);
   const fileInputRef = useRef(null);
@@ -42,15 +41,14 @@ const AddMedia = () => {
   const handleSubmit = async () => {
     const formData = new FormData();
     files.forEach((fileObj) => {
-      formData.append("files", fileObj.file);
+      formData.append("file", fileObj.file);
     });
-    formData.append("name", eventName);
-    formData.append("description", description);
+    formData.append("name", bannerName);
 
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "https://delightfulbroadband.com/api/media/upload/media-file",
+        "https://delightfulbroadband.com/api/banner/upload/e-files",
         formData,
         {
           headers: {
@@ -59,9 +57,9 @@ const AddMedia = () => {
           },
         }
       );
-      console.log("Success:", response.data);
-      alert("Media added successfully");
-      setUploadedMedia(response.data.uploadedFiles); // Assuming the API response contains an array of uploaded files
+      console.log("Success:", response);
+      // alert("Media added successfully");
+      // setUploadedMedia(response.data.uploadedFiles); // Assuming the API response contains an array of uploaded files
       handleClear();
     } catch (error) {
       console.error("Error uploading media:", error);
@@ -70,9 +68,7 @@ const AddMedia = () => {
   };
 
   const handleClear = () => {
-    setEventName("");
-    setEventDate("");
-    setDescription("");
+    setBannerName("");
     setFiles([]);
     document.getElementById("file-upload").value = "";
   };
@@ -137,37 +133,8 @@ const AddMedia = () => {
   return (
     <Container>
       <Typography variant="h5" sx={{ mb: 1 }}>
-        Upload Photos and Videos
+        Upload Banners
       </Typography>
-
-      <TextField
-        fullWidth
-        label="Event Name"
-        value={eventName}
-        onChange={(e) => setEventName(e.target.value)}
-        sx={{ mb: 1 }}
-      />
-
-      <TextField
-        type="date"
-        value={eventDate}
-        onChange={(e) => setEventDate(e.target.value)}
-        label="Event Date"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        sx={{ my: 2 }}
-      />
-
-      <Typography variant="body1" sx={{ mb: 1 }}>
-        Event Description
-      </Typography>
-      <Textarea
-        aria-label="minimum height"
-        minRows={3}
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
 
       <FormControl fullWidth sx={{ my: 2 }}>
         {/* <FormLabel component="legend">Upload</FormLabel> */}
@@ -224,22 +191,27 @@ const AddMedia = () => {
         ))}
       </Grid>
 
-      <Button
-        variant="outlined"
-        sx={{ width: "45%", mt: 2, mr: 1 }}
-        onClick={handleClear}
-      >
-        Clear
-      </Button>
-      <Button
-        variant="contained"
-        sx={{ width: "45%", mt: 1, ml: 1 }}
-        onClick={handleSubmit}
-      >
-        Submit
-      </Button>
+      <TextField id="outlined-basic" value={bannerName} onChange={(e)=> setBannerName(e.target.value)} label="Banner name" variant="outlined" sx={{mt:2}} />
 
-      {uploadedMedia.length > 0 && (
+      <Box>
+        <Button
+          variant="outlined"
+          sx={{ width: "45%", mt: 2, mr: 1 }}
+          onClick={handleClear}
+        >
+          Clear
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ width: "45%", mt: 1, ml: 1 }}
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
+      </Box>
+
+
+      {/* {uploadedMedia.length > 0 && (
         <Container sx={{ mt: 4 }}>
           <Typography variant="h6">Uploaded Media</Typography>
           <Grid container spacing={2}>
@@ -258,9 +230,9 @@ const AddMedia = () => {
             ))}
           </Grid>
         </Container>
-      )}
+      )} */}
     </Container>
   );
 };
 
-export default AddMedia;
+export default AddBanner;

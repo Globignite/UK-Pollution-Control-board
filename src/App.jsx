@@ -21,6 +21,9 @@ import Enquiries from "./Admin/Enquiry/Enquiries";
 import ViewEnquiry from "./Admin/Enquiry/ViewEnquiry";
 import Complaints from "./Admin/Complaint/complaints";
 import ViewComplaint from "./Admin/Complaint/ViewComplaint";
+import ManageMedia from "./Admin/Media/ManageMedia";
+import AddBanner from "./Admin/Banner/AddBanner";
+import ManageBanner from "./Admin/Banner/ManageBanner";
 
 function App() {
   //   useEffect(() => {
@@ -64,6 +67,9 @@ function App() {
               <Route path="add-notice" element={<AddNotice />} />
               <Route path="manage-notice" element={<ManageNotice />} />
               <Route path="add-media" element={<AddMedia />} />
+              <Route path="manage-media" element={<ManageMedia />} />
+              <Route path="add-banner" element={<AddBanner />} />
+              <Route path="manage-banner" element={<ManageBanner />} />
               <Route path="enquiries" element={<Enquiries />} />
               <Route path="enquiry/:enquireId" element={<ViewEnquiry />} />
               <Route path="complaints" element={<Complaints />} />

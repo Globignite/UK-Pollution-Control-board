@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { Link as RouterLink, useLocation,useNavigate } from "react-router-dom";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import styled from "styled-components";
 import filemanagement from "../../../public/assets/filemanagement.svg";
@@ -38,21 +38,33 @@ const StyledChevronRightIcon = styled(ChevronRightIcon)`
 `;
 
 const DropdownMenu = ({ title, items, isActive, basePath, svg }) => {
-  const isRender = items.some(item => isActive(`${basePath}/${item.path}`));
+  const isRender = items.some((item) => isActive(`${basePath}/${item.path}`));
 
   return (
     <>
       <StyledLinkBox
-        sx={{ bgcolor: isRender ? "#ffffff" : "", py: 1, borderRadius: 3, boxShadow:isRender ? 2 : 0 }}
+        sx={{
+          bgcolor: isRender ? "#ffffff" : "",
+          py: 1,
+          borderRadius: 3,
+          boxShadow: isRender ? 2 : 0,
+        }}
       >
         <Box
-          sx={{ bgcolor:"#3da73c", p: 1, borderRadius: 3, display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+          sx={{
+            bgcolor: "#3da73c",
+            p: 1,
+            borderRadius: 3,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          <img src={svg} alt={title}/>
+          <img src={svg} alt={title} />
         </Box>
         <Typography
           variant="body1"
-          sx={{ color:"#2D3748", pl: 3, fontWeight: 'bold' }}
+          sx={{ color: "#2D3748", pl: 3, fontWeight: "bold" }}
         >
           {title}
         </Typography>
@@ -81,8 +93,8 @@ const DashboardSidebar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/signin');
+    localStorage.removeItem("token");
+    navigate("/signin");
   };
 
   const menuItems = [
@@ -135,6 +147,22 @@ const DashboardSidebar = () => {
       ],
     },
     {
+      title: "Banner",
+      svg: media,
+      items: [
+        {
+          label: "Add Banner",
+          path: "add-banner",
+          icon: <StyledChevronRightIcon />,
+        },
+        {
+          label: "Manage Banner",
+          path: "manage-banner",
+          icon: <StyledChevronRightIcon />,
+        },
+      ],
+    },
+    {
       title: "Manage",
       svg: sharp,
       items: [
@@ -174,7 +202,7 @@ const DashboardSidebar = () => {
           <StyledChevronRightIcon isActive={isActive("/signIn")} />
           <Typography variant="body1">Logout</Typography>
         </StyledLinkBox> */}
-        <StyledLinkBox onClick={handleLogout} sx={{ cursor: 'pointer' }}>
+        <StyledLinkBox onClick={handleLogout} sx={{ cursor: "pointer" }}>
           <StyledChevronRightIcon />
           <Typography variant="body1">Logout</Typography>
         </StyledLinkBox>
@@ -184,4 +212,3 @@ const DashboardSidebar = () => {
 };
 
 export default DashboardSidebar;
-

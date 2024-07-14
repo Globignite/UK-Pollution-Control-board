@@ -69,7 +69,6 @@ const AddBanner = () => {
 
   const handleClear = () => {
     setBannerName("");
-    setDescription("");
     setFiles([]);
     document.getElementById("file-upload").value = "";
   };
@@ -192,7 +191,7 @@ const AddBanner = () => {
         ))}
       </Grid>
 
-      <TextField id="outlined-basic" onChange={(e)=> setBannerName(e.target.value)} label="Banner name" variant="outlined" sx={{mt:2}} />
+      <TextField id="outlined-basic" value={bannerName} onChange={(e)=> setBannerName(e.target.value)} label="Banner name" variant="outlined" sx={{mt:2}} />
 
       <Box>
         <Button

@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import {
   Container,
@@ -175,9 +173,9 @@ const Enquiries = () => {
                   <TableCell>{file.enquiryId}</TableCell>
                   <TableCell>{file.subject}</TableCell>
                   <TableCell>{file.name}</TableCell>
-                  <TableCell>{file.updatedAt.split("T")[0]}</TableCell>
-                  <TableCell>{file.progressStartDate}</TableCell>
-                  <TableCell>{file.resolvedDate}</TableCell>
+                  <TableCell>{file?.createdAt.split('T')[0]}</TableCell>
+                  <TableCell>{file?.progress_date?.split('T')[0]}</TableCell>
+                  <TableCell>{file?.resolve_date?.split('T')[0]}</TableCell>
                   <TableCell>
                     <Link to={`/dashboard/enquiry/${file.enquiryId}`}>
                       View

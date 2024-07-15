@@ -8,7 +8,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
@@ -28,6 +29,23 @@ function ManageMedia() {
   const handleStatusChange = (event) => {
     setStatusFilter(event.target.value);
   };
+
+  const fetchMediaData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(
+        "https://delightfulbroadband.com/api/media/fetch-media",);
+      console.log("Success:", response.data.data);
+      setData(response.data.data)
+    } catch (error) {
+      console.error("Error uploading media:", error);
+      alert(error.response?.data?.error || "Oops, something went wrong");
+    }
+  };
+
+  useEffect(() => {
+    fetchMediaData()
+  }, []);
 
   return (
     <>

@@ -35,7 +35,7 @@ function PdfListContainer({ data }) {
             }}
           >
             <Box component={Link}          
-             to={`${import.meta.env.VITE_APP_FILE_BASE_URL}${data.href}`}
+             to={`https://delightfulbroadband.com${data.href}`}
             target="_blank"
             sx={{width:'100%', display:'flex' }} >
               <PictureAsPdfIcon sx={{'&:hover':{color:'#000'}, color:'#000', mr:2}} />
@@ -48,7 +48,7 @@ function PdfListContainer({ data }) {
               </Typography>
             </Box>
             <Box >
-              <DownloadIcon onClick={() => download(import.meta.env.VITE_APP_FILE_BASE_URL + data.href, `${data.name}.${data.href.split('.')[1]}`)} sx={{ marginLeft: "auto" }} />
+              <DownloadIcon onClick={() => download("https://delightfulbroadband.com" + data.href, `${data.name}.${data.href.split('.')[1]}`)} sx={{ marginLeft: "auto" }} />
             </Box>
           </Card>
       </Box>

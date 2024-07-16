@@ -1,35 +1,38 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PdfListContainer from './Pdf_ListContainer';
-import { useReactToPrint } from "react-to-print";
-import { Box, Typography, Pagination, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import ExcelContent from './ExcelContent';
+import axios from "axios";
+import { Box, Typography, Pagination } from '@mui/material';
+import { useReactToPrint } from "react-to-print";
 
 function DynamicComponent({ parentMenu, currentMenu }) {
   const [jsonData, setJsonData] = useState({});
   const componentRef = useRef();
   const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [limit] = useState(10); // Assuming a default limit of 1 per page
 
-  const fetchData = async () => {
+  const fetchFiles = async (pageNumber) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_APP_PDFJSONFILE_URL}`, {
-        method: 'GET',
+      const baseURL = `https://delightfulbroadband.com/api/filesUpload/fetch-file`;
+      const url = `${baseURL}?path=${encodeURIComponent(parentMenu)}/${encodeURIComponent(currentMenu)}&limit=${limit}&page=${pageNumber}`;
+
+      const response = await axios.get(url, {
         headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
+          "Content-Type": "application/json",
+        }
       });
 
-      if (!res.ok) {
-        throw new Error('Failed to fetch data');
+      if (response.status !== 200) {
+        throw new Error("Failed to fetch file");
       }
 
-      const data = await res.json();
-      setJsonData(data);
+      setJsonData(response.data);
+      
     } catch (error) {
-      console.error('Error fetching data', error);
+      console.error("Error fetching file:", error);
+      setJsonData({ data: { data: [], pagination: { totalPages: 0 } } }); // Handle error state
     }
-  };
+  }
 
   const pageStyle = `
     @page {
@@ -68,21 +71,12 @@ function DynamicComponent({ parentMenu, currentMenu }) {
   });
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchFiles(page);
+  }, [parentMenu, currentMenu, page]); // Ensure fetchFiles runs when parentMenu, currentMenu, or page changes
 
   const handleChangePage = (event, value) => {
     setPage(value);
   };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(1);
-  };
-
-  // Combine parentMenu and currentMenu to form the key
-  const key = `${parentMenu}/${currentMenu}`;
-  const dataToDisplay = jsonData[key] ? jsonData[key].slice((page - 1) * rowsPerPage, page * rowsPerPage) : [];
 
   return (
     <Box ref={componentRef}>
@@ -126,10 +120,7 @@ function DynamicComponent({ parentMenu, currentMenu }) {
         </Box>
       </Box>
 
-      {jsonData[key] ? (
-        jsonData[key].length === 0 ? (
-          <p>No data available</p>
-        ) : (
+      {jsonData?.data?.data?.length ? ( 
           <>
             <Box
               id="content-box"
@@ -142,7 +133,7 @@ function DynamicComponent({ parentMenu, currentMenu }) {
               }}
             >
               <Box>
-                {dataToDisplay.map((value, index) => (
+                {jsonData?.data?.data?.map((value, index) => (
                   <div key={index}>
                     {value.type === 'PDF' ? (
                       <PdfListContainer data={value} />
@@ -154,30 +145,16 @@ function DynamicComponent({ parentMenu, currentMenu }) {
               </Box>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mt: 2 }}>
-              {/* <FormControl variant="outlined">
-                <InputLabel>Rows per page</InputLabel>
-                <Select
-                  value={rowsPerPage}
-                  onChange={handleChangeRowsPerPage}
-                  label="Rows per page"
-                >
-                  {[5, 10, 25, 50].map((rowsPerPageOption) => (
-                    <MenuItem key={rowsPerPageOption} value={rowsPerPageOption}>
-                      {rowsPerPageOption}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl> */}
               <Pagination
-                count={Math.ceil(jsonData[key].length / rowsPerPage)}
+                count={jsonData?.pagination?.totalPages || 1} // Default to 1 if totalPages is not available
                 page={page}
                 onChange={handleChangePage}
                 shape="rounded"
                 color="primary"
+                disabled={jsonData?.pagination?.totalPages === 1}
               />
             </Box>
           </>
-        )
       ) : (
         <p>No data available for the selected menu</p>
       )}

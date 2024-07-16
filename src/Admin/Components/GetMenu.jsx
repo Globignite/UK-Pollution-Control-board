@@ -63,13 +63,10 @@ export const RecursiveSubheading = ({
   );
 };
 
-const GetMenu = () => {
+const GetMenu = ({ menuPath }) => {
   const [selectedHeading, setSelectedHeading] = useState(null);
   const [selectedSubheadings, setSelectedSubheadings] = useState({});
   const [selectedFormat, setSelectedFormat] = useState("Excel");
-  const [file, setFile] = useState(null);
-  const [fileURL, setFileURL] = useState(null);
-  const [error, setError] = useState("");
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [customFileName, setCustomFileName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -79,17 +76,12 @@ const GetMenu = () => {
       ? Object.keys(selectedSubheadings).length > 0
       : true;
     setIsSubmitDisabled(!(selectedHeading && hasSubheadings));
-  }, [
-    selectedHeading,
-    selectedSubheadings,
-    selectedFormat,
-    file,
-    customFileName,
-  ]);
+  }, [selectedHeading, selectedSubheadings]);
 
   const handleHeadingChange = (event, newValue) => {
     setSelectedHeading(newValue);
     setSelectedSubheadings({});
+    setIsSubmitDisabled(!newValue); // Disable submit if no heading is selected
   };
 
   const handleSubheadingChange = (level, subheading) => {
@@ -100,151 +92,44 @@ const GetMenu = () => {
           delete newSubheadings[key];
         }
       });
+      setIsSubmitDisabled(Object.keys(newSubheadings).length === 0); // Disable submit if no subheadings are selected
       return newSubheadings;
     });
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const validExtensions = {
-      Excel: ["xlsx", "xls", "csv"],
-      PDF: ["pdf"],
-    };
-
-    const fileExtension = file.name.split(".").pop().toLowerCase();
-
-    if (!validExtensions[selectedFormat].includes(fileExtension)) {
-      setError(
-        `Invalid file type. Please select a valid ${selectedFormat} file.`
-      );
-      setFile(null);
-      setFileURL(null);
-    } else {
-      setError("");
-      setFile(file);
-      setFileURL(URL.createObjectURL(file));
-    }
-  };
-
-  const uploadFile = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-      const response = await axios.post(
-        `https://delightfulbroadband.com/upload/e-files`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      if (response?.data?.data?.filename !== undefined) {
-        setStoredFileName(response.data?.filename);
-        return response.data?.data?.filename;
-      }
-    } catch (error) {
-      console.error(error);
-      return false;
-    }
-  };
-
   const handleSubmit = async () => {
     setLoading(true);
-    if (file && selectedHeading && customFileName) {
-      const formData = new FormData();
-      formData.append("heading", selectedHeading.name);
-      formData.append("customFileName", customFileName);
-      formData.append("format", selectedFormat);
+    let combinedHeadings = [
+      selectedHeading.name,
+      ...Object.values(selectedSubheadings).map(
+        (subheading) => subheading?.name
+      ),
+    ];
+    let lastTwoSubheadings;
 
-      const upload_res = await uploadFile(file);
-
-      if (upload_res) {
-        let combinedHeadings = [
-          selectedHeading.name,
-          ...Object.values(selectedSubheadings).map(
-            (subheading) => subheading.name
-          ),
-        ];
-        let lastTwoSubheadings;
-
-        console.log(combinedHeadings);
-
-        if (combinedHeadings.length >= 2) {
-          lastTwoSubheadings = combinedHeadings.join("/");
-        } else {
-          lastTwoSubheadings = `null/${combinedHeadings[0]}`;
-        }
-
-        console.log(lastTwoSubheadings);
-
-        const newPDF = {
-          name: customFileName,
-          href: `/assets/${selectedFormat}/${upload_res}`,
-          type: selectedFormat,
-        };
-
-        try {
-          const res = await fetch(
-            `https://delightfulbroadband.com/update/pdf-file`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              credentials: "include",
-              body: JSON.stringify({
-                newPDF,
-                category: lastTwoSubheadings,
-              }),
-            }
-          );
-
-          if (!res.ok) {
-            throw new Error("Failed to upload file");
-          }
-
-          const data = await res.json();
-          toast.success(data?.message, { duration: 1500 });
-          handleClear();
-        } catch (error) {
-          console.error("Error uploading file:", error);
-          toast.error("Failed to upload file", { duration: 1500 });
-        }
-      }
+    if (combinedHeadings.length >= 2) {
+      lastTwoSubheadings = combinedHeadings.join("/");
     } else {
-      console.log("Form is incomplete");
+      lastTwoSubheadings = `null/${combinedHeadings[0]}`;
     }
+
+    menuPath(lastTwoSubheadings);
     setLoading(false);
-  };
-
-  const handleFormatChange = (event) => {
-    event.preventDefault();
-    setFile(null);
-    setFileURL(null);
-    setError("");
-    setSelectedFormat(event.target.value);
-
-    const inputFileField = document.querySelector('input[type="file"]');
-    if (inputFileField) {
-      inputFileField.value = "";
-    }
   };
 
   const handleClear = () => {
     setSelectedHeading(null);
     setSelectedSubheadings({});
     setSelectedFormat("Excel");
-    setFile(null);
-    setFileURL(null);
     setCustomFileName("");
-    setError("");
+    setIsSubmitDisabled(true); // Disable submit button when cleared
 
     const inputFileField = document.querySelector('input[type="file"]');
     if (inputFileField) {
       inputFileField.value = "";
     }
+
+    menuPath("");
   };
 
   const combinedOptions = [...mainMenu.slice(1, -1), ...SideMenu.menu];

@@ -149,42 +149,12 @@ const UploadFiles = () => {
     }
   };
 
-  const uploadFile = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-      const response = await axios.post(
-        `https://delightfulbroadband.com/upload/e-files`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      if (response?.data?.data?.filename !== undefined) {
-        // toast.success("successful!!", { duration: 1500 });
-        setStoredFileName(response.data?.filename);
-        return response.data?.data?.filename;
-      }
-    } catch (error) {
-      console.error(error);
-      return false;
-    }
-  };
-
   const handleSubmit = async () => {
     setLoading(true);
     if (file && selectedHeading && customFileName) {
       const formData = new FormData();
-      formData.append("heading", selectedHeading.name);
-      formData.append("customFileName", customFileName);
-      formData.append("format", selectedFormat);
 
-      const upload_res = await uploadFile(file);
 
-      if (upload_res) {
         let combinedHeadings = [
           selectedHeading.name,
           ...Object.values(selectedSubheadings).map(
@@ -193,7 +163,7 @@ const UploadFiles = () => {
         ];
         let lastTwoSubheadings;
 
-        console.log(combinedHeadings);
+        // console.log(combinedHeadings);
 
         if (combinedHeadings.length >= 2) {
           // lastTwoSubheadings = combinedHeadings.slice(-2).join('/');
@@ -202,42 +172,36 @@ const UploadFiles = () => {
           lastTwoSubheadings = `null/${combinedHeadings[0]}`;
         }
 
-        console.log(lastTwoSubheadings);
+        // console.log(lastTwoSubheadings);
 
-        const newPDF = {
-          name: customFileName,
-          href: `/assets/${selectedFormat}/${upload_res}`,
-          type: selectedFormat,
-        };
+        formData.append("file", file);
+        formData.append("filePath", lastTwoSubheadings);
+        formData.append("name", customFileName);
 
+        const token = localStorage.getItem("token");
         try {
-          const res = await fetch(
-            `https://delightfulbroadband.com/update/pdf-file`,
+          const response = await axios.post(
+            `https://delightfulbroadband.com/api/filesUpload/upload/e-files`,
+            formData,
             {
-              method: "POST",
               headers: {
-                "Content-Type": "application/json",
-              },
-              credentials: "include",
-              body: JSON.stringify({
-                newPDF,
-                category: lastTwoSubheadings,
-              }),
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`,
+              }
             }
           );
 
-          if (!res.ok) {
+          if (response.status !== 201) {
             throw new Error("Failed to upload file");
           }
 
-          const data = await res.json();
-          toast.success(data?.message, { duration: 1500 });
+          toast.success(response?.data?.message, { duration: 1500 });
           handleClear();
         } catch (error) {
           console.error("Error uploading file:", error);
           toast.error("Failed to upload file", { duration: 1500 });
         }
-      }
+
     } else {
       console.log("Form is incomplete");
     }
@@ -330,6 +294,7 @@ const UploadFiles = () => {
           <FormLabel>Upload File</FormLabel>
           <input
             type="file"
+            name='file'
             accept={selectedFormat === "Excel" ? ".xlsx,.xls,.csv" : ".pdf"}
             onChange={handleFileChange}
           />

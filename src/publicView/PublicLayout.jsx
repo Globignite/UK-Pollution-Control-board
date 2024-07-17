@@ -88,7 +88,7 @@ function PublicLayout() {
             <EOICard />
             <UsefulInfo />
             <EnvironmentLegislation />
-            {/* <NoticesAndUpdates /> */}
+            <NoticesAndUpdates />
             <QuickLinks />
           </Grid>
         </Grid>

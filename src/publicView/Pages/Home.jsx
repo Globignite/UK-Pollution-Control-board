@@ -82,7 +82,7 @@ function Home() {
             <EOICard />
             <UsefulInfo />
             <EnvironmentLegislation />
-            <NoticesAndUpdates />
+            {/* <NoticesAndUpdates /> */}
             <QuickLinks />
           </Grid>
         </Grid>

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import { Box, IconButton } from "@mui/material";
+import { Typography,Box, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 
@@ -44,7 +44,9 @@ function ManageBanner() {
 
   return (
     <Box sx={{pl:2}}>
-      <h3>Manage Banner</h3>
+       <Typography variant="h6" gutterBottom>
+       Manage Banner
+      </Typography>
       <Box
         sx={{
           display: "flex",

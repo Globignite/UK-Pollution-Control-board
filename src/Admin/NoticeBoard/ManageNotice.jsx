@@ -57,29 +57,37 @@ const ManageNotice = () => {
   };
  
 
-  const handleDelete = async (_id) => {
-    const token = localStorage.getItem('token');
-    try {
-      const response = await axios.delete(
-        "https://delightfulbroadband.com/api/notifications/delete-notification",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          data: {
-            _id: _id,
-          },
+  const handleDelete = async (href, name) => {
+    if(confirm("Are you sure you want to delete " + name)){
+      try {
+        const reqData = {
+          filePath: 'null/Notices',
+          href: href
+        };
+        const token = localStorage.getItem("token");
+        const response = await axios.delete(
+          "https://delightfulbroadband.com/api/filesUpload/delete-file",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            data: reqData, // This is the correct place to put the data for delete request
+          }
+        );
+    
+        if (response.status !== 200) {
+          throw new Error("Failed to delete file");
         }
-      );
-      console.log("Notification deleted:", response.data);
-      fetchNotifications();
-      alert("Notification deleted successfully");
-    } catch (error) {
-      console.error("Error deleting notification:", error);
-      alert(error.response?.data?.error || "Oops, something went wrong");
+        fetchNotifications();
+        alert("File deleted successfully");
+      } catch (error) {
+        console.error("Error deleting file:", error);
+        alert("Error deleting file:", error);
+      }
     }
   };
+
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -175,7 +183,7 @@ const ManageNotice = () => {
               
                   <TableCell>{file.type}</TableCell>
                   <TableCell>
-                    <IconButton color="primary" onClick={() => handleDelete(file?._id)}>
+                    <IconButton color="primary" onClick={() => handleDelete(file?.href,file?.name)}>
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>

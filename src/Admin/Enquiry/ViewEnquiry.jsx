@@ -89,18 +89,6 @@ function ViewEnquiry() {
   const { enquireId } = useParams();
 
   useEffect(() => {
-    async function fetchEnquire() {
-      try {
-        const response = await axios.get(`https://delightfulbroadband.com/api/enquiries/fetch-single-enquiries/${enquireId}`);
-        setEnquiryData(response?.data.data || {});
-        setStatusFilter(response?.data.data.status);
-        setNotesArray(response?.data.data.
-          action_notes);
-        console.log(response?.data.data );
-      } catch (error) {
-        console.error(error);
-      }
-    }
     fetchEnquire();
   }, [enquireId]);
 
@@ -113,6 +101,18 @@ function ViewEnquiry() {
     setPage(0);
   };
 
+  async function fetchEnquire() {
+    try {
+      const response = await axios.get(`https://delightfulbroadband.com/api/enquiries/fetch-single-enquiries/${enquireId}`);
+      setEnquiryData(response?.data.data || {});
+      setStatusFilter(response?.data.data.status);
+      setNotesArray(response?.data.data.
+        action_notes);
+      console.log(response?.data.data );
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
 
   const getCurrentDate = () => {
@@ -151,6 +151,7 @@ function ViewEnquiry() {
         }
       });
       if (response.status === 200) {
+        fetchEnquire()
         console.log(response?.data);
          //APPEND
         alert('Action note added successfully');
@@ -184,7 +185,6 @@ function ViewEnquiry() {
       );
       if (response.status === 201) {
         // setNotes(prevNotes => [...prevNotes, newNote]);
-     
         alert('Status updated successfully');
       }
     } catch (error) {

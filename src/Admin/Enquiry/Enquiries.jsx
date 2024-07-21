@@ -60,7 +60,8 @@ const Enquiries = () => {
 
   useEffect(() => {
     fetchEnquiries();
-  }, [page, rowsPerPage, searchTerm, statusFilter, startDate, endDate]);
+  }, []);
+  // }, [page, rowsPerPage, searchTerm, statusFilter, startDate, endDate]);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);

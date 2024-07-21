@@ -43,7 +43,8 @@ const Complaints = () => {
 
   useEffect(() => {
     fetchComplaints();
-  }, [page, rowsPerPage, searchTerm, statusFilter, startDate, endDate]);
+  }, []);
+  // }, [page, rowsPerPage, searchTerm, statusFilter, startDate, endDate]);
 
   const fetchComplaints = async () => {
     setLoading(true);

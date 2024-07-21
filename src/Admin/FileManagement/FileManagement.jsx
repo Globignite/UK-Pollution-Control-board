@@ -62,7 +62,7 @@ const FileManagement = () => {
   }
 
   const handleDelete = async (href, name) => {
-    if(confirm("Are you sure you want to delete" + name)){
+    if(confirm("Are you sure you want to delete " + name)){
       try {
         const reqData = {
           filePath: data?.data?.filePath,
@@ -84,7 +84,7 @@ const FileManagement = () => {
           throw new Error("Failed to delete file");
         }
         fetchFiles(data?.data?.filePath)
-        console.log("File deleted successfully");
+        alert("File deleted successfully");
       } catch (error) {
         console.error("Error deleting file:", error);
       }
@@ -180,7 +180,7 @@ const FileManagement = () => {
                         {ele.name}
                       </Link>
                     </TableCell>
-                    <TableCell>{ele.createdAt}</TableCell>
+                    <TableCell>{ele.createdAt.split('T')[0] }</TableCell>
                     <TableCell>
                       <IconButton color="primary">
                         <DeleteIcon onClick={()=>handleDelete(ele.href, ele.name)} />

@@ -92,47 +92,48 @@ function ViewComplaint() {
 
 
   useEffect(() => {
-    async function fetchComplaint() {
-      try {
-        const response = await axios.get(`https://delightfulbroadband.com/api/complaints/fetch-single-complaint/${complaintId}`);
-
-        const complaintData = response?.data?.data;
-        console.log(response?.data?.data);
-        setComplaintData(complaintData);
-        setStatusFilter(complaintData.status);
-        setNotesArray(complaintData.action_notes);
-
-        if (complaintData?.seen_date === null) {
-          const token = localStorage.getItem("token");
-
-          try {
-            const res = await axios.patch(
-              "https://delightfulbroadband.com/api/complaints/update-complaints-seen",
-              {
-                _id: complaintData._id,
-              },
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
-
-            if (res.status === 200) {
-              alert("Seen date updated successfully");
-            }
-          } catch (error) {
-            console.error("Error updating seen date:", error);
-            alert("Failed to update seen date");
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching complaint:", error);
-      }
-    }
-
     fetchComplaint();
   }, [complaintId]);
+
+  async function fetchComplaint() {
+    try {
+      const response = await axios.get(`https://delightfulbroadband.com/api/complaints/fetch-single-complaint/${complaintId}`);
+
+      const complaintData = response?.data?.data;
+      console.log(response?.data?.data);
+      setComplaintData(complaintData);
+      setStatusFilter(complaintData.status);
+      setNotesArray(complaintData.action_notes);
+
+      if (complaintData?.seen_date === null) {
+        const token = localStorage.getItem("token");
+
+        try {
+          const res = await axios.patch(
+            "https://delightfulbroadband.com/api/complaints/update-complaints-seen",
+            {
+              _id: complaintData._id,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (res.status === 200) {
+            alert("Seen date updated successfully");
+          }
+        } catch (error) {
+          console.error("Error updating seen date:", error);
+          alert("Failed to update seen date");
+        }
+      }
+    } catch (error) {
+      alert("Failed to update seen date");
+      console.error("Error fetching complaint:", error);
+    }
+  }
   
       const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -181,7 +182,7 @@ function ViewComplaint() {
             }
           });
           if (response.status === 200) {
-          //APPEND
+            fetchComplaint();
             alert('Action note added successfully');
             setNote();  // Clear the note field after successful submission
             setStatusFilter();
@@ -213,15 +214,13 @@ function ViewComplaint() {
           if (response.status === 201) {
             alert('Status updated successfully');
           }
+
+          console.log(response?.data)
         } catch (error) {
           console.error('Error updating status:', error);
           alert('Failed to update status');
         } 
       };
-
-
-       
-
 
 
 

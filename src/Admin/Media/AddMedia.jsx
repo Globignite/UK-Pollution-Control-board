@@ -230,7 +230,7 @@ const AddMedia = () => {
       </Button>
       <Button
         variant="contained"
-        sx={{ width: "45%", mt: 1, ml: 1 }}
+        sx={{ width: "45%", mt: 2, ml: 1 }}
         onClick={handleSubmit}
       >
         Submit

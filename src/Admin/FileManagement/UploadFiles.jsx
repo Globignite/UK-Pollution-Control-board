@@ -206,6 +206,7 @@ const UploadFiles = () => {
         }
 
     } else {
+      toast.error("Form is incomplete", { duration: 1500 });
       console.log("Form is incomplete");
     }
     setLoading(false);

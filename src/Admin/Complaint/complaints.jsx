@@ -129,9 +129,9 @@ const Complaints = () => {
             label="Status"
           >
             <MenuItem value="">All</MenuItem>
-            <MenuItem value="New">New</MenuItem>
-            <MenuItem value="In Progress">In Progress</MenuItem>
-            <MenuItem value="Resolved">Resolved</MenuItem>
+            <MenuItem value="new">New</MenuItem>
+            <MenuItem value="in_progress">In Progress</MenuItem>
+            <MenuItem value="resolved">Resolved</MenuItem>
           </Select>
         </FormControl>
         <TextField

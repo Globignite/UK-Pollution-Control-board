@@ -97,6 +97,7 @@ function ViewComplaint() {
         const response = await axios.get(`https://delightfulbroadband.com/api/complaints/fetch-single-complaint/${complaintId}`);
 
         const complaintData = response?.data?.data;
+        console.log(response?.data?.data);
         setComplaintData(complaintData);
         setStatusFilter(complaintData.status);
         setNotesArray(complaintData.action_notes);
@@ -237,7 +238,7 @@ function ViewComplaint() {
               <TableCell>{complaint.createdAt ? complaint.createdAt.split('T')[0] : 'N/A'}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell component="th" scope="row">Enquiry Number</TableCell>
+              <TableCell component="th" scope="row">Complaint Number</TableCell>
               <TableCell>{complaint.complaintId || 'N/A'}</TableCell>
             </TableRow>
             <TableRow>
@@ -257,7 +258,7 @@ function ViewComplaint() {
               <TableCell>{complaint.phone || 'N/A'}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell component="th" scope="row">Enquiry</TableCell>
+              <TableCell component="th" scope="row">Complaint</TableCell>
               <TableCell>{complaint.complaint || 'N/A'}</TableCell>
             </TableRow> 
          

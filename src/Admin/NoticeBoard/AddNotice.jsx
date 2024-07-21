@@ -1,315 +1,193 @@
-// import React, { useState } from "react";
-// import {
-//   Container,
-//   TextField,
-//   Button,
-//   Radio,
-//   RadioGroup,
-//   FormControlLabel,
-//   FormControl,
-//   FormLabel,
-//   Typography,
-// } from "@mui/material";
-// import axios from "axios";
-
-// const AddNotice = () => {
-//   const [format, setFormat] = useState("Excel");
-//   const [customFileName, setCustomFileName] = useState("");
-//   const [file, setFile] = useState(null);
-//   const [publishdate,setPublishDate] =useState("");
-//   const [module,setModule] = useState("");
-
-//   const handleFormatChange = (event) => {
-//     setFormat(event.target.value);
-//   };
-
-//   const handleFileChange = (event) => {
-//     setFile(event.target.files[0]);
-//   };
-
-//   const handleSubmit = async() => {
-//     // const { Module, title, Publish_Date, names } = req.body;
-//     console.log("Submitting:", { format, customFileName, file,publishdate,module });
-//     // Add your submit logic here
-//     try {
-//       const token = localStorage.getItem('token');
-//       const response = await axios.post("https://delightfulbroadband.com/api/notifications/upload/e-files", 
-//         {
-//           Module:module, 
-//           title:"hdhgfdkjdghjgdh",
-//           Publish_Date:publishdate, 
-//           names: customFileName,
-//           files:file
-//         }, {
-//         headers: {
-//           "Content-Type": "multipart/form-data",
-//           "Authorization": `Bearer ${token}`, 
-//         },
-//       });
-//       console.log(response.data);
-//       alert("File uploaded successfully");
-//     } catch (error) {
-//       console.error(error);
-//       alert("Error uploading file");
-//     }
-//   };
- 
-
-//   const handleClear = () => {
-//     setFormat("Excel");
-//     setCustomFileName("");
-//     setFile(null);
-//     document.getElementById("file-upload").value = "";
-//   };
- 
-
-//   const today = new Date().toISOString().split("T")[0];
-//   return (
-//     <Container>
-//       <Typography variant="h5" sx={{ mb: 2 }}>
-//         Add Notice
-//       </Typography>
-
-//       <FormControl component="fieldset" sx={{ mb: 2 }}>
-//         {/* <FormLabel component="legend">Format</FormLabel> */}
-//         <RadioGroup row value={format} onChange={handleFormatChange}>
-//           <FormControlLabel
-//             value="PDF"
-//             defaultChecked
-//             control={<Radio />}
-//             label="PDF"
-//           />
-//         </RadioGroup>
-//       </FormControl>
-
-//       <TextField
-//         fullWidth
-//         label="Custom File Name"
-//         value={customFileName}
-//         onChange={(e) => setCustomFileName(e.target.value)}
-//         sx={{ mb: 2 }}
-//       />
-//       <TextField
-//         fullWidth
-//         label="Module Name"
-//         value={module}
-//         onChange={(e) => setModule(e.target.value)}
-//         sx={{ mb: 2 }}
-//       />
-//         <TextField
-//           type="date"
-//           value={publishdate}
-//           onChange={(e) => setPublishDate(e.target.value)}
-//           label="Publish Date"
-//           margin="normal"
-//           InputLabelProps={{
-//             shrink: true,
-//           }}
-//           inputProps={{
-//             min: today, 
-//           }}
-//           style={{ flex: 1 }}
-//           sx={{ mb: 3 }}
-//         />
-//       <FormControl fullWidth sx={{ mb: 2 }}>
-//         <FormLabel component="legend" sx={{ mb: 1, mt:1 }}>Upload File</FormLabel>
-//         <input
-//           id="file-upload"
-//           type="file"
-//           name="files"
-//           multiple
-//           accept={format === "Excel" ? ".xlsx,.xls,.csv" : ".pdf"}
-//           onChange={handleFileChange}
-//         />
-//       </FormControl>
-
-//       <Button
-//         variant="outlined"
-//         sx={{ width: "45%", mt: 2, mr: 1 }}
-//         onClick={handleClear}
-//       >
-//         Clear
-//       </Button>
-//       <Button
-//         variant="contained"
-//         sx={{ width: "45%", mt: 2, ml: 1 }}
-//         onClick={handleSubmit}
-//       >
-//         Submit
-//       </Button>
-//     </Container>
-//   );
-// };
-
-// export default AddNotice;
-
-
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import {
-  Container,
+  Autocomplete,
   TextField,
-  Button,
+  Box,
   Radio,
   RadioGroup,
   FormControlLabel,
   FormControl,
   FormLabel,
+  Button,
+  Popper,
+  Container,
+  Alert,
   Typography,
 } from "@mui/material";
+import { toast } from "sonner";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { SideMenu } from "../../publicView/JsonFiles/SideMenu";
+import { mainMenu } from "../../publicView/JsonFiles/MainMenu";
+import ExcelPreview from "../ExcelPreview";
+import Spinner from "../../publicView/Components/Spinner";
+
+const formats = ["Excel", "PDF"];
 
 const AddNotice = () => {
-  const [format, setFormat] = useState("PDF");
-  const [customFileName, setCustomFileName] = useState([]);
-  const [files, setFiles] = useState([]);
-  const [publishDate, setPublishDate] = useState("");
-  const [module, setModule] = useState("");
-  const [title,settitle] = useState("");
+  const [selectedHeading, setSelectedHeading] = useState(null);
+  const [selectedSubheadings, setSelectedSubheadings] = useState({});
+  const [selectedFormat, setSelectedFormat] = useState("Excel");
+  const [file, setFile] = useState(null);
+  const [fileURL, setFileURL] = useState(null);
+  const [error, setError] = useState("");
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const [customFileName, setCustomFileName] = useState("");
 
-  const handleFormatChange = (event) => {
-    setFormat(event.target.value);
-  };
+
+
 
   const handleFileChange = (event) => {
-    setFiles(Array.from(event.target.files));
-  };
+    const file = event.target.files[0];
+    const validExtensions = {
+      Excel: ["xlsx", "xls", "csv"],
+      PDF: ["pdf"],
+    };
 
-  const handleCustomFileNameChange = (index, value) => {
-    const newCustomFileName = [...customFileName];
-    newCustomFileName[index] = value;
-    setCustomFileName(newCustomFileName);
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+
+    if (!validExtensions[selectedFormat].includes(fileExtension)) {
+      setError(
+        `Invalid file type. Please select a valid ${selectedFormat} file.`
+      );
+      setFile(null);
+      setFileURL(null);
+    } else {
+      setError("");
+      setFile(file);
+      setFileURL(URL.createObjectURL(file));
+    }
   };
 
   const handleSubmit = async () => {
-    if (!files.length) {
-      alert("Please upload at least one file.");
-      return;
+
+    if (file && customFileName) {
+      const formData = new FormData();
+        let lastTwoSubheadings = 'null/Notices';
+      
+
+        // console.log(lastTwoSubheadings);
+
+        formData.append("file", file);
+        formData.append("filePath", lastTwoSubheadings);
+        formData.append("name", customFileName);
+
+
+
+        const token = localStorage.getItem("token");
+        try {
+          const response = await axios.post(
+            `https://delightfulbroadband.com/api/filesUpload/upload/e-files`,
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`,
+              }
+            }
+          );
+
+          if (response.status !== 201) {
+            throw new Error("Failed to upload file");
+          }
+
+          toast.success(response?.data?.message, { duration: 1500 });
+          handleClear();
+        } catch (error) {
+          console.error("Error uploading file:", error);
+          toast.error("Failed to upload file", { duration: 1500 });
+        }
+
+    } else {
+      console.log("Form is incomplete");
     }
+    setLoading(false);
+  };
 
-    const formData = new FormData();
-    files.forEach((file, index) => {
-      formData.append("files", file);
-    });
-    formData.append("Module", module);
-    formData.append("title", title);
-    formData.append("Publish_Date", publishDate);
-    customFileName.forEach((name) => formData.append("names", name));
+  const handleFormatChange = (event) => {
+    event.preventDefault();
+    setFile(null);
+    setFileURL(null);
+    setError("");
+    setSelectedFormat(event.target.value);
 
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post("https://delightfulbroadband.com/api/notifications/upload/e-files", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "Authorization": `Bearer ${token}`,
-        },
-      });
-      console.log(response.data);
-      alert("File uploaded successfully");
-      handleClear();
-    } catch (error) {
-      console.error(error);
-      alert("Error uploading file");
+    const inputFileField = document.querySelector('input[type="file"]');
+    if (inputFileField) {
+      inputFileField.value = "";
     }
   };
 
   const handleClear = () => {
-    setFormat("PDF");
-    settitle("")
-    setCustomFileName([]);
-    setFiles([]);
-    setPublishDate("");
-    setModule("");
-    document.getElementById("file-upload").value = "";
-  };
+    setSelectedHeading(null);
+    setSelectedSubheadings({});
+    setSelectedFormat("Excel");
+    setFile(null);
+    setFileURL(null);
+    setCustomFileName("");
+    setError("");
 
-  const today = new Date().toISOString().split("T")[0];
+    const inputFileField = document.querySelector('input[type="file"]');
+    if (inputFileField) {
+      inputFileField.value = "";
+    }
+  };
 
   return (
     <Container>
-      <Typography variant="h5" sx={{ mb: 2 }}>
-        Add Notice
-      </Typography>
+      <Typography variant="h5">Add Notice</Typography>
+      <Box
+        sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}
+      >
 
-      <TextField
-        fullWidth
-        label="Title"
-        value={title}
-        onChange={(e) => settitle(e.target.value)}
-        sx={{ mb: 2 }}
-      />
+        <FormControl component="fieldset" sx={{ mb: 2, width: "100%" }}>
+          <FormLabel component="legend">Format</FormLabel>
+          <RadioGroup row value={selectedFormat} onChange={handleFormatChange}>
+            {formats.map((format) => (
+              <FormControlLabel
+                key={format}
+                value={format}
+                control={<Radio />}
+                label={format}
+              />
+            ))}
+          </RadioGroup>
+        </FormControl>
 
-      <FormControl component="fieldset" sx={{ mb: 2 }}>
-        <RadioGroup row value={format} onChange={handleFormatChange}>
-          <FormControlLabel
-            value="PDF"
-            control={<Radio />}
-            label="PDF"
-          />
-          <FormControlLabel
-            value="Excel"
-            control={<Radio />}
-            label="Excel"
-          />
-        </RadioGroup>
-      </FormControl>
-
-      {files.map((_, index) => (
         <TextField
-          key={index}
+          label="Custom File Name"
+          value={customFileName}
+          onChange={(event) => setCustomFileName(event.target.value)}
           fullWidth
-          label={`Custom File Name`}
-          value={customFileName[index] || ""}
-          onChange={(e) => handleCustomFileNameChange(index, e.target.value)}
           sx={{ mb: 2 }}
         />
-      ))}
-      <TextField
-        fullWidth
-        label="Module Name"
-        value={module}
-        onChange={(e) => setModule(e.target.value)}
-        sx={{ mb: 2 }}
-      />
-      <TextField
-        type="date"
-        value={publishDate}
-        onChange={(e) => setPublishDate(e.target.value)}
-        label="Publish Date"
-        margin="normal"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        inputProps={{
-          min: today,
-        }}
-        sx={{ mb: 3 }}
-      />
-      <FormControl fullWidth sx={{ mb: 2 }}>
-        <FormLabel component="legend" sx={{ mb: 1, mt: 1 }}>Upload Files</FormLabel>
-        <input
-          id="file-upload"
-          type="file"
-          name="files"
-          multiple
-          accept={format === "Excel" ? ".xlsx,.xls,.csv" : ".pdf"}
-          onChange={handleFileChange}
-        />
-      </FormControl>
 
-      <Button
-        variant="outlined"
-        sx={{ width: "45%", mt: 2, mr: 1 }}
-        onClick={handleClear}
-      >
-        Clear
-      </Button>
-      <Button
-        variant="contained"
-        sx={{ width: "45%", mt: 2, ml: 1 }}
-        onClick={handleSubmit}
-      >
-        Submit
-      </Button>
+        <FormControl fullWidth sx={{ mb: 2 }}>
+          <FormLabel>Upload File</FormLabel>
+          <input
+            type="file"
+            name='file'
+            accept={selectedFormat === "Excel" ? ".xlsx,.xls,.csv" : ".pdf"}
+            onChange={handleFileChange}
+          />
+        </FormControl>
+
+        <Box>
+          <Button
+            variant="outlined"
+            sx={{ width: "45%", mt: 2, mr: 1 }}
+            onClick={handleClear}
+          >
+            Clear
+          </Button>
+          <Button
+            variant="contained"
+            sx={{ width: "45%", mt: 2, ml: 1 }}
+            onClick={handleSubmit}
+          >
+            Submit
+          </Button>
+        </Box>
+      </Box>
     </Container>
   );
 };

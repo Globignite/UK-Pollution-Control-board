@@ -112,7 +112,7 @@ const GetMenu = ({ menuPath }) => {
     } else {
       lastTwoSubheadings = `null/${combinedHeadings[0]}`;
     }
-
+    
     menuPath(lastTwoSubheadings);
     setLoading(false);
   };
@@ -133,6 +133,8 @@ const GetMenu = ({ menuPath }) => {
   };
 
   const combinedOptions = [...mainMenu.slice(1, -1), ...SideMenu.menu];
+
+
 
   return (
     <>
@@ -161,7 +163,12 @@ const GetMenu = ({ menuPath }) => {
           />
         )}
 
-        <Box>
+        <Box 
+        display="flex"
+        flexDirection="row"
+        flexWrap="wrap"
+        gap={2}
+        marginBottom={2}>
           <Button
             variant="outlined"
             sx={{ width: "45%", mt: 2, mr: 1 }}

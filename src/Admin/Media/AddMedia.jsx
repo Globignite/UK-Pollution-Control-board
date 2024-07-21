@@ -134,7 +134,7 @@ const AddMedia = () => {
 
   return (
     <Container>
-      <Typography variant="h6" sx={{ mb: 1 }}>
+      <Typography variant="h6" gutterBottom>
         Upload Photos and Videos
       </Typography>
       <TextField

@@ -5,9 +5,11 @@ import {
   Table,
   TableBody,
   TableCell,
+  TextField,
   TableContainer,
   TableHead,
   TableRow,
+  Button,
   IconButton,
   Paper,
   Link,
@@ -18,41 +20,44 @@ import AddIcon from "@mui/icons-material/Add";
 import GetMenu from "../Components/GetMenu";
 import axios from "axios";
 
-const files = [
-  { name: "Quality Standards - Industry...",type:"pdf", date: "03/12/2023" },
-  { name: "User Manual - For industries & Unit...",type:"pdf", date: "03/12/2023" },
-  { name: "Chakra Soft UI Version",type:"pdf", date: "03/12/2023" },
-  { name: "Chakra Soft UI Version",type:"pdf", date: "03/12/2023" },
-  { name: "Chakra Soft UI Version",type:"pdf", date: "03/12/2023" },
-  { name: "Chakra Soft UI Version",type:"pdf", date: "03/12/2023" },
-];
-
 const ManageNotice = () => {
-  const [notifications,setNotifications]= useState([]);
-
- 
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [notifications, setNotifications] = useState([]);
 
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get(
-        "https://delightfulbroadband.com/api/notifications/fetch-notifications",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("Notifications:", response.data);
-      setNotifications(response?.data?.data); // Assuming response.data is an array of notifications
+      const baseURL = `https://delightfulbroadband.com/api/filesUpload/fetch-file`;
+      const defaultParams = {
+        limit: limit,
+        path: 'null/Notices',
+        page: page,
+      };
+      const url = `${baseURL}?path=${defaultParams.path}&limit=${defaultParams.limit}&page=${defaultParams.page}&name=${searchTerm}&startDate=${startDate}&endDate=${endDate}`;
+
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status !== 200) {
+        throw new Error("Failed to fetch file");
+      }
+
+      console.log(response?.data?.data?.data);
+      setNotifications(response?.data?.data?.data);
     } catch (error) {
-      console.error("Error fetching notifications:", error);
-      // Handle error state if needed
+      console.error("Error fetching file:", error);
+      setNotifications([]);
     }
   };
+ 
 
-  
-  const handledelete = async (_id) => {
+  const handleDelete = async (_id) => {
     const token = localStorage.getItem('token');
     try {
       const response = await axios.delete(
@@ -68,59 +73,118 @@ const ManageNotice = () => {
         }
       );
       console.log("Notification deleted:", response.data);
-      // setNotifications((prevNotifications) =>
-      //   prevNotifications.filter((notification) => notification._id !== _id)
-      // );
-      alert("Notification deleted successfully"); 
+      fetchNotifications();
+      alert("Notification deleted successfully");
     } catch (error) {
       console.error("Error deleting notification:", error);
       alert(error.response?.data?.error || "Oops, something went wrong");
     }
   };
 
-  useEffect(() => {
-  fetchNotifications();
-  }, [notifications]);
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleDateChange = (type, value) => {
+    if (type === "start") {
+      setStartDate(value);
+    } else {
+      setEndDate(value);
+    }
+  };
+
+  // useEffect(() => {
+  //   fetchNotifications();
+  // }, []);
 
   return (
-    <Container >
+    <Container>
       <Typography variant="h6" gutterBottom>
         Manage Notices
       </Typography>
-      {/* component for getting menu and sub menu  */}
-      <GetMenu /> 
-      <TableContainer component={Paper} style={{width:'60vw'}}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell>Publish Date
-              </TableCell>
-              <TableCell>Module
-              </TableCell>
-              <TableCell>File Type</TableCell>
-              <TableCell>Remove</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {notifications.map((file, index) => (
-              <TableRow key={index}>
-                <TableCell>
-                  <Link href="#">{file?.title || 'N/A'}</Link>
-                </TableCell>
-                <TableCell>{file.Publish_Date || 'N/A'}</TableCell>
- <TableCell>{file.Module || 'N/A'}</TableCell>
-                <TableCell>{file.files[0].type}</TableCell>
-                <TableCell>
-                  <IconButton color="primary" onClick={() =>handledelete(file?._id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
+
+      <Box
+        display="flex"
+        flexDirection="row"
+        flexWrap="wrap"
+        gap={2}
+        marginBottom={2}
+      >
+        <TextField
+          value={searchTerm}
+          onChange={handleSearchChange}
+          margin="normal"
+          variant="outlined"
+          placeholder="Search"
+          style={{ flex: 1 }}
+        />
+        <TextField
+          type="date"
+          value={startDate}
+          onChange={(e) => handleDateChange("start", e.target.value)}
+          label="Start Date"
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          style={{ flex: 1 }}
+        />
+        <TextField
+          type="date"
+          value={endDate}
+          margin="normal"
+          onChange={(e) => handleDateChange("end", e.target.value)}
+          label="End Date"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          style={{ flex: 1 }}
+        />
+        <Button
+          onClick={fetchNotifications}
+          variant="contained"
+          style={{ alignSelf: "center" }}
+        >
+          Apply Filters
+        </Button>
+      </Box>
+
+      {notifications.length == 0 ? (
+        <Typography variant="h6" gutterBottom>
+          No Records
+        </Typography>
+      ) : (
+        <TableContainer component={Paper} style={{ width: '60vw' }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Title</TableCell>
+                <TableCell>Publish Date</TableCell>
+            
+                <TableCell>File Type</TableCell>
+                <TableCell>Remove</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {notifications?.map((file, index) => (
+                <TableRow key={index}>
+                  <TableCell>
+                    <Link href="#">{file?.name || 'N/A'}</Link>
+                  </TableCell>
+                  <TableCell>{file.createdAt.split('T')[0] || 'N/A'}</TableCell>
+              
+                  <TableCell>{file.type}</TableCell>
+                  <TableCell>
+                    <IconButton color="primary" onClick={() => handleDelete(file?._id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )} 
     </Container>
   );
 };

@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from "react";
 import {
   Container,
+  TextField,
   Typography,
   Table,
   TableBody,
@@ -14,12 +15,13 @@ import {
   Box,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
 import GetMenu from "../Components/GetMenu";
 import axios from "axios";
 
 const FileManagement = () => {
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [data, setData] = useState([]);
@@ -32,13 +34,9 @@ const FileManagement = () => {
         path: "null/About Us",
         page: page,
       };
+
   
-      // If menu_path is provided, use it; otherwise, use default parameters
-      const url = menu_path 
-        ? `${baseURL}?path=${menu_path}&limit=${defaultParams.limit}&page=${defaultParams.page}`
-        : `${baseURL}?limit=${defaultParams.limit}&page=${defaultParams.page}`;
-  
-  
+      const url =`${baseURL}?path=${menu_path}&limit=${defaultParams.limit}&page=${defaultParams.page}&name=${searchTerm}&startDate=${startDate}&endDate=${endDate}`
 
       const response = await axios.get(
         url,
@@ -92,6 +90,18 @@ const FileManagement = () => {
       }
     }
   };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleDateChange = (type, value) => {
+    if (type === "start") {
+      setStartDate(value);
+    } else {
+      setEndDate(value);
+    }
+  };
   
 
   useEffect(() => {
@@ -100,13 +110,57 @@ const FileManagement = () => {
   }, []);
 
   return (
-    <Box sx={{ width: "100%", padding: "20px" }}>
+    <Container>
       <Typography variant="h6" gutterBottom>
         Manage Files
       </Typography>
       {/* component for getting menu and sub menu  */}
+      <Box
+        display="flex"
+        flexDirection="row"
+        flexWrap="wrap"
+        gap={2}
+        marginBottom={2}
+      >
+        <TextField
+          value={searchTerm}
+          onChange={handleSearchChange}
+          margin="normal"
+          variant="outlined"
+          placeholder="Search"
+          style={{ flex: 1 }}
+        />
+        <TextField
+          type="date"
+          value={startDate}
+          onChange={(e) => handleDateChange("start", e.target.value)}
+          label="Start Date"
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          style={{ flex: 1 }}
+        />
+        <TextField
+          margin="normal"
+          type="date"
+          value={endDate}
+          onChange={(e) => handleDateChange("end", e.target.value)}
+          label="End Date"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          style={{ flex: 1 }}
+        />
+      </Box>
       <GetMenu menuPath={fetchFiles} />
-      <TableContainer component={Paper}>
+
+      
+       {data?.data?.data?.length === 0 || data?.data?.data == null ?
+      (<Typography variant="h6" gutterBottom>
+        No Records 
+      </Typography>):(
+        <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
@@ -140,7 +194,9 @@ const FileManagement = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </Box>
+      )}
+      
+    </Container>
   );
 };
 

@@ -202,13 +202,14 @@ function ManageMedia() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const fetchMedia = async (startDate, endDate, page = 1, limit = 10) => {
+  const fetchMedia = async (startDate, endDate,searchTerm, page = 1, limit = 10) => {
     try {
       const response = await axios.get('https://delightfulbroadband.com/api/media/fetch-media', {
         headers: {
           'Content-Type': 'application/json',
         },
         params: {
+          event_name:searchTerm,
           startDate,
           endDate,
           page,
@@ -239,7 +240,7 @@ function ManageMedia() {
   };
 
   const handleSearchClick = () => {
-    fetchMedia(startDate, endDate);
+    fetchMedia(startDate, endDate,searchTerm);
   };
   
   const deleteMediaImage = async (id,link) => {
@@ -362,19 +363,6 @@ function ManageMedia() {
                           objectFit: "cover"
                         }}
                       />
-                      <IconButton
-                        aria-label="delete"
-                        size="small"
-                        sx={{
-                          position: "absolute",
-                          top: 2,
-                          right: 3,
-                          backgroundColor: "rgba(255, 255, 255, 0.7)",
-                        }}
-                        onClick={() => deleteMediaImage(ele._id,ele.href)}
-                      >
-                        <DeleteIcon fontSize="small" />
-                      </IconButton>
                       </Box>
                     </Grid>
                   )) : (

@@ -58,7 +58,7 @@ const AddBanner = () => {
         }
       );
       console.log("Success:", response);
-      // alert("Media added successfully");
+      alert("Media added successfully");
       // setUploadedMedia(response.data.uploadedFiles); // Assuming the API response contains an array of uploaded files
       handleClear();
     } catch (error) {
@@ -203,15 +203,13 @@ const AddBanner = () => {
         </Button>
         <Button
           variant="contained"
-          sx={{ width: "45%", mt: 1, ml: 1 }}
+          sx={{ width: "45%", mt: 2, ml: 1 }}
           onClick={handleSubmit}
         >
           Submit
         </Button>
       </Box>
-
-
-      {/* {uploadedMedia.length > 0 && (
+     {/* {uploadedMedia.length > 0 && (
         <Container sx={{ mt: 4 }}>
           <Typography variant="h6">Uploaded Media</Typography>
           <Grid container spacing={2}>
@@ -230,7 +228,7 @@ const AddBanner = () => {
             ))}
           </Grid>
         </Container>
-      )} */}
+      )}  */}
     </Container>
   );
 };

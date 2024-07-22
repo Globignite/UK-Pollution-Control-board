@@ -112,8 +112,14 @@ function Events() {
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {media.map((event, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
-            <Box>
-              <img src={`https://delightfulbroadband.com${event.data[0].href}`} alt={event.name} style={{ width: "100%", height: "auto" }} />
+            <Box> 
+              <img src={`https://delightfulbroadband.com${event.data[0].href}`} alt={event.name}   
+              loading="lazy"
+                        style={{
+                          width: "100%",
+                          height: "150px",
+                          objectFit: "cover"
+                        }} />
               <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Typography sx={{ my: 2, mx: 1, fontWeight: "600", fontSize: "1.3rem", color: "primary.main" }}>
                   {event.name}
@@ -122,7 +128,7 @@ function Events() {
                   <ArrowOutwardIcon sx={{ color: "#155693" }} />
                 </Link>
               </Box>
-     </Box>
+             </Box>
           </Grid>
         ))}
       </Grid>

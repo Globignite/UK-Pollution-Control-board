@@ -30,6 +30,7 @@ function ManageBanner() {
         }
       });
       console.log("Success:", response);
+      alert("Banner Deleted successfully");
       fetchBanners();
     } catch (error) {
       console.error("Error deleting Banner:", error);

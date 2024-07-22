@@ -118,6 +118,7 @@ const AddMedia = () => {
       );
       console.log("Success:", response.data);
       alert("Media added successfully");
+      handleClear();
     } catch (error) {
       console.error("Error uploading media:", error);
       alert(error.response?.data?.error || "Oops, something went wrong");
@@ -134,7 +135,7 @@ const AddMedia = () => {
 
   return (
     <Container>
-      <Typography variant="h6" sx={{ mb: 1 }}>
+      <Typography variant="h5" gutterBottom>
         Upload Photos and Videos
       </Typography>
       <TextField
@@ -142,7 +143,7 @@ const AddMedia = () => {
         label="Event Name"
         value={eventName}
         onChange={(e) => setEventName(e.target.value)}
-        sx={{ mb: 1 }}
+        sx={{ mb: 1, mt:1}}
       />
 
       <TextField
@@ -167,7 +168,6 @@ const AddMedia = () => {
       />
 
       <FormControl fullWidth sx={{ my: 2 }}>
-        {/* <FormLabel component="legend">Upload</FormLabel> */}
         <input
           ref={fileInputRef}
           id="file-upload"
@@ -230,7 +230,7 @@ const AddMedia = () => {
       </Button>
       <Button
         variant="contained"
-        sx={{ width: "45%", mt: 1, ml: 1 }}
+        sx={{ width: "45%", mt: 2, ml: 1 }}
         onClick={handleSubmit}
       >
         Submit

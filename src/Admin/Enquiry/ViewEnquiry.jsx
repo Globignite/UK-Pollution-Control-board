@@ -210,6 +210,9 @@ function ViewEnquiry() {
         #content-box {
             max-height: none !important;
         }
+        #disableComponentPrint{
+            display: none !important;
+          }
 
     }
   `;
@@ -284,9 +287,8 @@ function ViewEnquiry() {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
 
-       <Box marginTop={5}  marginBottom={5}>
+       <Box marginTop={5}  marginBottom={5} id="disableComponentPrint" >
       <FormControl variant="outlined" margin="normal" style={{width:'200px'}} >
           <InputLabel>Status</InputLabel>
           <Select
@@ -309,7 +311,7 @@ function ViewEnquiry() {
         </Button>
         </Box>
       </Box>
-      <Box marginTop={5} marginBottom={5}>
+      <Box marginTop={5} marginBottom={5} id="disableComponentPrint" >
         <Typography variant="h6" gutterBottom>
           Notes
         </Typography>
@@ -359,6 +361,7 @@ function ViewEnquiry() {
           />
         </TableContainer>
       </Box>
+      </div>
     </Container>
   );
 }

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import { Typography,Box, IconButton } from "@mui/material";
+import { Typography,Box,Grid, IconButton,Container } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 
@@ -44,29 +44,26 @@ function ManageBanner() {
   }, []);
 
   return (
-    <Box sx={{pl:2}}>
+    <Container>
        <Typography variant="h6" gutterBottom>
        Manage Banner
       </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 2,
-        }}
-      >
+
+      <Grid container gap={3}>
         {banners?.length > 0 ?
         
         banners?.map((ele, index) => (
-          <Box
+          <Grid item
             key={ele?._id}
             sx={{
               position: "relative",
-              width: 600,
-              height: 200,
               border: "1px solid #ccc",
               borderRadius: 1,
               overflow: "hidden",
+            }}
+            style={{
+              width: "32vw",
+              height: "200px"
             }}
           >
             <img
@@ -92,13 +89,13 @@ function ManageBanner() {
             >
               <DeleteIcon fontSize="small" />
             </IconButton>
-          </Box>
+          </Grid>
         ))
           : 
           <p>No data</p>
       }
-      </Box>
-    </Box>
+      </Grid>
+    </Container>
   );
 }
 

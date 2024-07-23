@@ -36,7 +36,7 @@ function Enquiry() {
         enquiryData
       );
       console.log(response.data);
-      setEnquiryNumber(response.data.enquiryNumber);
+      setEnquiryNumber(response?.data?.data.enquiryId);
       clearFormData(); // Clear form data on success
       setOpen(true); // Open success dialog on successful upload
     } catch (error) {

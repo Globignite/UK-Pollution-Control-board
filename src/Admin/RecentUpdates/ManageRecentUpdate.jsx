@@ -20,7 +20,7 @@ import AddIcon from "@mui/icons-material/Add";
 import GetMenu from "../Components/GetMenu";
 import axios from "axios";
 
-const ManageNotice = () => {
+const ManageRecentUpdate = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -33,7 +33,7 @@ const ManageNotice = () => {
       const baseURL = `https://delightfulbroadband.com/api/filesUpload/fetch-file`;
       const defaultParams = {
         limit: limit,
-        path: 'null/Notices',
+        path: 'null/Recent Updates',
         page: page,
       };
       const url = `${baseURL}?path=${defaultParams.path}&limit=${defaultParams.limit}&page=${defaultParams.page}&name=${searchTerm}&startDate=${startDate}&endDate=${endDate}`;
@@ -57,11 +57,11 @@ const ManageNotice = () => {
   };
  
 
-  const handleDelete = async (href, name) => {
+  const handleDelete = async (_id,href, name) => {
     if(confirm("Are you sure you want to delete " + name)){
       try {
         const reqData = {
-          filePath: 'null/Notices',
+          filePath: 'null/Recent Updates',
           href: href
         };
         const token = localStorage.getItem("token");
@@ -108,7 +108,7 @@ const ManageNotice = () => {
   return (
     <Container>
       <Typography variant="h6" gutterBottom>
-        Manage Notices
+        Manage Recent Updates
       </Typography>
 
       <Box
@@ -183,7 +183,7 @@ const ManageNotice = () => {
               
                   <TableCell>{file.type}</TableCell>
                   <TableCell>
-                    <IconButton color="primary" onClick={() => handleDelete(file?.href,file?.name)}>
+                    <IconButton color="primary" onClick={() => handleDelete(file?._id,file?.href,file?.name)}>
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -197,4 +197,4 @@ const ManageNotice = () => {
   );
 };
 
-export default ManageNotice;
+export default ManageRecentUpdate;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Container,
   Typography,
@@ -21,6 +21,7 @@ import { styled } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useReactToPrint } from "react-to-print";
 
 const blue = {
   100: "#DAECFF",
@@ -87,6 +88,7 @@ function ViewEnquiry() {
   const [note, setNote] = useState();
   const [notesArray,setNotesArray] =useState([]);
   const { enquireId } = useParams();
+  const componentRef = useRef();
 
   useEffect(() => {
     fetchEnquire();
@@ -193,45 +195,96 @@ function ViewEnquiry() {
     } 
   };
 
+  
+  const pageStyle = `
+    @page {
+        margin: 10mm;
+    }
+    @media print {
+        body {
+            -webkit-print-color-adjust: exact;
+        }
+        #print_icon {
+            display: none !important;
+        }
+        #content-box {
+            max-height: none !important;
+        }
+
+    }
+  `;
+
+  const handlePrint = useReactToPrint({
+    documentTitle: `Uttarakhand Pollution Control Board, Government Of Uttarakhand, India`,
+    copyStyles: true,
+    pageStyle: pageStyle,
+    content: () => componentRef.current,
+  });
+
   return (
     <Container>
-      <Typography variant="h6" gutterBottom>
-        Enquiry
-      </Typography>
-      <TableContainer component={Paper} sx={{ width: '75vw' }}>
-        <Table sx={{ width: '100%' }}>
-          <TableBody>
-            <TableRow>
-              <TableCell component="th" scope="row">Date</TableCell>
-              <TableCell>{enquiryData.createdAt ? enquiryData.createdAt.split('T')[0] : 'N/A'}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row">Enquiry Number</TableCell>
-              <TableCell>{enquiryData.enquiryId || 'N/A'}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row">Subject</TableCell>
-              <TableCell>{enquiryData.subject || 'N/A'}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row">Name</TableCell>
-              <TableCell>{enquiryData.name || 'N/A'}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row">Email</TableCell>
-              <TableCell>{enquiryData.email || 'N/A'}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row">Phone</TableCell>
-              <TableCell>{enquiryData.phone || 'N/A'}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row">Enquiry</TableCell>
-              <TableCell>{enquiryData.enquiry || 'N/A'}</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Box
+          onClick={handlePrint}
+          id="print_icon"
+          sx={{
+            position: 'relative',
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            float: "right",
+            // bgcolor:'pink'
+          }}
+        >
+          <img
+            src="/assets/print.png"
+            alt="print"
+            style={{ width: "40px", height: "40px" }}
+          />
+          <Typography variant="body1" color="error.main">
+            Print
+          </Typography>
+        </Box>
+      <div ref={componentRef} >
+        <Typography variant="h6" gutterBottom mt={3}>
+          Enquiry
+        </Typography>
+        <TableContainer component={Paper} sx={{ width: '75vw' }}>
+          <Table sx={{ width: '100%' }}>
+            <TableBody>
+              <TableRow>
+                <TableCell component="th" scope="row">Date</TableCell>
+                <TableCell>{enquiryData.createdAt ? enquiryData.createdAt.split('T')[0] : 'N/A'}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell component="th" scope="row">Enquiry Number</TableCell>
+                <TableCell>{enquiryData.enquiryId || 'N/A'}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell component="th" scope="row">Subject</TableCell>
+                <TableCell>{enquiryData.subject || 'N/A'}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell component="th" scope="row">Name</TableCell>
+                <TableCell>{enquiryData.name || 'N/A'}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell component="th" scope="row">Email</TableCell>
+                <TableCell>{enquiryData.email || 'N/A'}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell component="th" scope="row">Phone</TableCell>
+                <TableCell>{enquiryData.phone || 'N/A'}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell component="th" scope="row">Enquiry</TableCell>
+                <TableCell>{enquiryData.enquiry || 'N/A'}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
 
        <Box marginTop={5}  marginBottom={5}>
       <FormControl variant="outlined" margin="normal" style={{width:'200px'}} >

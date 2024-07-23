@@ -238,6 +238,9 @@ function ViewComplaint() {
           #content-box {
               max-height: none !important;
           }
+          #disableComponentPrint{
+            display: none !important;
+          }
   
       }
     `;
@@ -315,8 +318,8 @@ function ViewComplaint() {
             </TableBody>
             </Table>
           </TableContainer>
-        </div>
-      <Box marginTop={5}  marginBottom={5}>
+
+      <Box marginTop={5}  marginBottom={5} id="disableComponentPrint" >
       <FormControl variant="outlined" margin="normal" style={{width:'200px'}} >
           <InputLabel>Status</InputLabel>
           <Select
@@ -338,7 +341,7 @@ function ViewComplaint() {
         </Button>
         </Box>
       </Box>
-      <Box marginTop={5}  marginBottom={5}>
+      <Box marginTop={5}  marginBottom={5} id="disableComponentPrint" >
       <Typography variant="h6" gutterBottom>
       Notes
       </Typography>
@@ -388,6 +391,7 @@ function ViewComplaint() {
       />
     </TableContainer>
     </Box>
+        </div>
     </Container>
   );
 }

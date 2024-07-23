@@ -24,6 +24,8 @@ import ViewComplaint from "./Admin/Complaint/ViewComplaint";
 import ManageMedia from "./Admin/Media/ManageMedia";
 import AddBanner from "./Admin/Banner/AddBanner";
 import ManageBanner from "./Admin/Banner/ManageBanner";
+import ManageRecentUpdate from "./Admin/RecentUpdates/ManageRecentUpdate";
+import AddRecentUpdate from "./Admin/RecentUpdates/AddRecentUpdate";
 
 function App() {
   //   useEffect(() => {
@@ -74,6 +76,8 @@ function App() {
               <Route path="enquiry/:enquireId" element={<ViewEnquiry />} />
               <Route path="complaints" element={<Complaints />} />
               <Route path="complaint/:complaintId" element={<ViewComplaint />} />
+              <Route path="add-recent-updates" element={<AddRecentUpdate />} />
+              <Route path="manage-recent-updates" element={<ManageRecentUpdate />} />
               {/* <Route path="/add-heading" element={<AddHeadings />} /> */}
             </Route>
             <Route path="/excel-preview" element={<ExcelPreview />} />

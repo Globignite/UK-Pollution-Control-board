@@ -24,7 +24,7 @@ import Spinner from "../../publicView/Components/Spinner";
 
 const formats = ["PDF"];
 
-const AddNotice = () => {
+const AddRecentUpdate = () => {
   const [selectedHeading, setSelectedHeading] = useState(null);
   const [selectedSubheadings, setSelectedSubheadings] = useState({});
   const [selectedFormat, setSelectedFormat] = useState("Pdf");
@@ -63,7 +63,7 @@ const AddNotice = () => {
 
     if (file && customFileName) {
       const formData = new FormData();
-        let lastTwoSubheadings = 'null/Notices';
+        let lastTwoSubheadings = 'null/Recent Updates';
       
 
         // console.log(lastTwoSubheadings);
@@ -134,7 +134,7 @@ const AddNotice = () => {
 
   return (
     <Container>
-      <Typography variant="h5">Add Notice</Typography>
+      <Typography variant="h5">Add Recent Updates</Typography>
       <Box
         sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}
       >
@@ -192,4 +192,4 @@ const AddNotice = () => {
   );
 };
 
-export default AddNotice;
+export default AddRecentUpdate;

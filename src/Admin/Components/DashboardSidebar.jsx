@@ -163,6 +163,22 @@ const DashboardSidebar = () => {
       ],
     },
     {
+      title: "Recent Updates",
+      svg: sharp,
+      items: [
+        {
+          label: "Add Updates",
+          path: "add-recent-updates",
+          icon: <StyledChevronRightIcon />,
+        },
+        {
+          label: "Manage Updates",
+          path: "manage-recent-updates",
+          icon: <StyledChevronRightIcon />,
+        },
+      ],
+    },
+    {
       title: "Manage",
       svg: sharp,
       items: [
@@ -181,8 +197,8 @@ const DashboardSidebar = () => {
   ];
 
   return (
-    <StyledBox>
-      <Box sx={{ width: "80%" }}>
+    <StyledBox  sx={{ height:"100%"}}>
+      <Box sx={{ width: "85%"}}>
         {menuItems.map((menu, index) => (
           <DropdownMenu
             key={index}

@@ -159,8 +159,9 @@ function ManageMedia() {
           {media.map((item) => (
             <Box key={item.id} marginBottom={2} padding={2} boxShadow={2} borderRadius={2} sx={{ position: "relative"}}>
               
-              <Typography variant="h6" marginBottom={2}>{item.name}</Typography>
-              <Typography variant="body1" marginBottom={2} sx={{ fontWeight: 'semibold'}}>{item.description}</Typography>
+              <Typography variant="h6" marginBottom={1}>{item.name}</Typography>
+              <Typography variant="body2" marginBottom={1} sx={{ fontWeight: 'semibold' }}>{new Date(item.createdAt).toLocaleDateString()}</Typography>
+              <Typography variant="body1" marginBottom={1} sx={{ fontWeight: 'semibold'}}>{item.description}</Typography>
              
                 <Grid container  columns={{ xs: 4, sm: 8, md: 12 }}>
                   {item?.data.length > 0 ? item?.data.map((ele, index) => (
@@ -188,7 +189,7 @@ function ManageMedia() {
                   )}
                 </Grid>
            
-              <Typography variant="body2" sx={{ fontWeight: 'semibold' }}>{new Date(item.createdAt).toLocaleDateString()}</Typography>
+             
               <IconButton
                  aria-label="delete"
                  size="small"

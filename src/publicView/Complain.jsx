@@ -17,67 +17,55 @@ import axios from "axios";
 
 function Complain() {
   const today = new Date().toISOString().split("T")[0];
+  const [subject, setSubject] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [complaint, setComplaint] = useState("");
   const [files, setFiles] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [complaintNumber, setComplaintNumber] = useState(null);
+  // const [open, setOpen] = useState(false);
+  // const [complaintNumber, setComplaintNumber] = useState(null);
   const fileInputRef = useRef(null);
 
   const handleFileChange = (event) => {
-    const fileArray = Array.from(event.target.files).map((file) =>
-      URL.createObjectURL(file)
-    );
+    const fileArray = Array.from(event.target.files).map((file) => {
+      return {
+        url: URL.createObjectURL(file),
+        type: file.type,
+        file,
+      };
+    });
     setFiles((prevFiles) => prevFiles.concat(fileArray));
-    // Clean up the object URL
-    event.target.value = null;
+    event.target.value = null; // Clean up the object URL
   };
 
-  const handleRemoveFile = (fileUrl) => {
-    setFiles((prevFiles) => prevFiles.filter((url) => url !== fileUrl));
-    URL.revokeObjectURL(fileUrl);
+  const handleRemoveFile = (fileObj) => {
+    setFiles((prevFiles) => prevFiles.filter((f) => f.url !== fileObj.url));
+    URL.revokeObjectURL(fileObj.url);
   };
 
   const clearFormData = () => {
+    setSubject("");
+    setName("");
+    setEmail("");
+    setPhone("");
+    setComplaint("");
     setFiles([]);
     fileInputRef.current.value = null;
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const formData = {
-      subject: event.currentTarget.subject.value,
-      name: event.currentTarget.name.value,
-      email: event.currentTarget.email.value,
-      phone: event.currentTarget.phone.value,
-      complaint: event.currentTarget.complain.value,
-      files: []
-    };
-
-    // Create a FormData to read files and append to the request
-    Array.from(fileInputRef.current.files).forEach((file, index) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        formData.files.push({
-          name: file.name,
-          href: reader.result,
-          type: file.type
-        });
-
-        // If last file is read, send the request
-        if (index === fileInputRef.current.files.length - 1) {
-          sendRequest(formData);
-        }
-      };
+    const formData = new FormData();
+    files.forEach((fileObj) => {
+      formData.append("files", fileObj.file);
     });
+    formData.append("subject", subject);
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("complaint", complaint);
 
-    // If no files, send the request immediately
-    if (fileInputRef.current.files.length === 0) {
-      sendRequest(formData);
-    }
-  };
-
-  const sendRequest = async (formData) => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_APP_BASE_COMPLAIANT_URL}/add-complaints`,  
@@ -87,15 +75,14 @@ function Complain() {
             "Content-Type": "multipart/form-data",
           },
         }
-        
       );
       console.log(response.data);
-      // setComplaintNumber(response.data.complaintNumber);
-      setComplaintNumber(123434);
+      alert(`Your Complaint Number is :${response.data.data.complaintId}`)
       clearFormData(); // Clear form data on success
       setOpen(true); // Open success dialog on successful upload
     } catch (error) {
       console.error("Error uploading files: ", error);
+      alert("Error uploading files: ", error)
       clearFormData();
     }
   };
@@ -117,9 +104,9 @@ function Complain() {
               variant="outlined"
               required
               fullWidth
-              id="subject"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
               label="Subject"
-              name="subject"
             />
           </Grid>
           <Grid item xs={12}>
@@ -127,9 +114,9 @@ function Complain() {
               variant="outlined"
               required
               fullWidth
-              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               label="Name"
-              name="name"
             />
           </Grid>
           <Grid item xs={12}>
@@ -137,9 +124,9 @@ function Complain() {
               variant="outlined"
               required
               fullWidth
-              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               label="Email"
-              name="email"
               type="email"
             />
           </Grid>
@@ -148,9 +135,9 @@ function Complain() {
               variant="outlined"
               required
               fullWidth
-              id="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               label="Phone"
-              name="phone"
               type="tel"
             />
           </Grid>
@@ -158,7 +145,8 @@ function Complain() {
             <TextareaAutosize
               minRows={10}
               style={{ width: "100%" }}
-              id="complain"
+              value={complaint}
+              onChange={(e) => setComplaint(e.target.value)}
               name="complain"
               aria-label="complain"
               placeholder="Write your complain"
@@ -180,11 +168,11 @@ function Complain() {
               Upload Images
             </Button>
           </Grid>
-          {files.map((file, index) => (
+          {files.map((fileObj, index) => (
             <Grid item xs={4} key={index}>
               <div style={{ position: "relative" }}>
                 <img
-                  src={file}
+                  src={fileObj.url}
                   alt="Preview"
                   style={{ width: "100%", height: "auto" }}
                 />
@@ -198,7 +186,7 @@ function Complain() {
                     padding: "0px",
                     width: "50px",
                   }}
-                  onClick={() => handleRemoveFile(file)}
+                  onClick={() => handleRemoveFile(fileObj)}
                 >
                   <CloseIcon style={{ width: "20px", margin: "0px" }} />
                 </Button>
@@ -212,7 +200,7 @@ function Complain() {
           </Grid>
         </Grid>
       </form>
-      <Dialog open={open} onClose={handleClose}>
+      {/* <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{"Submission Successful!"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -224,7 +212,7 @@ function Complain() {
             Close
           </Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
     </Container>
   );
 }

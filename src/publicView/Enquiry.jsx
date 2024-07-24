@@ -6,7 +6,13 @@ import {
   Container,
   Grid,
   Typography,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
 } from "@mui/material";
+import { toast } from "sonner";
 import axios from "axios";
 
 function Enquiry() {
@@ -37,8 +43,9 @@ function Enquiry() {
       );
       console.log(response.data);
       setEnquiryNumber(response?.data?.data.enquiryId);
-      clearFormData(); // Clear form data on success
       setOpen(true); // Open success dialog on successful upload
+      clearFormData(); // Clear form data on success
+      // setOpen(true); // Open success dialog on successful upload
     } catch (error) {
       console.error("Error submitting enquiry: ", error);
       clearFormData();
@@ -47,6 +54,10 @@ function Enquiry() {
 
   const clearFormData = () => {
     document.getElementById("enquiry-form").reset();
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -117,6 +128,19 @@ function Enquiry() {
           </Grid>
         </Grid>
       </form>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>{"Submission Successful!"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {`Your complaint number is: ${enquiryNumber}`}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }

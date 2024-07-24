@@ -89,7 +89,7 @@ function ViewEnquiry() {
   const [notesArray,setNotesArray] =useState([]);
   const { enquireId } = useParams();
   const componentRef = useRef();
-
+  console.log(enquiryData);
   useEffect(() => {
     fetchEnquire();
   }, [enquireId]);
@@ -188,6 +188,7 @@ function ViewEnquiry() {
       if (response.status === 201) {
         // setNotes(prevNotes => [...prevNotes, newNote]);
         alert('Status updated successfully');
+        fetchEnquire();
       }
     } catch (error) {
       console.error('Error updating status:', error);
@@ -227,20 +228,38 @@ function ViewEnquiry() {
   return (
     <Container>
       <Box
-          onClick={handlePrint}
-          id="print_icon"
           sx={{
             position: 'relative',
-            cursor: "pointer",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            flexDirection: "column",
             float: "right",
-            // bgcolor:'pink'
           }}
         >
-          <img
+      <Box id="disableComponentPrint" sx={{display: "flex",alignItems: "center", justifyContent: "center" }} >
+      <FormControl variant="outlined" margin="normal" style={{width:'200px'}} >
+          <InputLabel>Status</InputLabel>
+          <Select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            label="Status"
+          >
+            <MenuItem value="in_progress">In Progress</MenuItem>
+            <MenuItem value="resolved">Resolved</MenuItem>
+          </Select>
+        </FormControl>
+        <Box sx={{display: "flex",alignItems: "center"}} >
+        <Button
+          variant="contained"
+          onClick={handleUpdateStatus}
+          sx={{ ml: 2 }}
+        >
+         Update Status
+        </Button>
+        </Box>
+      </Box>
+      <Box sx={{mx:10,  cursor: "pointer"}}    onClick={handlePrint} id="print_icon">
+      <img
             src="/assets/print.png"
             alt="print"
             style={{ width: "40px", height: "40px" }}
@@ -248,7 +267,8 @@ function ViewEnquiry() {
           <Typography variant="body1" color="error.main">
             Print
           </Typography>
-        </Box>
+      </Box>
+      </Box>
       <div ref={componentRef} >
         <Typography variant="h6" gutterBottom mt={3}>
           Enquiry
@@ -284,33 +304,17 @@ function ViewEnquiry() {
                 <TableCell component="th" scope="row">Enquiry</TableCell>
                 <TableCell>{enquiryData.enquiry || 'N/A'}</TableCell>
               </TableRow>
+              <TableRow>
+                  <TableCell component="th" scope="row">In Progress Date</TableCell>
+                  <TableCell>{enquiryData.progress_date  ? enquiryData.progress_date.split('T')[0] : 'N/A' }</TableCell>
+                </TableRow> 
+                <TableRow>
+                  <TableCell component="th" scope="row">Resolved Date</TableCell>
+                  <TableCell>{enquiryData.resolve_date ? enquiryData.resolve_date.split('T')[0] : 'N/A'}</TableCell>
+                </TableRow> 
             </TableBody>
           </Table>
         </TableContainer>
-
-       <Box marginTop={5}  marginBottom={5} id="disableComponentPrint" >
-      <FormControl variant="outlined" margin="normal" style={{width:'200px'}} >
-          <InputLabel>Status</InputLabel>
-          <Select
-            value={statusFilter}
-            onChange={handleUpdateChange}
-            label="Status"
-          >
-            <MenuItem value="in_progress">In Progress</MenuItem>
-            <MenuItem value="resolved">Resolved</MenuItem>
-          </Select>
-        </FormControl>
-        <Box marginTop={1}  marginBottom={5}>
-        <Button
-          variant="contained"
-          onClick={handleUpdateStatus}
-          sx={{ ml: 2 }}
-         
-        >
-         Update Status
-        </Button>
-        </Box>
-      </Box>
       <Box marginTop={5} marginBottom={5} id="disableComponentPrint" >
         <Typography variant="h6" gutterBottom>
           Notes

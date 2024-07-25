@@ -131,6 +131,22 @@ const DashboardSidebar = () => {
       ],
     },
     {
+      title: "Recent Updates",
+      svg: sharp,
+      items: [
+        {
+          label: "Add Updates",
+          path: "add-recent-updates",
+          icon: <StyledChevronRightIcon />,
+        },
+        {
+          label: "Manage Updates",
+          path: "manage-recent-updates",
+          icon: <StyledChevronRightIcon />,
+        },
+      ],
+    },
+    {
       title: "Media/Events",
       svg: media,
       items: [
@@ -163,17 +179,17 @@ const DashboardSidebar = () => {
       ],
     },
     {
-      title: "Recent Updates",
-      svg: sharp,
+      title: "Marque",
+      svg: media,
       items: [
         {
-          label: "Add Updates",
-          path: "add-recent-updates",
+          label: "Add Marque",
+          path: "add-marque",
           icon: <StyledChevronRightIcon />,
         },
         {
-          label: "Manage Updates",
-          path: "manage-recent-updates",
+          label: "Manage Marque",
+          path: "manage-marque",
           icon: <StyledChevronRightIcon />,
         },
       ],

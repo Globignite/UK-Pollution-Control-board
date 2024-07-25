@@ -26,6 +26,8 @@ import AddBanner from "./Admin/Banner/AddBanner";
 import ManageBanner from "./Admin/Banner/ManageBanner";
 import ManageRecentUpdate from "./Admin/RecentUpdates/ManageRecentUpdate";
 import AddRecentUpdate from "./Admin/RecentUpdates/AddRecentUpdate";
+import AddMarque from "./Admin/Marque/AddMarque";
+import ManageMarque from "./Admin/Marque/ManageMarque";
 
 function App() {
   //   useEffect(() => {
@@ -78,6 +80,8 @@ function App() {
               <Route path="complaint/:complaintId" element={<ViewComplaint />} />
               <Route path="add-recent-updates" element={<AddRecentUpdate />} />
               <Route path="manage-recent-updates" element={<ManageRecentUpdate />} />
+              <Route path="add-marque" element={<AddMarque />} />
+              <Route path="manage-marque" element={<ManageMarque />} />
               {/* <Route path="/add-heading" element={<AddHeadings />} /> */}
             </Route>
             <Route path="/excel-preview" element={<ExcelPreview />} />

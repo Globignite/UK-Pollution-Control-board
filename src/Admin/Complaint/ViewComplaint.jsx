@@ -23,6 +23,7 @@ import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAuto
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
+import { Padding } from "@mui/icons-material";
 
 
 const blue = {
@@ -332,6 +333,14 @@ function ViewComplaint() {
                 <TableRow>
                   <TableCell component="th" scope="row">Complaint</TableCell>
                   <TableCell>{complaint.complaint || 'N/A'}</TableCell>
+                </TableRow> 
+                  <TableRow>
+                  <TableCell component="th" scope="row">Complaint Image</TableCell>
+                  <TableCell component="th" scope="row">{
+                       complaint.files.length === 0 ? "N/A" : <Box >
+                    <img src={`https://delightfulbroadband.com${complaint.files[0].href}`} width={200} height={100} alt="Complaint Image" />
+                  </Box> 
+                  }</TableCell>
                 </TableRow> 
                 <TableRow>
                   <TableCell component="th" scope="row">In Progress Date</TableCell>

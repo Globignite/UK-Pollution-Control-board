@@ -1,4 +1,4 @@
-import React from "react";
+    import React, { useEffect } from "react";
 import {
   Grid,
   Typography,
@@ -10,8 +10,9 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
-
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useParams } from 'react-router-dom';
 
 const mediaItems = [
   {
@@ -37,6 +38,42 @@ const mediaItems = [
 ];
 
 function EventGallery() {
+  const { id } = useParams();
+
+  const fetchMedia = async (id) => {
+    try {
+      const response = await axios.get('https://delightfulbroadband.com/api/media/fetch-single-media', {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        params: {
+          id: id
+        }
+      });
+      console.log(response?.data?.data);
+    } catch (error) {
+      console.error('Error fetching media:', error);
+    }
+  };
+
+  // const fetchMedia =async()=>{
+  //   console.log(id);
+  //   try {
+  //     const response = await axios.get('https://delightfulbroadband.com/api/media/fetch-single-media', {
+  //       params: {
+  //         id: id
+  //       }
+  //     });
+
+  
+  // }    console.log(response?.data?.data);
+  // }catch{
+
+  // }
+  useEffect(()=>{
+    fetchMedia(id);
+  })
+
   return (
     <Box>
       <Typography

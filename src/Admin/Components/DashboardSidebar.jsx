@@ -1,246 +1,178 @@
-import { Box, Typography } from "@mui/material";
-import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import styled from "styled-components";
-import filemanagement from "../../../public/assets/filemanagement.svg";
-import notice from "../../../public/assets/notice.svg";
-import media from "../../../public/assets/media.svg";
-import sharp from "../../../public/assets/sharp.svg";
+import React from "react";
+import {
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Drawer,
+  Typography,
+  Divider,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import "../Dashboard/Dashboard.css";
 
-// Import your custom MUI theme
-import theme from "../../theme";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import FileUploadIcon from "@mui/icons-material/CloudUpload";
+import FileManageIcon from "@mui/icons-material/FolderOpen";
+import NoticeIcon from "@mui/icons-material/Announcement";
+import UpdateIcon from "@mui/icons-material/Update";
+import EventIcon from "@mui/icons-material/Event";
+import BannerIcon from "@mui/icons-material/ViewCarousel";
+import MarqueeIcon from "@mui/icons-material/TextRotateUp";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import CommentIcon from "@mui/icons-material/Comment";
 
-const StyledBox = styled(Box)`
-  height: 90vh;
-  padding: 5px;
-  background-color: "#f8fcf8";
-  width: 100%;
-`;
-
-const StyledLinkBox = styled(Box)`
-  background-color: "#ffff";
-  padding: 5px 10px;
-  display: flex;
-  align-items: center;
-  color: ${({ isActive }) => (isActive ? "#000" : "grey")};
-  width: 100%;
-`;
-
-const StyledChevronRightIcon = styled(ChevronRightIcon)`
-  margin-right: 5px;
-  font-size: small;
-  color: ${({ isActive }) => (isActive ? "#fff" : "#3da73c")};
-  background-color: ${({ isActive }) => (isActive ? "#3da73c" : "transparent")};
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  border-radius: 5px;
-`;
-
-const DropdownMenu = ({ title, items, isActive, basePath, svg }) => {
-  const isRender = items.some((item) => isActive(`${basePath}/${item.path}`));
-
-  return (
-    <>
-      <StyledLinkBox
-        sx={{
-          bgcolor: isRender ? "#ffffff" : "",
-          py: 1,
-          borderRadius: 3,
-          boxShadow: isRender ? 2 : 0,
-        }}
-      >
-        <Box
-          sx={{
-            bgcolor: "#3da73c",
-            p: 1,
-            borderRadius: 3,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <img src={svg} alt={title} />
-        </Box>
-        <Typography
-          variant="body1"
-          sx={{ color: "#2D3748", pl: 3, fontWeight: "bold" }}
-        >
-          {title}
-        </Typography>
-      </StyledLinkBox>
-      {items?.map((item) => (
-        <StyledLinkBox
-          key={item.path}
-          component={RouterLink}
-          to={`${basePath}/${item.path}`}
-          isActive={isActive(`${basePath}/${item.path}`)}
-        >
-          {item.icon}
-          <Typography variant="body1">{item.label}</Typography>
-        </StyledLinkBox>
-      ))}
-    </>
-  );
-};
-
-const DashboardSidebar = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const isActive = (href) => {
-    return location.pathname.startsWith(href);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/signin");
-  };
-
+const Sidebar = () => {
   const menuItems = [
     {
+      title: "Dashboard",
+      path: "/admin/dashboard",
+      icon: <DashboardIcon />,
+    },
+    {
+      title: "Enquiries",
+      path: "/admin/enquiries",
+      icon: <ManageAccountsIcon />,
+    },
+    {
+      title: "Complaints",
+      path: "/admin/complaints",
+      icon: <CommentIcon />,
+    },
+    {
       title: "File Management",
-      svg: filemanagement,
       items: [
         {
           label: "Add File",
-          path: "upload-files",
-          icon: <StyledChevronRightIcon />,
+          path: "/admin/upload-files",
+          icon: <FileUploadIcon />,
         },
         {
           label: "Manage File",
-          path: "manage-files",
-          icon: <StyledChevronRightIcon />,
+          path: "/admin/manage-files",
+          icon: <FileManageIcon />,
         },
       ],
     },
     {
       title: "Notice Board",
-      svg: notice,
       items: [
         {
           label: "Add Notice",
-          path: "add-notice",
-          icon: <StyledChevronRightIcon />,
+          path: "/admin/add-notice",
+          icon: <NoticeIcon />,
         },
         {
           label: "Manage Notice",
-          path: "manage-notice",
-          icon: <StyledChevronRightIcon />,
+          path: "/admin/manage-notice",
+          icon: <NoticeIcon />,
         },
       ],
     },
     {
       title: "Recent Updates",
-      svg: sharp,
       items: [
         {
           label: "Add Updates",
-          path: "add-recent-updates",
-          icon: <StyledChevronRightIcon />,
+          path: "/admin/add-recent-updates",
+          icon: <UpdateIcon />,
         },
         {
           label: "Manage Updates",
-          path: "manage-recent-updates",
-          icon: <StyledChevronRightIcon />,
+          path: "/admin/manage-recent-updates",
+          icon: <UpdateIcon />,
         },
       ],
     },
     {
       title: "Media/Events",
-      svg: media,
       items: [
         {
           label: "Add Media",
-          path: "add-media",
-          icon: <StyledChevronRightIcon />,
+          path: "/admin/add-media",
+          icon: <EventIcon />,
         },
         {
           label: "Manage Media",
-          path: "manage-media",
-          icon: <StyledChevronRightIcon />,
+          path: "/admin/manage-media",
+          icon: <EventIcon />,
         },
       ],
     },
     {
       title: "Banner",
-      svg: media,
       items: [
         {
           label: "Add Banner",
-          path: "add-banner",
-          icon: <StyledChevronRightIcon />,
+          path: "/admin/add-banner",
+          icon: <BannerIcon />,
         },
         {
           label: "Manage Banner",
-          path: "manage-banner",
-          icon: <StyledChevronRightIcon />,
+          path: "/admin/manage-banner",
+          icon: <BannerIcon />,
         },
       ],
     },
     {
       title: "Marque",
-      svg: media,
       items: [
         {
           label: "Add Marque",
-          path: "add-marque",
-          icon: <StyledChevronRightIcon />,
+          path: "/admin/add-marque",
+          icon: <MarqueeIcon />,
         },
         {
           label: "Manage Marque",
-          path: "manage-marque",
-          icon: <StyledChevronRightIcon />,
-        },
-      ],
-    },
-    {
-      title: "Manage",
-      svg: sharp,
-      items: [
-        {
-          label: "Enquiries",
-          path: "enquiries",
-          icon: <StyledChevronRightIcon />,
-        },
-        {
-          label: "Complaints",
-          path: "complaints",
-          icon: <StyledChevronRightIcon />,
+          path: "/admin/manage-marque",
+          icon: <MarqueeIcon />,
         },
       ],
     },
   ];
 
   return (
-    <StyledBox  sx={{ height:"100%"}}>
-      <Box sx={{ width: "85%"}}>
-        {menuItems.map((menu, index) => (
-          <DropdownMenu
-            key={index}
-            title={menu.title}
-            items={menu.items}
-            svg={menu.svg}
-            isActive={isActive}
-            basePath="/dashboard"
-          />
+    <Drawer variant="permanent" anchor="left">
+      <Typography
+        variant="h6"
+        sx={{ padding: 2, position: "sticky", top: 0, zIndex: 20 }}
+        className="navBG"
+      >
+        UKPCB Dashboard
+      </Typography>
+      <Divider />
+      <List>
+        {menuItems.map((item, index) => (
+          <React.Fragment key={index}>
+            {item.icon ? (
+              <ListItem button component={Link} to={item.path}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItem>
+            ) : (
+              <ListItem to={item.path} className="sideNavHeadings">
+                <ListItemText primary={item.title} />
+              </ListItem>
+            )}
+
+            {item.items &&
+              item.items.map((subItem, subIndex) => (
+                <ListItem
+                  button
+                  component={Link}
+                  to={subItem.path}
+                  key={subIndex}
+                >
+                  {subItem.icon && <ListItemIcon>{subItem.icon}</ListItemIcon>}
+                  <ListItemText primary={subItem.label} />
+                </ListItem>
+              ))}
+            {/* {index !== menuItems.length - 1 && <Divider />} */}
+          </React.Fragment>
         ))}
-        {/* <StyledLinkBox
-          component={RouterLink}
-          to="/signIn"
-          isActive={isActive("/signIn")}
-          fontWeight="bold"
-        >
-          <StyledChevronRightIcon isActive={isActive("/signIn")} />
-          <Typography variant="body1">Logout</Typography>
-        </StyledLinkBox> */}
-        <StyledLinkBox onClick={handleLogout} sx={{ cursor: "pointer" }}>
-          <StyledChevronRightIcon />
-          <Typography variant="body1">Logout</Typography>
-        </StyledLinkBox>
-      </Box>
-    </StyledBox>
+      </List>
+    </Drawer>
   );
 };
 
-export default DashboardSidebar;
+export default Sidebar;

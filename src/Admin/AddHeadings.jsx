@@ -12,7 +12,7 @@ import {
   Radio,
   FormControlLabel,
 } from "@mui/material";
-import DashboardNavbar from "./Components/DashboardNavbar";
+import AdminNavbar from "./Components/AdminNavbar";
 
 const formats = ["Excel", "PDF", "Photo", "Video"];
 
@@ -111,7 +111,7 @@ const MyComponent = () => {
 
   return (
     <>
-      <DashboardNavbar />
+      <AdminNavbar />
       <Container
         sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}
       >

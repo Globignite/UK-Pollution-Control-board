@@ -14,11 +14,15 @@ import {
 } from "@mui/material";
 import { toast } from "sonner";
 import axios from "axios";
+import Spinner from "./Components/Spinner";
+import PrintModal from "./Components/PrintModal";
 
 function Enquiry() {
   const today = new Date().toISOString().split("T")[0]; // Format today's date as YYYY-MM-DD
   const [open, setOpen] = useState(false);
   const [enquiryNumber, setEnquiryNumber] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [eqData, setEqData] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -42,10 +46,11 @@ function Enquiry() {
         enquiryData
       );
       console.log(response.data);
+      setEqData(response?.data?.data)
       setEnquiryNumber(response?.data?.data.enquiryId);
       setOpen(true); // Open success dialog on successful upload
       clearFormData(); // Clear form data on success
-      // setOpen(true); // Open success dialog on successful upload
+      setOpen(true); // Open success dialog on successful upload
     } catch (error) {
       console.error("Error submitting enquiry: ", error);
       clearFormData();
@@ -58,7 +63,9 @@ function Enquiry() {
 
   const handleClose = () => {
     setOpen(false);
+    setComplaintData(null);
   };
+
 
   return (
     <Container component="main" maxWidth="sm">
@@ -141,6 +148,12 @@ function Enquiry() {
           </Button>
         </DialogActions>
       </Dialog>
+
+        {
+          eqData &&
+          <PrintModal data={eqData} open={open} title='Enquiry' handleClose={handleClose} />
+        }
+
     </Container>
   );
 }

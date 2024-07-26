@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
+import Spinner from "./Components/Spinner";
+import PrintModal from "./Components/PrintModal";
 
 function Complain() {
   const today = new Date().toISOString().split("T")[0];
@@ -23,9 +25,11 @@ function Complain() {
   const [phone, setPhone] = useState("");
   const [complaint, setComplaint] = useState("");
   const [files, setFiles] = useState([]);
-  // const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   // const [complaintNumber, setComplaintNumber] = useState(null);
   const fileInputRef = useRef(null);
+  const [complaintData, setComplaintData] = useState(null);
 
   const handleFileChange = (event) => {
     const fileArray = Array.from(event.target.files).map((file) => {
@@ -77,8 +81,10 @@ function Complain() {
         }
       );
       console.log(response.data);
+      setComplaintData(response.data.data)
       alert(`Your Complaint Number is :${response.data.data.complaintId}`);
       clearFormData(); // Clear form data on success
+      setLoading(false)
       setOpen(true); // Open success dialog on successful upload
     } catch (error) {
       console.error("Error uploading files: ", error);
@@ -89,10 +95,14 @@ function Complain() {
 
   const handleClose = () => {
     setOpen(false);
+    setComplaintData(null)
   };
 
   return (
     <Container component="main" maxWidth="sm">
+
+      <Spinner loading={loading} />
+
       <Typography variant="h4">Complain</Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -213,6 +223,11 @@ function Complain() {
           </Button>
         </DialogActions>
       </Dialog> */}
+        {
+          complaintData &&
+          <PrintModal data={complaintData} open={open} title='Complaint' handleClose={handleClose} />
+        }
+
     </Container>
   );
 }

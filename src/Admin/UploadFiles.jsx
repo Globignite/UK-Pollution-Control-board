@@ -17,10 +17,10 @@ import {
 import { toast } from "sonner";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import DashboardNavbar from "./Components/DashboardNavbar";
+import AdminNavbar from "./Components/AdminNavbar";
 import { SideMenu } from "../publicView/JsonFiles/SideMenu";
 import { mainMenu } from "../publicView/JsonFiles/MainMenu";
-import { AdminNavbar } from "./Components/DashboardNavbar";
+import { AdminNavbar } from "./Components/AdminNavbar";
 import ExcelPreview from "./ExcelPreview";
 import Spinner from "../publicView/Components/Spinner";
 

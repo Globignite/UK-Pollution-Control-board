@@ -28,6 +28,7 @@ import ManageRecentUpdate from "./Admin/RecentUpdates/ManageRecentUpdate";
 import AddRecentUpdate from "./Admin/RecentUpdates/AddRecentUpdate";
 import AddMarque from "./Admin/Marque/AddMarque";
 import ManageMarque from "./Admin/Marque/ManageMarque";
+import Dashboard from "./Admin/Dashboard/Dashboard";
 
 function App() {
   //   useEffect(() => {
@@ -66,6 +67,7 @@ function App() {
               })}
             </Route>
             <Route path="/dashboard" element={<DashboardHome />}>
+              <Route path="" element={<Dashboard />} />
               <Route path="upload-files" element={<UploadFiles />} />
               <Route path="manage-files" element={<FileManagement />} />
               <Route path="add-notice" element={<AddNotice />} />
@@ -77,9 +79,15 @@ function App() {
               <Route path="enquiries" element={<Enquiries />} />
               <Route path="enquiry/:enquireId" element={<ViewEnquiry />} />
               <Route path="complaints" element={<Complaints />} />
-              <Route path="complaint/:complaintId" element={<ViewComplaint />} />
+              <Route
+                path="complaint/:complaintId"
+                element={<ViewComplaint />}
+              />
               <Route path="add-recent-updates" element={<AddRecentUpdate />} />
-              <Route path="manage-recent-updates" element={<ManageRecentUpdate />} />
+              <Route
+                path="manage-recent-updates"
+                element={<ManageRecentUpdate />}
+              />
               <Route path="add-marque" element={<AddMarque />} />
               <Route path="manage-marque" element={<ManageMarque />} />
               {/* <Route path="/add-heading" element={<AddHeadings />} /> */}

@@ -178,7 +178,7 @@ const Enquiries = () => {
                   <TableCell>{file?.progress_date?.split('T')[0]}</TableCell>
                   <TableCell>{file?.resolve_date?.split('T')[0]}</TableCell>
                   <TableCell>
-                    <Link to={`/dashboard/enquiry/${file.enquiryId}`}>
+                    <Link to={`/admin/enquiry/${file.enquiryId}`}>
                       View
                     </Link>
                   </TableCell>

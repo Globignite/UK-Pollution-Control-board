@@ -66,8 +66,8 @@ function App() {
                 }
               })}
             </Route>
-            <Route path="/dashboard" element={<DashboardHome />}>
-              <Route path="" element={<Dashboard />} />
+            <Route path="/admin" element={<DashboardHome />}>
+              <Route path="dashboard" element={<Dashboard />} />
               <Route path="upload-files" element={<UploadFiles />} />
               <Route path="manage-files" element={<FileManagement />} />
               <Route path="add-notice" element={<AddNotice />} />

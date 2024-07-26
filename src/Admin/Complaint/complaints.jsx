@@ -195,7 +195,7 @@ const Complaints = () => {
                   <TableCell>{file?.progress_date?.split('T')[0]}</TableCell>
                   <TableCell>{file?.resolve_date?.split('T')[0]}</TableCell>
                   <TableCell>
-                    <Link to={`/dashboard/complaint/${file.complaintId}`}>
+                    <Link to={`/admin/complaint/${file.complaintId}`}>
                       View
                     </Link>
                   </TableCell>

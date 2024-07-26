@@ -44,7 +44,7 @@ const NotFoundPage = (props) => {
 NotFoundPage.propTypes = {
   history: PropTypes.shape({
     goBack: PropTypes.func.isRequired,
-  }).isRequired,
+  }),
 };
 
 export default NotFoundPage;

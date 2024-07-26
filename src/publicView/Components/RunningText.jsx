@@ -29,20 +29,12 @@ const RunningText = () => {
   })
 
 
-  // console.log(notifications);
-
-
   return (
-    // <Box sx={{color:'primary.main', fontWeight:'bold', fontSize:{lg:'1.2rem', xs:'1rem'}, bgcolor:'background.header'}} >
-    //     <marquee>
-    //         *******Say No To Single Use Of Plastic*******
-    //     </marquee>
-    // </Box>
     <Box sx={{ color: 'primary.main', fontWeight: 'bold', fontSize: { lg: '1.2rem', xs: '1rem' }, bgcolor: 'background.header' }}>
     <marquee>
       {notifications.length > 0
         ? notifications.map((notification, index) => (
-            <span key={index}>
+            <span key={index} style={{padding:'0px 7px'}}>
              <a href={`https://delightfulbroadband.com${notification?.file_data.href}`}>{notification.marquee_title || 'N/A'}</a>
             </span>
           ))

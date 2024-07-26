@@ -2,20 +2,21 @@ import { useState, useEffect, useRef } from "react";
 import {
   Container,
   Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  TableHead,
   Button,
-  TableRow,
-  Box,
   Paper,
-  TablePagination
+  Box,
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
@@ -82,11 +83,11 @@ const Textarea = styled(BaseTextareaAutosize)(
 
 function ViewEnquiry() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [enquiryData, setEnquiryData] = useState({});
-  const [statusFilter, setStatusFilter] = useState(); 
+  const [statusFilter, setStatusFilter] = useState();
   const [note, setNote] = useState();
-  const [notesArray,setNotesArray] =useState([]);
+  const [notesArray, setNotesArray] = useState([]);
   const { enquireId } = useParams();
   const componentRef = useRef();
   console.log(enquiryData);
@@ -105,98 +106,98 @@ function ViewEnquiry() {
 
   async function fetchEnquire() {
     try {
-      const response = await axios.get(`https://delightfulbroadband.com/api/enquiries/fetch-single-enquiries/${enquireId}`);
+      const response = await axios.get(
+        `https://delightfulbroadband.com/api/enquiries/fetch-single-enquiries/${enquireId}`
+      );
       setEnquiryData(response?.data.data || {});
       setStatusFilter(response?.data.data.status);
-      setNotesArray(response?.data.data.
-        action_notes);
-      console.log(response?.data.data );
+      setNotesArray(response?.data.data.action_notes);
+      console.log(response?.data.data);
     } catch (error) {
       console.error(error);
     }
   }
 
-
   const getCurrentDate = () => {
     const currentDate = new Date();
-    const day = String(currentDate.getDate()).padStart(2, '0');
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
     const year = currentDate.getFullYear();
     return `${day}-${month}-${year}`;
   };
 
   const handleUpdateChange = (e) => {
     setStatusFilter(e.target.value);
-  }
- 
+  };
+
   const handleNoteChange = (e) => {
     setNote(e.target.value);
-  }
-
+  };
 
   const handleNoteSubmit = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const currentDate = getCurrentDate();
     try {
-      const response = await axios.patch('https://delightfulbroadband.com/api/enquiries/update-enquiries-action-note', {
-        _id: enquiryData._id,
-        actions: [
-          {
-            date:currentDate,
-            status: statusFilter,
-            note: note
-          }
-        ]
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
+      const response = await axios.patch(
+        "https://delightfulbroadband.com/api/enquiries/update-enquiries-action-note",
+        {
+          _id: enquiryData?._id,
+          actions: [
+            {
+              date: currentDate,
+              status: statusFilter,
+              note: note,
+            },
+          ],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
       if (response.status === 200) {
-        fetchEnquire()
+        fetchEnquire();
         console.log(response?.data);
-         //APPEND
-        alert('Action note added successfully');
-        setNote();  // Clear the note field after successful submission
+        //APPEND
+        alert("Action note added successfully");
+        setNote(); // Clear the note field after successful submission
         setStatusFilter();
       }
     } catch (error) {
-      console.error('Error adding action note:', error);
-      alert('Failed to add action note');
+      console.error("Error adding action note:", error);
+      alert("Failed to add action note");
     }
   };
 
- 
-
   const handleUpdateStatus = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     console.log(statusFilter);
     try {
       const response = await axios.patch(
-        'https://delightfulbroadband.com/api/enquiries/update-enquiries-status', 
+        "https://delightfulbroadband.com/api/enquiries/update-enquiries-status",
         {
-          _id: enquiryData._id,
-          status: statusFilter
-        }, 
+          _id: enquiryData?._id,
+          status: statusFilter,
+        },
         {
           headers: {
-            'Authorization': `Bearer ${token}`, 
-            'Content-Type': 'application/json' 
-          }
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
       );
       if (response.status === 201) {
         // setNotes(prevNotes => [...prevNotes, newNote]);
-        alert('Status updated successfully');
+        alert("Status updated successfully");
         fetchEnquire();
       }
     } catch (error) {
-      console.error('Error updating status:', error);
-      alert('Failed to update status');
-    } 
+      console.error("Error updating status:", error);
+      alert("Failed to update status");
+    }
   };
 
-  
   const pageStyle = `
     @page {
         margin: 10mm;
@@ -225,41 +226,76 @@ function ViewEnquiry() {
     content: () => componentRef.current,
   });
 
+  console.log(enquiryData);
   return (
     <Container>
       <Box
+        sx={{
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          float: "right",
+        }}
+      >
+        <Box
+          id="disableComponentPrint"
           sx={{
-            position: 'relative',
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            float: "right",
           }}
         >
-      <Box id="disableComponentPrint" sx={{display: "flex",alignItems: "center", justifyContent: "center" }} >
-      <FormControl variant="outlined" margin="normal" style={{width:'200px'}} >
-          <InputLabel>Status</InputLabel>
-          <Select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            label="Status"
+          <FormControl
+            variant="outlined"
+            margin="normal"
+            style={{ width: "200px" }}
           >
-            <MenuItem value="in_progress">In Progress</MenuItem>
-            <MenuItem value="resolved">Resolved</MenuItem>
-          </Select>
-        </FormControl>
-        <Box sx={{display: "flex",alignItems: "center"}} >
-        <Button
-          variant="contained"
-          onClick={handleUpdateStatus}
-          sx={{ ml: 2 }}
-        >
-         Update Status
-        </Button>
+            <InputLabel>Status</InputLabel>
+            <Select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              label="Status"
+            >
+              <MenuItem value="new" disabled={true}>
+                New
+              </MenuItem>
+              <MenuItem
+                value="in_progress"
+                disabled={
+                  enquiryData?.status === "in_progress" ||
+                  enquiryData?.status === "resolved"
+                }
+              >
+                In Progress
+              </MenuItem>
+              <MenuItem
+                value="resolved"
+                disabled={
+                  enquiryData?.status === "new" ||
+                  enquiryData?.status === "resolved"
+                }
+              >
+                Resolved
+              </MenuItem>
+            </Select>
+          </FormControl>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Button
+              variant="contained"
+              onClick={handleUpdateStatus}
+              sx={{ ml: 2 }}
+            >
+              Update Status
+            </Button>
+          </Box>
         </Box>
-      </Box>
-      <Box sx={{mx:10,  cursor: "pointer"}}    onClick={handlePrint} id="print_icon">
-      <img
+        <Box
+          sx={{ mx: 10, cursor: "pointer" }}
+          onClick={handlePrint}
+          id="print_icon"
+        >
+          <img
             src="/assets/print.png"
             alt="print"
             style={{ width: "40px", height: "40px" }}
@@ -267,104 +303,142 @@ function ViewEnquiry() {
           <Typography variant="body1" color="error.main">
             Print
           </Typography>
+        </Box>
       </Box>
-      </Box>
-      <div ref={componentRef} >
+      <div ref={componentRef}>
         <Typography variant="h6" gutterBottom mt={3}>
           Enquiry
         </Typography>
-        <TableContainer component={Paper} sx={{ width: '75vw' }}>
-          <Table sx={{ width: '100%' }}>
-            <TableBody>
-              <TableRow>
-                <TableCell component="th" scope="row">Date</TableCell>
-                <TableCell>{enquiryData.createdAt ? enquiryData.createdAt.split('T')[0] : 'N/A'}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell component="th" scope="row">Enquiry Number</TableCell>
-                <TableCell>{enquiryData.enquiryId || 'N/A'}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell component="th" scope="row">Subject</TableCell>
-                <TableCell>{enquiryData.subject || 'N/A'}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell component="th" scope="row">Name</TableCell>
-                <TableCell>{enquiryData.name || 'N/A'}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell component="th" scope="row">Email</TableCell>
-                <TableCell>{enquiryData.email || 'N/A'}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell component="th" scope="row">Phone</TableCell>
-                <TableCell>{enquiryData.phone || 'N/A'}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell component="th" scope="row">Enquiry</TableCell>
-                <TableCell>{enquiryData.enquiry || 'N/A'}</TableCell>
-              </TableRow>
-              <TableRow>
-                  <TableCell component="th" scope="row">In Progress Date</TableCell>
-                  <TableCell>{enquiryData.progress_date  ? enquiryData.progress_date.split('T')[0] : 'N/A' }</TableCell>
-                </TableRow> 
-                <TableRow>
-                  <TableCell component="th" scope="row">Resolved Date</TableCell>
-                  <TableCell>{enquiryData.resolve_date ? enquiryData.resolve_date.split('T')[0] : 'N/A'}</TableCell>
-                </TableRow> 
-            </TableBody>
-          </Table>
-        </TableContainer>
-      <Box marginTop={5} marginBottom={5} id="disableComponentPrint" >
-        <Typography variant="h6" gutterBottom>
-          Notes
-        </Typography>
-        <Textarea 
-        placeholder="Write A Note..." 
-        aria-label="minimum height" 
-        minRows={3} 
-        value={note}
-        onChange={handleNoteChange}
-        style={{ width: "70%" }}
-         />
-        <Button variant="contained"  
-        onClick={handleNoteSubmit}
-         sx={{ width: "20%", mt: 2, ml: 1, display: 'block' }}>
-          Submit
-        </Button>
-      </Box>
-      <Box marginTop={5} marginBottom={5}>
-        <Typography variant="h6" gutterBottom>
-          Actions
-        </Typography>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Note</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {notesArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell>{row.date}</TableCell>
-                  <TableCell>{row.note}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={notesArray.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
+        <Paper sx={{ padding: 4, width: "100%" }}>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <Typography variant="body2" component="div">
+                enquiryData Number
+              </Typography>
+              <Typography>{enquiryData?.enquiryId || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" component="div">
+                Status
+              </Typography>
+              <Typography>{enquiryData?.status || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" component="div">
+                Subject
+              </Typography>
+              <Typography>{enquiryData?.subject || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" component="div">
+                Name
+              </Typography>
+              <Typography>{enquiryData?.name || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" component="div">
+                Email
+              </Typography>
+              <Typography>{enquiryData?.email || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" component="div">
+                Phone
+              </Typography>
+              <Typography>{enquiryData?.phone || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2" component="div">
+                Enquiry
+              </Typography>
+              <Typography>{enquiryData?.enquiry || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography variant="body2" component="div">
+                Date
+              </Typography>
+              <Typography>
+                {enquiryData?.createdAt
+                  ? enquiryData?.createdAt.split("T")[0]
+                  : "N/A"}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography variant="body2" component="div">
+                In Progress Date
+              </Typography>
+              <Typography>
+                {enquiryData?.progress_date
+                  ? enquiryData?.progress_date.split("T")[0]
+                  : "N/A"}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography variant="body2" component="div">
+                Resolved Date
+              </Typography>
+              <Typography>
+                {enquiryData?.resolve_date
+                  ? enquiryData?.resolve_date.split("T")[0]
+                  : "N/A"}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Paper>
+        <Box marginTop={5} marginBottom={5} id="disableComponentPrint">
+          <Typography variant="h6" gutterBottom>
+            Notes
+          </Typography>
+          <Textarea
+            placeholder="Write A Note..."
+            aria-label="minimum height"
+            minRows={3}
+            value={note}
+            onChange={handleNoteChange}
+            style={{ width: "70%" }}
           />
-        </TableContainer>
-      </Box>
+          <Button
+            variant="contained"
+            onClick={handleNoteSubmit}
+            sx={{ width: "20%", mt: 2, ml: 1, display: "block" }}
+          >
+            Submit
+          </Button>
+        </Box>
+        <Box marginTop={5} marginBottom={5}>
+          <Typography variant="h6" gutterBottom>
+            Actions
+          </Typography>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Note</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {notesArray
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{row.date}</TableCell>
+                      <TableCell>{row.note}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[10]}
+              component="div"
+              count={notesArray.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </TableContainer>
+        </Box>
       </div>
     </Container>
   );

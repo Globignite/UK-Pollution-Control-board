@@ -68,7 +68,7 @@ function Complain() {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_APP_BASE_COMPLAIANT_URL}/add-complaints`,  
+        `${import.meta.env.VITE_APP_BASE_COMPLAIANT_URL}/add-complaints`,
         formData,
         {
           headers: {
@@ -77,12 +77,12 @@ function Complain() {
         }
       );
       console.log(response.data);
-      alert(`Your Complaint Number is :${response.data.data.complaintId}`)
+      alert(`Your Complaint Number is :${response.data.data.complaintId}`);
       clearFormData(); // Clear form data on success
       setOpen(true); // Open success dialog on successful upload
     } catch (error) {
       console.error("Error uploading files: ", error);
-      alert("Error uploading files: ", error)
+      alert("Error uploading files: ", error);
       clearFormData();
     }
   };
@@ -218,4 +218,3 @@ function Complain() {
 }
 
 export default Complain;
-

@@ -29,7 +29,7 @@ const Enquiries = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const fetchEnquiries = async () => {
     try {
@@ -187,7 +187,7 @@ const Enquiries = () => {
           </TableBody>
         </Table>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10]}
           component="div"
           count={filteredData.length}
           rowsPerPage={rowsPerPage}

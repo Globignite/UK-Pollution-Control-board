@@ -35,9 +35,9 @@ const Complaints = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/signin');
+      navigate("/signin");
     }
   }, [navigate]);
 
@@ -49,13 +49,13 @@ const Complaints = () => {
   const fetchComplaints = async () => {
     setLoading(true);
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const response = await axios.get(
         `${import.meta.env.VITE_APP_BASE_COMPLAIANT_URL}/fetch-complaints`,
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           params: {
             page: page + 1,
@@ -191,9 +191,9 @@ const Complaints = () => {
                   <TableCell>{file?.complaintId}</TableCell>
                   <TableCell>{file?.subject}</TableCell>
                   <TableCell>{file?.name}</TableCell>
-                  <TableCell>{file?.createdAt.split('T')[0]}</TableCell>
-                  <TableCell>{file?.progress_date?.split('T')[0]}</TableCell>
-                  <TableCell>{file?.resolve_date?.split('T')[0]}</TableCell>
+                  <TableCell>{file?.createdAt.split("T")[0]}</TableCell>
+                  <TableCell>{file?.progress_date?.split("T")[0]}</TableCell>
+                  <TableCell>{file?.resolve_date?.split("T")[0]}</TableCell>
                   <TableCell>
                     <Link to={`/admin/complaint/${file.complaintId}`}>
                       View

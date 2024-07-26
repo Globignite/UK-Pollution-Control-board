@@ -7,7 +7,7 @@ const ExcelPreview = ({ file }) => {
   const [rows, setRows] = useState([]);
   const [error, setError] = useState('');
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     const handleFileChange = () => {
@@ -82,7 +82,7 @@ const ExcelPreview = ({ file }) => {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 25, 50]}
+            rowsPerPageOptions={[10]}
             component="div"
             count={rows.length}
             rowsPerPage={rowsPerPage}

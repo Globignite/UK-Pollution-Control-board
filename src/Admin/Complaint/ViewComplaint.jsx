@@ -1,30 +1,30 @@
-import { useEffect, useState, useRef} from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Container,
   Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  TableHead,
   Button,
-  TableRow,
-  IconButton,
-  TablePagination,
   Paper,
   Box,
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
+  Stack,
+  Divider,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
-import { Padding } from "@mui/icons-material";
-
 
 const blue = {
   100: "#DAECFF",
@@ -84,26 +84,26 @@ const Textarea = styled(BaseTextareaAutosize)(
 );
 
 function ViewComplaint() {
-  const{complaintId}=useParams();
+  const { complaintId } = useParams();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [note, setNote] = useState();
-  const [statusFilter, setStatusFilter] = useState(); 
-  const [complaint,setComplaintData] =useState({});
-  const [notesArray,setNotesArray] =useState([]);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [note, setNote] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [complaint, setComplaintData] = useState({});
+  const [notesArray, setNotesArray] = useState([]);
   const componentRef = useRef();
 
-
   useEffect(() => {
-    fetchComplaint();
+    fetchComplaintData();
   }, [complaintId]);
 
-  async function fetchComplaint() {
+  async function fetchComplaintData() {
     try {
-      const response = await axios.get(`https://delightfulbroadband.com/api/complaints/fetch-single-complaint/${complaintId}`);
+      const response = await axios.get(
+        `https://delightfulbroadband.com/api/complaints/fetch-single-complaint/${complaintId}`
+      );
 
       const complaintData = response?.data?.data;
-      console.log(response?.data?.data);
       setComplaintData(complaintData);
       setStatusFilter(complaintData.status);
       setNotesArray(complaintData.action_notes);
@@ -137,96 +137,89 @@ function ViewComplaint() {
       console.error("Error fetching complaint:", error);
     }
   }
-  
-      const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-      };
-    
-      const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-      };
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-      const handleUpdateChange = (e) => {
-        setStatusFilter(e.target.value);
-      }
-     
-      const handleNotesChange = (e) => {
-      e.preventDefault();
-      setNote(e.target.value)
-      };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
-      const getCurrentDate = () => {
-        const currentDate = new Date();
-        const day = String(currentDate.getDate()).padStart(2, '0');
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-        const year = currentDate.getFullYear();
-        return `${day}-${month}-${year}`;
-      };
+  const handleNotesChange = (e) => {
+    setNote(e.target.value);
+  };
 
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const year = currentDate.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
 
-      const handleNoteSubmit = async () => {
-        const token = localStorage.getItem('token');
-        const currentDate = getCurrentDate();
-        try {
-          const response = await axios.patch('https://delightfulbroadband.com/api/complaints/update-complaints-action-note', {
-            _id: complaint._id,
-            actions: [
-              {
-                date:currentDate,
-                status: statusFilter,
-                note: note
-              }
-            ]
-          }, {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            }
-          });
-          if (response.status === 200) {
-            fetchComplaint();
-            alert('Action note added successfully');
-            setNote();  // Clear the note field after successful submission
-            setStatusFilter();
-          }
-        } catch (error) {
-          console.error('Error adding action note:', error);
-          alert('Failed to add action note');
+  const handleNoteSubmit = async () => {
+    const token = localStorage.getItem("token");
+    const currentDate = getCurrentDate();
+    try {
+      const response = await axios.patch(
+        "https://delightfulbroadband.com/api/complaints/update-complaints-action-note",
+        {
+          _id: complaint?._id,
+          actions: [
+            {
+              date: currentDate,
+              status: statusFilter,
+              note: note,
+            },
+          ],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      };
-    
+      );
+      if (response.status === 200) {
+        fetchComplaintData();
+        alert("Action note added successfully");
+        setNote(""); // Clear the note field after successful submission
+        setStatusFilter("");
+      }
+    } catch (error) {
+      console.error("Error adding action note:", error);
+      alert("Failed to add action note");
+    }
+  };
 
+  const handleUpdateStatus = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.patch(
+        "https://delightfulbroadband.com/api/complaints/update-complaints-status",
+        {
+          _id: complaint?._id,
+          status: statusFilter,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status === 201) {
+        alert("Status updated successfully");
+        fetchComplaintData();
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+      alert("Failed to update status");
+    }
+  };
 
-      const handleUpdateStatus = async () => {
-        const token = localStorage.getItem('token');
-        try {
-          const response = await axios.patch(
-            'https://delightfulbroadband.com/api/complaints/update-complaints-status', 
-            {
-              _id: complaint._id,
-              status: statusFilter
-            }, 
-            {
-              headers: {
-                'Authorization': `Bearer ${token}`, 
-                'Content-Type': 'application/json' 
-              }
-            }
-          );
-          if (response.status === 201) {
-            alert('Status updated successfully');
-            fetchComplaint() ;
-          }
-
-          console.log(response?.data)
-        } catch (error) {
-          console.error('Error updating status:', error);
-          alert('Failed to update status');
-        } 
-      };
-
-      const pageStyle = `
+  const pageStyle = `
       @page {
           margin: 10mm;
       }
@@ -246,50 +239,75 @@ function ViewComplaint() {
   
       }
     `;
-  
-    const handlePrint = useReactToPrint({
-      documentTitle: `Uttarakhand Pollution Control Board, Government Of Uttarakhand, India`,
-      copyStyles: true,
-      pageStyle: pageStyle,
-      content: () => componentRef.current,
-    });
 
+  const handlePrint = useReactToPrint({
+    documentTitle: `Uttarakhand Pollution Control Board, Government Of Uttarakhand, India`,
+    copyStyles: true,
+    pageStyle: pageStyle,
+    content: () => componentRef.current,
+  });
 
   return (
     <Container>
       <Box
+        sx={{
+          display: "flex",
+          justifyContent: "right",
+          gap: 5,
+          mb: 3,
+        }}
+      >
+        <Box
+          id="disableComponentPrint"
           sx={{
-            position: 'relative',
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            float: "right",
           }}
         >
-      <Box id="disableComponentPrint" sx={{display: "flex",alignItems: "center", justifyContent: "center" }} >
-      <FormControl variant="outlined" margin="normal" style={{width:'200px'}} >
-          <InputLabel>Status</InputLabel>
-          <Select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            label="Status"
+          <FormControl
+            variant="outlined"
+            margin="normal"
+            sx={{ width: "200px" }}
           >
-            <MenuItem value="in_progress">In Progress</MenuItem>
-            <MenuItem value="resolved">Resolved</MenuItem>
-          </Select>
-        </FormControl>
-        <Box sx={{display: "flex",alignItems: "center"}} >
-        <Button
-          variant="contained"
-          onClick={handleUpdateStatus}
-          sx={{ ml: 2 }}
-        >
-         Update Status
-        </Button>
+            <InputLabel>Status</InputLabel>
+            <Select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              label="Status"
+            >
+              <MenuItem value="new" disabled={true}>
+                New
+              </MenuItem>
+              <MenuItem
+                value="in_progress"
+                disabled={
+                  complaint?.status === "in_progress" ||
+                  complaint?.status === "resolved"
+                }
+              >
+                In Progress
+              </MenuItem>
+              <MenuItem
+                value="resolved"
+                disabled={
+                  complaint?.status === "new" ||
+                  complaint?.status === "resolved"
+                }
+              >
+                Resolved
+              </MenuItem>
+            </Select>
+          </FormControl>
+          <Button
+            variant="contained"
+            onClick={handleUpdateStatus}
+            sx={{ ml: 2 }}
+          >
+            Update Status
+          </Button>
         </Box>
-      </Box>
-      <Box sx={{mx:10,  cursor: "pointer"}}    onClick={handlePrint} id="print_icon">
-      <img
+        <Box sx={{ cursor: "pointer" }} onClick={handlePrint} id="print_icon">
+          <img
             src="/assets/print.png"
             alt="print"
             style={{ width: "40px", height: "40px" }}
@@ -297,119 +315,167 @@ function ViewComplaint() {
           <Typography variant="body1" color="error.main">
             Print
           </Typography>
+        </Box>
       </Box>
-      </Box>
-        <div ref={componentRef} >
-          <Typography variant="h6" gutterBottom mt={3}>
-            Complaint
-          </Typography>
-          <TableContainer  component={Paper} sx={{ width: '75vw' }}>
-            <Table sx={{ width: '100%' }}>
-              <TableBody>
-              <TableRow>
-                  <TableCell component="th" scope="row">Date</TableCell>
-                  <TableCell>{complaint.createdAt ? complaint.createdAt.split('T')[0] : 'N/A'}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell component="th" scope="row">Complaint Number</TableCell>
-                  <TableCell>{complaint.complaintId || 'N/A'}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell component="th" scope="row">Subject</TableCell>
-                  <TableCell>{complaint.subject || 'N/A'}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell component="th" scope="row">Name</TableCell>
-                  <TableCell>{complaint.name || 'N/A'}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell component="th" scope="row">Email</TableCell>
-                  <TableCell>{complaint.email || 'N/A'}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell component="th" scope="row">Phone</TableCell>
-                  <TableCell>{complaint.phone || 'N/A'}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell component="th" scope="row">Complaint</TableCell>
-                  <TableCell>{complaint.complaint || 'N/A'}</TableCell>
-                </TableRow> 
-                  <TableRow>
-                  <TableCell component="th" scope="row">Complaint Image</TableCell>
-                  <TableCell component="th" scope="row">{
-                       complaint.files.length === 0 ? "N/A" : <Box >
-                    <img src={`https://delightfulbroadband.com${complaint.files[0].href}`} width={200} height={100} alt="Complaint Image" />
-                  </Box> 
-                  }</TableCell>
-                </TableRow> 
-                <TableRow>
-                  <TableCell component="th" scope="row">In Progress Date</TableCell>
-                  <TableCell>{complaint.progress_date  ? complaint.progress_date.split('T')[0] : 'N/A' }</TableCell>
-                </TableRow> 
-                <TableRow>
-                  <TableCell component="th" scope="row">Resolved Date</TableCell>
-                  <TableCell>{complaint.resolve_date ? complaint.resolve_date.split('T')[0] : 'N/A'}</TableCell>
-                </TableRow> 
-            
-            </TableBody>
-            </Table>
-          </TableContainer>
+      <div ref={componentRef}>
+        <Typography variant="h6" gutterBottom>
+          Complaint Details
+        </Typography>
+        <Paper sx={{ padding: 4, width: "100%" }}>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <Typography variant="body2" component="div">
+                Complaint Number
+              </Typography>
+              <Typography>{complaint?.complaintId || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" component="div">
+                Status
+              </Typography>
+              <Typography>{complaint?.status || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" component="div">
+                Subject
+              </Typography>
+              <Typography>{complaint?.subject || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" component="div">
+                Name
+              </Typography>
+              <Typography>{complaint?.name || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" component="div">
+                Email
+              </Typography>
+              <Typography>{complaint?.email || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" component="div">
+                Phone
+              </Typography>
+              <Typography>{complaint?.phone || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2" component="div">
+                Complaint
+              </Typography>
+              <Typography>{complaint?.complaint || "N/A"}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2" component="div">
+                Complaint Image
+              </Typography>
+              {complaint?.files?.length === 0 ? (
+                <Typography>N/A</Typography>
+              ) : (
+                <Box>
+                  {complaint?.files?.map((file, index) => (
+                    <img
+                      key={index}
+                      src={`https://delightfulbroadband.com${file.href}`}
+                      width={200}
+                      height={100}
+                      alt={`Complaint Image ${index + 1}`}
+                      style={{ margin: "5px" }}
+                    />
+                  ))}
+                </Box>
+              )}
+            </Grid>
 
-      <Box marginTop={5}  marginBottom={5} id="disableComponentPrint" >
-      <Typography variant="h6" gutterBottom>
-      Notes
-      </Typography>
-      <Textarea 
-      // placeholder="Write A Note..." 
-      aria-label="minimum height" 
-      minRows={3}  
-      value={note}
-      onChange={handleNotesChange}
-      style={{ width: "60%" }}
-      />
-      <Button
-        variant="contained"
-        onClick={handleNoteSubmit}
-        sx={{ width: "20%", mt: 2,  ml: 1, display:'block' }}
-      >Submit</Button>
-      </Box>
-      <Box marginTop={5}  marginBottom={5}>
-      <Typography variant="h6" gutterBottom>
-        Actions
-      </Typography>
-      <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Note</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {notesArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
-            <TableRow key={index}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.note}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={notesArray.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </TableContainer>
-    </Box>
-        </div>
+            <Grid item xs={4}>
+              <Typography variant="body2" component="div">
+                Date
+              </Typography>
+              <Typography>
+                {complaint?.createdAt
+                  ? complaint?.createdAt.split("T")[0]
+                  : "N/A"}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography variant="body2" component="div">
+                In Progress Date
+              </Typography>
+              <Typography>
+                {complaint?.progress_date
+                  ? complaint?.progress_date.split("T")[0]
+                  : "N/A"}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography variant="body2" component="div">
+                Resolved Date
+              </Typography>
+              <Typography>
+                {complaint?.resolve_date
+                  ? complaint?.resolve_date.split("T")[0]
+                  : "N/A"}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Paper>
+
+        <Box marginTop={5} marginBottom={5} id="disableComponentPrint">
+          <Typography variant="body2" gutterBottom>
+            Notes
+          </Typography>
+          <Textarea
+            aria-label="minimum height"
+            minRows={3}
+            value={note}
+            onChange={handleNotesChange}
+            style={{ width: "60%" }}
+          />
+          <Button
+            variant="contained"
+            onClick={handleNoteSubmit}
+            sx={{ width: "20%", mt: 2, ml: 1, display: "block" }}
+          >
+            Submit
+          </Button>
+        </Box>
+        <Box marginTop={5} marginBottom={5}>
+          <Typography variant="body2" gutterBottom>
+            Actions
+          </Typography>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Note</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {notesArray
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{row.date}</TableCell>
+                      <TableCell>{row.note}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[10]}
+              component="div"
+              count={notesArray.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </TableContainer>
+        </Box>
+      </div>
     </Container>
   );
 }
 
 export default ViewComplaint;
-
-

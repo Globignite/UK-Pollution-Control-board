@@ -26,17 +26,17 @@ const Sidebar = () => {
   const menuItems = [
     {
       title: "Dashboard",
-      path: "/dashboard/",
+      path: "/admin/dashboard",
       icon: <DashboardIcon />,
     },
     {
       title: "Enquiries",
-      path: "/dashboard/enquiries",
+      path: "/admin/enquiries",
       icon: <ManageAccountsIcon />,
     },
     {
       title: "Complaints",
-      path: "/dashboard/complaints",
+      path: "/admin/complaints",
       icon: <CommentIcon />,
     },
     {
@@ -44,12 +44,12 @@ const Sidebar = () => {
       items: [
         {
           label: "Add File",
-          path: "/dashboard/upload-files",
+          path: "/admin/upload-files",
           icon: <FileUploadIcon />,
         },
         {
           label: "Manage File",
-          path: "/dashboard/manage-files",
+          path: "/admin/manage-files",
           icon: <FileManageIcon />,
         },
       ],
@@ -59,12 +59,12 @@ const Sidebar = () => {
       items: [
         {
           label: "Add Notice",
-          path: "/dashboard/add-notice",
+          path: "/admin/add-notice",
           icon: <NoticeIcon />,
         },
         {
           label: "Manage Notice",
-          path: "/dashboard/manage-notice",
+          path: "/admin/manage-notice",
           icon: <NoticeIcon />,
         },
       ],
@@ -74,12 +74,12 @@ const Sidebar = () => {
       items: [
         {
           label: "Add Updates",
-          path: "/dashboard/add-recent-updates",
+          path: "/admin/add-recent-updates",
           icon: <UpdateIcon />,
         },
         {
           label: "Manage Updates",
-          path: "/dashboard/manage-recent-updates",
+          path: "/admin/manage-recent-updates",
           icon: <UpdateIcon />,
         },
       ],
@@ -89,12 +89,12 @@ const Sidebar = () => {
       items: [
         {
           label: "Add Media",
-          path: "/dashboard/add-media",
+          path: "/admin/add-media",
           icon: <EventIcon />,
         },
         {
           label: "Manage Media",
-          path: "/dashboard/manage-media",
+          path: "/admin/manage-media",
           icon: <EventIcon />,
         },
       ],
@@ -104,12 +104,12 @@ const Sidebar = () => {
       items: [
         {
           label: "Add Banner",
-          path: "/dashboard/add-banner",
+          path: "/admin/add-banner",
           icon: <BannerIcon />,
         },
         {
           label: "Manage Banner",
-          path: "/dashboard/manage-banner",
+          path: "/admin/manage-banner",
           icon: <BannerIcon />,
         },
       ],
@@ -119,12 +119,12 @@ const Sidebar = () => {
       items: [
         {
           label: "Add Marque",
-          path: "/dashboard/add-marque",
+          path: "/admin/add-marque",
           icon: <MarqueeIcon />,
         },
         {
           label: "Manage Marque",
-          path: "/dashboard/manage-marque",
+          path: "/admin/manage-marque",
           icon: <MarqueeIcon />,
         },
       ],
@@ -135,7 +135,7 @@ const Sidebar = () => {
     <Drawer variant="permanent" anchor="left">
       <Typography
         variant="h6"
-        sx={{ padding: 2, position: "sticky", top: 0, zIndex:20 }}
+        sx={{ padding: 2, position: "sticky", top: 0, zIndex: 20 }}
         className="navBG"
       >
         UKPCB Dashboard

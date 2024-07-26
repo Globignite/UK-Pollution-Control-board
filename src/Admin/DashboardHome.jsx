@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Drawer,
@@ -8,10 +8,11 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import DashboardSidebar from "./Components/DashboardSidebar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import AdminNavbar from "./Components/AdminNavbar";
 
 const DashboardHome = () => {
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -27,6 +28,14 @@ const DashboardHome = () => {
       <DashboardSidebar />
     </Box>
   );
+
+  // protected routing
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/signin");
+    }
+  }, [window.location.pathname]);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>

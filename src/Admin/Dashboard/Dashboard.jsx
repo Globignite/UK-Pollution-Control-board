@@ -18,7 +18,7 @@ function Dashboard() {
           },
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching enquiries:", error);

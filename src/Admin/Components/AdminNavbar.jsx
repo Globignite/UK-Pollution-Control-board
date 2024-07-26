@@ -2,8 +2,19 @@ import React from "react";
 import { AppBar, Toolbar, Typography, Button, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import "../Dashboard/Dashboard.css";
+import { useNavigate } from "react-router-dom";
 
 const AdminNavbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear local storage
+    localStorage.clear();
+
+    // Navigate to the sign-in page
+    navigate("/signIn");
+  };
+
   return (
     <AppBar position="fixed" className="navBG">
       <Toolbar>
@@ -21,7 +32,9 @@ const AdminNavbar = () => {
         </Typography>
 
         {/* Logout Link */}
-        <Button color="inherit">Logout</Button>
+        <Button color="inherit" onClick={handleLogout}>
+          Logout
+        </Button>
       </Toolbar>
     </AppBar>
   );

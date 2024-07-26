@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
@@ -10,8 +10,6 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AdminNavbar from "../../Admin/Components/AdminNavbar";
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 export default function SignIn() {
   const [loading, setLoading] = useState(false);
   const [userDataError, setUserDataError] = useState({
@@ -19,6 +17,13 @@ export default function SignIn() {
     password: false,
   });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/admin/dashboard");
+    }
+  }, [navigate]);
 
   const isEmail = (emailVal) => {
     let validRegex =
@@ -51,7 +56,6 @@ export default function SignIn() {
 
     let allTrue = isValid.every((value) => value === false);
 
-    console.log(loginData);
     if (allTrue) {
       axios
         .post("https://delightfulbroadband.com/api/user/signIn", loginData, {
@@ -62,7 +66,7 @@ export default function SignIn() {
         .then((response) => {
           const token = response.data.token;
           localStorage.setItem("token", token);
-          navigate("/dashboard/upload-files");
+          navigate("/admin/dashboard");
         })
         .catch((error) => {
           console.error("There was an error signing in!", error);
@@ -132,7 +136,7 @@ export default function SignIn() {
               variant="body1"
               sx={{ color: "grey", fontSize: "0.8rem" }}
             >
-              Enter your email and password to signIn
+              Enter your email and password to sign in
             </Typography>
             <Box
               component="form"

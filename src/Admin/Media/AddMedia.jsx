@@ -13,6 +13,7 @@ import { styled } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import axios from "axios";
 import ImageContainer from "../Components/ImageContainer";
+import Spinner from "../../publicView/Components/Spinner";
 
 const blue = {
   100: "#DAECFF",
@@ -78,6 +79,7 @@ const AddMedia = () => {
   const [files, setFiles] = useState([]);
   const [uploadedMedia, setUploadedMedia] = useState([]);
   const fileInputRef = useRef(null);
+const [loading, setLoading] = useState(false);
 
   const handleFileChange = (event) => {
     const fileArray = Array.from(event.target.files).map((file) => {
@@ -97,6 +99,7 @@ const AddMedia = () => {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     const formData = new FormData();
     files.forEach((fileObj) => {
       formData.append("files", fileObj.file);
@@ -123,6 +126,7 @@ const AddMedia = () => {
       console.error("Error uploading media:", error);
       alert(error.response?.data?.error || "Oops, something went wrong");
     }
+    setLoading(false);
   };
 
   const handleClear = () => {
@@ -135,6 +139,7 @@ const AddMedia = () => {
 
   return (
     <Container>
+      <Spinner loading={loading} />
       <Typography variant="h5" gutterBottom>
         Upload Photos and Videos
       </Typography>

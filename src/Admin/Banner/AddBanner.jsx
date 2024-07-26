@@ -14,11 +14,13 @@ import { styled } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import axios from "axios";
 import ImageContainer from "../Components/ImageContainer";
+import Spinner from "../../publicView/Components/Spinner";
 
 const AddBanner = () => {
   const [bannerName, setBannerName] = useState("");
   const [files, setFiles] = useState([]);
   const [uploadedMedia, setUploadedMedia] = useState([]);
+  const [loading, setLoading] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleFileChange = (event) => {
@@ -39,6 +41,7 @@ const AddBanner = () => {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     const formData = new FormData();
     files.forEach((fileObj) => {
       formData.append("file", fileObj.file);
@@ -65,6 +68,7 @@ const AddBanner = () => {
       console.error("Error uploading media:", error);
       alert(error.response?.data?.error || "Oops, something went wrong");
     }
+    setLoading(false);
   };
 
   const handleClear = () => {
@@ -132,6 +136,7 @@ const AddBanner = () => {
 
   return (
     <Container>
+        <Spinner loading={loading} />
       <Typography variant="h5" sx={{ mb: 1 }}>
         Upload Banners
       </Typography>

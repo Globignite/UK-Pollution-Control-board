@@ -27,6 +27,7 @@ import AddRecentUpdate from "./Admin/RecentUpdates/AddRecentUpdate";
 import AddMarque from "./Admin/Marque/AddMarque";
 import ManageMarque from "./Admin/Marque/ManageMarque";
 import Dashboard from "./Admin/Dashboard/Dashboard";
+import React from "react";
 
 function App() {
   //   useEffect(() => {

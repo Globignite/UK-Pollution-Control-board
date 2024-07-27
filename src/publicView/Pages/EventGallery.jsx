@@ -87,6 +87,7 @@ function EventGallery() {
                   <CardMedia
                     component="img"
                     alt={item.title}
+                    style={{borderRadius:'8px'}}
                     height="140"
                     image={`https://delightfulbroadband.com${item?.href}`}
                     title={item?.media_name}
@@ -95,6 +96,7 @@ function EventGallery() {
                   <CardMedia
                     component="video"
                     controls
+                    style={{borderRadius:'8px'}}
                     alt={item.title}
                     height="140"
                     src={`https://delightfulbroadband.com${item?.href}`}

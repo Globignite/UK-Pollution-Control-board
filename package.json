@@ -19,6 +19,7 @@
     "react": "^18.2.0",
     "react-data-grid": "^7.0.0-beta.44",
     "react-dom": "^18.2.0",
+    "react-fast-marquee": "^1.6.5",
     "react-marquee-master": "^1.4.5",
     "react-material-ui-carousel": "^3.4.2",
     "react-multi-carousel": "^2.8.5",

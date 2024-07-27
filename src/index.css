@@ -1,5 +1,6 @@
 * {
   /* transition: all 0.2s ease-in-out; */
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 body {
@@ -8,7 +9,8 @@ body {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none; /* Removes underline */
+  color: inherit; /* Inherits color from parent elements */
 }
 
 a:hover {
@@ -98,7 +100,6 @@ input[type="search"]:focus {
   z-index: 10;
 }
 
-
 /* react-popup modal */
 
 .popup-overlay {
@@ -106,8 +107,7 @@ input[type="search"]:focus {
 }
 
 @media screen and (max-width: 820px) {
-  .popup-content{
-    width:95% !important;
+  .popup-content {
+    width: 95% !important;
   }
-  
 }

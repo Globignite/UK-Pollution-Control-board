@@ -169,9 +169,9 @@ export default function SignIn() {
                 }
               />
               <Grid item xs sx={{ display: "flex", justifyContent: "end" }}>
-                <Link component={RouterLink} to="#" variant="body2">
+                {/* <Link component={RouterLink} to="#" variant="body2">
                   Forgot password?
-                </Link>
+                </Link> */}
               </Grid>
               <Button
                 type="submit"

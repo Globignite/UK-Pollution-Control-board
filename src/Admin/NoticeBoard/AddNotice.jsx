@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {
-  Autocomplete,
   TextField,
   Box,
-  Radio,
-  RadioGroup,
   FormControlLabel,
   FormControl,
   FormLabel,
   Button,
-  Popper,
   Container,
   Alert,
   Typography,
@@ -22,12 +18,7 @@ import { mainMenu } from "../../publicView/JsonFiles/MainMenu";
 import ExcelPreview from "../ExcelPreview";
 import Spinner from "../../publicView/Components/Spinner";
 
-const formats = ["PDF"];
-
 const AddNotice = () => {
-  const [selectedHeading, setSelectedHeading] = useState(null);
-  const [selectedSubheadings, setSelectedSubheadings] = useState({});
-  const [selectedFormat, setSelectedFormat] = useState("Pdf");
   const [file, setFile] = useState(null);
   const [fileURL, setFileURL] = useState(null);
   const [error, setError] = useState("");
@@ -35,22 +26,16 @@ const AddNotice = () => {
   const [customFileName, setCustomFileName] = useState("");
   const [loading, setLoading] = useState(false);
 
-
-
-
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const validExtensions = {
-      // Excel: ["xlsx", "xls", "csv"],
       PDF: ["pdf"],
     };
 
     const fileExtension = file.name.split(".").pop().toLowerCase();
 
-    if (!validExtensions[selectedFormat].includes(fileExtension)) {
-      setError(
-        `Invalid file type. Please select a valid ${selectedFormat} file.`
-      );
+    if (!validExtensions.PDF.includes(fileExtension)) {
+      setError(`Invalid file type. Please select a PDF file.`);
       setFile(null);
       setFileURL(null);
     } else {
@@ -64,64 +49,42 @@ const AddNotice = () => {
     setLoading(true);
     if (file && customFileName) {
       const formData = new FormData();
-        let lastTwoSubheadings = 'null/Notices';
-      
+      let lastTwoSubheadings = "null/Notices";
 
-        // console.log(lastTwoSubheadings);
+      formData.append("file", file);
+      formData.append("filePath", lastTwoSubheadings);
+      formData.append("name", customFileName);
 
-        formData.append("file", file);
-        formData.append("filePath", lastTwoSubheadings);
-        formData.append("name", customFileName);
-
-
-
-        const token = localStorage.getItem("token");
-        try {
-          const response = await axios.post(
-            `https://delightfulbroadband.com/api/filesUpload/upload/e-files`,
-            formData,
-            {
-              headers: {
-                "Content-Type": "multipart/form-data",
-                Authorization: `Bearer ${token}`,
-              }
-            }
-          );
-
-          if (response.status !== 201) {
-            throw new Error("Failed to upload file");
+      const token = localStorage.getItem("token");
+      try {
+        const response = await axios.post(
+          `https://delightfulbroadband.com/api/filesUpload/upload/e-files`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
           }
+        );
 
-          toast.success(response?.data?.message, { duration: 1500 });
-          handleClear();
-        } catch (error) {
-          console.error("Error uploading file:", error);
-          toast.error("Failed to upload file", { duration: 1500 });
+        if (response.status !== 201) {
+          throw new Error("Failed to upload file");
         }
 
+        toast.success(response?.data?.message, { duration: 1500 });
+        handleClear();
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        toast.error("Failed to upload file", { duration: 1500 });
+      }
     } else {
       console.log("Form is incomplete");
     }
     setLoading(false);
   };
 
-  const handleFormatChange = (event) => {
-    event.preventDefault();
-    setFile(null);
-    setFileURL(null);
-    setError("");
-    setSelectedFormat(event.target.value);
-
-    const inputFileField = document.querySelector('input[type="file"]');
-    if (inputFileField) {
-      inputFileField.value = "";
-    }
-  };
-
   const handleClear = () => {
-    setSelectedHeading(null);
-    setSelectedSubheadings({});
-    setSelectedFormat("Excel");
     setFile(null);
     setFileURL(null);
     setCustomFileName("");
@@ -137,24 +100,7 @@ const AddNotice = () => {
     <Container>
       <Spinner loading={loading} />
       <Typography variant="h5">Add Notice</Typography>
-      <Box
-        sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}
-      >
-
-        <FormControl component="fieldset" sx={{ mb: 2, width: "100%" }}>
-          <FormLabel component="legend">Format</FormLabel>
-          <RadioGroup row value={selectedFormat} onChange={handleFormatChange}>
-            {formats.map((format) => (
-              <FormControlLabel
-                key={format}
-                value={format}
-                control={<Radio />}
-                label={format}
-              />
-            ))}
-          </RadioGroup>
-        </FormControl>
-
+      <Box sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}>
         <TextField
           label="Custom File Name"
           value={customFileName}
@@ -167,8 +113,8 @@ const AddNotice = () => {
           <FormLabel>Upload File</FormLabel>
           <input
             type="file"
-            name='file'
-            accept={selectedFormat === "Excel" ? ".xlsx,.xls,.csv" : ".pdf"}
+            name="file"
+            accept=".pdf"
             onChange={handleFileChange}
           />
         </FormControl>

@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import {
   Container,
   Typography,
@@ -247,6 +248,20 @@ function ViewComplaint() {
     content: () => componentRef.current,
   });
 
+  // model to open image  =======================
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
+
+  // Add this function to handle image click
+  const handleImageClick = (url) => {
+    setSelectedImage(url);
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setSelectedImage("");
+  };
+
   return (
     <Container>
       <Box
@@ -260,7 +275,7 @@ function ViewComplaint() {
         <Box
           id="disableComponentPrint"
           sx={{
-            display: "flex",
+            display: complaint?.status === "resolved" ? "none" : "flex",
             alignItems: "center",
           }}
         >
@@ -380,7 +395,12 @@ function ViewComplaint() {
                       width={200}
                       height={100}
                       alt={`Complaint Image ${index + 1}`}
-                      style={{ margin: "5px" }}
+                      style={{ margin: "5px", cursor: "pointer" }}
+                      onClick={() =>
+                        handleImageClick(
+                          `https://delightfulbroadband.com${file.href}`
+                        )
+                      }
                     />
                   ))}
                 </Box>
@@ -474,6 +494,21 @@ function ViewComplaint() {
           </TableContainer>
         </Box>
       </div>
+
+      <Dialog
+        open={openModal}
+        onClose={handleCloseModal}
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogContent>
+          <img
+            src={selectedImage}
+            alt="Enlarged Complaint Image"
+            style={{ width: "100%" }}
+          />
+        </DialogContent>
+      </Dialog>
     </Container>
   );
 }

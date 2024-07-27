@@ -38,7 +38,7 @@ function ComplaintsStats({ data }) {
         <h4>Complaints</h4>
         <Button
           component={Link}
-          to="/admin/enquiries"
+          to="/admin/complaints"
           color="success"
           size="small"
           variant="string"

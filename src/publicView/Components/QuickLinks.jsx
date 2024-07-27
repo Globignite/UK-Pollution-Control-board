@@ -1,5 +1,5 @@
 import { Box, Stack, Grid, Paper, Typography, styled } from "@mui/material";
-import React from "react";
+
 import { Link } from "react-router-dom";
 
 const QuickLinks = () => {
@@ -84,7 +84,7 @@ const QuickLinks = () => {
         >
           {Links.map(({ id, title, img_link, href }) => {
             return (
-              <React.Fragment key={id}>
+              <div key={id}>
                 <Link to={href}>
                   <Paper
                     sx={{
@@ -127,7 +127,7 @@ const QuickLinks = () => {
                     </Typography>
                   </Paper>
                 </Link>
-              </React.Fragment>
+              </div>
             );
           })}
         </Stack>

@@ -231,25 +231,24 @@ function ViewEnquiry() {
     <Container>
       <Box
         sx={{
-          position: "relative",
           display: "flex",
+          justifyContent: "right",
           alignItems: "center",
-          justifyContent: "center",
-          float: "right",
+          gap: 5,
+          mb: 3,
         }}
       >
         <Box
           id="disableComponentPrint"
           sx={{
-            display: "flex",
+            display: enquiryData?.status === "resolved" ? "none" : "flex",
             alignItems: "center",
-            justifyContent: "center",
           }}
         >
           <FormControl
             variant="outlined"
             margin="normal"
-            style={{ width: "200px" }}
+            sx={{ width: "200px" }}
           >
             <InputLabel>Status</InputLabel>
             <Select
@@ -280,21 +279,15 @@ function ViewEnquiry() {
               </MenuItem>
             </Select>
           </FormControl>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Button
-              variant="contained"
-              onClick={handleUpdateStatus}
-              sx={{ ml: 2 }}
-            >
-              Update Status
-            </Button>
-          </Box>
+          <Button
+            variant="contained"
+            onClick={handleUpdateStatus}
+            sx={{ ml: 2 }}
+          >
+            Update Status
+          </Button>
         </Box>
-        <Box
-          sx={{ mx: 10, cursor: "pointer" }}
-          onClick={handlePrint}
-          id="print_icon"
-        >
+        <Box sx={{ cursor: "pointer" }} onClick={handlePrint} id="print_icon">
           <img
             src="/assets/print.png"
             alt="print"

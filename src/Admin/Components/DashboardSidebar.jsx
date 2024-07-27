@@ -1,4 +1,3 @@
-import React from "react";
 import {
   List,
   ListItem,
@@ -8,8 +7,9 @@ import {
   Typography,
   Divider,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import "../Dashboard/Dashboard.css";
+import { NavLink } from "react-router-dom";
+import { styled } from "@mui/material/styles";
 
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import FileUploadIcon from "@mui/icons-material/CloudUpload";
@@ -23,6 +23,24 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import CommentIcon from "@mui/icons-material/Comment";
 
 const Sidebar = () => {
+  const CustomDrawer = styled(Drawer)({
+    "& .MuiDrawer-paper": {
+      "&::-webkit-scrollbar": {
+        width: "4px",
+      },
+      "&::-webkit-scrollbar-thumb": {
+        backgroundColor: "#888",
+        borderRadius: "5px",
+      },
+      "&::-webkit-scrollbar-thumb:hover": {
+        backgroundColor: "#555",
+      },
+      "&::-webkit-scrollbar-track": {
+        backgroundColor: "#f1f1f1",
+      },
+    },
+  });
+
   const menuItems = [
     {
       title: "Dashboard",
@@ -132,7 +150,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <Drawer variant="permanent" anchor="left">
+    <CustomDrawer variant="permanent" anchor="left" className="MuiSidebar">
       <Typography
         variant="h6"
         sx={{ padding: 2, position: "sticky", top: 0, zIndex: 20 }}
@@ -143,14 +161,18 @@ const Sidebar = () => {
       <Divider />
       <List>
         {menuItems.map((item, index) => (
-          <React.Fragment key={index}>
+          <div key={index}>
             {item.icon ? (
-              <ListItem button component={Link} to={item.path}>
+              <ListItem button component={NavLink} to={item.path}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.title} />
               </ListItem>
             ) : (
-              <ListItem to={item.path} className="sideNavHeadings">
+              <ListItem
+                to={item.path}
+                className="sideNavHeadings"
+                sx={{ py: 0 }}
+              >
                 <ListItemText primary={item.title} />
               </ListItem>
             )}
@@ -159,19 +181,19 @@ const Sidebar = () => {
               item.items.map((subItem, subIndex) => (
                 <ListItem
                   button
-                  component={Link}
+                  component={NavLink}
                   to={subItem.path}
-                  key={subIndex}
+                  key={subIndex} 
                 >
                   {subItem.icon && <ListItemIcon>{subItem.icon}</ListItemIcon>}
                   <ListItemText primary={subItem.label} />
                 </ListItem>
               ))}
             {/* {index !== menuItems.length - 1 && <Divider />} */}
-          </React.Fragment>
+          </div>
         ))}
       </List>
-    </Drawer>
+    </CustomDrawer>
   );
 };
 

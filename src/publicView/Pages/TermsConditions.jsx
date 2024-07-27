@@ -1,5 +1,3 @@
-import React from "react";
-
 function TermsConditions() {
   return (
     <div id="midColumn">

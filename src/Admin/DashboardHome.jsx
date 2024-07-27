@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../index.css";
 import {
   Box,
   Drawer,
@@ -27,12 +28,12 @@ const DashboardHome = () => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <AdminNavbar />
-      {isMobile &&  (
+      {isMobile && (
         <Box sx={{ flex: 1, overflowY: "auto", pt: "80px", pb: "50px" }}>
           <Outlet />
         </Box>
       )}
-      {!isMobile &&  (
+      {!isMobile && (
         <Box
           sx={{
             flex: 1,

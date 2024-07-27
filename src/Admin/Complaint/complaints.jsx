@@ -11,7 +11,6 @@ import {
   Paper,
   TextField,
   Button,
-  TablePagination,
   MenuItem,
   Select,
   InputLabel,
@@ -21,6 +20,7 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Pagination from "../../publicView/Components/Pagination";
 
 const Complaints = () => {
   const [data, setData] = useState([]);
@@ -28,23 +28,10 @@ const Complaints = () => {
   const [statusFilter, setStatusFilter] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [loading, setLoading] = useState(false);
-  const [totalComplaints, setTotalComplaints] = useState(0);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/signin");
-    }
-  }, [navigate]);
-
-  useEffect(() => {
-    fetchComplaints();
-  }, []);
-  // }, [page, rowsPerPage, searchTerm, statusFilter, startDate, endDate]);
+  const [pageNo, setPageNo] = useState(1);
+  const [paginationData, setPaginationData] = useState(0);
 
   const fetchComplaints = async () => {
     setLoading(true);
@@ -58,23 +45,36 @@ const Complaints = () => {
             Authorization: `Bearer ${token}`,
           },
           params: {
-            page: page + 1,
-            limit: rowsPerPage,
             complaintId: searchTerm,
             status: statusFilter,
             startDate: startDate,
             endDate: endDate,
+            page: pageNo,
+            limit: 10,
           },
         }
       );
-      console.log(response.data.data);
+      console.log(response.data.pagination);
       setData(response.data.data);
-      setTotalComplaints(response.data.pagination.total);
+      setPaginationData(response.data.pagination);
     } catch (error) {
       console.error("Error fetching complaints:", error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const setPage = (page) => {
+    setPageNo(page);
+  };
+
+  useEffect(() => {
+    fetchComplaints();
+  }, [pageNo]);
+
+  const handleFilterClick = () => {
+    setPageNo(1);
+    fetchComplaints();
   };
 
   const handleSearchChange = (event) => {
@@ -93,14 +93,7 @@ const Complaints = () => {
     }
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+ 
 
   return (
     <Container>
@@ -158,7 +151,7 @@ const Complaints = () => {
           style={{ flex: 1 }}
         />
         <Button
-          onClick={fetchComplaints}
+          onClick={handleFilterClick}
           variant="contained"
           style={{ alignSelf: "center" }}
         >
@@ -203,17 +196,17 @@ const Complaints = () => {
               ))}
             </TableBody>
           </Table>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={totalComplaints}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
         </TableContainer>
       )}
+      <Box>
+        {paginationData.totalPages > 1 && (
+          <Pagination
+            pagination={paginationData}
+            setPageNo={setPage}
+            pageNo={pageNo}
+          />
+        )}
+      </Box>
     </Container>
   );
 };

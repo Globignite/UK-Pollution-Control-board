@@ -25,19 +25,19 @@ const ManageRecentUpdate = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [pageNo, setPageNo] = useState(1);
+  const [paginationData, setPaginationData] = useState(0);
 
   const fetchNotifications = async () => {
     setLoading(true);
     try {
       const baseURL = `https://delightfulbroadband.com/api/filesUpload/fetch-file`;
       const defaultParams = {
-        limit: limit,
-        path: 'null/Recent Updates',
-        page: page,
+        path: "null/Recent Updates",
+        page: pageNo,
+        limit: 10,
       };
       const url = `${baseURL}?path=${defaultParams.path}&limit=${defaultParams.limit}&page=${defaultParams.page}&name=${searchTerm}&startDate=${startDate}&endDate=${endDate}`;
 
@@ -57,17 +57,29 @@ const ManageRecentUpdate = () => {
       console.error("Error fetching file:", error);
       setNotifications([]);
     }
-    setLoading(false)
+    setLoading(false);
   };
- 
 
-  const handleDelete = async (_id,href, name) => {
+  const setPage = (page) => {
+    setPageNo(page);
+  };
+
+  useEffect(() => {
+    fetchNotifications();
+  }, [pageNo]);
+
+  const handleFilterClick = () => {
+    setPageNo(1);
+    fetchComplaints();
+  };
+
+  const handleDelete = async (_id, href, name) => {
     setLoading(true);
-    if(confirm("Are you sure you want to delete " + name)){
+    if (confirm("Are you sure you want to delete " + name)) {
       try {
         const reqData = {
-          filePath: 'null/Recent Updates',
-          href: href
+          filePath: "null/Recent Updates",
+          href: href,
         };
         const token = localStorage.getItem("token");
         const response = await axios.delete(
@@ -80,7 +92,7 @@ const ManageRecentUpdate = () => {
             data: reqData, // This is the correct place to put the data for delete request
           }
         );
-    
+
         if (response.status !== 200) {
           throw new Error("Failed to delete file");
         }
@@ -91,9 +103,8 @@ const ManageRecentUpdate = () => {
         alert("Error deleting file:", error);
       }
     }
-    setLoading(false)
+    setLoading(false);
   };
-
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -106,10 +117,6 @@ const ManageRecentUpdate = () => {
       setEndDate(value);
     }
   };
-
-  // useEffect(() => {
-  //   fetchNotifications();
-  // }, []);
 
   return (
     <Container>
@@ -156,7 +163,7 @@ const ManageRecentUpdate = () => {
           style={{ flex: 1 }}
         />
         <Button
-          onClick={fetchNotifications}
+          onClick={handleFilterClick}
           variant="contained"
           style={{ alignSelf: "center" }}
         >
@@ -169,13 +176,13 @@ const ManageRecentUpdate = () => {
           No Records
         </Typography>
       ) : (
-        <TableContainer component={Paper} style={{ width: '60vw' }}>
+        <TableContainer component={Paper} style={{ width: "60vw" }}>
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell>Title</TableCell>
                 <TableCell>Publish Date</TableCell>
-            
+
                 <TableCell>File Type</TableCell>
                 <TableCell>Remove</TableCell>
               </TableRow>
@@ -184,13 +191,18 @@ const ManageRecentUpdate = () => {
               {notifications?.map((file, index) => (
                 <TableRow key={index}>
                   <TableCell>
-                    <Link href="#">{file?.name || 'N/A'}</Link>
+                    <Link href="#">{file?.name || "N/A"}</Link>
                   </TableCell>
-                  <TableCell>{file.createdAt.split('T')[0] || 'N/A'}</TableCell>
-              
+                  <TableCell>{file.createdAt.split("T")[0] || "N/A"}</TableCell>
+
                   <TableCell>{file.type}</TableCell>
                   <TableCell>
-                    <IconButton color="primary" onClick={() => handleDelete(file?._id,file?.href,file?.name)}>
+                    <IconButton
+                      color="primary"
+                      onClick={() =>
+                        handleDelete(file?._id, file?.href, file?.name)
+                      }
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -199,7 +211,17 @@ const ManageRecentUpdate = () => {
             </TableBody>
           </Table>
         </TableContainer>
-      )} 
+      )}
+
+      <Box>
+        {paginationData.totalPages > 1 && (
+          <Pagination
+            pagination={paginationData}
+            setPageNo={setPage}
+            pageNo={pageNo}
+          />
+        )}
+      </Box>
     </Container>
   );
 };

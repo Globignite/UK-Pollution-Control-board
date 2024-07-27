@@ -36,8 +36,8 @@ const PrintModal = ({ data, open, title, handleClose }) => {
   });
 
   return (
-    <Popup open={open} style={{ zIndex: '10000' }} closeOnDocumentClick={false} modal>
-      <Paper sx={{ padding: 4, width: '100%' }} ref={componentRef}>
+    <Popup open={open} style={{ zIndex: '10000' }}  closeOnDocumentClick={false} modal>
+      <Paper sx={{ padding:{lg:4, xs:1}, width: '100%'}} ref={componentRef}>
         <Typography variant="h6" gutterBottom>
           {title} Details
         </Typography>
@@ -84,27 +84,37 @@ const PrintModal = ({ data, open, title, handleClose }) => {
             </Typography>
             <Typography>{data?.complaint || data?.enquiry || 'N/A'}</Typography>
           </Grid>
-          <Grid item xs={12}>
-            <Typography variant="body2" component="div">
-              {title} Image
-            </Typography>
-            {data?.files?.length === 0 ? (
-              <Typography>N/A</Typography>
-            ) : (
-              <Box>
-                {data?.files?.map((file, index) => (
-                  <img
-                    key={index}
-                    src={`https://delightfulbroadband.com${file.href}`}
-                    width={200}
-                    height={100}
-                    alt={`Image ${index + 1}`}
-                    style={{ margin: '5px' }}
-                  />
-                ))}
-              </Box>
-            )}
-          </Grid>
+            {
+              data?.complaintId &&
+              <Grid item xs={12} sx={{mb:3}}>
+                <Typography variant="body2" component="div">
+                  {title} Image
+                </Typography>
+
+                    {data?.files?.length === 0 ? (
+                      <Typography>N/A</Typography>
+                    ) : (
+                      <>
+                        {data?.files?.map((file, index) => (
+                          <Box sx={{width:{lg:150, sm:100, xs:50}, height:{lg:130, sm:80, xs:30}}} >
+                            <img
+                              key={index}
+                              src={`https://delightfulbroadband.com${file.href}`}
+                              width="100%"
+                              height="100%"
+                              alt={`Image ${index + 1}`}
+                              style={{ margin: '5px' }}
+                            />
+                          </Box>
+
+                        ))}
+                      </>
+                    )}
+
+
+
+              </Grid>
+            }
           <Grid item xs={4}>
             <Typography variant="body2" component="div">
               Date

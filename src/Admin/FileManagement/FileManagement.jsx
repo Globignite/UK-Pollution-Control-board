@@ -17,6 +17,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import GetMenu from "../Components/GetMenu";
 import axios from "axios";
+import Spinner from "../../publicView/Components/Spinner";
 
 const FileManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,6 +26,7 @@ const FileManagement = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchFiles = async (menu_path) =>{
     try {
@@ -62,6 +64,7 @@ const FileManagement = () => {
   }
 
   const handleDelete = async (href, name) => {
+    setLoading(true)
     if(confirm("Are you sure you want to delete " + name)){
       try {
         const reqData = {
@@ -89,6 +92,7 @@ const FileManagement = () => {
         console.error("Error deleting file:", error);
       }
     }
+    setLoading(false)
   };
 
   const handleSearchChange = (event) => {
@@ -111,6 +115,7 @@ const FileManagement = () => {
 
   return (
     <Container>
+            <Spinner loading={loading} />
       <Typography variant="h6" gutterBottom>
         Manage Files
       </Typography>

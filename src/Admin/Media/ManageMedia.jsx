@@ -10,14 +10,17 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useState } from "react";
 import axios from "axios";
+import Spinner from "../../publicView/Components/Spinner";
 
 function ManageMedia() {
   const [media, setMedia] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const fetchMedia = async (startDate, endDate,searchTerm, page = 1, limit = 10) => {
+    setLoading(true);
     try {
       const response = await axios.get('https://delightfulbroadband.com/api/media/fetch-media', {
         headers: {
@@ -40,6 +43,7 @@ function ManageMedia() {
       console.error('Error fetching media:', error.response ? error.response.data : error.message);
       throw error;
     }
+    setLoading(false);
   };
 
   const handleDateChange = (type, value) => {
@@ -79,6 +83,7 @@ function ManageMedia() {
   // }
 
   const deleteEvent = async (id) => {
+    setLoading(true);
     if(confirm("Are you sure you want to delete this Media")){
       const token = localStorage.getItem("token");
       try {
@@ -97,11 +102,13 @@ function ManageMedia() {
         console.error("Error deleting Event:", error);
         alert(error.response?.data?.error || "Oops, something went wrong");
       }
-  }
+    }
+    setLoading(false)
   }
 
   return (
     <Container>
+    <Spinner loading={loading} />
       <Typography variant="h6" gutterBottom>
         Manage Media
       </Typography>

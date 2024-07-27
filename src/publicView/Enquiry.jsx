@@ -26,6 +26,7 @@ function Enquiry() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const formData = new FormData(event.currentTarget);
 
     const enquiryData = {
@@ -37,6 +38,7 @@ function Enquiry() {
       enquiry: formData.get("enquiry"),
     };
     await sendRequest(enquiryData);
+    setLoading(false);
   };
 
   const sendRequest = async (enquiryData) => {
@@ -69,6 +71,9 @@ function Enquiry() {
 
   return (
     <Container component="main" maxWidth="sm">
+
+      <Spinner loading={loading} />
+
       <Typography variant="h4">Enquiry</Typography>
       <form id="enquiry-form" onSubmit={handleSubmit}>
         <Grid container spacing={2}>

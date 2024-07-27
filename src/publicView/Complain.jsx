@@ -60,6 +60,7 @@ function Complain() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true)
     const formData = new FormData();
     files.forEach((fileObj) => {
       formData.append("files", fileObj.file);
@@ -91,6 +92,7 @@ function Complain() {
       alert("Error uploading files: ", error);
       clearFormData();
     }
+    setLoading(false)
   };
 
   const handleClose = () => {
@@ -100,6 +102,9 @@ function Complain() {
 
   return (
     <Container component="main" maxWidth="sm">
+
+      <Spinner loading={loading} />
+
 
       <Spinner loading={loading} />
 

@@ -22,6 +22,7 @@ import CopyrightPolicy from "./publicView/Pages/CopyrightPolicy";
 import TermsConditions from "./publicView/Pages/TermsConditions";
 import Disclaimer from "./publicView/Pages/Disclaimer";
 import Help from "./publicView/Pages/Help";
+import SearchResult from "./publicView/Pages/SearchResult";
 
 export const RoutesJson = [
   {
@@ -1876,5 +1877,13 @@ export const RoutesJson = [
     hasSubItem: null,
     parent_id: null,
     component: Help,
+  },
+  {
+    id: 164,
+    name: "Search",
+    path: "/search",
+    hasSubItem: null,
+    parent_id: null,
+    component: SearchResult,
   },
 ];

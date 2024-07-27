@@ -25,6 +25,15 @@ const PrintModal = ({ data, open, title, handleClose }) => {
         #disableComponentPrint{
           display: none !important;
         }
+
+        #print-modal{
+        maxHeight: auto!important;
+        }
+
+        ::-webkit-scrollbar {
+          display: none;
+        }
+        
     }
   `;
 
@@ -37,7 +46,7 @@ const PrintModal = ({ data, open, title, handleClose }) => {
 
   return (
     <Popup open={open} style={{ zIndex: '10000' }}  closeOnDocumentClick={false} modal>
-      <Paper sx={{ padding:{lg:4, xs:1}, width: '100%'}} ref={componentRef}>
+      <Paper id="print-modal" sx={{ padding:{lg:4, xs:1}, width: '100%', maxHeight:'90vh', overflowY:'auto',}} ref={componentRef}>
         <Typography variant="h6" gutterBottom>
           {title} Details
         </Typography>
@@ -94,7 +103,7 @@ const PrintModal = ({ data, open, title, handleClose }) => {
                     {data?.files?.length === 0 ? (
                       <Typography>N/A</Typography>
                     ) : (
-                      <>
+                      <Box sx={{display:'flex', flexWrap:'wrap'}}>
                         {data?.files?.map((file, index) => (
                           <Box sx={{width:{lg:150, sm:100, xs:50}, height:{lg:130, sm:80, xs:30}}} >
                             <img
@@ -108,7 +117,7 @@ const PrintModal = ({ data, open, title, handleClose }) => {
                           </Box>
 
                         ))}
-                      </>
+                      </Box>
                     )}
 
 

@@ -1,4 +1,4 @@
-import { Box, Grid, Paper, Typography, Stack } from "@mui/material";
+import { Box,  Paper, Typography, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const EOICard = () => {
@@ -29,8 +29,8 @@ const EOICard = () => {
         spacing={4}
         sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
       >
-        {UserInfoItems.map(({ title, icon, href }) => (
-          <Link to={href}>
+        {UserInfoItems.map(({ title, icon, href, index }) => (
+          <Link to={href} key={index}>
             <Paper
               key={title}
               elevation={24}

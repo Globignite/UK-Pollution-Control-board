@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import {
   TextField,
   TextareaAutosize,
@@ -11,8 +11,7 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-} from "@mui/material";
-import { toast } from "sonner";
+} from "@mui/material"; 
 import axios from "axios";
 import Spinner from "./Components/Spinner";
 import PrintModal from "./Components/PrintModal";
@@ -64,8 +63,7 @@ function Enquiry() {
   };
 
   const handleClose = () => {
-    setOpen(false);
-    setComplaintData(null);
+    setOpen(false); 
   };
 
   const handlePhoneInput = (e) => {

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { read, utils } from 'xlsx';
-import { Container, Typography, Alert, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, TablePagination } from '@mui/material';
+import { Container,  Alert, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, TablePagination } from '@mui/material';
 
 const ExcelPreview = ({ file }) => {
   const [columns, setColumns] = useState([]);

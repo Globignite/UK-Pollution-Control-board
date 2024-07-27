@@ -1,9 +1,6 @@
 import {
   Box,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
+  Typography, 
   Grid,
   Paper,
 } from "@mui/material";

@@ -1,4 +1,4 @@
-import * as React from "react";
+ 
 import {
   Box,
   Typography,
@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 // import { styled } from '@mui/system';
 
 export default function Footer() {
-  const EmailInput = styled("input")(({ theme }) => ({
+  const EmailInput = styled("input")(( ) => ({
     width: "70%",
     border: "none",
     borderRadius: "5px",

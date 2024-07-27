@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import {
   Autocomplete,
   TextField,
   Button,
   Popper,
-  Container,
-  Alert,
+  Container, 
   FormControl,
   FormLabel,
   RadioGroup,
@@ -31,8 +30,7 @@ const MyComponent = () => {
   const [selectedSubheadings, setSelectedSubheadings] = useState([]);
   const [selectedFormat, setSelectedFormat] = useState("Excel");
   const [file, setFile] = useState(null);
-  const [fileURL, setFileURL] = useState(null);
-  const [error, setError] = useState("");
+  const [fileURL, setFileURL] = useState(null); 
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [customHeading, setCustomHeading] = useState("");
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Autocomplete,
   TextField,
   Box,
   Radio,
@@ -9,17 +8,11 @@ import {
   FormControl,
   FormLabel,
   Button,
-  Popper,
   Container,
-  Alert,
   Typography,
 } from "@mui/material";
 import { toast } from "sonner";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { SideMenu } from "../../publicView/JsonFiles/SideMenu";
-import { mainMenu } from "../../publicView/JsonFiles/MainMenu";
-import ExcelPreview from "../ExcelPreview";
 import Spinner from "../../publicView/Components/Spinner";
 
 const formats = ["PDF"];
@@ -29,12 +22,8 @@ const AddMarque = () => {
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState(null);
   const [error, setError] = useState("");
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [customFileName, setCustomFileName] = useState("");
   const [loading, setLoading] = useState(false);
-
-
-
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -49,56 +38,51 @@ const AddMarque = () => {
         `Invalid file type. Please select a valid ${selectedFormat} file.`
       );
       setFile(null);
-    
     } else {
       setError("");
       setFile(file);
-     
     }
   };
 
   const handleSubmit = async () => {
     setLoading(true);
     const formData = new FormData();
-   
 
     formData.append("file", file);
-    formData.append("marquee_title",title);
+    formData.append("marquee_title", title);
     formData.append("custom_name", customFileName);
 
-
-    if (file && customFileName ) {
-        const token = localStorage.getItem("token");
-        console.log('marque title = ',title)
-        console.log('marque data = ',formData)
-        try {
-          const response = await axios.post(
-            `https://delightfulbroadband.com/api/marquee`,
-            formData,
-            // {
-            //   marquee_title:title,
-            //   custom_name:customFileName,
-            //   file:file
-            // },
-            {
-              headers: {
-                "Content-Type": "multipart/form-data",
-                Authorization: `Bearer ${token}`,
-              }
-            }
-          );
-
-          if (response.status !== 201) {
-            throw new Error("Failed to upload file");
+    if (file && customFileName) {
+      const token = localStorage.getItem("token");
+      console.log("marque title = ", title);
+      console.log("marque data = ", formData);
+      try {
+        const response = await axios.post(
+          `https://delightfulbroadband.com/api/marquee`,
+          formData,
+          // {
+          //   marquee_title:title,
+          //   custom_name:customFileName,
+          //   file:file
+          // },
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
           }
+        );
 
-          toast.success(response?.data?.message, { duration: 1500 });
-          handleClear();
-        } catch (error) {
-          console.error("Error uploading file:", error);
-          toast.error("Failed to upload file", { duration: 1500 });
+        if (response.status !== 201) {
+          throw new Error("Failed to upload file");
         }
 
+        toast.success(response?.data?.message, { duration: 1500 });
+        handleClear();
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        toast.error("Failed to upload file", { duration: 1500 });
+      }
     } else {
       console.log("Form is incomplete");
     }
@@ -125,7 +109,7 @@ const AddMarque = () => {
     setFile(null);
     // setFileURL(null);
     setCustomFileName("");
-    setTitle("")
+    setTitle("");
     setError("");
 
     const inputFileField = document.querySelector('input[type="file"]');
@@ -138,10 +122,7 @@ const AddMarque = () => {
     <Container>
       <Spinner loading={loading} />
       <Typography variant="h5">Add Marquee</Typography>
-      <Box
-        sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}
-      >
-
+      <Box sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}>
         <FormControl component="fieldset" sx={{ mb: 2, width: "100%" }}>
           <FormLabel component="legend">Format</FormLabel>
           <RadioGroup row value={selectedFormat} onChange={handleFormatChange}>
@@ -175,7 +156,7 @@ const AddMarque = () => {
           <FormLabel>Upload File</FormLabel>
           <input
             type="file"
-            name='file'
+            name="file"
             accept={selectedFormat === "Excel" ? ".xlsx,.xls,.csv" : ".pdf"}
             onChange={handleFileChange}
           />

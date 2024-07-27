@@ -19,6 +19,7 @@ function Events() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [search,setSearch] = useState(null);
 
   useEffect(() => {
     fetchMedia();
@@ -42,12 +43,31 @@ function Events() {
 
       console.log(response);
       const newMedia = response.data.data;
-      setMedia((prevMedia) => [...prevMedia, ...newMedia]);
+      // setMedia((prevMedia) => [...prevMedia, ...newMedia]);
+      setMedia(response?.data?.data);
       setHasMore(response.data.pagination.hasNextPage);
     } catch (error) {
       console.error("Error fetching media:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchMediaSearch = async () => {
+    try {
+      const response = await axios.get('https://delightfulbroadband.com/api/media/fetch-media', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        params: {
+          event_name:search,
+        },
+      });
+      setMedia(response?.data?.data);
+      setHasMore(response.data.pagination.hasNextPage);
+    } catch (error) {
+      console.error('Error fetching media:', error.response ? error.response.data : error.message);
+      throw error;
     }
   };
 
@@ -75,10 +95,11 @@ function Events() {
       <Stack spacing={2} direction="row" sx={{ mt: 2 }}>
         <Box sx={{ position: "relative", display: { lg: "flex", xs: "none" } }}>
           <SearchIcon sx={{ position: "absolute", top: "5px", left: "5px", color: "grey" }} />
-          <input type="search" />
+          <input type="search" value={search} onChange={(e)=>{setSearch(e.target.value)}}/>
         </Box>
         <Button
           variant="contained"
+          onClick={fetchMediaSearch}
           sx={{ bgcolor: "secondary.main", textTransform: "none", borderRadius: 2, ":hover": { backgroundColor: "secondary.light" } }}
         >
           Search
@@ -128,7 +149,7 @@ function Events() {
                   <ArrowOutwardIcon sx={{ color: "#155693" }} />
                 </Link>
               </Box>
-             </Box>
+            </Box>
           </Grid>
         ))}
       </Grid>

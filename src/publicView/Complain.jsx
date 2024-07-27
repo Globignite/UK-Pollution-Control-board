@@ -39,6 +39,15 @@ function Complain() {
         file,
       };
     });
+    // Calculate the total number of files including existing ones
+    const totalFilesCount = files.length + fileArray.length;
+
+    if (totalFilesCount > 10) {
+      alert("You can only upload a maximum of 10 images.");
+      event.target.value = null; // Clear the input to allow re-selection
+      return; // Exit the function early
+    }
+
     setFiles((prevFiles) => prevFiles.concat(fileArray));
     event.target.value = null; // Clean up the object URL
   };
@@ -60,7 +69,7 @@ function Complain() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const formData = new FormData();
     files.forEach((fileObj) => {
       formData.append("files", fileObj.file);
@@ -82,30 +91,31 @@ function Complain() {
         }
       );
       console.log(response.data);
-      setComplaintData(response.data.data)
-      alert(`Your Complaint Number is :${response.data.data.complaintId}`);
+      setComplaintData(response.data.data);
+      // alert(`Your Complaint Number is :${response.data.data.complaintId}`);
       clearFormData(); // Clear form data on success
-      setLoading(false)
+      setLoading(false);
       setOpen(true); // Open success dialog on successful upload
     } catch (error) {
       console.error("Error uploading files: ", error);
-      alert("Error uploading files: ", error);
+      alert("There was an error processing your request. Please try again.");
       clearFormData();
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   const handleClose = () => {
     setOpen(false);
-    setComplaintData(null)
+    setComplaintData(null);
+  };
+
+  const handlePhoneInput = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, "");
+    e.target.value = value;
   };
 
   return (
     <Container component="main" maxWidth="sm">
-
-      <Spinner loading={loading} />
-
-
       <Spinner loading={loading} />
 
       <Typography variant="h4">Complain</Typography>
@@ -122,6 +132,9 @@ function Complain() {
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               label="Subject"
+              inputProps={{
+                maxLength: 50,
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -150,10 +163,15 @@ function Complain() {
               variant="outlined"
               required
               fullWidth
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              id="phone"
               label="Phone"
+              name="phone"
               type="tel"
+              inputProps={{
+                minLength: 10,
+                maxLength: 11,
+              }}
+              onInput={handlePhoneInput}
             />
           </Grid>
           <Grid item xs={12}>
@@ -165,6 +183,9 @@ function Complain() {
               name="complain"
               aria-label="complain"
               placeholder="Write your complain"
+              inputProps={{
+                maxLength: 500,
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -215,24 +236,15 @@ function Complain() {
           </Grid>
         </Grid>
       </form>
-      {/* <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{"Submission Successful!"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {`Your complaint number is: ${complaintNumber}`}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog> */}
-        {
-          complaintData &&
-          <PrintModal data={complaintData} open={open} title='Complaint' handleClose={handleClose} />
-        }
 
+      {complaintData && (
+        <PrintModal
+          data={complaintData}
+          open={open}
+          title="Complaint"
+          handleClose={handleClose}
+        />
+      )}
     </Container>
   );
 }

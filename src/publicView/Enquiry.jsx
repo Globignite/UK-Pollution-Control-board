@@ -48,7 +48,7 @@ function Enquiry() {
         enquiryData
       );
       console.log(response.data);
-      setEqData(response?.data?.data)
+      setEqData(response?.data?.data);
       setEnquiryNumber(response?.data?.data.enquiryId);
       setOpen(true); // Open success dialog on successful upload
       clearFormData(); // Clear form data on success
@@ -68,10 +68,13 @@ function Enquiry() {
     setComplaintData(null);
   };
 
+  const handlePhoneInput = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, "");
+    e.target.value = value;
+  };
 
   return (
     <Container component="main" maxWidth="sm">
-
       <Spinner loading={loading} />
 
       <Typography variant="h4">Enquiry</Typography>
@@ -89,6 +92,9 @@ function Enquiry() {
               id="subject"
               label="Subject"
               name="subject"
+              inputProps={{
+                maxLength: 50,
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -121,6 +127,11 @@ function Enquiry() {
               label="Phone"
               name="phone"
               type="tel"
+              inputProps={{
+                minLength: 10,
+                maxLength: 11,
+              }}
+              onInput={handlePhoneInput}
             />
           </Grid>
           <Grid item xs={12}>
@@ -131,6 +142,9 @@ function Enquiry() {
               name="enquiry"
               aria-label="enquiry"
               placeholder="Enquiry"
+              inputProps={{
+                maxLength: 500,
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -154,11 +168,14 @@ function Enquiry() {
         </DialogActions>
       </Dialog>
 
-        {
-          eqData &&
-          <PrintModal data={eqData} open={open} title='Enquiry' handleClose={handleClose} />
-        }
-
+      {eqData && (
+        <PrintModal
+          data={eqData}
+          open={open}
+          title="Enquiry"
+          handleClose={handleClose}
+        />
+      )}
     </Container>
   );
 }

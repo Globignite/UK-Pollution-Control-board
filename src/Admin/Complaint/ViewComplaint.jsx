@@ -339,46 +339,120 @@ function ViewComplaint() {
         <Paper sx={{ padding: 4, width: "100%" }}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Typography variant="body2" component="div">
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Complaint Number
               </Typography>
               <Typography>{complaint?.complaintId || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Status
               </Typography>
-              <Typography>{complaint?.status || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
-                Subject
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {complaint?.status || "N/A"}
               </Typography>
-              <Typography>{complaint?.subject || "N/A"}</Typography>
+
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                Date
+              </Typography>
+              <Typography>
+                {complaint?.createdAt
+                  ? complaint?.createdAt.split("T")[0]
+                  : "N/A"}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                In Progress Date
+              </Typography>
+              <Typography>
+                {complaint?.progress_date
+                  ? complaint?.progress_date.split("T")[0]
+                  : "N/A"}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                Resolved Date
+              </Typography>
+              <Typography>
+                {complaint?.resolve_date
+                  ? complaint?.resolve_date.split("T")[0]
+                  : "N/A"}
+              </Typography>
             </Grid>
+
             <Grid item xs={6}>
-              <Typography variant="body2" component="div">
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Name
               </Typography>
-              <Typography>{complaint?.name || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {complaint?.name || "N/A"}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Email
               </Typography>
-              <Typography>{complaint?.email || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {complaint?.email || "N/A"}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Phone
               </Typography>
-              <Typography>{complaint?.phone || "N/A"}</Typography>
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {complaint?.phone || "N/A"}
+              </Typography>
             </Grid>
+
             <Grid item xs={12}>
-              <Typography variant="body2" component="div">
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                Subject
+              </Typography>
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {complaint?.subject || "N/A"}
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Complaint
               </Typography>
-              <Typography>{complaint?.complaint || "N/A"}</Typography>
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {complaint?.complaint || "N/A"}
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="body2" component="div">
@@ -405,37 +479,6 @@ function ViewComplaint() {
                   ))}
                 </Box>
               )}
-            </Grid>
-
-            <Grid item xs={4}>
-              <Typography variant="body2" component="div">
-                Date
-              </Typography>
-              <Typography>
-                {complaint?.createdAt
-                  ? complaint?.createdAt.split("T")[0]
-                  : "N/A"}
-              </Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography variant="body2" component="div">
-                In Progress Date
-              </Typography>
-              <Typography>
-                {complaint?.progress_date
-                  ? complaint?.progress_date.split("T")[0]
-                  : "N/A"}
-              </Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography variant="body2" component="div">
-                Resolved Date
-              </Typography>
-              <Typography>
-                {complaint?.resolve_date
-                  ? complaint?.resolve_date.split("T")[0]
-                  : "N/A"}
-              </Typography>
             </Grid>
           </Grid>
         </Paper>

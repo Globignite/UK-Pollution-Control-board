@@ -31,7 +31,7 @@ const fetchMainBanner= async () => {
         },
       }
     );
-    console.log("Banner:", response?.data?.data);
+    // console.log("Banner:", response?.data?.data);
     setBanner(response?.data?.data || []);
   } catch (error) {
     console.error("Error fetching notifications:", error);

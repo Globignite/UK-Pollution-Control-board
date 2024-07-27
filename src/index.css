@@ -111,3 +111,20 @@ input[type="search"]:focus {
     width: 95% !important;
   }
 }
+
+/* pagination ================================ */
+.pagination {
+  display: flex;
+  gap: 50px;
+  justify-content: end;
+  align-items: center;
+  /* background-color: #281f33; */
+  font-size: 0.8rem;
+  padding-right: 5px;
+  /* border-top: 1px solid rgb(48, 30, 100); */
+  color: rgb(20, 20, 20);
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+ 

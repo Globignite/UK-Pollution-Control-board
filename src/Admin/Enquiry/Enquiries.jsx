@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Pagination from "../../publicView/Components/Pagination";
 
 const Enquiries = () => {
   const [data, setData] = useState([]);
@@ -28,8 +29,9 @@ const Enquiries = () => {
   const [statusFilter, setStatusFilter] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [pageNo, setPageNo] = useState(1);
+  const [paginationData, setPaginationData] = useState(0);
 
   const fetchEnquiries = async () => {
     try {
@@ -41,27 +43,32 @@ const Enquiries = () => {
             Authorization: `Bearer ${token}`,
           },
           params: {
-            page: page + 1, // API page index starts at 1
             limit: rowsPerPage,
             enquiryId: searchTerm,
             status: statusFilter,
             startDate: startDate || undefined,
             endDate: endDate || undefined,
+            page: pageNo,
+            limit: 10,
           },
         }
       );
       console.log(response.data.data);
       setData(response.data.data);
+      setPaginationData(response.data.pagination);
       setFilteredData(response.data.data);
     } catch (error) {
       console.error("Error fetching enquiries:", error);
     }
   };
 
+  const setPage = (page) => {
+    setPageNo(page);
+  };
+
   useEffect(() => {
     fetchEnquiries();
-  }, []);
-  // }, [page, rowsPerPage, searchTerm, statusFilter, startDate, endDate]);
+  }, [pageNo]);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -79,13 +86,9 @@ const Enquiries = () => {
     }
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+  const handleFilterClick = () => {
+    setPageNo(1);
+    fetchEnquiries();
   };
 
   return (
@@ -144,7 +147,7 @@ const Enquiries = () => {
           style={{ flex: 1 }}
         />
         <Button
-          onClick={fetchEnquiries}
+          onClick={handleFilterClick}
           variant="contained"
           style={{ alignSelf: "center" }}
         >
@@ -166,36 +169,32 @@ const Enquiries = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredData
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((file, index) => (
-                <TableRow key={index}>
-                  <TableCell>{file.status}</TableCell>
-                  <TableCell>{file.enquiryId}</TableCell>
-                  <TableCell>{file.subject}</TableCell>
-                  <TableCell>{file.name}</TableCell>
-                  <TableCell>{file?.createdAt.split('T')[0]}</TableCell>
-                  <TableCell>{file?.progress_date?.split('T')[0]}</TableCell>
-                  <TableCell>{file?.resolve_date?.split('T')[0]}</TableCell>
-                  <TableCell>
-                    <Link to={`/admin/enquiry/${file.enquiryId}`}>
-                      View
-                    </Link>
-                  </TableCell>
-                </TableRow>
-              ))}
+            {filteredData.map((file, index) => (
+              <TableRow key={index}>
+                <TableCell>{file.status}</TableCell>
+                <TableCell>{file.enquiryId}</TableCell>
+                <TableCell>{file.subject}</TableCell>
+                <TableCell>{file.name}</TableCell>
+                <TableCell>{file?.createdAt.split("T")[0]}</TableCell>
+                <TableCell>{file?.progress_date?.split("T")[0]}</TableCell>
+                <TableCell>{file?.resolve_date?.split("T")[0]}</TableCell>
+                <TableCell>
+                  <Link to={`/admin/enquiry/${file.enquiryId}`}>View</Link>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
-        <TablePagination
-          rowsPerPageOptions={[10]}
-          component="div"
-          count={filteredData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
       </TableContainer>
+      <Box>
+        {paginationData.totalPages > 1 && (
+          <Pagination
+            pagination={paginationData}
+            setPageNo={setPage}
+            pageNo={pageNo}
+          />
+        )}
+      </Box>
     </Container>
   );
 };

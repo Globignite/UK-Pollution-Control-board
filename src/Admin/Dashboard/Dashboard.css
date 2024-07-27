@@ -14,8 +14,8 @@ p {
   color: white;
 }
 .sideNavHeadings {
-  background: linear-gradient(180deg, #3a8d39, #3a8d39);
-  color: white;
+  background: linear-gradient(180deg, #e0e0e0, #e0e0e0);
+  color: rgb(57, 57, 57);
   padding-block: 0;
   font-weight: bold;
 }

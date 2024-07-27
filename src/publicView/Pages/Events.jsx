@@ -89,15 +89,18 @@ function Events() {
           color: "primary.main",
         }}
       >
-        Gallery
+        Events
       </Typography>
 
-      <Stack spacing={2} direction="row" sx={{ mt: 2 }}>
-        <Box sx={{ position: "relative", display: { lg: "flex", xs: "none" } }}>
+      <Stack spacing={2} direction="row" sx={{ mt: 2 }} >
+        <Box sx={{display: { lg: "flex", xs: "block" } }}>
+        <Box sx={{ position: "relative"}} style={{margin:'5px'}}>
           <SearchIcon sx={{ position: "absolute", top: "5px", left: "5px", color: "grey" }} />
           <input type="search" value={search} onChange={(e)=>{setSearch(e.target.value)}}/>
         </Box>
-        <Button
+     
+     <Box style={{margin:'7px 5px', display:"flex",gap:"4px"}}>
+     <Button
           variant="contained"
           onClick={fetchMediaSearch}
           sx={{ bgcolor: "secondary.main", textTransform: "none", borderRadius: 2, ":hover": { backgroundColor: "secondary.light" } }}
@@ -110,36 +113,25 @@ function Events() {
         >
           Refresh
         </Button>
+     </Box>
+     </Box>
       </Stack>
 
-      <Box
-        sx={{
-          margin: "20px 0px",
-          boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-          width: "150px",
-          py: 0.5,
-          pl: 1,
-          bgcolor: "#155693",
-          color: "white",
-          fontSize: "0.9rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-evenly",
-        }}
-      >
-        Playlist
-      </Box>
-
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 1, sm: 8, md: 12 }}>
         {media.map((event, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
-            <Box> 
+          <Grid item xs={1} sm={4} md={4} key={index}>
+            <Box   sx={{
+          margin: "20px 0px",
+          boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ",
+          borderRadius:"8px",
+        }}> 
               <img src={`https://delightfulbroadband.com${event.data[0].href}`} alt={event.name}   
               loading="lazy"
                         style={{
                           width: "100%",
                           height: "150px",
-                          objectFit: "cover"
+                          objectFit: "cover",
+                          borderRadius:"8px",
                         }} />
               <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Typography sx={{ my: 2, mx: 1, fontWeight: "600", fontSize: "1.3rem", color: "primary.main" }}>

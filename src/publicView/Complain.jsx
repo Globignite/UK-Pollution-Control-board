@@ -27,29 +27,23 @@ function Complain() {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  // const [complaintNumber, setComplaintNumber] = useState(null);
   const fileInputRef = useRef(null);
   const [complaintData, setComplaintData] = useState(null);
 
   const handleFileChange = (event) => {
-    const fileArray = Array.from(event.target.files).map((file) => {
-      return {
-        url: URL.createObjectURL(file),
-        type: file.type,
-        file,
-      };
-    });
-    // Calculate the total number of files including existing ones
+    const fileArray = Array.from(event.target.files).map((file) => ({
+      url: URL.createObjectURL(file),
+      type: file.type,
+      file,
+    }));
     const totalFilesCount = files.length + fileArray.length;
-
     if (totalFilesCount > 10) {
       alert("You can only upload a maximum of 10 images.");
-      event.target.value = null; // Clear the input to allow re-selection
-      return; // Exit the function early
+      event.target.value = null;
+      return;
     }
-
     setFiles((prevFiles) => prevFiles.concat(fileArray));
-    event.target.value = null; // Clean up the object URL
+    event.target.value = null;
   };
 
   const handleRemoveFile = (fileObj) => {
@@ -92,16 +86,15 @@ function Complain() {
       );
       console.log(response.data);
       setComplaintData(response.data.data);
-      // alert(`Your Complaint Number is :${response.data.data.complaintId}`);
-      clearFormData(); // Clear form data on success
+      clearFormData();
       setLoading(false);
-      setOpen(true); // Open success dialog on successful upload
+      setOpen(true);
     } catch (error) {
       console.error("Error uploading files: ", error);
       alert("There was an error processing your request. Please try again.");
       clearFormData();
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleClose = () => {
@@ -111,13 +104,12 @@ function Complain() {
 
   const handlePhoneInput = (e) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
-    e.target.value = value;
+    setPhone(value);
   };
 
   return (
     <Container component="main" maxWidth="sm">
       <Spinner loading={loading} />
-
       <Typography variant="h4">Complain</Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -163,6 +155,8 @@ function Complain() {
               variant="outlined"
               required
               fullWidth
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               id="phone"
               label="Phone"
               name="phone"
@@ -170,6 +164,7 @@ function Complain() {
               inputProps={{
                 minLength: 10,
                 maxLength: 11,
+                pattern: "[0-9]*",
               }}
               onInput={handlePhoneInput}
             />
@@ -180,9 +175,9 @@ function Complain() {
               style={{ width: "100%" }}
               value={complaint}
               onChange={(e) => setComplaint(e.target.value)}
-              name="complain"
-              aria-label="complain"
-              placeholder="Write your complain"
+              name="complaint"
+              aria-label="complaint"
+              placeholder="Write your complaint"
               inputProps={{
                 maxLength: 500,
               }}
@@ -236,7 +231,6 @@ function Complain() {
           </Grid>
         </Grid>
       </form>
-
       {complaintData && (
         <PrintModal
           data={complaintData}

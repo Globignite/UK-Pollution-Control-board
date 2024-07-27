@@ -97,3 +97,17 @@ input[type="search"]:focus {
   color: rgb(72, 163, 47);
   z-index: 10;
 }
+
+
+/* react-popup modal */
+
+.popup-overlay {
+  z-index: 9999 !important;
+}
+
+@media screen and (max-width: 820px) {
+  .popup-content{
+    width:95% !important;
+  }
+  
+}

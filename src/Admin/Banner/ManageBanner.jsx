@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { Typography, Box, Grid, IconButton, Container } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
+import Spinner from "../../publicView/Components/Spinner";
 
 function ManageBanner() {
   const [banners, setBanners] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchBanners = async () => {
     try {
@@ -20,6 +22,7 @@ function ManageBanner() {
   };
 
   const deleteBanner = async (id) => {
+    setLoading(true);
     const token = localStorage.getItem("token");
     console.log(token);
     try {
@@ -41,6 +44,7 @@ function ManageBanner() {
       console.error("Error deleting Banner:", error);
       alert(error.response?.data?.error || "Oops, something went wrong");
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -49,7 +53,7 @@ function ManageBanner() {
 
   return (
     <Container >
-
+      <Spinner loading={loading} />
       <Typography variant="h6" gutterBottom>
         Manage Banner
       </Typography>

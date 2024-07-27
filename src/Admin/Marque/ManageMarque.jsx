@@ -14,9 +14,11 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
+import Spinner from "../../publicView/Components/Spinner";
 
 const ManageMarquee = () => {
   const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchNotifications = async () => {
     try {
@@ -38,6 +40,7 @@ const ManageMarquee = () => {
   };
 
   const handleDelete = async (id, name) => {
+    setLoading(true);
     if (confirm(`Are you sure you want to delete ${name}?`)) {
       try {
         const token = localStorage.getItem("token");
@@ -61,6 +64,7 @@ const ManageMarquee = () => {
         alert("Error deleting marquee. Please try again later.");
       }
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -69,6 +73,7 @@ const ManageMarquee = () => {
 
   return (
     <Container>
+      <Spinner loading={loading} />
       <Typography variant="h6" gutterBottom>
         Manage Marquee
       </Typography>

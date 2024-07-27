@@ -33,6 +33,7 @@ const AddRecentUpdate = () => {
   const [error, setError] = useState("");
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [customFileName, setCustomFileName] = useState("");
+  const [loading, setLoading] = useState(false);
 
 
 
@@ -60,7 +61,7 @@ const AddRecentUpdate = () => {
   };
 
   const handleSubmit = async () => {
-
+    setLoading(true);
     if (file && customFileName) {
       const formData = new FormData();
         let lastTwoSubheadings = 'null/Recent Updates';
@@ -134,6 +135,7 @@ const AddRecentUpdate = () => {
 
   return (
     <Container>
+      <Spinner loading={loading} />
       <Typography variant="h5">Add Recent Updates</Typography>
       <Box
         sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}

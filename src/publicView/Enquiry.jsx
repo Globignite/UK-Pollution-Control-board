@@ -14,14 +14,17 @@ import {
 } from "@mui/material";
 import { toast } from "sonner";
 import axios from "axios";
+import Spinner from "./Components/Spinner";
 
 function Enquiry() {
   const today = new Date().toISOString().split("T")[0]; // Format today's date as YYYY-MM-DD
   const [open, setOpen] = useState(false);
   const [enquiryNumber, setEnquiryNumber] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const formData = new FormData(event.currentTarget);
 
     const enquiryData = {
@@ -33,6 +36,7 @@ function Enquiry() {
       enquiry: formData.get("enquiry"),
     };
     await sendRequest(enquiryData);
+    setLoading(false);
   };
 
   const sendRequest = async (enquiryData) => {
@@ -62,6 +66,9 @@ function Enquiry() {
 
   return (
     <Container component="main" maxWidth="sm">
+
+      <Spinner loading={loading} />
+
       <Typography variant="h4">Enquiry</Typography>
       <form id="enquiry-form" onSubmit={handleSubmit}>
         <Grid container spacing={2}>

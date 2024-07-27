@@ -19,6 +19,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import GetMenu from "../Components/GetMenu";
 import axios from "axios";
+import Spinner from "../../publicView/Components/Spinner";
 
 const ManageNotice = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -27,8 +28,10 @@ const ManageNotice = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchNotifications = async () => {
+    setLoading(true);
     try {
       const baseURL = `https://delightfulbroadband.com/api/filesUpload/fetch-file`;
       const defaultParams = {
@@ -54,10 +57,12 @@ const ManageNotice = () => {
       console.error("Error fetching file:", error);
       setNotifications([]);
     }
+    setLoading(false)
   };
  
 
   const handleDelete = async (href, name) => {
+    setLoading(true);
     if(confirm("Are you sure you want to delete " + name)){
       try {
         const reqData = {
@@ -86,6 +91,7 @@ const ManageNotice = () => {
         alert("Error deleting file:", error);
       }
     }
+    setLoading(false)
   };
 
 
@@ -107,6 +113,7 @@ const ManageNotice = () => {
 
   return (
     <Container>
+      <Spinner loading={loading} />
       <Typography variant="h6" gutterBottom>
         Manage Notices
       </Typography>
@@ -157,7 +164,7 @@ const ManageNotice = () => {
         </Button>
       </Box>
 
-      {notifications.length == 0 ? (
+      {notifications?.length == 0 ? (
         <Typography variant="h6" gutterBottom>
           No Records
         </Typography>

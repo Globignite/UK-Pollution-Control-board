@@ -31,6 +31,7 @@ const AddMarque = () => {
   const [error, setError] = useState("");
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [customFileName, setCustomFileName] = useState("");
+  const [loading, setLoading] = useState(false);
 
 
 
@@ -57,6 +58,7 @@ const AddMarque = () => {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     const formData = new FormData();
    
 
@@ -67,6 +69,8 @@ const AddMarque = () => {
 
     if (file && customFileName ) {
         const token = localStorage.getItem("token");
+        console.log('marque title = ',title)
+        console.log('marque data = ',formData)
         try {
           const response = await axios.post(
             `https://delightfulbroadband.com/api/marquee`,
@@ -98,6 +102,7 @@ const AddMarque = () => {
     } else {
       console.log("Form is incomplete");
     }
+    setLoading(false);
   };
 
   const handleFormatChange = (event) => {
@@ -131,6 +136,7 @@ const AddMarque = () => {
 
   return (
     <Container>
+      <Spinner loading={loading} />
       <Typography variant="h5">Add Marquee</Typography>
       <Box
         sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}

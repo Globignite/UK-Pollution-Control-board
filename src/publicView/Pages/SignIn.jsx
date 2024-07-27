@@ -27,13 +27,12 @@ export default function SignIn() {
 
   const isEmail = (emailVal) => {
     let validRegex =
-      /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return emailVal.match(validRegex);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     setLoading(true);
 
     const data = new FormData(event.currentTarget);
@@ -67,6 +66,7 @@ export default function SignIn() {
           const token = response.data.token;
           localStorage.setItem("token", token);
           navigate("/admin/dashboard");
+          setLoading(false);
         })
         .catch((error) => {
           console.error("There was an error signing in!", error);
@@ -74,8 +74,6 @@ export default function SignIn() {
             email: true,
             password: true,
           });
-        })
-        .finally(() => {
           setLoading(false);
         });
     } else {
@@ -83,13 +81,13 @@ export default function SignIn() {
         email: true,
         password: true,
       });
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <Box sx={{ bgcolor: "", height: "100vh", display: "flex" }}>
+      <Spinner loading={loading} />
       <Box
         sx={{ width: "60%", height: "100%", bgcolor: "", alignItems: "center" }}
       >
@@ -210,7 +208,6 @@ export default function SignIn() {
           style={{ width: "100%", height: "100%" }}
         />
       </Box>
-      <Spinner loading={loading} />
     </Box>
   );
 }

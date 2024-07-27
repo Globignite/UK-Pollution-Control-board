@@ -10,10 +10,11 @@ p {
 
 .navBG {
   background: linear-gradient(180deg, #0dbb0a, #179615);
+  /* background-color: #2c8f6c !important; */
   color: white;
 }
 .sideNavHeadings {
-  background: linear-gradient(180deg, #0dbb0a, #179615);
+  background: linear-gradient(180deg, #3a8d39, #3a8d39);
   color: white;
   padding-block: 0;
   font-weight: bold;
@@ -26,7 +27,7 @@ p {
 }
 
 .dashStatsCard {
-  background: linear-gradient(180deg, #0dbb0a, #179615);
+  background: linear-gradient(180deg, #45d943, #299327);
   color: white !important;
   padding: 10px;
   border-radius: 8px;
@@ -37,5 +38,8 @@ p {
   box-sizing: border-box;
 }
 
-.PieChartContainer {
+a:active,
+a.active {
+  color: #ffffff !important;
+  background: linear-gradient(180deg, #4bc248, #398a38);
 }

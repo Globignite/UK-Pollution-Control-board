@@ -31,7 +31,7 @@ function Dashboard() {
 
   return (
     <>
-      <h3 style={{ padding: "20px" }}>Dashboard</h3>
+      <h3 style={{ padding: "5px 20px" }}>Dashboard</h3>
       <Grid container spacing={2} p={2}>
         <Grid item xs={6}>
           <EnquiryStats data={data} />

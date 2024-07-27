@@ -13,21 +13,8 @@ import AdminNavbar from "./Components/AdminNavbar";
 
 const DashboardHome = () => {
   const navigate = useNavigate();
-  const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  const drawerWidth = 250;
-
-  const drawer = (
-    <Box sx={{ width: drawerWidth, bgcolor: "#f3f4f5", borderRadius: "8px" }}>
-      <DashboardSidebar />
-    </Box>
-  );
 
   // protected routing
   useEffect(() => {
@@ -40,43 +27,24 @@ const DashboardHome = () => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <AdminNavbar />
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        edge="start"
-        onClick={handleDrawerToggle}
-        sx={{ ml: 1, display: { sm: "none" } }}
-      >
-        <MenuIcon />
-      </IconButton>
-      <Box sx={{ display: "flex", flex: 1, pt: 8 }}>
-        <Drawer
-          variant={isMobile ? "temporary" : "permanent"}
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
+      {isMobile &&  (
+        <Box sx={{ flex: 1, overflowY: "auto", pt: "80px", pb: "50px" }}>
+          <Outlet />
+        </Box>
+      )}
+      {!isMobile &&  (
+        <Box
           sx={{
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
+            flex: 1,
+            overflowY: "auto",
+            pl: "220px",
+            pt: "80px",
+            pb: "50px",
           }}
         >
-          {drawer}
-        </Drawer>
-        {isMobile && (
-          <Box sx={{ flex: 1, overflowY: "auto" }}>
-            <Outlet />
-          </Box>
-        )}
-        {!isMobile && (
-          <Box sx={{ flex: 1, overflowY: "auto", pl: `${drawerWidth}px` }}>
-            <Outlet />
-          </Box>
-        )}
-      </Box>
+          <Outlet />
+        </Box>
+      )}
     </Box>
   );
 };

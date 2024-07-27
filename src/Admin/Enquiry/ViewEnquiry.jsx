@@ -231,25 +231,24 @@ function ViewEnquiry() {
     <Container>
       <Box
         sx={{
-          position: "relative",
           display: "flex",
+          justifyContent: "right",
           alignItems: "center",
-          justifyContent: "center",
-          float: "right",
+          gap: 5,
+          mb: 3,
         }}
       >
         <Box
           id="disableComponentPrint"
           sx={{
-            display: "flex",
+            display: enquiryData?.status === "resolved" ? "none" : "flex",
             alignItems: "center",
-            justifyContent: "center",
           }}
         >
           <FormControl
             variant="outlined"
             margin="normal"
-            style={{ width: "200px" }}
+            sx={{ width: "200px" }}
           >
             <InputLabel>Status</InputLabel>
             <Select
@@ -280,21 +279,15 @@ function ViewEnquiry() {
               </MenuItem>
             </Select>
           </FormControl>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Button
-              variant="contained"
-              onClick={handleUpdateStatus}
-              sx={{ ml: 2 }}
-            >
-              Update Status
-            </Button>
-          </Box>
+          <Button
+            variant="contained"
+            onClick={handleUpdateStatus}
+            sx={{ ml: 2 }}
+          >
+            Update Status
+          </Button>
         </Box>
-        <Box
-          sx={{ mx: 10, cursor: "pointer" }}
-          onClick={handlePrint}
-          id="print_icon"
-        >
+        <Box sx={{ cursor: "pointer" }} onClick={handlePrint} id="print_icon">
           <img
             src="/assets/print.png"
             alt="print"
@@ -312,49 +305,30 @@ function ViewEnquiry() {
         <Paper sx={{ padding: 4, width: "100%" }}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Typography variant="body2" component="div">
-                enquiryData Number
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                Enquiry Number
               </Typography>
               <Typography>{enquiryData?.enquiryId || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Status
               </Typography>
-              <Typography>{enquiryData?.status || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
-                Subject
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {enquiryData?.status || "N/A"}
               </Typography>
-              <Typography>{enquiryData?.subject || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
-                Name
-              </Typography>
-              <Typography>{enquiryData?.name || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
-                Email
-              </Typography>
-              <Typography>{enquiryData?.email || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
-                Phone
-              </Typography>
-              <Typography>{enquiryData?.phone || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="body2" component="div">
-                Enquiry
-              </Typography>
-              <Typography>{enquiryData?.enquiry || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography variant="body2" component="div">
+
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Date
               </Typography>
               <Typography>
@@ -362,9 +336,11 @@ function ViewEnquiry() {
                   ? enquiryData?.createdAt.split("T")[0]
                   : "N/A"}
               </Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography variant="body2" component="div">
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 In Progress Date
               </Typography>
               <Typography>
@@ -372,15 +348,76 @@ function ViewEnquiry() {
                   ? enquiryData?.progress_date.split("T")[0]
                   : "N/A"}
               </Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography variant="body2" component="div">
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Resolved Date
               </Typography>
               <Typography>
                 {enquiryData?.resolve_date
                   ? enquiryData?.resolve_date.split("T")[0]
                   : "N/A"}
+              </Typography>
+            </Grid>
+
+            <Grid item xs={6}>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                Name
+              </Typography>
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {enquiryData?.name || "N/A"}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                Email
+              </Typography>
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {enquiryData?.email || "N/A"}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                Phone
+              </Typography>
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {enquiryData?.phone || "N/A"}
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                Subject
+              </Typography>
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {enquiryData?.subject || "N/A"}
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                Enquiry
+              </Typography>
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {enquiryData?.enquiry || "N/A"}
               </Typography>
             </Grid>
           </Grid>

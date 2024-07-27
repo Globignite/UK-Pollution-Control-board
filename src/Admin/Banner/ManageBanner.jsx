@@ -52,7 +52,7 @@ function ManageBanner() {
   }, []);
 
   return (
-    <Container >
+    <Container>
       <Spinner loading={loading} />
       <Typography variant="h6" gutterBottom>
         Manage Banner

@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import {
   Container,
   Typography,
@@ -247,6 +248,20 @@ function ViewComplaint() {
     content: () => componentRef.current,
   });
 
+  // model to open image  =======================
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
+
+  // Add this function to handle image click
+  const handleImageClick = (url) => {
+    setSelectedImage(url);
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setSelectedImage("");
+  };
+
   return (
     <Container>
       <Box
@@ -260,7 +275,7 @@ function ViewComplaint() {
         <Box
           id="disableComponentPrint"
           sx={{
-            display: "flex",
+            display: complaint?.status === "resolved" ? "none" : "flex",
             alignItems: "center",
           }}
         >
@@ -324,46 +339,120 @@ function ViewComplaint() {
         <Paper sx={{ padding: 4, width: "100%" }}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Typography variant="body2" component="div">
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Complaint Number
               </Typography>
               <Typography>{complaint?.complaintId || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Status
               </Typography>
-              <Typography>{complaint?.status || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
-                Subject
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {complaint?.status || "N/A"}
               </Typography>
-              <Typography>{complaint?.subject || "N/A"}</Typography>
+
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                Date
+              </Typography>
+              <Typography>
+                {complaint?.createdAt
+                  ? complaint?.createdAt.split("T")[0]
+                  : "N/A"}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                In Progress Date
+              </Typography>
+              <Typography>
+                {complaint?.progress_date
+                  ? complaint?.progress_date.split("T")[0]
+                  : "N/A"}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                Resolved Date
+              </Typography>
+              <Typography>
+                {complaint?.resolve_date
+                  ? complaint?.resolve_date.split("T")[0]
+                  : "N/A"}
+              </Typography>
             </Grid>
+
             <Grid item xs={6}>
-              <Typography variant="body2" component="div">
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Name
               </Typography>
-              <Typography>{complaint?.name || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {complaint?.name || "N/A"}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Email
               </Typography>
-              <Typography>{complaint?.email || "N/A"}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" component="div">
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {complaint?.email || "N/A"}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Phone
               </Typography>
-              <Typography>{complaint?.phone || "N/A"}</Typography>
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {complaint?.phone || "N/A"}
+              </Typography>
             </Grid>
+
             <Grid item xs={12}>
-              <Typography variant="body2" component="div">
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
+                Subject
+              </Typography>
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {complaint?.subject || "N/A"}
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography
+                variant="body2"
+                sx={{ color: "gray", marginTop: "10px" }}
+                component="div"
+              >
                 Complaint
               </Typography>
-              <Typography>{complaint?.complaint || "N/A"}</Typography>
+              <Typography sx={{ overflowWrap: "break-word" }}>
+                {complaint?.complaint || "N/A"}
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="body2" component="div">
@@ -380,42 +469,16 @@ function ViewComplaint() {
                       width={200}
                       height={100}
                       alt={`Complaint Image ${index + 1}`}
-                      style={{ margin: "5px" }}
+                      style={{ margin: "5px", cursor: "pointer" }}
+                      onClick={() =>
+                        handleImageClick(
+                          `https://delightfulbroadband.com${file.href}`
+                        )
+                      }
                     />
                   ))}
                 </Box>
               )}
-            </Grid>
-
-            <Grid item xs={4}>
-              <Typography variant="body2" component="div">
-                Date
-              </Typography>
-              <Typography>
-                {complaint?.createdAt
-                  ? complaint?.createdAt.split("T")[0]
-                  : "N/A"}
-              </Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography variant="body2" component="div">
-                In Progress Date
-              </Typography>
-              <Typography>
-                {complaint?.progress_date
-                  ? complaint?.progress_date.split("T")[0]
-                  : "N/A"}
-              </Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography variant="body2" component="div">
-                Resolved Date
-              </Typography>
-              <Typography>
-                {complaint?.resolve_date
-                  ? complaint?.resolve_date.split("T")[0]
-                  : "N/A"}
-              </Typography>
             </Grid>
           </Grid>
         </Paper>
@@ -474,6 +537,21 @@ function ViewComplaint() {
           </TableContainer>
         </Box>
       </div>
+
+      <Dialog
+        open={openModal}
+        onClose={handleCloseModal}
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogContent>
+          <img
+            src={selectedImage}
+            alt="Enlarged Complaint Image"
+            style={{ width: "100%" }}
+          />
+        </DialogContent>
+      </Dialog>
     </Container>
   );
 }

@@ -160,7 +160,7 @@ const Sidebar = () => {
       </Typography>
       <Divider />
       <List>
-        {menuItems.map((item, index) => (
+        {menuItems?.map((item, index) => (
           <div key={index}>
             {item.icon ? (
               <ListItem button component={NavLink} to={item.path}>
@@ -177,8 +177,8 @@ const Sidebar = () => {
               </ListItem>
             )}
 
-            {item.items &&
-              item.items.map((subItem, subIndex) => (
+            {item?.items &&
+              item?.items?.map((subItem, subIndex) => (
                 <ListItem
                   button
                   component={NavLink}

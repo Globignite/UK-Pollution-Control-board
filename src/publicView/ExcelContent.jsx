@@ -39,11 +39,11 @@ const ExcelContent = ({ excelData }) => {
           const jsonData = utils.sheet_to_json(firstSheet, { header: 1 });
 
           if (jsonData.length > 0) {
-            const cols = jsonData[0].map((col, idx) => ({
+            const cols = jsonData[0]?.map((col, idx) => ({
               key: idx.toString(),
               name: col || `Column ${idx + 1}`,
             }));
-            const rowsData = jsonData.slice(1).map((row, rowIndex) => {
+            const rowsData = jsonData.slice(1)?.map((row, rowIndex) => {
               let rowObj = {};
               row.forEach((cell, cellIndex) => {
                 rowObj[cols[cellIndex]?.name] = cell;

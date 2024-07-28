@@ -16,7 +16,7 @@ export default function MainBanner() {
           },
         }
       );
-      console.log("Banner:", response?.data?.data);
+      // console.log("Banner:", response?.data?.data);
       setBanner(response?.data?.data || []);
     } catch (error) {
       console.error("Error fetching notifications:", error);
@@ -52,7 +52,7 @@ export default function MainBanner() {
         },
       }}
     >
-      {banner.map(({ name, href }) => (
+      {banner?.map(({ name, href }) => (
         <Paper key={name} sx={{ height: { lg: "400px", xs: "200px" } }}>
           <img
             src={`https://delightfulbroadband.com${href}`}

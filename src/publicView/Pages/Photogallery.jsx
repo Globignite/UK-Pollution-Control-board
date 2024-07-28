@@ -17,7 +17,7 @@ export default function Photogallery() {
       cols={4}
       rowHeight={121}
     >
-      {itemData.map((item) => (
+      {itemData?.map((item) => (
         <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
           <img
             {...srcset(item.img, 121, item.rows, item.cols)}

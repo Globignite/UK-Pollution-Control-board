@@ -42,7 +42,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/" element={<PublicLayout />}>
               {/* for sidebar */}
-              {RoutesJson.map((item) => {
+              {RoutesJson?.map((item) => {
                 if (item.hasSubItem) {
                   return (
                     <Route

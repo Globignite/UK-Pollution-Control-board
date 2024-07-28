@@ -22,8 +22,8 @@ const ExcelPreview = ({ file }) => {
             const jsonData = utils.sheet_to_json(firstSheet, { header: 1 });
 
             if (jsonData.length > 0) {
-              const cols = jsonData[0].map((col, idx) => ({ key: idx.toString(), name: col || `Column ${idx + 1}` }));
-              const rowsData = jsonData.slice(1).map((row, rowIndex) => {
+              const cols = jsonData[0]?.map((col, idx) => ({ key: idx.toString(), name: col || `Column ${idx + 1}` }));
+              const rowsData = jsonData?.slice(1).map((row, rowIndex) => {
                 let rowObj = {};
                 row.forEach((cell, cellIndex) => {
                   rowObj[cellIndex.toString()] = cell;
@@ -65,7 +65,7 @@ const ExcelPreview = ({ file }) => {
             <Table stickyHeader aria-label="sticky table" >
               <TableHead>
                 <TableRow>
-                  {columns.map((column) => (
+                  {columns?.map((column) => (
                     <TableCell sx={{ fontWeight: 'bolder' }} key={column.key}>{column.name}</TableCell>
                   ))}
                 </TableRow>
@@ -73,7 +73,7 @@ const ExcelPreview = ({ file }) => {
               <TableBody>
                 {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                   <TableRow key={row.id}>
-                    {columns.map((column) => (
+                    {columns?.map((column) => (
                       <TableCell key={`${row.id}-${column.key}`}>{row[column.key]}</TableCell>
                     ))}
                   </TableRow>

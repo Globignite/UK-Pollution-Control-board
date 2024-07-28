@@ -162,7 +162,7 @@ const AddBanner = () => {
       </FormControl>
 
       <Grid container spacing={2}>
-        {files.map((fileObj, index) => (
+        {files?.map((fileObj, index) => (
           <Grid item xs={4} key={index}>
             <div style={{ position: "relative" }}>
               {fileObj.type.startsWith("video/") ? (

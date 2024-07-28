@@ -54,7 +54,7 @@ export default function Gallery() {
           Gallery
         </Typography>
         <Grid container spacing={2}>
-          {galleryItems.map(({ title, image }) =>
+          {galleryItems?.map(({ title, image }) =>
             title ? (
               <Grid item key={image} xs={6} sm={6} md={3} lg={3}>
                 <Paper sx={{ boxShadow: "none", position: "relative" }}>

@@ -1,5 +1,17 @@
 import { useEffect, useState } from "react";
-import { Typography,  Grid, IconButton, Container } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Grid,
+  IconButton,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import Spinner from "../../publicView/Components/Spinner";
@@ -7,6 +19,8 @@ import Spinner from "../../publicView/Components/Spinner";
 function ManageBanner() {
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [bannerToDelete, setBannerToDelete] = useState(null);
 
   const fetchBanners = async () => {
     try {
@@ -21,7 +35,18 @@ function ManageBanner() {
     }
   };
 
-  const deleteBanner = async (id) => {
+  const handleDeleteClick = (id) => {
+    setBannerToDelete(id);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setBannerToDelete(null);
+  };
+
+  const confirmDelete = async () => {
+    if (!bannerToDelete) return;
     setLoading(true);
     const token = localStorage.getItem("token");
     console.log(token);
@@ -33,7 +58,7 @@ function ManageBanner() {
             Authorization: `Bearer ${token}`,
           },
           data: {
-            _id: id,
+            _id: bannerToDelete,
           },
         }
       );
@@ -45,6 +70,7 @@ function ManageBanner() {
       alert(error.response?.data?.error || "Oops, something went wrong");
     }
     setLoading(false);
+    handleClose();
   };
 
   useEffect(() => {
@@ -94,7 +120,7 @@ function ManageBanner() {
                   right: 2,
                   backgroundColor: "rgba(255, 255, 255, 0.7)",
                 }}
-                onClick={() => deleteBanner(ele._id)}
+                onClick={() => handleDeleteClick(ele._id)}
               >
                 <DeleteIcon fontSize="small" />
               </IconButton>
@@ -104,6 +130,26 @@ function ManageBanner() {
           <p>No data</p>
         )}
       </Grid>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+      >
+        <DialogTitle>{"Confirm Delete"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this banner? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={confirmDelete} color="primary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }

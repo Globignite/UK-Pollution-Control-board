@@ -10,25 +10,37 @@ import {
   Button,
   Container,
   Typography,
+  Alert,
 } from "@mui/material";
-import { toast } from "sonner";
+import { toast } from "sonner";  // Ensure you have installed the "sonner" package
 import axios from "axios";
-import Spinner from "../../publicView/Components/Spinner";
+import Spinner from "../../publicView/Components/Spinner";  // Ensure the Spinner component is correctly imported
 
-const formats = ["PDF"];
+const formats = ["PDF", "Image"];
 
 const AddMarque = () => {
-  const [selectedFormat, setSelectedFormat] = useState("Pdf");
+  const [selectedFormat, setSelectedFormat] = useState("PDF");
   const [file, setFile] = useState(null);
-  const [title, setTitle] = useState(null);
+  const [title, setTitle] = useState("");
   const [error, setError] = useState("");
   const [customFileName, setCustomFileName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+
+  useEffect(() => {
+    // Check if all required fields are filled
+    if (file && customFileName && title) {
+      setIsSubmitDisabled(false);
+    } else {
+      setIsSubmitDisabled(true);
+    }
+  }, [file, customFileName, title]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const validExtensions = {
       PDF: ["pdf"],
+      Image: ["jpg", "jpeg", "png", "gif"],
     };
 
     const fileExtension = file.name.split(".").pop().toLowerCase();
@@ -54,17 +66,10 @@ const AddMarque = () => {
 
     if (file && customFileName) {
       const token = localStorage.getItem("token");
-      console.log("marque title = ", title);
-      console.log("marque data = ", formData);
       try {
         const response = await axios.post(
           `https://delightfulbroadband.com/api/marquee`,
           formData,
-          // {
-          //   marquee_title:title,
-          //   custom_name:customFileName,
-          //   file:file
-          // },
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -92,7 +97,7 @@ const AddMarque = () => {
   const handleFormatChange = (event) => {
     event.preventDefault();
     setFile(null);
-    setTitle(null);
+    setTitle("");
     setError("");
     setSelectedFormat(event.target.value);
 
@@ -103,11 +108,7 @@ const AddMarque = () => {
   };
 
   const handleClear = () => {
-    // setSelectedHeading(null);
-    // setSelectedSubheadings({});
-    // setSelectedFormat("Excel");
     setFile(null);
-    // setFileURL(null);
     setCustomFileName("");
     setTitle("");
     setError("");
@@ -122,7 +123,7 @@ const AddMarque = () => {
     <Container>
       <Spinner loading={loading} />
       <Typography variant="h5">Add Marquee</Typography>
-      <Box sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}>
+      <Box sx={{ width: { lg: "60%", xs: "100%" }, p: 1, mt: 5 }}>
         <FormControl component="fieldset" sx={{ mb: 2, width: "100%" }}>
           <FormLabel component="legend">Format</FormLabel>
           <RadioGroup row value={selectedFormat} onChange={handleFormatChange}>
@@ -157,10 +158,16 @@ const AddMarque = () => {
           <input
             type="file"
             name="file"
-            accept={selectedFormat === "Excel" ? ".xlsx,.xls,.csv" : ".pdf"}
+            accept={selectedFormat === "Image" ? "image/*" : ".pdf"}
             onChange={handleFileChange}
           />
         </FormControl>
+
+        {error && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        )}
 
         <Box>
           <Button
@@ -174,6 +181,7 @@ const AddMarque = () => {
             variant="contained"
             sx={{ width: "45%", mt: 2, ml: 1 }}
             onClick={handleSubmit}
+            disabled={isSubmitDisabled}
           >
             Submit
           </Button>

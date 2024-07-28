@@ -94,52 +94,21 @@ function Events() {
         Events
       </Typography>
 
-      <Stack spacing={2} direction="row" sx={{ mt: 2 }}>
-        <Box sx={{ display: { lg: "flex", xs: "block" } }}>
-          <Box sx={{ position: "relative" }} style={{ margin: "5px" }}>
-            <SearchIcon
-              sx={{
-                position: "absolute",
-                top: "5px",
-                left: "5px",
-                color: "grey",
-              }}
-            />
-            <input
-              type="search"
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-            />
-          </Box>
-
-          <Box style={{ margin: "7px 5px", display: "flex", gap: "4px" }}>
-            <Button
-              variant="contained"
-              onClick={fetchMediaSearch}
-              sx={{
-                bgcolor: "secondary.main",
-                textTransform: "none",
-                borderRadius: 2,
-                ":hover": { backgroundColor: "secondary.light" },
-              }}
-            >
-              Search
-            </Button>
-            <Button
-              variant="contained"
-              sx={{
-                bgcolor: "secondary.main",
-                textTransform: "none",
-                borderRadius: 2,
-                ":hover": { backgroundColor: "secondary.light" },
-              }}
-            >
-              Refresh
-            </Button>
-          </Box>
+      <Stack spacing={2} direction="row" sx={{ mt: 2 }} >
+        <Box sx={{display: "flex",gap:"6px" }}>
+        <Box sx={{ position: "relative"}} style={{margin:'5px'}}>
+          <SearchIcon sx={{ position: "absolute", top: "5px", left: "5px", color: "grey" }} />
+          <input type="search" value={search} onChange={(e)=>{setSearch(e.target.value)}}/>
         </Box>
+     <Button
+          variant="contained"
+          onClick={fetchMediaSearch}
+          sx={{ bgcolor: "secondary.main", textTransform: "none", borderRadius: 2, ":hover": { backgroundColor: "secondary.light" } }}
+        >
+          Search
+        </Button>
+    
+     </Box>
       </Stack>
 
       <Grid
@@ -149,46 +118,26 @@ function Events() {
       >
         {media?.map((event, index) => (
           <Grid item xs={1} sm={4} md={4} key={index}>
-            <Box
-              sx={{
-                margin: "20px 0px",
-                boxShadow:
-                  "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ",
-                borderRadius: "8px",
-              }}
-            >
-              <img
-                src={`https://delightfulbroadband.com${event.data[0].href}`}
-                alt={event.name}
-                loading="lazy"
-                style={{
-                  width: "100%",
-                  height: "150px",
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                }}
-              />
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Typography
-                  sx={{
-                    my: 2,
-                    mx: 1,
-                    fontWeight: "600",
-                    fontSize: "1.3rem",
-                    color: "primary.main",
-                  }}
-                >
+             <Link to={`/media/event-gallery/${event._id}`}>
+            <Box sx={{margin: "20px 0px",borderRadius:"8px"}}>  
+              <img src={`https://delightfulbroadband.com${event.data[0].href}`} alt={event.name}   
+              loading="lazy"
+                        style={{
+                          width: "100%",
+                          height: "150px",
+                          objectFit: "cover",
+                          borderRadius:"8px",
+                        }} />
+              <Box display="flex" justifyContent="space-between" alignItems="center">
+                <Typography sx={{ my: 2, mx: 1, fontWeight: "600", fontSize: "1.3rem", color: "primary.main" }}>
                   {event.name}
                 </Typography>
-                <Link to={`/media/event-gallery/${event._id}`}>
+               
                   <ArrowOutwardIcon sx={{ color: "#155693" }} />
-                </Link>
+                
               </Box>
             </Box>
+            </Link>
           </Grid>
         ))}
       </Grid>

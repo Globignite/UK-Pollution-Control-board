@@ -6,25 +6,26 @@ import Carousel from "react-material-ui-carousel";
 export default function MainBanner() {
   const [banner, setBanner] = useState([]);
 
-  const fetchMainBanner = async () => {
-    try {
-      const response = await axios.get(
-        "https://delightfulbroadband.com/api/banner/fetch-banner",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      // console.log("Banner:", response?.data?.data);
-      setBanner(response?.data?.data || []);
-    } catch (error) {
-      console.error("Error fetching notifications:", error);
-    }
-  };
-  useEffect(() => {
-    fetchMainBanner();
-  }, []);
+const fetchMainBanner= async () => {
+  try {
+    const response = await axios.get(
+      "https://delightfulbroadband.com/api/banner/fetch-banner",
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    // console.log("Banner:", response?.data?.data);
+    setBanner(response?.data?.data || []);
+  } catch (error) {
+    console.error("Error fetching notifications:", error);
+  }
+};
+ useEffect(()=>{
+  fetchMainBanner();
+ },[])
+
 
   return (
     <Carousel

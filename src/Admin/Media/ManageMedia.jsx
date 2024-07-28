@@ -6,12 +6,21 @@ import {
   TextField,
   Typography,
   Grid,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../../publicView/Components/Spinner";
+ 
+import { toast } from "sonner";
+ 
 import Pagination from "../../publicView/Components/Pagination";
+ 
 
 function ManageMedia() {
   const [media, setMedia] = useState([]);
@@ -21,14 +30,10 @@ function ManageMedia() {
   const [loading, setLoading] = useState(false);
   const [pageNo, setPageNo] = useState(1);
   const [paginationData, setPaginationData] = useState(0);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [mediaToDelete, setMediaToDelete] = useState(null);
 
-  const fetchMedia = async (
-    startDate,
-    endDate,
-    searchTerm,
-    page = 1,
-    limit = 10
-  ) => {
+  const fetchMedia = async (startDate, endDate, searchTerm, pageNo) => {
     setLoading(true);
     try {
       const response = await axios.get(
@@ -50,7 +55,9 @@ function ManageMedia() {
       const { data, pagination } = response.data;
       console.log("Media Data:", response?.data.data);
       setMedia(response?.data.data);
+ 
       setPaginationData(response?.data.pagination);
+ 
     } catch (error) {
       console.error(
         "Error fetching media:",
@@ -63,15 +70,16 @@ function ManageMedia() {
 
   const setPage = (page) => {
     setPageNo(page);
+    fetchMedia(startDate, endDate, searchTerm, page);
   };
 
   useEffect(() => {
-    fetchMedia();
+    fetchMedia(startDate, endDate, searchTerm, pageNo);
   }, [pageNo]);
 
   const handleFilterClick = () => {
     setPageNo(1);
-    fetchMedia();
+    fetchMedia(startDate, endDate, searchTerm, 1);
   };
 
   const handleDateChange = (type, value) => {
@@ -87,32 +95,43 @@ function ManageMedia() {
   };
 
   const handleSearchClick = () => {
-    fetchMedia(startDate, endDate, searchTerm);
+    setPageNo(1);
+    fetchMedia(startDate, endDate, searchTerm, 1);
   };
 
-  const deleteEvent = async (id) => {
+  const openDeleteDialog = (media) => {
+    setMediaToDelete(media);
+    setOpenDialog(true);
+  };
+
+  const closeDeleteDialog = () => {
+    setMediaToDelete(null);
+    setOpenDialog(false);
+  };
+
+  const deleteEvent = async () => {
     setLoading(true);
-    if (confirm("Are you sure you want to delete this Media")) {
-      const token = localStorage.getItem("token");
-      try {
-        const response = await axios.delete(
-          "https://delightfulbroadband.com/api/media/delete-media-event",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            data: {
-              _id: id,
-            },
-          }
-        );
-        console.log("Success:", response);
-        fetchMedia(startDate, endDate);
-        alert("Media deleted successfully");
-      } catch (error) {
-        console.error("Error deleting Event:", error);
-        alert(error.response?.data?.error || "Oops, something went wrong");
-      }
+    setOpenDialog(false);
+    const id = mediaToDelete._id;
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.delete(
+        "https://delightfulbroadband.com/api/media/delete-media-event",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          data: {
+            _id: id,
+          },
+        }
+      );
+      console.log("Success:", response);
+      fetchMedia(startDate, endDate, searchTerm, pageNo);
+      toast.success("Media deleted successfully");
+    } catch (error) {
+      console.error("Error deleting Event:", error);
+      toast.error(error.response?.data?.error || "Oops, something went wrong");
     }
     setLoading(false);
   };
@@ -245,7 +264,7 @@ function ManageMedia() {
                   right: 3,
                   backgroundColor: "rgba(255, 255, 255, 0.7)",
                 }}
-                onClick={() => deleteEvent(item._id)}
+                onClick={() => openDeleteDialog(item)}
               >
                 <DeleteIcon fontSize="small" />
               </IconButton>
@@ -262,6 +281,23 @@ function ManageMedia() {
           />
         )}
       </Box>
+
+      <Dialog open={openDialog} onClose={closeDeleteDialog}>
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this media event?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeDeleteDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={deleteEvent} color="primary" autoFocus>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }

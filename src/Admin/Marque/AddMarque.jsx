@@ -12,8 +12,8 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
-import { toast } from "sonner";  // Ensure you have installed the "sonner" package
 import axios from "axios";
+import { toast } from "sonner";
 import Spinner from "../../publicView/Components/Spinner";  // Ensure the Spinner component is correctly imported
 
 const formats = ["PDF", "Image"];
@@ -82,11 +82,11 @@ const AddMarque = () => {
           throw new Error("Failed to upload file");
         }
 
-        toast.success(response?.data?.message, { duration: 1500 });
+        toast.success(response?.data?.message, { duration: 3000 });
         handleClear();
       } catch (error) {
         console.error("Error uploading file:", error);
-        toast.error("Failed to upload file", { duration: 1500 });
+        toast.error("Failed to upload file", { duration: 3000 });
       }
     } else {
       console.log("Form is incomplete");

@@ -13,12 +13,19 @@ import {
   Paper,
   Link,
   Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import GetMenu from "../Components/GetMenu";
 import axios from "axios";
 import Spinner from "../../publicView/Components/Spinner";
 import Pagination from "../../publicView/Components/Pagination";
+import { toast } from "sonner";
 
 const FileManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,8 +35,11 @@ const FileManagement = () => {
   const [loading, setLoading] = useState(false);
   const [pageNo, setPageNo] = useState(1);
   const [paginationData, setPaginationData] = useState(0);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [deleteFile, setDeleteFile] = useState({ href: "", name: "" });
 
   const fetchFiles = async (menu_path) => {
+    setLoading(true);
     try {
       const baseURL = `https://delightfulbroadband.com/api/filesUpload/fetch-file`;
       const defaultParams = {
@@ -49,14 +59,14 @@ const FileManagement = () => {
       if (response.status !== 200) {
         throw new Error("Failed to fetch file");
       }
-
-      console.log(response?.data?.pagination);
+ 
       setData(response?.data);
       setPaginationData(response?.data?.pagination);
     } catch (error) {
       console.error("Error fetching file:", error);
       setData([]);
     }
+    setLoading(false);
   };
 
   const setPage = (page) => {
@@ -67,36 +77,46 @@ const FileManagement = () => {
     fetchFiles();
   }, [pageNo]);
 
-  const handleDelete = async (href, name) => {
+  const handleDelete = async () => {
     setLoading(true);
-    if (confirm("Are you sure you want to delete " + name)) {
-      try {
-        const reqData = {
-          filePath: data?.data?.filePath,
-          href: href,
-        };
-        const token = localStorage.getItem("token");
-        const response = await axios.delete(
-          "https://delightfulbroadband.com/api/filesUpload/delete-file",
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            data: reqData, // This is the correct place to put the data for delete request
-          }
-        );
-
-        if (response.status !== 200) {
-          throw new Error("Failed to delete file");
+    const { href, name } = deleteFile;
+    try {
+      const reqData = {
+        filePath: data?.data?.filePath,
+        href: href,
+      };
+      const token = localStorage.getItem("token");
+      const response = await axios.delete(
+        "https://delightfulbroadband.com/api/filesUpload/delete-file",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          data: reqData,
         }
-        fetchFiles(data?.data?.filePath);
-        alert("File deleted successfully");
-      } catch (error) {
-        console.error("Error deleting file:", error);
+      );
+
+      if (response.status !== 200) {
+        throw new Error("Failed to delete file");
       }
+      fetchFiles(data?.data?.filePath);
+      toast.success("File deleted successfully", { duration: 3000 });
+    } catch (error) {
+      console.error("Error deleting file:", error);
+      toast.error("Failed to delete file", { duration: 3000 });
     }
     setLoading(false);
+    setOpenDialog(false);
+  };
+
+  const handleOpenDialog = (href, name) => {
+    setDeleteFile({ href, name });
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
 
   const handleSearchChange = (event) => {
@@ -121,7 +141,7 @@ const FileManagement = () => {
       <Typography variant="h6" gutterBottom>
         Manage Files
       </Typography>
-      {/* component for getting menu and sub menu  */}
+      {/* component for getting menu and sub menu */}
       <Box
         display="flex"
         flexDirection="row"
@@ -180,14 +200,15 @@ const FileManagement = () => {
               {data?.data?.data?.map((ele, ind) => (
                 <TableRow key={ind}>
                   <TableCell>
-                    <Link href="#">{ele.name}</Link>
+                    <Link href={`https://delightfulbroadband.com${ele?.href}`}>{ele?.name}</Link>
                   </TableCell>
                   <TableCell>{ele.createdAt.split("T")[0]}</TableCell>
                   <TableCell>
-                    <IconButton color="primary">
-                      <DeleteIcon
-                        onClick={() => handleDelete(ele.href, ele.name)}
-                      />
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleOpenDialog(ele.href, ele.name)}
+                    >
+                      <DeleteIcon />
                     </IconButton>
                   </TableCell>
                 </TableRow>
@@ -206,6 +227,28 @@ const FileManagement = () => {
           />
         )}
       </Box>
+
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Confirm Delete"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete {deleteFile.name}?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} color="primary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };

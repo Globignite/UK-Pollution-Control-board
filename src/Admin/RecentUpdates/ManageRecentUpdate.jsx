@@ -14,11 +14,20 @@ import {
   Paper,
   Link,
   Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import Spinner from "../../publicView/Components/Spinner";
+ 
+import { toast } from "sonner";
+ 
 import Pagination from "../../publicView/Components/Pagination";
+ 
 
 const ManageRecentUpdate = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,6 +37,8 @@ const ManageRecentUpdate = () => {
   const [loading, setLoading] = useState(false);
   const [pageNo, setPageNo] = useState(1);
   const [paginationData, setPaginationData] = useState(0);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [fileToDelete, setFileToDelete] = useState(null);
 
   const fetchNotifications = async () => {
     setLoading(true);
@@ -49,8 +60,9 @@ const ManageRecentUpdate = () => {
       if (response.status !== 200) {
         throw new Error("Failed to fetch file");
       }
-
+ 
       console.log("recent update", response?.data?.data?.data);
+ 
       setNotifications(response?.data?.data?.data);
       setPaginationData(response?.data?.pagination);
     } catch (error) {
@@ -70,38 +82,43 @@ const ManageRecentUpdate = () => {
 
   const handleFilterClick = () => {
     setPageNo(1);
-    fetchComplaints();
+    fetchNotifications();
   };
 
-  const handleDelete = async (_id, href, name) => {
-    setLoading(true);
-    if (confirm("Are you sure you want to delete " + name)) {
-      try {
-        const reqData = {
-          filePath: "null/Recent Updates",
-          href: href,
-        };
-        const token = localStorage.getItem("token");
-        const response = await axios.delete(
-          "https://delightfulbroadband.com/api/filesUpload/delete-file",
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            data: reqData, // This is the correct place to put the data for delete request
-          }
-        );
+  const handleDeleteClick = (file) => {
+    setFileToDelete(file);
+    setOpenDialog(true);
+  };
 
-        if (response.status !== 200) {
-          throw new Error("Failed to delete file");
+  const handleDeleteConfirm = async () => {
+    setLoading(true);
+    setOpenDialog(false);
+    const { _id, href, name } = fileToDelete;
+    try {
+      const reqData = {
+        filePath: "null/Recent Updates",
+        href: href,
+      };
+      const token = localStorage.getItem("token");
+      const response = await axios.delete(
+        "https://delightfulbroadband.com/api/filesUpload/delete-file",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          data: reqData,
         }
-        fetchNotifications();
-        alert("File deleted successfully");
-      } catch (error) {
-        console.error("Error deleting file:", error);
-        alert("Error deleting file:", error);
+      );
+
+      if (response.status !== 200) {
+        throw new Error("Failed to delete file");
       }
+      fetchNotifications();
+      toast.success("File deleted successfully", { duration: 3000 });
+    } catch (error) {
+      console.error("Error deleting file:", error);
+      toast.error("Error deleting file", { duration: 3000 });
     }
     setLoading(false);
   };
@@ -171,7 +188,7 @@ const ManageRecentUpdate = () => {
         </Button>
       </Box>
 
-      {notifications.length == 0 ? (
+      {notifications?.length == 0 ? (
         <Typography variant="h6" gutterBottom>
           No Records
         </Typography>
@@ -182,7 +199,6 @@ const ManageRecentUpdate = () => {
               <TableRow>
                 <TableCell>Title</TableCell>
                 <TableCell>Publish Date</TableCell>
-
                 <TableCell>File Type</TableCell>
                 <TableCell>Remove</TableCell>
               </TableRow>
@@ -191,17 +207,20 @@ const ManageRecentUpdate = () => {
               {notifications?.map((file, index) => (
                 <TableRow key={index}>
                   <TableCell>
-                    <Link href="#">{file?.name || "N/A"}</Link>
+                    <Link
+                      href={`https://delightfulbroadband.com${file?.href}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {file?.name || "N/A"}
+                    </Link>
                   </TableCell>
                   <TableCell>{file.createdAt.split("T")[0] || "N/A"}</TableCell>
-
                   <TableCell>{file.type}</TableCell>
                   <TableCell>
                     <IconButton
                       color="primary"
-                      onClick={() =>
-                        handleDelete(file?._id, file?.href, file?.name)
-                      }
+                      onClick={() => handleDeleteClick(file)}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -222,6 +241,23 @@ const ManageRecentUpdate = () => {
           />
         )}
       </Box>
+
+      <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this file?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenDialog(false)} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDeleteConfirm} color="primary" autoFocus>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };

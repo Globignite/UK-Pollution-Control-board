@@ -15,6 +15,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import Spinner from "../../publicView/Components/Spinner";
+import { toast } from "sonner"; 
 
 function ManageBanner() {
   const [banners, setBanners] = useState([]);
@@ -63,11 +64,11 @@ function ManageBanner() {
         }
       );
       console.log("Success:", response);
-      alert("Banner Deleted successfully");
+      toast.success("Banner Deleted successfully", { duration: 3000 });
       fetchBanners();
     } catch (error) {
       console.error("Error deleting Banner:", error);
-      alert(error.response?.data?.error || "Oops, something went wrong");
+      toast.error(error.response?.data?.error || "Oops, something went wrong", { duration: 3000 });
     }
     setLoading(false);
     handleClose();

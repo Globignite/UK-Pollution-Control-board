@@ -40,10 +40,12 @@ const NoticesAndUpdates = () => {
           </Box>
         </Grid>
         <Grid item lg={9} md={9} xs={12} container direction="column">
+ 
 
           <VerticalRecentUpdate />
           <Link to="/recent-updates">Read More</Link>
 
+ 
         </Grid>
       </Grid>
     </Box>

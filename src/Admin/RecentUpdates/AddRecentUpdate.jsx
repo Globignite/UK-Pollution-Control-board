@@ -63,11 +63,11 @@ const AddRecentUpdate = () => {
           throw new Error("Failed to upload file");
         }
 
-        toast.success(response?.data?.message, { duration: 1500 });
+        toast.success(response?.data?.message, { duration: 3000 });
         handleClear();
       } catch (error) {
         console.error("Error uploading file:", error);
-        toast.error("Failed to upload file", { duration: 1500 });
+        toast.error("Failed to upload file", { duration: 3000 });
       }
     } else {
       console.log("Form is incomplete");
@@ -110,6 +110,12 @@ const AddRecentUpdate = () => {
           />
         </FormControl>
 
+        {error && (
+          <Typography color="error" variant="body2" sx={{ mb: 2 }}>
+            {error}
+          </Typography>
+        )}
+
         <Box>
           <Button
             variant="outlined"
@@ -122,6 +128,7 @@ const AddRecentUpdate = () => {
             variant="contained"
             sx={{ width: "45%", mt: 2, ml: 1 }}
             onClick={handleSubmit}
+            disabled={!file || !customFileName}
           >
             Submit
           </Button>

@@ -44,7 +44,7 @@ const FileManagement = () => {
       const baseURL = `https://delightfulbroadband.com/api/filesUpload/fetch-file`;
       const defaultParams = {
         path: "null/About Us",
-        limit: 10,
+        limit: 5,
         page: pageNo,
       };
 
@@ -59,8 +59,9 @@ const FileManagement = () => {
       if (response.status !== 200) {
         throw new Error("Failed to fetch file");
       }
-
+ 
       setData(response?.data);
+      setPaginationData(response?.data?.pagination);
     } catch (error) {
       console.error("Error fetching file:", error);
       setData([]);
@@ -218,7 +219,7 @@ const FileManagement = () => {
       )}
 
       <Box>
-        {paginationData.totalPages > 1 && (
+        {paginationData?.total > 1 && (
           <Pagination
             pagination={paginationData}
             setPageNo={setPage}

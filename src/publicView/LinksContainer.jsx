@@ -89,7 +89,7 @@ const LinksContainer = ({ itemData }) => {
           </Typography>
         </Box>
       </Box>
-      {submenuItems.map((item) => (
+      {submenuItems?.map((item) => (
         <Link to={`${item.path}`} key={item.path}>
           <Card
             sx={{

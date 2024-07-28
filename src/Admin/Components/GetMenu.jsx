@@ -99,7 +99,7 @@ const GetMenu = ({ menuPath }) => {
     setLoading(true);
     let combinedHeadings = [
       selectedHeading.name,
-      ...Object.values(selectedSubheadings).map(
+      ...Object.values(selectedSubheadings)?.map(
         (subheading) => subheading?.name
       ),
     ];

@@ -60,7 +60,7 @@ const MyComponent = () => {
         ...selectedHeading.subheadings,
         { label: `Subheading ${selectedHeading.subheadings.length + 1}` },
       ];
-      const updatedHeadings = headings.map((heading) =>
+      const updatedHeadings = headings?.map((heading) =>
         heading.label === selectedHeading.label
           ? { ...heading, subheadings: newSubheadings }
           : heading
@@ -164,7 +164,7 @@ const MyComponent = () => {
             value={selectedFormat}
             onChange={(event) => setSelectedFormat(event.target.value)}
           >
-            {formats.map((format) => (
+            {formats?.map((format) => (
               <FormControlLabel
                 key={format}
                 value={format}

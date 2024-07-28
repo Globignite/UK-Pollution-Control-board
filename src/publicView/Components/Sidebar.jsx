@@ -58,8 +58,8 @@ export default function Sidebar() {
             py: 5,
           }}
         >
-          {SideMenu.menu.map((menuItem) => (
-            <Box key={menuItem.name}>
+          {SideMenu?.menu?.map((menuItem) => (
+            <Box key={menuItem?.name}>
               <ListItem
                 sx={{
                   borderBottom: '1px solid #EEEEEE',
@@ -114,7 +114,7 @@ export default function Sidebar() {
               {menuItem.subItems && (
                 <Collapse in={open[menuItem.name]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
-                    {menuItem.subItems.map((subItem) => (
+                    {menuItem?.subItems?.map((subItem) => (
                       <div key={subItem.name}>
                         {subItem?.subItems ? (
                           <ListItem key={subItem.name} sx={{ pl: 5 }} button>
@@ -166,7 +166,7 @@ export default function Sidebar() {
                         {subItem?.subItems && (
                           <Collapse in={openSub[subItem.name]} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
-                              {subItem.subItems.map((nestedSubItem) => (
+                              {subItem?.subItems?.map((nestedSubItem) => (
                                 <ListItem key={nestedSubItem.name} sx={{ pl: 8 }} button>
                                   <Link
                                     component={RouterLink}

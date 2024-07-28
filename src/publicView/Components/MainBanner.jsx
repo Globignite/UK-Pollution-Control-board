@@ -6,21 +6,6 @@ import Carousel from "react-material-ui-carousel";
 export default function MainBanner() {
   const [banner, setBanner] = useState([]);
 
-  const items = [
-    {
-        name: "Banner1",
-        image: "/assets/banner1.png"
-    },
-    {
-        name: "Banner2",
-        image: "/assets/banner1.png"
-    },
-    {
-        name: "Banner3",
-        image: "/assets/banner1.png"
-    },
-
-];
 const fetchMainBanner= async () => {
   try {
     const response = await axios.get(
@@ -40,6 +25,7 @@ const fetchMainBanner= async () => {
  useEffect(()=>{
   fetchMainBanner();
  },[])
+
 
   return (
     <Carousel
@@ -67,7 +53,7 @@ const fetchMainBanner= async () => {
         },
       }}
     >
-      {banner.map(({ name, href }) => (
+      {banner?.map(({ name, href }) => (
         <Paper key={name} sx={{ height: { lg: "400px", xs: "200px" } }}>
           <img
             src={`https://delightfulbroadband.com${href}`}

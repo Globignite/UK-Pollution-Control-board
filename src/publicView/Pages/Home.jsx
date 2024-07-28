@@ -64,8 +64,6 @@ function Home() {
       </Box>
       <Container maxWidth="lg">
         <Grid container spacing={3}>
-          {/* <Grid item xs={12}>
-          </Grid> */}
           <Grid item lg={3} sm={0} xs={0}>
             <Sidebar />
           </Grid>

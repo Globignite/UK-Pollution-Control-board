@@ -1,8 +1,8 @@
-import  { useState, useEffect, useRef } from 'react';
-import PdfListContainer from './Pdf_ListContainer';
-import ExcelContent from './ExcelContent';
+import { useState, useEffect, useRef } from "react";
+import PdfListContainer from "./Pdf_ListContainer";
+import ExcelContent from "./ExcelContent";
 import axios from "axios";
-import { Box, Typography, Pagination } from '@mui/material';
+import { Box, Typography, Pagination } from "@mui/material";
 import { useReactToPrint } from "react-to-print";
 
 function DynamicComponent({ parentMenu, currentMenu }) {
@@ -14,12 +14,14 @@ function DynamicComponent({ parentMenu, currentMenu }) {
   const fetchFiles = async (pageNumber) => {
     try {
       const baseURL = `https://delightfulbroadband.com/api/filesUpload/fetch-file`;
-      const url = `${baseURL}?path=${encodeURIComponent(parentMenu)}/${encodeURIComponent(currentMenu)}&limit=${limit}&page=${pageNumber}`;
+      const url = `${baseURL}?path=${encodeURIComponent(
+        parentMenu
+      )}/${encodeURIComponent(currentMenu)}&limit=${limit}&page=${pageNumber}`;
 
       const response = await axios.get(url, {
         headers: {
           "Content-Type": "application/json",
-        }
+        },
       });
 
       if (response.status !== 200) {
@@ -27,12 +29,11 @@ function DynamicComponent({ parentMenu, currentMenu }) {
       }
 
       setJsonData(response.data);
-      
     } catch (error) {
       console.error("Error fetching file:", error);
       setJsonData({ data: { data: [], pagination: { totalPages: 0 } } }); // Handle error state
     }
-  }
+  };
 
   const pageStyle = `
     @page {
@@ -120,41 +121,48 @@ function DynamicComponent({ parentMenu, currentMenu }) {
         </Box>
       </Box>
 
-      {jsonData?.data?.data?.length ? ( 
-          <>
-            <Box
-              id="content-box"
-              sx={{
-                height: '90vh', 
-                overflow: 'auto',
-                '@media print': {
-                  height: 'none !important',
-                },
-              }}
-            >
-              <Box>
-                {jsonData?.data?.data?.map((value, index) => (
-                  <div key={index}>
-                    {value.type === 'PDF' ? (
-                      <PdfListContainer data={value} />
-                    ) : (
-                      <ExcelContent excelData={value} />
-                    )}
-                  </div>
-                ))}
-              </Box>
+      {jsonData?.data?.data?.length ? (
+        <>
+          <Box
+            id="content-box"
+            sx={{
+              height: "90vh",
+              overflow: "auto",
+              "@media print": {
+                height: "none !important",
+              },
+            }}
+          >
+            <Box>
+              {jsonData?.data?.data?.map((value, index) => (
+                <div key={index}>
+                  {value.type === "PDF" ? (
+                    <PdfListContainer data={value} />
+                  ) : (
+                    <ExcelContent excelData={value} />
+                  )}
+                </div>
+              ))}
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mt: 2 }}>
-              <Pagination
-                count={jsonData?.pagination?.totalPages || 1} // Default to 1 if totalPages is not available
-                page={page}
-                onChange={handleChangePage}
-                shape="rounded"
-                color="primary"
-                disabled={jsonData?.pagination?.totalPages === 1}
-              />
-            </Box>
-          </>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              mt: 2,
+            }}
+          >
+            <Pagination
+              count={jsonData?.pagination?.totalPages || 1} // Default to 1 if totalPages is not available
+              page={page}
+              onChange={handleChangePage}
+              shape="rounded"
+              color="primary"
+              disabled={jsonData?.pagination?.totalPages === 1}
+            />
+          </Box>
+        </>
       ) : (
         <p>No data available for the selected menu</p>
       )}

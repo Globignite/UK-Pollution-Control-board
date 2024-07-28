@@ -29,7 +29,7 @@ const EOICard = () => {
         spacing={4}
         sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
       >
-        {UserInfoItems.map(({ title, icon, href, index }) => (
+        {UserInfoItems.map(({ title, icon, href },index) => (
           <Link to={href} key={index}>
             <Paper
               key={title}

@@ -1,51 +1,62 @@
-import { useEffect} from 'react';
-import { Box, Container, } from '@mui/material';
-
+import { useEffect } from "react";
+import { Box, Container } from "@mui/material";
 
 const TopBar = () => {
- 
+  const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        autoDisplay: false,
+      },
+      "google_translate_element"
+    );
+  };
+  useEffect(() => {
+    var addScript = document.createElement("script");
+    addScript.setAttribute(
+      "src",
+      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    );
+    document.body.appendChild(addScript);
+    window.googleTranslateElementInit = googleTranslateElementInit;
+  }, []);
 
-    
-
-    const googleTranslateElementInit = () => {
-      new window.google.translate.TranslateElement(
-        {
-          pageLanguage: "en",
-          autoDisplay: false
-        },
-        "google_translate_element"
-      );
-    };
-    useEffect(() => {
-      var addScript = document.createElement("script");
-      addScript.setAttribute(
-        "src",
-        "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-      );
-      document.body.appendChild(addScript);
-      window.googleTranslateElementInit = googleTranslateElementInit;
-    }, []);
-
-  return (     
-        <Box position="static" sx={{bgcolor:'secondary.main', py:1, height:'50px', display:'flex', alignItems:'center'}} >
-          <Container sx={{display:'flex', justifyContent:'space-between'}}  >
-            <Box sx={{display:'flex', alignItems:'center'}} >
-              <img src={'/assets/ashok_sthambha.png'} alt="" style={{height:'40px'}} />
-              <img src={'/assets/akam_logo.png'} alt="" style={{height:'40px', marginLeft:'20px'}} />
-            </Box>
-
+  return (
+    <Box
+      position="static"
+      sx={{
+        bgcolor: "secondary.main",
+        py: 1,
+        height: "50px",
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <Container sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <img
+            src={"/assets/ashok_sthambha.png"}
+            alt=""
+            style={{ height: "40px" }}
+          />
+          <img
+            src={"/assets/akam_logo.png"}
+            alt=""
+            style={{ height: "40px", marginLeft: "20px" }}
+          />
+        </Box>
+        {/* 
             <Box sx={{display:'flex', alignItems:'center'}} >
               <select name="language" id="lang" className='lang_select' >
                 <option value="en">English</option>
                 <option value="hindi">Hindi</option>
               </select>
-            </Box>
+            </Box> */}
 
-            {/* <div id="google_translate_element"></div> */}
+        {/* <div id="google_translate_element"></div> */}
+      </Container>
+    </Box>
+  );
+};
 
-          </Container>
-      </Box>
-  )
-}
-
-export default TopBar
+export default TopBar;

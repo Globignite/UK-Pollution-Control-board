@@ -26,16 +26,24 @@ import { toast } from "sonner";
 const ManageMarquee = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
+ 
   const [open, setOpen] = useState(false);
   const [selectedMarquee, setSelectedMarquee] = useState(null);
+ 
+  const [pageNo, setPageNo] = useState(1);
+  const [paginationData, setPaginationData] = useState(0);
+ 
 
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get("https://delightfulbroadband.com/api/marquee", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.get(
+        "https://delightfulbroadband.com/api/marquee",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.status !== 200) {
         throw new Error("Failed to fetch notifications");
@@ -115,8 +123,10 @@ const ManageMarquee = () => {
               {notifications.map((file, index) => (
                 <TableRow key={index}>
                   <TableCell>
+ 
                     <Link href={`https://delightfulbroadband.com${file?.file_data?.href}`} target="_blank">
                       {file?.marquee_title || "N/A"}
+ 
                     </Link>
                   </TableCell>
                   <TableCell>{file?.createdAt?.split("T")[0] || "N/A"}</TableCell>

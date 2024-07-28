@@ -42,7 +42,7 @@ const ManageNotice = () => {
     try {
       const baseURL = `https://delightfulbroadband.com/api/filesUpload/fetch-file`;
       const defaultParams = {
-        limit: 10,
+        limit: 5,
         path: "null/Notices",
         page: pageNo,
       };
@@ -58,8 +58,9 @@ const ManageNotice = () => {
         throw new Error("Failed to fetch file");
       }
 
-      console.log(response?.data?.data?.data);
+      console.log(response?.data.pagination);
       setNotifications(response?.data?.data?.data);
+      setPaginationData(response?.data?.pagination);
     } catch (error) {
       console.error("Error fetching file:", error);
       setNotifications([]);
@@ -230,7 +231,7 @@ const ManageNotice = () => {
       )}
 
       <Box>
-        {paginationData.totalPages > 1 && (
+        {paginationData.total > 0 && (
           <Pagination
             pagination={paginationData}
             setPageNo={setPage}

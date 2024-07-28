@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   Typography,
@@ -50,7 +50,7 @@ const Complaints = () => {
             startDate: startDate,
             endDate: endDate,
             page: pageNo,
-            limit: 10,
+            limit: 5,
           },
         }
       );
@@ -92,8 +92,6 @@ const Complaints = () => {
       setEndDate(value);
     }
   };
-
- 
 
   return (
     <Container>
@@ -178,7 +176,7 @@ const Complaints = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((file, index) => (
+              {data?.map((file, index) => (
                 <TableRow key={index}>
                   <TableCell>{file?.status}</TableCell>
                   <TableCell>{file?.complaintId}</TableCell>
@@ -199,7 +197,7 @@ const Complaints = () => {
         </TableContainer>
       )}
       <Box>
-        {paginationData.totalPages > 1 && (
+        {paginationData?.total > 1 && (
           <Pagination
             pagination={paginationData}
             setPageNo={setPage}

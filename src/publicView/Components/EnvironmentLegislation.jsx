@@ -36,7 +36,6 @@ const responsive = {
     breakpoint: { max: 3000, min: 1024 },
     items: 4,
     partialVisibilityGutter: 40,
-    partialVisible: false,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -66,34 +65,16 @@ const EnvironmentLegislation = () => {
       >
         Environment Legislation
       </Typography>
-      {/* <Grid container spacing={2}> */}
-      {/* <Stack direction={'row'} spacing={{lg:4, xs:1}} sx={{display:'flex', pb:2, overflow:{lg:'hidden', xs:'scroll'},  flexDirection:'row', flexWrap:'no-wrap'}} >
-            {legislationItems.map(({title, icon}) => (
-                <Paper key={title} elevation={24} sx={{ minWidth:{lg:'180px', xs:'130px'}, height:{lg:'180px', xs:'130px'}, m:{lg:0, xs:5},  boxShadow:'none', py:2, bgcolor:"background.lightGreen", borderRadius:'10px', display:'flex', flexDirection:'column', justifyContent:'space-around', alignItems:'center'}}>
-                  <Box sx={{width:{lg:"70px", xs:'50px'}, height:{lg:'70px', xs:'50px'} }} >
-                    <img src={icon} alt={'link_logo'} loading='lazy' style={{ width: '100%', height: '100%' }} />
-                  </Box>
-                  <Typography align="center" sx={{fontWeight:'530', fontSize:{lg:'0.9rem', xs:'0.7rem'}, px:1, color:'#393838'}} > {title} </Typography>
-                </Paper>
-            ))}
-          </Stack> */}
-      {/* </Grid> */}
 
       <Carousel
         additionalTransfrom={0}
         arrows={false}
         autoPlaySpeed={3000}
         centerMode={false}
-        className=""
-        containerClass="container"
-        dotListClass=""
         draggable
-        focusOnSelect={false}
         infinite={false}
-        itemClass=""
         keyBoardControl
         minimumTouchDrag={80}
-        // partialVisible={false}
         pauseOnHover
         renderArrowsWhenDisabled={false}
         renderButtonGroupOutside={false}
@@ -103,14 +84,12 @@ const EnvironmentLegislation = () => {
         rewindWithAnimation={false}
         shouldResetAutoplay
         showDots
-        sliderClass=""
         slidesToSlide={1}
         swipeable
       >
-        {legislationItems.map(({ title, icon, href }) => (
-          <Link to={href}>
+        {legislationItems.map(({ title, icon, href }, index) => (
+          <Link to={href} key={index}>
             <Paper
-              key={title}
               elevation={24}
               sx={{
                 width: { lg: "190px", xs: "150px" },
@@ -121,7 +100,7 @@ const EnvironmentLegislation = () => {
                 bgcolor: "background.lightGreen",
                 borderRadius: "10px",
                 display: "flex",
-                flexWrap: "no-wrap",
+                flexWrap: "nowrap",
                 flexDirection: "column",
                 justifyContent: "space-around",
                 alignItems: "center",
@@ -135,7 +114,7 @@ const EnvironmentLegislation = () => {
               >
                 <img
                   src={icon}
-                  alt={"link_logo"}
+                  alt="link_logo"
                   loading="lazy"
                   style={{ width: "100%", height: "100%" }}
                 />
@@ -149,8 +128,7 @@ const EnvironmentLegislation = () => {
                   color: "#393838",
                 }}
               >
-                {" "}
-                {title}{" "}
+                {title}
               </Typography>
             </Paper>
           </Link>

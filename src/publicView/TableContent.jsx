@@ -31,13 +31,13 @@ const TableComponent = ({ title, tblData }) => {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            {Object.keys(tblData[0]).map((key, index) => (
+            {Object.keys(tblData[0])?.map((key, index) => (
               <StyledTableCell key={index}>{key}</StyledTableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {tblData.map((row, rowIndex) => (
+          {tblData?.map((row, rowIndex) => (
             <TableRow key={rowIndex}>
               {Object.values(row).map((value, valueIndex) => (
                 <StyledTableCell key={valueIndex}>{value}</StyledTableCell>

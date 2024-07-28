@@ -70,7 +70,7 @@ function SearchResult() {
         <Typography>Loading...</Typography>
       ) : (
         <>
-          {results.length > 0 ? (
+          {results?.length > 0 ? (
             <TableContainer component={Paper}>
               <Table>
                 <TableHead>
@@ -82,22 +82,22 @@ function SearchResult() {
                 <TableBody>
                   {results.map((result, index) => (
                     <React.Fragment key={index}>
-                      {result.data.map((file, i) => (
+                      {result?.data?.map((file, i) => (
                         <TableRow key={i}>
                           {i === 0 && (
-                            <TableCell rowSpan={result.data.length}>
-                              {generateBreadcrumbs(result.path)}
+                            <TableCell rowSpan={result?.data?.length}>
+                              {generateBreadcrumbs(result?.path)}
                             </TableCell>
                           )}
                           <TableCell>
                             <Button
-                              onClick={() => alert(`File Name: ${file.name}, File Type: ${file.type}`)}
+                              onClick={() => alert(`File Name: ${file?.name}, File Type: ${file?.type}`)}
                               href="#"
                               style={{ textTransform: 'none' }}
                             >
-                              <Box style={{display:"flex" gap:""}}>
-                                <p>{file.name}</p>
-                                <p>{file.type}</p>
+                              <Box style={{display:"flex"}}>
+                                <p>{file?.name}</p>
+                                <p>{file?.type}</p>
                               </Box>
                             </Button>
                           </TableCell>
@@ -112,13 +112,13 @@ function SearchResult() {
             <Typography>No results found</Typography>
           )}
           <Box mt={2}>
-            <Typography>Page: {pagination.currentPage} of {pagination.totalPages}</Typography>
+            <Typography>Page: {pagination?.currentPage} of {pagination?.totalPages}</Typography>
             <Box>
-              {pagination.hasPreviousPage && (
-                <Button onClick={() => handlePageChange(pagination.currentPage - 1)}>Previous</Button>
+              {pagination?.hasPreviousPage && (
+                <Button onClick={() => handlePageChange(pagination?.currentPage - 1)}>Previous</Button>
               )}
-              {pagination.hasNextPage && (
-                <Button onClick={() => handlePageChange(pagination.currentPage + 1)}>Next</Button>
+              {pagination?.hasNextPage && (
+                <Button onClick={() => handlePageChange(pagination?.currentPage + 1)}>Next</Button>
               )}
             </Box>
           </Box>

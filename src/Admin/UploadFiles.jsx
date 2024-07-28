@@ -16,11 +16,9 @@ import {
 } from "@mui/material";
 import { toast } from "sonner";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import AdminNavbar from "./Components/AdminNavbar";
+import { Link } from "react-router-dom"; 
 import { SideMenu } from "../publicView/JsonFiles/SideMenu";
-import { mainMenu } from "../publicView/JsonFiles/MainMenu";
-import { AdminNavbar } from "./Components/AdminNavbar";
+import { mainMenu } from "../publicView/JsonFiles/MainMenu"; 
 import ExcelPreview from "./ExcelPreview";
 import Spinner from "../publicView/Components/Spinner";
 
@@ -277,8 +275,7 @@ const UploadFiles = () => {
   return (
     <>
       <Typography variant="h5">Add Files</Typography>
-      <Spinner loading={loading} />
-      {/* <AdminNavbar /> */}
+      <Spinner loading={loading} /> 
       <Container
         sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}
       >

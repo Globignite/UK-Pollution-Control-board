@@ -5,10 +5,10 @@ import {
   IconButton,
   TextField,
   Typography,
-  Grid
+  Grid,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../../publicView/Components/Spinner";
 
@@ -18,32 +18,59 @@ function ManageMedia() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [loading, setLoading] = useState(false);
+  const [pageNo, setPageNo] = useState(1);
+  const [paginationData, setPaginationData] = useState(0);
 
-  const fetchMedia = async (startDate, endDate,searchTerm, page = 1, limit = 10) => {
+  const fetchMedia = async (
+    startDate,
+    endDate,
+    searchTerm,
+    page = 1,
+    limit = 10
+  ) => {
     setLoading(true);
     try {
-      const response = await axios.get('https://delightfulbroadband.com/api/media/fetch-media', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        params: {
-          event_name:searchTerm,
-          startDate,
-          endDate,
-          page,
-          limit,
-        },
-      });
+      const response = await axios.get(
+        "https://delightfulbroadband.com/api/media/fetch-media",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          params: {
+            event_name: searchTerm,
+            startDate,
+            endDate,
+            page: pageNo,
+            limit: 10,
+          },
+        }
+      );
 
       const { data, pagination } = response.data;
-      console.log('Media Data:', response?.data.data);
+      console.log("Media Data:", response?.data.data);
       setMedia(response?.data.data);
-      console.log('Pagination Info:', pagination);
+      console.log("Pagination Info:", pagination);
     } catch (error) {
-      console.error('Error fetching media:', error.response ? error.response.data : error.message);
+      console.error(
+        "Error fetching media:",
+        error.response ? error.response.data : error.message
+      );
       throw error;
     }
     setLoading(false);
+  };
+
+  const setPage = (page) => {
+    setPageNo(page);
+  };
+
+  useEffect(() => {
+    fetchMedia();
+  }, [pageNo]);
+
+  const handleFilterClick = () => {
+    setPageNo(1);
+    fetchMedia();
   };
 
   const handleDateChange = (type, value) => {
@@ -59,42 +86,25 @@ function ManageMedia() {
   };
 
   const handleSearchClick = () => {
-    fetchMedia(startDate, endDate,searchTerm);
+    fetchMedia(startDate, endDate, searchTerm);
   };
-  
-  // const deleteMediaImage = async (id,link) => {
-  //   const token = localStorage.getItem("token");
-  //   try {
-  //     const response = await axios.delete("https://delightfulbroadband.com/api/media/delete-media-file", {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //       data: {
-  //         _id: id,
-  //         href:link
-  //       }
-  //     });
-  //     console.log("Success:", response);
-  //     fetchMedia(startDate, endDate);
-  //   } catch (error) {
-  //     console.error("Error deleting Event Media:", error);
-  //     alert(error.response?.data?.error || "Oops, something went wrong");
-  //   }
-  // }
 
   const deleteEvent = async (id) => {
     setLoading(true);
-    if(confirm("Are you sure you want to delete this Media")){
+    if (confirm("Are you sure you want to delete this Media")) {
       const token = localStorage.getItem("token");
       try {
-        const response = await axios.delete("https://delightfulbroadband.com/api/media/delete-media-event", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          data: {
-            _id: id,
+        const response = await axios.delete(
+          "https://delightfulbroadband.com/api/media/delete-media-event",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            data: {
+              _id: id,
+            },
           }
-        });
+        );
         console.log("Success:", response);
         fetchMedia(startDate, endDate);
         alert("Media deleted successfully");
@@ -103,12 +113,12 @@ function ManageMedia() {
         alert(error.response?.data?.error || "Oops, something went wrong");
       }
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   return (
     <Container>
-    <Spinner loading={loading} />
+      <Spinner loading={loading} />
       <Typography variant="h6" gutterBottom>
         Manage Media
       </Typography>
@@ -150,7 +160,11 @@ function ManageMedia() {
           }}
           style={{ flex: 1 }}
         />
-        <Button variant="contained" style={{ alignSelf: "center" }} onClick={handleSearchClick}>
+        <Button
+          variant="contained"
+          style={{ alignSelf: "center" }}
+          onClick={handleFilterClick}
+        >
           Search
         </Button>
       </Box>
@@ -164,56 +178,89 @@ function ManageMedia() {
             Media Events
           </Typography>
           {media.map((item) => (
-            <Box key={item.id} marginBottom={2} padding={2} boxShadow={2} borderRadius={2} sx={{ position: "relative"}}>
-              
-              <Typography variant="h6" marginBottom={1}>{item.name}</Typography>
-              <Typography variant="body2" marginBottom={1} sx={{ fontWeight: 'semibold' }}>{new Date(item.createdAt).toLocaleDateString()}</Typography>
-              <Typography variant="body1" marginBottom={1} sx={{ fontWeight: 'semibold'}}>{item.description}</Typography>
-             
-                <Grid container  columns={{ xs: 4, sm: 8, md: 12 }}>
-                  {item?.data.length > 0 ? item?.data.map((ele, index) => (
-                    <Grid item xs={2} sm={2} md={2}
+            <Box
+              key={item.id}
+              marginBottom={2}
+              padding={2}
+              boxShadow={2}
+              borderRadius={2}
+              sx={{ position: "relative" }}
+            >
+              <Typography variant="h6" marginBottom={1}>
+                {item.name}
+              </Typography>
+              <Typography
+                variant="body2"
+                marginBottom={1}
+                sx={{ fontWeight: "semibold" }}
+              >
+                {new Date(item.createdAt).toLocaleDateString()}
+              </Typography>
+              <Typography
+                variant="body1"
+                marginBottom={1}
+                sx={{ fontWeight: "semibold" }}
+              >
+                {item.description}
+              </Typography>
+
+              <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
+                {item?.data.length > 0 ? (
+                  item?.data.map((ele, index) => (
+                    <Grid
+                      item
+                      xs={2}
+                      sm={2}
+                      md={2}
                       key={ele?._id}
-                      
                       marginRight={2}
-                      sx={{ position: "relative"}}
+                      sx={{ position: "relative" }}
                     >
                       <Box>
-                      <img
-                        src={`https://delightfulbroadband.com${ele.href}`}
-                        alt={`Media Event ${index + 1}`}
-                        loading="lazy"
-                        style={{
-                          width: "100%",
-                          height: "120px",
-                          objectFit: "cover"
-                        }}
-                      />
+                        <img
+                          src={`https://delightfulbroadband.com${ele.href}`}
+                          alt={`Media Event ${index + 1}`}
+                          loading="lazy"
+                          style={{
+                            width: "100%",
+                            height: "120px",
+                            objectFit: "cover",
+                          }}
+                        />
                       </Box>
                     </Grid>
-                  )) : (
-                    <Typography variant="body2">No data</Typography>
-                  )}
-                </Grid>
-           
-             
+                  ))
+                ) : (
+                  <Typography variant="body2">No data</Typography>
+                )}
+              </Grid>
+
               <IconButton
-                 aria-label="delete"
-                 size="small"
+                aria-label="delete"
+                size="small"
                 sx={{
-                 position: "absolute",
-                 top: 2,
-                 right: 3,
-                 backgroundColor: "rgba(255, 255, 255, 0.7)",
+                  position: "absolute",
+                  top: 2,
+                  right: 3,
+                  backgroundColor: "rgba(255, 255, 255, 0.7)",
                 }}
-                      onClick={() => deleteEvent(item._id)}
-                >
-                  <DeleteIcon fontSize="small" />
-                 </IconButton>
+                onClick={() => deleteEvent(item._id)}
+              >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
             </Box>
           ))}
         </Box>
       )}
+      <Box>
+        {paginationData.totalPages > 1 && (
+          <Pagination
+            pagination={paginationData}
+            setPageNo={setPage}
+            pageNo={pageNo}
+          />
+        )}
+      </Box>
     </Container>
   );
 }

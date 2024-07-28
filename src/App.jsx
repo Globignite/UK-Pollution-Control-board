@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
@@ -8,7 +7,6 @@ import Home from "./publicView/Pages/Home";
 import { RoutesJson } from "./RoutesJson";
 import SignIn from "./publicView/Pages/SignIn";
 import UploadFiles from "./Admin/FileManagement/UploadFiles";
-import AddHeadings from "./Admin/AddHeadings";
 import { Toaster } from "sonner";
 import ExcelPreview from "./Admin/ExcelPreview";
 import DashboardHome from "./Admin/DashboardHome";
@@ -29,6 +27,7 @@ import AddRecentUpdate from "./Admin/RecentUpdates/AddRecentUpdate";
 import AddMarque from "./Admin/Marque/AddMarque";
 import ManageMarque from "./Admin/Marque/ManageMarque";
 import Dashboard from "./Admin/Dashboard/Dashboard";
+import React from "react";
 
 function App() {
   //   useEffect(() => {

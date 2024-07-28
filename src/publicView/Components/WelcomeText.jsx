@@ -27,7 +27,7 @@ const WelcomeText = () => {
 			<Typography variant="body1">
 				Uttaranchal Pollution Control Board was established in Year 2001 as per
 				Section (4) of Water ( Prevention and Control of Pollution) Act, 1974 by
-				Forest and Environment Division, Uttarakhand Secretariat's notification
+				Forest and Environment Division, Uttarakhand Secretariat&apos;s notification
 				no 7756/I-V.G.V/2001-13(5)/2000 dated 26.12.2001. With continuation to
 				the same Uttaranchal Pollution Control Board was reconstructed by the
 				Forest and Environment Division, Uttarakhand Secretariat notification

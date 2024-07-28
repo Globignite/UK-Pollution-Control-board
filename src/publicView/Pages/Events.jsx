@@ -1,12 +1,10 @@
-
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Grid,
   Typography,
   Box,
   Stack,
-  Button,
-  Container,
+  Button, 
   CircularProgress,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -19,7 +17,7 @@ function Events() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [search,setSearch] = useState(null);
+  const [search, setSearch] = useState(null);
 
   useEffect(() => {
     fetchMedia();
@@ -40,8 +38,8 @@ function Events() {
           },
         }
       );
-      const newMedia = response.data.data;
-      // setMedia((prevMedia) => [...prevMedia, ...newMedia]);
+
+      console.log(response);  
       setMedia(response?.data?.data);
       setHasMore(response.data.pagination.hasNextPage);
     } catch (error) {
@@ -53,18 +51,24 @@ function Events() {
 
   const fetchMediaSearch = async () => {
     try {
-      const response = await axios.get('https://delightfulbroadband.com/api/media/fetch-media', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        params: {
-          event_name:search,
-        },
-      });
+      const response = await axios.get(
+        "https://delightfulbroadband.com/api/media/fetch-media",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          params: {
+            event_name: search,
+          },
+        }
+      );
       setMedia(response?.data?.data);
       setHasMore(response.data.pagination.hasNextPage);
     } catch (error) {
-      console.error('Error fetching media:', error.response ? error.response.data : error.message);
+      console.error(
+        "Error fetching media:",
+        error.response ? error.response.data : error.message
+      );
       throw error;
     }
   };
@@ -107,7 +111,11 @@ function Events() {
      </Box>
       </Stack>
 
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 1, sm: 8, md: 12 }}>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 1, sm: 8, md: 12 }}
+      >
         {media.map((event, index) => (
           <Grid item xs={1} sm={4} md={4} key={index}>
              <Link to={`/media/event-gallery/${event._id}`}>
@@ -149,7 +157,6 @@ function Events() {
       )}
     </Box>
   );
-
 }
 
 export default Events;

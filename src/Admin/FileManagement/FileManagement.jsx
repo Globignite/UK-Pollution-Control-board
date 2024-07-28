@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   TextField,
@@ -18,58 +18,61 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import GetMenu from "../Components/GetMenu";
 import axios from "axios";
 import Spinner from "../../publicView/Components/Spinner";
+import Pagination from "../../publicView/Components/Pagination";
 
 const FileManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [pageNo, setPageNo] = useState(1);
+  const [paginationData, setPaginationData] = useState(0);
 
-  const fetchFiles = async (menu_path) =>{
+  const fetchFiles = async (menu_path) => {
     try {
       const baseURL = `https://delightfulbroadband.com/api/filesUpload/fetch-file`;
       const defaultParams = {
-        limit: limit,
         path: "null/About Us",
-        page: page,
+        limit: 10,
+        page: pageNo,
       };
 
-  
-      const url =`${baseURL}?path=${menu_path}&limit=${defaultParams.limit}&page=${defaultParams.page}&name=${searchTerm}&startDate=${startDate}&endDate=${endDate}`
+      const url = `${baseURL}?path=${menu_path}&limit=${defaultParams.limit}&page=${defaultParams.page}&name=${searchTerm}&startDate=${startDate}&endDate=${endDate}`;
 
-      const response = await axios.get(
-        url,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          }
-        }
-      );
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.status !== 200) {
         throw new Error("Failed to fetch file");
       }
 
-      console.log(response?.data)
-      setData(response?.data)
-
-      
+      console.log(response?.data);
+      setData(response?.data);
     } catch (error) {
       console.error("Error fetching file:", error);
-      setData([])
+      setData([]);
     }
-  }
+  };
+
+  const setPage = (page) => {
+    setPageNo(page);
+  };
+
+  useEffect(() => {
+    fetchFiles();
+  }, [pageNo]);
 
   const handleDelete = async (href, name) => {
-    setLoading(true)
-    if(confirm("Are you sure you want to delete " + name)){
+    setLoading(true);
+    if (confirm("Are you sure you want to delete " + name)) {
       try {
         const reqData = {
           filePath: data?.data?.filePath,
-          href: href
+          href: href,
         };
         const token = localStorage.getItem("token");
         const response = await axios.delete(
@@ -82,17 +85,17 @@ const FileManagement = () => {
             data: reqData, // This is the correct place to put the data for delete request
           }
         );
-    
+
         if (response.status !== 200) {
           throw new Error("Failed to delete file");
         }
-        fetchFiles(data?.data?.filePath)
+        fetchFiles(data?.data?.filePath);
         alert("File deleted successfully");
       } catch (error) {
         console.error("Error deleting file:", error);
       }
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   const handleSearchChange = (event) => {
@@ -106,16 +109,14 @@ const FileManagement = () => {
       setEndDate(value);
     }
   };
-  
 
   useEffect(() => {
-    
-    fetchFiles('')
+    fetchFiles("");
   }, []);
 
   return (
     <Container>
-            <Spinner loading={loading} />
+      <Spinner loading={loading} />
       <Typography variant="h6" gutterBottom>
         Manage Files
       </Typography>
@@ -160,47 +161,50 @@ const FileManagement = () => {
       </Box>
       <GetMenu menuPath={fetchFiles} />
 
-      
-       {data?.data?.data?.length === 0 || data?.data?.data == null ?
-      (<Typography variant="h6" gutterBottom>
-        No Records 
-      </Typography>):(
+      {data?.data?.data?.length === 0 || data?.data?.data == null ? (
+        <Typography variant="h6" gutterBottom>
+          No Records
+        </Typography>
+      ) : (
         <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Files</TableCell>
-              <TableCell>Uploaded</TableCell>
-              <TableCell>Remove</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
- 
-            {
-               data?.data?.data?.map((ele, ind)=>(
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Files</TableCell>
+                <TableCell>Uploaded</TableCell>
+                <TableCell>Remove</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data?.data?.data?.map((ele, ind) => (
                 <TableRow key={ind}>
-  
-                    <TableCell>
-                      <Link href="#" >
-                        {ele.name}
-                      </Link>
-                    </TableCell>
-                    <TableCell>{ele.createdAt.split('T')[0] }</TableCell>
-                    <TableCell>
-                      <IconButton color="primary">
-                        <DeleteIcon onClick={()=>handleDelete(ele.href, ele.name)} />
-                      </IconButton> 
-                    </TableCell>
-                  
+                  <TableCell>
+                    <Link href="#">{ele.name}</Link>
+                  </TableCell>
+                  <TableCell>{ele.createdAt.split("T")[0]}</TableCell>
+                  <TableCell>
+                    <IconButton color="primary">
+                      <DeleteIcon
+                        onClick={() => handleDelete(ele.href, ele.name)}
+                      />
+                    </IconButton>
+                  </TableCell>
                 </TableRow>
-                
-               ))
-            }
-          </TableBody>
-        </Table>
-      </TableContainer>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
-      
+
+      <Box>
+        {paginationData.totalPages > 1 && (
+          <Pagination
+            pagination={paginationData}
+            setPageNo={setPage}
+            pageNo={pageNo}
+          />
+        )}
+      </Box>
     </Container>
   );
 };

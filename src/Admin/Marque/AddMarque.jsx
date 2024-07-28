@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Autocomplete,
   TextField,
   Box,
   Radio,
@@ -9,18 +8,13 @@ import {
   FormControl,
   FormLabel,
   Button,
-  Popper,
   Container,
-  Alert,
   Typography,
+  Alert,
 } from "@mui/material";
-import { toast } from "sonner";
+import { toast } from "sonner";  // Ensure you have installed the "sonner" package
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { SideMenu } from "../../publicView/JsonFiles/SideMenu";
-import { mainMenu } from "../../publicView/JsonFiles/MainMenu";
-import ExcelPreview from "../ExcelPreview";
-import Spinner from "../../publicView/Components/Spinner";
+import Spinner from "../../publicView/Components/Spinner";  // Ensure the Spinner component is correctly imported
 
 const formats = ["PDF", "Image"];
 
@@ -29,9 +23,9 @@ const AddMarque = () => {
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [customFileName, setCustomFileName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
   useEffect(() => {
     // Check if all required fields are filled
@@ -129,7 +123,7 @@ const AddMarque = () => {
     <Container>
       <Spinner loading={loading} />
       <Typography variant="h5">Add Marquee</Typography>
-      <Box sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }} >
+      <Box sx={{ width: { lg: "60%", xs: "100%" }, p: 1, mt: 5 }}>
         <FormControl component="fieldset" sx={{ mb: 2, width: "100%" }}>
           <FormLabel component="legend">Format</FormLabel>
           <RadioGroup row value={selectedFormat} onChange={handleFormatChange}>

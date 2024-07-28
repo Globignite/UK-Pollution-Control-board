@@ -1,21 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   TextField,
   Box,
-  FormControlLabel,
   FormControl,
   FormLabel,
   Button,
   Container,
-  Alert,
   Typography,
 } from "@mui/material";
 import { toast } from "sonner";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { SideMenu } from "../../publicView/JsonFiles/SideMenu";
-import { mainMenu } from "../../publicView/JsonFiles/MainMenu";
-import ExcelPreview from "../ExcelPreview";
 import Spinner from "../../publicView/Components/Spinner";
 
 const AddNotice = () => {

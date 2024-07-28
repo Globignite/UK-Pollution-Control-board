@@ -80,7 +80,7 @@ function SearchResult() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {results.map((result, index) => (
+                  {results?.map((result, index) => (
                     <React.Fragment key={index}>
                       {result?.data?.map((file, i) => (
                         <TableRow key={i}>

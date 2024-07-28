@@ -16,7 +16,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TablePagination,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
@@ -82,27 +81,16 @@ const Textarea = styled(BaseTextareaAutosize)(
 );
 
 function ViewEnquiry() {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [enquiryData, setEnquiryData] = useState({});
   const [statusFilter, setStatusFilter] = useState();
   const [note, setNote] = useState();
   const [notesArray, setNotesArray] = useState([]);
   const { enquireId } = useParams();
   const componentRef = useRef();
-  console.log(enquiryData);
+
   useEffect(() => {
     fetchEnquire();
   }, [enquireId]);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
 
   async function fetchEnquire() {
     try {
@@ -112,7 +100,6 @@ function ViewEnquiry() {
       setEnquiryData(response?.data.data || {});
       setStatusFilter(response?.data.data.status);
       setNotesArray(response?.data.data.action_notes);
-      console.log(response?.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -158,8 +145,6 @@ function ViewEnquiry() {
       );
       if (response.status === 200) {
         fetchEnquire();
-        console.log(response?.data);
-        //APPEND
         alert("Action note added successfully");
         setNote(); // Clear the note field after successful submission
         setStatusFilter();
@@ -172,7 +157,6 @@ function ViewEnquiry() {
 
   const handleUpdateStatus = async () => {
     const token = localStorage.getItem("token");
-    console.log(statusFilter);
     try {
       const response = await axios.patch(
         "https://delightfulbroadband.com/api/enquiries/update-enquiries-status",
@@ -188,7 +172,6 @@ function ViewEnquiry() {
         }
       );
       if (response.status === 201) {
-        // setNotes(prevNotes => [...prevNotes, newNote]);
         alert("Status updated successfully");
         fetchEnquire();
       }
@@ -226,7 +209,6 @@ function ViewEnquiry() {
     content: () => componentRef.current,
   });
 
-  console.log(enquiryData);
   return (
     <Container>
       <Box
@@ -455,25 +437,14 @@ function ViewEnquiry() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {notesArray
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row, index) => (
-                    <TableRow key={index}>
-                      <TableCell>{row.date}</TableCell>
-                      <TableCell>{row.note}</TableCell>
-                    </TableRow>
-                  ))}
+                {notesArray.map((row, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{row.date}</TableCell>
+                    <TableCell>{row.note}</TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
-            <TablePagination
-              rowsPerPageOptions={[10]}
-              component="div"
-              count={notesArray.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
           </TableContainer>
         </Box>
       </div>

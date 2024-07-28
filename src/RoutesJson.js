@@ -1,9 +1,9 @@
 import WelcomeText from "./publicView/Components/WelcomeText";
 import DynamicComponent from "./publicView/DynamicComponent";
-// import { PDFjson } from "./publicView/JsonFiles/PDFjson"; 
-import About from "./publicView/Pages/About"; 
-import ContactUs from "./publicView/Pages/ContactUs"; 
-import RelatedLinks from "./publicView/Pages/RelatedLinks"; 
+// import { PDFjson } from "./publicView/JsonFiles/PDFjson";
+import About from "./publicView/Pages/About";
+import ContactUs from "./publicView/Pages/ContactUs";
+import RelatedLinks from "./publicView/Pages/RelatedLinks";
 import Enquiry from "./publicView/Enquiry";
 import Complain from "./publicView/Complain";
 import Events from "./publicView/Pages/Events";
@@ -1701,18 +1701,6 @@ export const RoutesJson = [
     },
   },
   {
-    id: 147,
-    name: "Tenders",
-    path: "/tenders",
-    hasSubItem: null,
-    parent_id: null,
-    component: DynamicComponent,
-    componentProps: {
-      parentMenu: null,
-      currentMenu: "Tenders",
-    },
-  },
-  {
     id: 148,
     name: "Important Office Orders / Letters / Directions",
     path: "/important-office-orders-letters-directions",
@@ -1758,18 +1746,6 @@ export const RoutesJson = [
     componentProps: {
       parentMenu: null,
       currentMenu: "Recruitments",
-    },
-  },
-  {
-    id: 152,
-    name: "Tenders",
-    path: "/tenders",
-    hasSubItem: null,
-    parent_id: null,
-    component: DynamicComponent,
-    componentProps: {
-      parentMenu: null,
-      currentMenu: "Tenders",
     },
   },
   {

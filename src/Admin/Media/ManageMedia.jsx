@@ -11,6 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../../publicView/Components/Spinner";
+import Pagination from "../../publicView/Components/Pagination";
 
 function ManageMedia() {
   const [media, setMedia] = useState([]);
@@ -41,7 +42,7 @@ function ManageMedia() {
             startDate,
             endDate,
             page: pageNo,
-            limit: 10,
+            limit: 5,
           },
         }
       );
@@ -49,7 +50,7 @@ function ManageMedia() {
       const { data, pagination } = response.data;
       console.log("Media Data:", response?.data.data);
       setMedia(response?.data.data);
-      console.log("Pagination Info:", pagination);
+      setPaginationData(response?.data.pagination);
     } catch (error) {
       console.error(
         "Error fetching media:",
@@ -253,7 +254,7 @@ function ManageMedia() {
         </Box>
       )}
       <Box>
-        {paginationData.totalPages > 1 && (
+        {paginationData?.total > 1 && (
           <Pagination
             pagination={paginationData}
             setPageNo={setPage}

@@ -25,7 +25,7 @@ const VerticalRecentUpdate = () => {
       if (response.status !== 200) {
         throw new Error("Failed to fetch notifications");
       }
-      console.log("response", response?.data?.data?.data);
+      // console.log("response", response?.data?.data?.data);
       setNotifications(response?.data?.data?.data);
     } catch (error) {
       console.error("Error fetching notifications:", error);

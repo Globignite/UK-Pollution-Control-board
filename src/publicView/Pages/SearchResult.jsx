@@ -13,27 +13,36 @@ import {
   Link,
   Box,
   Button,
-  Breadcrumbs
+  Breadcrumbs,
+  Pagination,
 } from "@mui/material";
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import axios from "axios";
+import PdfListContainer from "../Pdf_ListContainer";
+import ExcelContent from "../ExcelContent";
 
 function SearchResult() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const query = searchParams.get('query');
+  const query = searchParams.get("query");
 
   const [results, setResults] = useState([]);
   const [pagination, setPagination] = useState({});
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10); // Assuming a default limit of 10 items per page
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("https://delightfulbroadband.com/api/filesUpload/search-file", {
-          params: { name: query }
-        });
+        const response = await axios.get(
+          "https://delightfulbroadband.com/api/filesUpload/search-file",
+          {
+            params: { name: query, page, limit },
+          }
+        );
+        console.log(response?.data.pagination);
         setResults(response?.data?.data);
         setPagination(response?.data?.pagination);
       } catch (error) {
@@ -43,18 +52,20 @@ function SearchResult() {
     };
 
     fetchData();
-  }, [query]);
+  }, [query, page, limit]);
 
-  const handlePageChange = (newPage) => {
-    searchParams.set('page', newPage);
-    location.search = searchParams.toString();
+  const handlePageChange = (event, value) => {
+    setPage(value);
   };
 
   const generateBreadcrumbs = (path) => {
-    const parts = path.split('/');
+    const parts = path.split("/").filter((part) => part !== "null");
     return (
-      <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-        {parts.map((part, index) => (
+      <Breadcrumbs
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {parts?.map((part, index) => (
           <Link key={index} href="#" color="inherit">
             {part}
           </Link>
@@ -65,62 +76,47 @@ function SearchResult() {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>Search Result</Typography>
+      <Typography variant="h4" gutterBottom>
+        Search Result
+      </Typography>
       {loading ? (
         <Typography>Loading...</Typography>
       ) : (
         <>
           {results?.length > 0 ? (
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Path</TableCell>
-                    <TableCell>File</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {results?.map((result, index) => (
-                    <React.Fragment key={index}>
-                      {result?.data?.map((file, i) => (
-                        <TableRow key={i}>
-                          {i === 0 && (
-                            <TableCell rowSpan={result?.data?.length}>
-                              {generateBreadcrumbs(result?.path)}
-                            </TableCell>
-                          )}
-                          <TableCell>
-                            <Button
-                              onClick={() => alert(`File Name: ${file?.name}, File Type: ${file?.type}`)}
-                              href="#"
-                              style={{ textTransform: 'none' }}
-                            >
-                              <Box style={{display:"flex"}}>
-                                <p>{file?.name}</p>
-                                <p>{file?.type}</p>
-                              </Box>
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </React.Fragment>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            <>
+              {results.map((result, index) => (
+                <React.Fragment key={index}>
+                  <Paper sx={{ mb: 2, p: 2 }}>
+                    <Box sx={{ p: 2 }}>{generateBreadcrumbs(result.path)}</Box>
+                    {result.data.map((item, index) =>
+                      item.type === "PDF" ? (
+                        <PdfListContainer data={item} key={index} />
+                      ) : (
+                        <ExcelContent excelData={item} />
+                      )
+                    )}
+                  </Paper>
+                </React.Fragment>
+              ))}
+            </>
           ) : (
             <Typography>No results found</Typography>
           )}
+
           <Box mt={2}>
-            <Typography>Page: {pagination?.currentPage} of {pagination?.totalPages}</Typography>
-            <Box>
-              {pagination?.hasPreviousPage && (
-                <Button onClick={() => handlePageChange(pagination?.currentPage - 1)}>Previous</Button>
-              )}
-              {pagination?.hasNextPage && (
-                <Button onClick={() => handlePageChange(pagination?.currentPage + 1)}>Next</Button>
-              )}
-            </Box>
+            <Typography>
+              Page: {page} of {pagination?.totalPages}
+            </Typography>
+            {pagination?.totalPages > 1 && (
+              <Pagination
+                count={pagination?.totalPages}
+                page={page}
+                onChange={handlePageChange}
+                shape="rounded"
+                color="primary"
+              />
+            )}
           </Box>
         </>
       )}

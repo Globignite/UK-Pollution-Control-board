@@ -40,8 +40,6 @@ function Events() {
           },
         }
       );
-
-      console.log(response);
       const newMedia = response.data.data;
       // setMedia((prevMedia) => [...prevMedia, ...newMedia]);
       setMedia(response?.data?.data);
@@ -113,11 +111,7 @@ function Events() {
         {media.map((event, index) => (
           <Grid item xs={1} sm={4} md={4} key={index}>
              <Link to={`/media/event-gallery/${event._id}`}>
-            <Box   sx={{
-          margin: "20px 0px",
-          
-          borderRadius:"8px",
-        }}> 
+            <Box sx={{margin: "20px 0px",borderRadius:"8px"}}>  
               <img src={`https://delightfulbroadband.com${event.data[0].href}`} alt={event.name}   
               loading="lazy"
                         style={{

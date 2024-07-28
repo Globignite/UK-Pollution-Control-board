@@ -22,10 +22,10 @@ import { mainMenu } from "../../publicView/JsonFiles/MainMenu";
 import ExcelPreview from "../ExcelPreview";
 import Spinner from "../../publicView/Components/Spinner";
 
-const formats = ["PDF"];
+const formats = ["PDF", "Image"];
 
 const AddMarque = () => {
-  const [selectedFormat, setSelectedFormat] = useState("Pdf");
+  const [selectedFormat, setSelectedFormat] = useState("PDF");
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
@@ -46,6 +46,7 @@ const AddMarque = () => {
     const file = event.target.files[0];
     const validExtensions = {
       PDF: ["pdf"],
+      Image: ["jpg", "jpeg", "png", "gif"],
     };
 
     const fileExtension = file.name.split(".").pop().toLowerCase();
@@ -71,8 +72,6 @@ const AddMarque = () => {
 
     if (file && customFileName) {
       const token = localStorage.getItem("token");
-      console.log('marque title = ', title);
-      console.log('marque data = ', formData);
       try {
         const response = await axios.post(
           `https://delightfulbroadband.com/api/marquee`,
@@ -130,9 +129,7 @@ const AddMarque = () => {
     <Container>
       <Spinner loading={loading} />
       <Typography variant="h5">Add Marquee</Typography>
-      <Box
-        sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }}
-      >
+      <Box sx={{ width: { lg: "60%", xs: "100%" }, p: 1, bgcolor: "", mt: 5 }} >
         <FormControl component="fieldset" sx={{ mb: 2, width: "100%" }}>
           <FormLabel component="legend">Format</FormLabel>
           <RadioGroup row value={selectedFormat} onChange={handleFormatChange}>
@@ -167,7 +164,7 @@ const AddMarque = () => {
           <input
             type="file"
             name="file"
-            accept={selectedFormat === "Excel" ? ".xlsx,.xls,.csv" : ".pdf"}
+            accept={selectedFormat === "Image" ? "image/*" : ".pdf"}
             onChange={handleFileChange}
           />
         </FormControl>

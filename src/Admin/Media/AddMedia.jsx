@@ -192,7 +192,7 @@ const [loading, setLoading] = useState(false);
       </FormControl>
 
       <Grid container spacing={2}>
-        {files.map((fileObj, index) => (
+        {files?.map((fileObj, index) => (
           <Grid item xs={4} key={index}>
             <div style={{ position: "relative" }}>
               {fileObj.type.startsWith("video/") ? (
@@ -244,7 +244,7 @@ const [loading, setLoading] = useState(false);
         <Container sx={{ mt: 4 }}>
           <Typography variant="h6">Uploaded Media</Typography>
           <Grid container spacing={2}>
-            {uploadedMedia.map((media, index) => (
+            {uploadedMedia?.map((media, index) => (
               <Grid item xs={4} key={index}>
                 {media.type.startsWith("image/") && (
                   <ImageContainer imageUrl={media.url} />

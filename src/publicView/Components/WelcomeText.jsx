@@ -48,7 +48,7 @@ const WelcomeText = () => {
 			{/* Add additional content or styling here */}
 			
 			<Box sx={{mt:5}} >
-				{data.map((item, index) => (
+				{data?.map((item, index) => (
 				<Card
 				key={index}
 				sx={{

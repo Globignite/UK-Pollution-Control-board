@@ -275,7 +275,7 @@ const UploadFiles = () => {
         <FormControl component="fieldset" sx={{ mb: 2, width: "100%" }}>
           <FormLabel component="legend">Format</FormLabel>
           <RadioGroup row value={selectedFormat} onChange={handleFormatChange}>
-            {formats.map((format) => (
+            {formats?.map((format) => (
               <FormControlLabel
                 key={format}
                 value={format}

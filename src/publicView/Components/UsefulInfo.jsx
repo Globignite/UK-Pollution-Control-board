@@ -117,7 +117,7 @@ const UsefulInfo = () => {
         slidesToSlide={1}
         swipeable
       >
-        {UserInfoItems.map(({ title, icon, href , index }) => (
+        {UserInfoItems?.map(({ title, icon, href , index }) => (
           <Link to={href} key={index}>
             <Paper
               key={title}

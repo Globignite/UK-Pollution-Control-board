@@ -1,5 +1,5 @@
-import {Box} from "@mui/material";
-import  { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import axios from "axios";
 
@@ -8,11 +8,14 @@ const RunningText = () => {
 
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get("https://delightfulbroadband.com/api/marquee", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.get(
+        "https://delightfulbroadband.com/api/marquee",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.status !== 200) {
         throw new Error("Failed to fetch notifications");
@@ -25,24 +28,37 @@ const RunningText = () => {
     }
   };
 
-  useEffect(()=>{
-    fetchNotifications()
-  })
-
+  useEffect(() => {
+    fetchNotifications();
+  });
 
   return (
-    <Box sx={{ color: 'primary.main', fontWeight: 'bold', fontSize: { lg: '1.2rem', xs: '1rem' }, bgcolor: 'background.header'}}>
-    <Marquee>
-      {notifications.length > 0
-        ? notifications.map((notification, index) => (
-            <span key={index} style={{padding:'0px 15px'}}>
-             <a href={`https://delightfulbroadband.com${notification?.file_data?.href}`}>{notification?.marquee_title || 'N/A'}</a>
-            </span>
-          ))
-        : "*******Marquee*******"}
-    </Marquee>
-  </Box>
-  )
-}
+    <Box
+      sx={{
+        color: "primary.main",
+        fontWeight: "bold",
+        fontSize: { lg: "1.2rem", xs: "1rem" },
+        bgcolor: "background.header",
+      }}
+    >
+      <Marquee>
+        {notifications?.length > 0
+          ? notifications?.map((notification, index) => (
+              <span
+                key={index}
+                style={{ padding: "0px 15px", marginRight: "150px" }}
+              >
+                <a
+                  href={`https://delightfulbroadband.com${notification?.file_data?.href}`}
+                >
+                  {notification?.marquee_title || "N/A"}
+                </a>
+              </span>
+            ))
+          : "*******no Latest Notification*******"}
+      </Marquee>
+    </Box>
+  );
+};
 
-export default RunningText
+export default RunningText;

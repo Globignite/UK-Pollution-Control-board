@@ -116,7 +116,7 @@ function Events() {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 1, sm: 8, md: 12 }}
       >
-        {media.map((event, index) => (
+        {media?.map((event, index) => (
           <Grid item xs={1} sm={4} md={4} key={index}>
              <Link to={`/media/event-gallery/${event._id}`}>
             <Box sx={{margin: "20px 0px",borderRadius:"8px"}}>  

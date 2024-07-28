@@ -49,7 +49,7 @@ const ManageRecentUpdate = () => {
         throw new Error("Failed to fetch file");
       }
 
-      console.log(response?.data?.data?.data);
+      console.log("recent update", response?.data?.data?.data);
       setNotifications(response?.data?.data?.data);
     } catch (error) {
       console.error("Error fetching file:", error);

@@ -177,7 +177,7 @@ function ManageMedia() {
           <Typography variant="h6" gutterBottom>
             Media Events
           </Typography>
-          {media.map((item) => (
+          {media?.map((item) => (
             <Box
               key={item.id}
               marginBottom={2}

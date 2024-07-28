@@ -168,7 +168,7 @@ const Enquiries = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredData.map((file, index) => (
+            {filteredData?.map((file, index) => (
               <TableRow key={index}>
                 <TableCell>{file.status}</TableCell>
                 <TableCell>{file.enquiryId}</TableCell>

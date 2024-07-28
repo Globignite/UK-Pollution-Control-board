@@ -31,7 +31,7 @@ function ActionPlanRiverStretches() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows?.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.id}.</TableCell>
                 <TableCell>{row.river}</TableCell>

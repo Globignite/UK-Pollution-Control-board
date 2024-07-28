@@ -61,6 +61,7 @@ export default function Gallery() {
         <Typography variant="h5" align='center' sx={{ fontWeight: 600, fontSize: '1.8rem', pb: 5, color: 'primary.main' }} >
           Gallery
         </Typography>
+
         <Grid container spacing={2} columns={{ xs: 1, sm: 8, md: 12 }}>
           {media?.map((event) => (
             <Grid item xs={1} sm={4} md={4} key={event?._id}>
@@ -90,6 +91,7 @@ export default function Gallery() {
                       <TitleBox>{event?.name}</TitleBox>
                     </>
                   )}
+
                 </Paper>
               </Link>
             </Grid>

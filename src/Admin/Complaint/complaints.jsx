@@ -178,7 +178,7 @@ const Complaints = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((file, index) => (
+              {data?.map((file, index) => (
                 <TableRow key={index}>
                   <TableCell>{file?.status}</TableCell>
                   <TableCell>{file?.complaintId}</TableCell>

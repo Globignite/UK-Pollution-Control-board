@@ -107,8 +107,8 @@ const EnvironmentLegislation = () => {
         slidesToSlide={1}
         swipeable
       >
-        {legislationItems.map(({ title, icon, href }) => (
-          <Link to={href}>
+        {legislationItems?.map(({ title, icon, href, index }) => (
+          <Link to={href} key={index}>
             <Paper
               key={title}
               elevation={24}

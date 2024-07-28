@@ -318,7 +318,7 @@ const PublicHearing = () => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{projectData.map((row, index) => (
+					{projectData?.map((row, index) => (
 						<TableRow key={index}>
 							<TableCell component="th" scope="row">
 								{row.project_description}
@@ -330,7 +330,7 @@ const PublicHearing = () => {
 								</Link>
 							</TableCell>
 							<TableCell align="right">
-								{row.documents.map((doc, docIndex) => (
+								{row?.documents?.map((doc, docIndex) => (
 									<Link
 										key={docIndex}
 										href={doc}

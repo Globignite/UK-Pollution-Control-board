@@ -157,7 +157,7 @@ const MainMenu = () => {
           }}
           disablePadding
         >
-          {mainMenu.map((menuItem) => (
+          {mainMenu?.map((menuItem) => (
             <Box key={menuItem.name} sx={{ bgcolor: "background.header" }}>
               <MenuItem
                 sx={{ px: 0 }}
@@ -247,7 +247,7 @@ const MainMenu = () => {
                       unmountOnExit
                     >
                       <List component="div" disablePadding>
-                        {menuItem.subItems.map((subItem) => (
+                        {menuItem?.subItems?.map((subItem) => (
                           <ListItem key={subItem.name} button sx={{ pl: 3 }}>
                             <div key={subItem.name} style={{ width: "100%" }}>
                               {subItem?.subItems ? (
@@ -334,7 +334,7 @@ const MainMenu = () => {
                                   unmountOnExit
                                 >
                                   <List component="div" disablePadding>
-                                    {subItem.subItems.map((nestedSubItem) => (
+                                    {subItem?.subItems?.map((nestedSubItem) => (
                                       <ListItem
                                         key={nestedSubItem.name}
                                         sx={{ pl: 5 }}
@@ -395,7 +395,7 @@ const MainMenu = () => {
                         sx={{ position: "relative" }}
                         disablePadding
                       >
-                        {menuItem.subItems.map((subItem) => (
+                        {menuItem?.subItems?.map((subItem) => (
                           <ListItem
                             key={subItem.name}
                             sx={{ p: 0, minWidth: "200px" }}
@@ -483,7 +483,7 @@ const MainMenu = () => {
                                   }
                                 >
                                   <List component="div" disablePadding>
-                                    {subItem.subItems.map((nestedSubItem) => (
+                                    {subItem?.subItems?.map((nestedSubItem) => (
                                       <ListItem
                                         key={nestedSubItem.name}
                                         sx={{}}

@@ -194,7 +194,7 @@ function Complain() {
               Upload Images
             </Button>
           </Grid>
-          {files.map((fileObj, index) => (
+          {files?.map((fileObj, index) => (
             <Grid item xs={4} key={index}>
               <div style={{ position: "relative" }}>
                 <img

@@ -1,16 +1,11 @@
-import React, { useEffect,useState} from "react";
+import { useEffect,useState} from "react";
 import {
   Grid,
   Typography,
-  Box,
-  Stack,
-  Button,
+  Box,  
   Card,
   CardMedia,
-} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
-import { Link } from "react-router-dom";
+} from "@mui/material";   
 import axios from "axios";
 import { useParams } from 'react-router-dom';
 

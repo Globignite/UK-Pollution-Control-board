@@ -1,8 +1,7 @@
 import { Grid, Typography, Box, Container } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import { Link } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search"; 
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import  { useState } from "react";
 
 const MyAppBar = () => {
   const [searchQuery, setSearchQuery] = useState("");

@@ -117,8 +117,7 @@ const PDFData = {
   "null/River Rejuvenation & Pollution": [],
   "River Rejuvenation & Pollution/Action Plan for Rejuvenation of Polluted River Stretch":
     [],
-  "River Rejuvenation & Pollution/Water Quality of Polluted River Stretch":
-    [],
+  "River Rejuvenation & Pollution/Water Quality of Polluted River Stretch": [],
   "River Rejuvenation & Pollution/Order of Hon’ble NGT": [],
   "River Rejuvenation & Pollution/Letter | Notices etc": [],
 

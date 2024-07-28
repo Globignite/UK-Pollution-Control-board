@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   Typography,
@@ -11,7 +11,6 @@ import {
   Paper,
   TextField,
   Button,
-  TablePagination,
   MenuItem,
   Select,
   InputLabel,

@@ -49,12 +49,12 @@ const Sidebar = () => {
     },
     {
       title: "Enquiries",
-      path: "/admin/enquiries",
+      path: "/admin/enquiries", 
       icon: <ManageAccountsIcon />,
     },
     {
       title: "Complaints",
-      path: "/admin/complaints",
+      path: "/admin/complaints", 
       icon: <CommentIcon />,
     },
     {
@@ -62,12 +62,12 @@ const Sidebar = () => {
       items: [
         {
           label: "Add File",
-          path: "/admin/upload-files",
+          path: "/admin/upload-files", 
           icon: <FileUploadIcon />,
         },
         {
           label: "Manage File",
-          path: "/admin/manage-files",
+          path: "/admin/manage-files", 
           icon: <FileManageIcon />,
         },
       ],
@@ -77,12 +77,12 @@ const Sidebar = () => {
       items: [
         {
           label: "Add Notice",
-          path: "/admin/add-notice",
+          path: "/admin/add-notice", 
           icon: <NoticeIcon />,
         },
         {
           label: "Manage Notice",
-          path: "/admin/manage-notice",
+          path: "/admin/manage-notice", 
           icon: <NoticeIcon />,
         },
       ],
@@ -92,12 +92,12 @@ const Sidebar = () => {
       items: [
         {
           label: "Add Updates",
-          path: "/admin/add-recent-updates",
+          path: "/admin/add-recent-updates", 
           icon: <UpdateIcon />,
         },
         {
           label: "Manage Updates",
-          path: "/admin/manage-recent-updates",
+          path: "/admin/manage-recent-updates", 
           icon: <UpdateIcon />,
         },
       ],
@@ -107,12 +107,12 @@ const Sidebar = () => {
       items: [
         {
           label: "Add Media",
-          path: "/admin/add-media",
+          path: "/admin/add-media", 
           icon: <EventIcon />,
         },
         {
           label: "Manage Media",
-          path: "/admin/manage-media",
+          path: "/admin/manage-media", 
           icon: <EventIcon />,
         },
       ],
@@ -122,12 +122,12 @@ const Sidebar = () => {
       items: [
         {
           label: "Add Banner",
-          path: "/admin/add-banner",
+          path: "/admin/add-banner", 
           icon: <BannerIcon />,
         },
         {
           label: "Manage Banner",
-          path: "/admin/manage-banner",
+          path: "/admin/manage-banner", 
           icon: <BannerIcon />,
         },
       ],
@@ -137,12 +137,12 @@ const Sidebar = () => {
       items: [
         {
           label: "Add Marque",
-          path: "/admin/add-marque",
+          path: "/admin/add-marque", 
           icon: <MarqueeIcon />,
         },
         {
           label: "Manage Marque",
-          path: "/admin/manage-marque",
+          path: "/admin/manage-marque", 
           icon: <MarqueeIcon />,
         },
       ],

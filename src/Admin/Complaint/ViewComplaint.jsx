@@ -488,6 +488,7 @@ function ViewComplaint() {
           <Textarea
             aria-label="minimum height"
             minRows={3}
+            placeholder="Add Note for Action Took"
             value={note}
             onChange={handleNotesChange}
             style={{ width: "60%" }}

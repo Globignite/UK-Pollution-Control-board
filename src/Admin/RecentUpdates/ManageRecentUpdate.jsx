@@ -18,6 +18,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import Spinner from "../../publicView/Components/Spinner";
+import Pagination from "../../publicView/Components/Pagination";
 
 const ManageRecentUpdate = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -35,7 +36,7 @@ const ManageRecentUpdate = () => {
       const defaultParams = {
         path: "null/Recent Updates",
         page: pageNo,
-        limit: 10,
+        limit: 5,
       };
       const url = `${baseURL}?path=${defaultParams.path}&limit=${defaultParams.limit}&page=${defaultParams.page}&name=${searchTerm}&startDate=${startDate}&endDate=${endDate}`;
 
@@ -51,6 +52,7 @@ const ManageRecentUpdate = () => {
 
       console.log("recent update", response?.data?.data?.data);
       setNotifications(response?.data?.data?.data);
+      setPaginationData(response?.data?.pagination);
     } catch (error) {
       console.error("Error fetching file:", error);
       setNotifications([]);
@@ -212,7 +214,7 @@ const ManageRecentUpdate = () => {
       )}
 
       <Box>
-        {paginationData.totalPages > 1 && (
+        {paginationData?.total > 0 && (
           <Pagination
             pagination={paginationData}
             setPageNo={setPage}

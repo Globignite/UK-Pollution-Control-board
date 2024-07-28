@@ -48,7 +48,7 @@ const Enquiries = () => {
             startDate: startDate || undefined,
             endDate: endDate || undefined,
             page: pageNo,
-            limit: 10,
+            limit: 5,
           },
         }
       );
@@ -186,7 +186,7 @@ const Enquiries = () => {
         </Table>
       </TableContainer>
       <Box>
-        {paginationData.totalPages > 1 && (
+        {paginationData?.total > 1 && (
           <Pagination
             pagination={paginationData}
             setPageNo={setPage}

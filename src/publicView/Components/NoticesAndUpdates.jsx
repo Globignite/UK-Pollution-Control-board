@@ -125,8 +125,8 @@ const NoticesAndUpdates = () => {
               direction="up"
               height={600}
               >
-            {notifications.map((notification, index) => (
-                <a key={index} href={`https://delightfulbroadband.com${notification.href}`}>
+            {notifications?.map((notification, index) => (
+                <a key={index} href={`https://delightfulbroadband.com${notification?.href}`}>
                    {notification.name} // Change 'title' to the actual key for the notification title
                 </a>
               ))}

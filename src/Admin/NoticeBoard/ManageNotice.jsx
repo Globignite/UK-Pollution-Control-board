@@ -14,11 +14,17 @@ import {
   Paper,
   Link,
   Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import Spinner from "../../publicView/Components/Spinner";
 import Pagination from "../../publicView/Components/Pagination";
+import { toast } from "sonner";
 
 const ManageNotice = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,6 +34,8 @@ const ManageNotice = () => {
   const [loading, setLoading] = useState(false);
   const [pageNo, setPageNo] = useState(1);
   const [paginationData, setPaginationData] = useState(0);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [deleteFile, setDeleteFile] = useState({ href: "", name: "" });
 
   const fetchNotifications = async () => {
     setLoading(true);
@@ -59,37 +67,46 @@ const ManageNotice = () => {
     setLoading(false);
   };
 
-  const handleDelete = async (href, name) => {
+  const handleDelete = async () => {
     setLoading(true);
-    if (confirm("Are you sure you want to delete " + name)) {
-      try {
-        const reqData = {
-          filePath: "null/Notices",
-          href: href,
-        };
-        const token = localStorage.getItem("token");
-        const response = await axios.delete(
-          "https://delightfulbroadband.com/api/filesUpload/delete-file",
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            data: reqData, // This is the correct place to put the data for delete request
-          }
-        );
-
-        if (response.status !== 200) {
-          throw new Error("Failed to delete file");
+    const { href, name } = deleteFile;
+    try {
+      const reqData = {
+        filePath: "null/Notices",
+        href: href,
+      };
+      const token = localStorage.getItem("token");
+      const response = await axios.delete(
+        "https://delightfulbroadband.com/api/filesUpload/delete-file",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          data: reqData,
         }
-        fetchNotifications();
-        alert("File deleted successfully");
-      } catch (error) {
-        console.error("Error deleting file:", error);
-        alert("Error deleting file:", error);
+      );
+
+      if (response.status !== 200) {
+        throw new Error("Failed to delete file");
       }
+      fetchNotifications();
+      toast.success("File deleted successfully", { duration: 3000 });
+    } catch (error) {
+      console.error("Error deleting file:", error);
+      toast.error("Error deleting file", { duration: 3000 });
     }
     setLoading(false);
+    setOpenDialog(false);
+  };
+
+  const handleOpenDialog = (href, name) => {
+    setDeleteFile({ href, name });
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
 
   const handleSearchChange = (event) => {
@@ -170,7 +187,7 @@ const ManageNotice = () => {
         </Button>
       </Box>
 
-      {notifications?.length == 0 ? (
+      {notifications?.length === 0 ? (
         <Typography variant="h6" gutterBottom>
           No Records
         </Typography>
@@ -181,7 +198,6 @@ const ManageNotice = () => {
               <TableRow>
                 <TableCell>Title</TableCell>
                 <TableCell>Publish Date</TableCell>
-
                 <TableCell>File Type</TableCell>
                 <TableCell>Remove</TableCell>
               </TableRow>
@@ -190,15 +206,18 @@ const ManageNotice = () => {
               {notifications?.map((file, index) => (
                 <TableRow key={index}>
                   <TableCell>
-                    <Link href="#">{file?.name || "N/A"}</Link>
+                    <Link href={`https://delightfulbroadband.com${file?.href}`}>
+                      {file?.name || "N/A"}
+                    </Link>
                   </TableCell>
-                  <TableCell>{file.createdAt.split("T")[0] || "N/A"}</TableCell>
-
+                  <TableCell>
+                    {file.createdAt.split("T")[0] || "N/A"}
+                  </TableCell>
                   <TableCell>{file.type}</TableCell>
                   <TableCell>
                     <IconButton
                       color="primary"
-                      onClick={() => handleDelete(file?.href, file?.name)}
+                      onClick={() => handleOpenDialog(file?.href, file?.name)}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -219,6 +238,28 @@ const ManageNotice = () => {
           />
         )}
       </Box>
+
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Confirm Delete"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete {deleteFile.name}?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} color="primary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };

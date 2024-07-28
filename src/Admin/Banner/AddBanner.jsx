@@ -1,4 +1,4 @@
-import  { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import {
   Container,
   TextField,
@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import axios from "axios";
+import { toast } from "sonner";
 import ImageContainer from "../Components/ImageContainer";
 import Spinner from "../../publicView/Components/Spinner";
 
@@ -59,13 +60,11 @@ const AddBanner = () => {
           },
         }
       );
-      console.log("Success:", response);
-      alert("Media added successfully");
-      // setUploadedMedia(response.data.uploadedFiles); // Assuming the API response contains an array of uploaded files
+      toast.success("Media added successfully", { duration: 3000 });
       handleClear();
     } catch (error) {
       console.error("Error uploading media:", error);
-      alert(error.response?.data?.error || "Oops, something went wrong");
+      toast.error(error.response?.data?.error || "Oops, something went wrong", { duration: 3000 });
     }
     setLoading(false);
   };
@@ -135,13 +134,12 @@ const AddBanner = () => {
 
   return (
     <Container>
-        <Spinner loading={loading} />
+      <Spinner loading={loading} />
       <Typography variant="h5" sx={{ mb: 1 }}>
         Upload Banners
       </Typography>
 
       <FormControl fullWidth sx={{ my: 2 }}>
-        {/* <FormLabel component="legend">Upload</FormLabel> */}
         <input
           ref={fileInputRef}
           id="file-upload"
@@ -195,7 +193,14 @@ const AddBanner = () => {
         ))}
       </Grid>
 
-      <TextField id="outlined-basic" value={bannerName} onChange={(e)=> setBannerName(e.target.value)} label="Banner name" variant="outlined" sx={{mt:2}} />
+      <TextField 
+        id="outlined-basic" 
+        value={bannerName} 
+        onChange={(e) => setBannerName(e.target.value)} 
+        label="Banner name" 
+        variant="outlined" 
+        sx={{ mt: 2 }} 
+      />
 
       <Box>
         <Button
@@ -209,30 +214,11 @@ const AddBanner = () => {
           variant="contained"
           sx={{ width: "45%", mt: 2, ml: 1 }}
           onClick={handleSubmit}
+          disabled={!bannerName || files.length === 0}
         >
           Submit
         </Button>
       </Box>
-     {/* {uploadedMedia.length > 0 && (
-        <Container sx={{ mt: 4 }}>
-          <Typography variant="h6">Uploaded Media</Typography>
-          <Grid container spacing={2}>
-            {uploadedMedia.map((media, index) => (
-              <Grid item xs={4} key={index}>
-                {media.type.startsWith("image/") && (
-                  <ImageContainer imageUrl={media.url} />
-                )}
-                {media.type.startsWith("video/") && (
-                  <video width="100%" controls>
-                    <source src={media.url} type={media.type} />
-                    Your browser does not support the video tag.
-                  </video>
-                )}
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      )}  */}
     </Container>
   );
 };

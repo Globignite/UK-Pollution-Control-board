@@ -1,10 +1,10 @@
-import  { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import {
   Container,
   TextField,
   Button,
   Typography,
-  FormControl, 
+  FormControl,
   Grid,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -13,6 +13,7 @@ import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAuto
 import axios from "axios";
 import ImageContainer from "../Components/ImageContainer";
 import Spinner from "../../publicView/Components/Spinner";
+import { toast } from "sonner";
 
 const blue = {
   100: "#DAECFF",
@@ -39,7 +40,7 @@ const grey = {
 const Textarea = styled(BaseTextareaAutosize)(
   ({ theme }) => `
   box-sizing: border-box;
-  width: 320px;
+  width: 100%;
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
@@ -77,17 +78,15 @@ const AddMedia = () => {
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState([]);
   const [uploadedMedia, setUploadedMedia] = useState([]);
+  const [loading, setLoading] = useState(false);
   const fileInputRef = useRef(null);
-const [loading, setLoading] = useState(false);
 
   const handleFileChange = (event) => {
-    const fileArray = Array.from(event.target.files).map((file) => {
-      return {
-        url: URL.createObjectURL(file),
-        type: file.type,
-        file,
-      };
-    });
+    const fileArray = Array.from(event.target.files).map((file) => ({
+      url: URL.createObjectURL(file),
+      type: file.type,
+      file,
+    }));
     setFiles((prevFiles) => prevFiles.concat(fileArray));
     event.target.value = null; // Clean up the object URL
   };
@@ -119,11 +118,11 @@ const [loading, setLoading] = useState(false);
         }
       );
       console.log("Success:", response.data);
-      alert("Media added successfully");
+      toast.success("Media added successfully", { duration: 3000 });
       handleClear();
     } catch (error) {
       console.error("Error uploading media:", error);
-      alert(error.response?.data?.error || "Oops, something went wrong");
+      toast.error(error.response?.data?.error || "Oops, something went wrong", { duration: 3000 });
     }
     setLoading(false);
   };
@@ -147,7 +146,7 @@ const [loading, setLoading] = useState(false);
         label="Event Name"
         value={eventName}
         onChange={(e) => setEventName(e.target.value)}
-        sx={{ mb: 1, mt:1}}
+        sx={{ mb: 1, mt: 1 }}
       />
 
       <TextField
@@ -236,6 +235,7 @@ const [loading, setLoading] = useState(false);
         variant="contained"
         sx={{ width: "45%", mt: 2, ml: 1 }}
         onClick={handleSubmit}
+        disabled={!eventName || files.length === 0}
       >
         Submit
       </Button>

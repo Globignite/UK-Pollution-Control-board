@@ -198,15 +198,15 @@ const UploadFiles = () => {
             throw new Error("Failed to upload file");
           }
 
-          toast.success(response?.data?.message, { duration: 1500 });
+          toast.success(response?.data?.message, { duration: 3000 });
           handleClear();
         } catch (error) {
           console.error("Error uploading file:", error);
-          toast.error("Failed to upload file", { duration: 1500 });
+          toast.error("Failed to upload file", { duration: 3000 });
         }
 
     } else {
-      toast.error("Form is incomplete", { duration: 1500 });
+      toast.error("Form is incomplete", { duration: 3000 });
       console.log("Form is incomplete");
     }
     setLoading(false);

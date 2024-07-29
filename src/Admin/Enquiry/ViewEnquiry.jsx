@@ -409,7 +409,7 @@ function ViewEnquiry() {
             Notes
           </Typography>
           <Textarea
-            placeholder="Write A Note..."
+            placeholder="Add Note for Action Took"
             aria-label="minimum height"
             minRows={3}
             value={note}

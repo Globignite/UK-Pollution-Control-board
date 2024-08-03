@@ -16,11 +16,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../../publicView/Components/Spinner";
- 
 import { toast } from "sonner";
- 
 import Pagination from "../../publicView/Components/Pagination";
- 
+import CloseIcon from '@mui/icons-material/Close';
 
 function ManageMedia() {
   const [media, setMedia] = useState([]);
@@ -32,6 +30,8 @@ function ManageMedia() {
   const [paginationData, setPaginationData] = useState(0);
   const [openDialog, setOpenDialog] = useState(false);
   const [mediaToDelete, setMediaToDelete] = useState(null);
+  const [openImageDialog, setOpenImageDialog] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
 
   const fetchMedia = async (startDate, endDate, searchTerm, pageNo) => {
     setLoading(true);
@@ -55,9 +55,9 @@ function ManageMedia() {
       const { data, pagination } = response.data;
       console.log("Media Data:", response?.data.data);
       setMedia(response?.data.data);
- 
+
       setPaginationData(response?.data.pagination);
- 
+
     } catch (error) {
       console.error(
         "Error fetching media:",
@@ -134,6 +134,16 @@ function ManageMedia() {
       toast.error(error.response?.data?.error || "Oops, something went wrong");
     }
     setLoading(false);
+  };
+
+  const handleImageClickOpen = (image) => {
+    setSelectedImage(image);
+    setOpenImageDialog(true);
+  };
+
+  const handleImageClose = () => {
+    setOpenImageDialog(false);
+    setSelectedImage("");
   };
 
   return (
@@ -236,7 +246,7 @@ function ManageMedia() {
                       marginRight={2}
                       sx={{ position: "relative" }}
                     >
-                      <Box>
+                      <Box onClick={() => handleImageClickOpen(`https://delightfulbroadband.com${ele.href}`)}>
                         <img
                           src={`https://delightfulbroadband.com${ele.href}`}
                           alt={`Media Event ${index + 1}`}
@@ -245,6 +255,7 @@ function ManageMedia() {
                             width: "100%",
                             height: "120px",
                             objectFit: "cover",
+                            cursor: "pointer"
                           }}
                         />
                       </Box>
@@ -297,6 +308,30 @@ function ManageMedia() {
             Confirm
           </Button>
         </DialogActions>
+      </Dialog>
+
+      <Dialog open={openImageDialog} onClose={handleImageClose} maxWidth="md" fullWidth>
+        <DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleImageClose}
+            sx={{
+              position: 'absolute',
+              right: 3,
+              top: 2,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent dividers>
+          <img
+            src={selectedImage}
+            alt="Selected"
+            style={{ width: '100%', height: 'auto' }}
+          />
+        </DialogContent>
       </Dialog>
     </Container>
   );

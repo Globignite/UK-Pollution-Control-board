@@ -1,40 +1,24 @@
-import { useEffect,useState} from "react";
+import { useEffect, useState } from "react";
 import {
   Grid,
   Typography,
-  Box,  
+  Box,
   Card,
   CardMedia,
-} from "@mui/material";   
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton
+} from "@mui/material";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
-
-// const mediaItems = [
-//   {
-//     type: "image",
-//     src: "https://images.unsplash.com/photo-1719336234156-320dafbac51a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//     title: "Image 1",
-//   },
-//   {
-//     type: "video",
-//     src: "https://www.w3schools.com/html/mov_bbb.mp4",
-//     title: "Video 1",
-//   },
-//   {
-//     type: "image",
-//     src: "https://images.unsplash.com/photo-1719336234156-320dafbac51a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//     title: "Image 2",
-//   },
-//   {
-//     type: "video",
-//     src: "https://www.w3schools.com/html/mov_bbb.mp4",
-//     title: "Video 2",
-//   },
-// ];
+import CloseIcon from '@mui/icons-material/Close';
 
 function EventGallery() {
   const { id } = useParams();
   const [event, setEvent] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
 
   const fetchMedia = async (id) => {
     try {
@@ -43,15 +27,25 @@ function EventGallery() {
           "Content-Type": "application/json",
         }
       });
-      // console.log(response?.data?.data);
       setEvent(response?.data?.data);
     } catch (error) {
       console.error('Error fetching media:', error);
     }
   };
-  useEffect(()=>{
+
+  useEffect(() => {
     fetchMedia(id);
-  },[])
+  }, [id]);
+
+  const handleClickOpen = (image) => {
+    setSelectedImage(image);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedImage("");
+  };
 
   return (
     <Box>
@@ -65,12 +59,12 @@ function EventGallery() {
           color: "primary.main",
         }}
       >
-       {event?.name}
+        {event?.name}
       </Typography>
       <Typography variant="body2">{event?.createdAt}</Typography>
 
       <Typography variant="body2" sx={{ my: 2 }}>
-       {event?.description}
+        {event?.description}
       </Typography>
 
       <Box sx={{ flexGrow: 1, p: 3 }}>
@@ -82,20 +76,22 @@ function EventGallery() {
                   <CardMedia
                     component="img"
                     alt={item.title}
-                    style={{borderRadius:'8px'}}
+                    style={{ borderRadius: '8px', cursor: 'pointer' }}
                     height="140"
                     image={`https://delightfulbroadband.com${item?.href}`}
                     title={item?.media_name}
+                    onClick={() => handleClickOpen(`https://delightfulbroadband.com${item?.href}`)}
                   />
                 ) : (
                   <CardMedia
                     component="video"
                     controls
-                    style={{borderRadius:'8px'}}
+                    style={{ borderRadius: '8px', cursor: 'pointer' }}
                     alt={item.title}
                     height="140"
                     src={`https://delightfulbroadband.com${item?.href}`}
                     title={item?.media_name}
+                    onClick={() => handleClickOpen(`https://delightfulbroadband.com${item?.href}`)}
                   />
                 )}
               </Card>
@@ -103,7 +99,30 @@ function EventGallery() {
           ))}
         </Grid>
       </Box>
-      
+
+      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+        <DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 3,
+              top: 2,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent dividers >
+          <img
+            src={selectedImage}
+            alt="Selected"
+            style={{ width: '100%', height: 'auto' }}
+          />
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 }

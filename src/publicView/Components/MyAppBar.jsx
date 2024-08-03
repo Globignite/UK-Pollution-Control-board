@@ -26,6 +26,7 @@ const MyAppBar = () => {
               lg={9}
               sx={{ display: "flex", alignItems: "center" }}
             >
+              <a href="/">
               <Box width={{ lg: 90, xs: 50 }} height={{ lg: 90, xs: 50 }}>
                 <img
                   src={"/assets/logo.png"}
@@ -34,6 +35,7 @@ const MyAppBar = () => {
                   height="100%"
                 />
               </Box>
+              </a>
               <Box sx={{ ml: 1 }}>
                 <Typography
                   variant="h2"
@@ -54,6 +56,7 @@ const MyAppBar = () => {
                   Government Of Uttarakhand
                 </Typography>
               </Box>
+              
             </Grid>
 
             <Grid

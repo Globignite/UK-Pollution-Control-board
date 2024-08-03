@@ -10,7 +10,7 @@ body {
 
 a {
   text-decoration: none; /* Removes underline */
-  color: inherit; /* Inherits color from parent elements */
+ color: inherit; /* Inherits color from parent elements */
 }
 
 a:hover {

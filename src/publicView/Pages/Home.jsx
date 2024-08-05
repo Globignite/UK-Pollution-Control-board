@@ -54,7 +54,7 @@ function Home() {
         <MainMenu />
       </Box>
       <MyAppBar />
-      <Box sx={{ display: { lg: "flex", xs: "none" } }}>
+      <Box sx={{ display: { lg: "flex", xs: "none" }}}>
         <MainMenu />
       </Box>
       <MainBanner />

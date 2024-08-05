@@ -13,15 +13,18 @@ import {
   Button,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import Spinner from "../../publicView/Components/Spinner";
-import { toast } from "sonner"; 
+import { toast } from "sonner";
 
 function ManageBanner() {
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [bannerToDelete, setBannerToDelete] = useState(null);
+  const [openImageDialog, setOpenImageDialog] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
 
   const fetchBanners = async () => {
     try {
@@ -74,6 +77,16 @@ function ManageBanner() {
     handleClose();
   };
 
+  const handleImageClickOpen = (image) => {
+    setSelectedImage(image);
+    setOpenImageDialog(true);
+  };
+
+  const handleImageClose = () => {
+    setOpenImageDialog(false);
+    setSelectedImage("");
+  };
+
   useEffect(() => {
     fetchBanners();
   }, []);
@@ -101,6 +114,7 @@ function ManageBanner() {
                 width: "32vw",
                 height: "200px",
               }}
+              onClick={() => handleImageClickOpen(`https://delightfulbroadband.com${ele.href}`)}
             >
               <img
                 src={`https://delightfulbroadband.com${ele.href}`}
@@ -110,6 +124,7 @@ function ManageBanner() {
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
+                  cursor: "pointer"
                 }}
               />
               <IconButton
@@ -121,7 +136,10 @@ function ManageBanner() {
                   right: 2,
                   backgroundColor: "rgba(255, 255, 255, 0.7)",
                 }}
-                onClick={() => handleDeleteClick(ele._id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteClick(ele._id);
+                }}
               >
                 <DeleteIcon fontSize="small" />
               </IconButton>
@@ -150,6 +168,30 @@ function ManageBanner() {
             Delete
           </Button>
         </DialogActions>
+      </Dialog>
+
+      <Dialog open={openImageDialog} onClose={handleImageClose} maxWidth="md" fullWidth>
+        <DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleImageClose}
+            sx={{
+              position: 'absolute',
+              right: 3,
+              top: 2,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent dividers>
+          <img
+            src={selectedImage}
+            alt="Selected"
+            style={{ width: '100%', height: 'auto' }}
+          />
+        </DialogContent>
       </Dialog>
     </Container>
   );

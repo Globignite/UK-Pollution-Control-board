@@ -62,12 +62,15 @@ const VerticalRecentUpdate = () => {
         {notifications?.length > 0
           ? notifications?.map((item, index) => (
               <div key={index} style={{ padding: "10px 0" }}>
+                <Box style={{display:"flex",gap:"20px"}}>
                 <a
                   href={`https://delightfulbroadband.com${item?.href}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   {item?.name || "N/A"}
                 </a>
+                <p>{item?.updatedAt.split('T')[0] || "N/A"}</p>
+                </Box>
               </div>
             ))
           : "*******No Recent Updates*******"}

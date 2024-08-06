@@ -42,7 +42,7 @@ function SearchResult() {
             params: { name: query, page, limit },
           }
         );
-        console.log(response?.data.pagination);
+        // console.log(response?.data?.data);
         setResults(response?.data?.data);
         setPagination(response?.data?.pagination);
       } catch (error) {

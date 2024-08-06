@@ -58,6 +58,13 @@ function PdfListContainer({ data }) {
               {data.name}
             </Typography>
           </Box>
+          <Typography
+              variant="body1"
+              sx={{ width: "75%", overflow: "hidden" }}
+              color="red"
+            >
+              {data?.createdAt.split("T")[0]}
+            </Typography>
           <Box>
             <DownloadIcon
               onClick={() =>
@@ -71,7 +78,7 @@ function PdfListContainer({ data }) {
           </Box>
         </Card>
       </Box>
-      <Box id="footer" sx={{ display: "none" }}>
+      <Box id="footer" sx={{ display: "none" }} >
         Source: Uttarakhand Pollution Control Board, Government Of Uttarakhand,
         Last Updated on 15-06-2024
       </Box>

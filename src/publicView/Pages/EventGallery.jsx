@@ -18,7 +18,7 @@ function EventGallery() {
   const { id } = useParams();
   const [event, setEvent] = useState([]);
   const [open, setOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedMedia, setSelectedMedia] = useState({ url: "", type: "" });
 
   const fetchMedia = async (id) => {
     try {
@@ -37,14 +37,14 @@ function EventGallery() {
     fetchMedia(id);
   }, [id]);
 
-  const handleClickOpen = (image) => {
-    setSelectedImage(image);
+  const handleClickOpen = (url, type) => {
+    setSelectedMedia({ url, type });
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-    setSelectedImage("");
+    setSelectedMedia({ url: "", type: "" });
   };
 
   return (
@@ -80,7 +80,7 @@ function EventGallery() {
                     height="140"
                     image={`https://delightfulbroadband.com${item?.href}`}
                     title={item?.media_name}
-                    onClick={() => handleClickOpen(`https://delightfulbroadband.com${item?.href}`)}
+                    onClick={() => handleClickOpen(`https://delightfulbroadband.com${item?.href}`, "image")}
                   />
                 ) : (
                   <CardMedia
@@ -91,7 +91,7 @@ function EventGallery() {
                     height="140"
                     src={`https://delightfulbroadband.com${item?.href}`}
                     title={item?.media_name}
-                    onClick={() => handleClickOpen(`https://delightfulbroadband.com${item?.href}`)}
+                    onClick={() => handleClickOpen(`https://delightfulbroadband.com${item?.href}`, "video")}
                   />
                 )}
               </Card>
@@ -115,12 +115,20 @@ function EventGallery() {
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent dividers >
-          <img
-            src={selectedImage}
-            alt="Selected"
-            style={{ width: '100%', height: 'auto' }}
-          />
+        <DialogContent dividers>
+          {selectedMedia.type === "image" ? (
+            <img
+              src={selectedMedia.url}
+              alt="Selected"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          ) : selectedMedia.type === "video" ? (
+            <video
+              src={selectedMedia.url}
+              controls
+              style={{ width: '100%', height: 'auto' }}
+            />
+          ) : null}
         </DialogContent>
       </Dialog>
     </Box>

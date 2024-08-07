@@ -27,11 +27,11 @@ function ManageMedia() {
   const [endDate, setEndDate] = useState("");
   const [loading, setLoading] = useState(false);
   const [pageNo, setPageNo] = useState(1);
-  const [paginationData, setPaginationData] = useState(0);
+  const [paginationData, setPaginationData] = useState({});
   const [openDialog, setOpenDialog] = useState(false);
   const [mediaToDelete, setMediaToDelete] = useState(null);
-  const [openImageDialog, setOpenImageDialog] = useState(false);
-  const [selectedImage, setSelectedImage] = useState("");
+  const [openMediaDialog, setOpenMediaDialog] = useState(false);
+  const [selectedMedia, setSelectedMedia] = useState({ url: "", type: "" });
 
   const fetchMedia = async (startDate, endDate, searchTerm, pageNo) => {
     setLoading(true);
@@ -53,19 +53,14 @@ function ManageMedia() {
       );
 
       const { data, pagination } = response.data;
-      console.log("Media Data:", response?.data.data);
-      setMedia(response?.data.data);
-
-      setPaginationData(response?.data.pagination);
-
+      setMedia(data);
+      setPaginationData(pagination);
     } catch (error) {
-      console.error(
-        "Error fetching media:",
-        error.response ? error.response.data : error.message
-      );
-      throw error;
+      console.error("Error fetching media:", error.response ? error.response.data : error.message);
+      toast.error("Failed to fetch media");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const setPage = (page) => {
@@ -75,7 +70,7 @@ function ManageMedia() {
 
   useEffect(() => {
     fetchMedia(startDate, endDate, searchTerm, pageNo);
-  }, [pageNo]);
+  }, [pageNo, startDate, endDate, searchTerm]);
 
   const handleFilterClick = () => {
     setPageNo(1);
@@ -111,39 +106,37 @@ function ManageMedia() {
 
   const deleteEvent = async () => {
     setLoading(true);
-    setOpenDialog(false);
-    const id = mediaToDelete._id;
-    const token = localStorage.getItem("token");
     try {
-      const response = await axios.delete(
+      const id = mediaToDelete._id;
+      const token = localStorage.getItem("token");
+      await axios.delete(
         "https://delightfulbroadband.com/api/media/delete-media-event",
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          data: {
-            _id: id,
-          },
+          data: { _id: id },
         }
       );
-      console.log("Success:", response);
       fetchMedia(startDate, endDate, searchTerm, pageNo);
       toast.success("Media deleted successfully");
     } catch (error) {
       console.error("Error deleting Event:", error);
       toast.error(error.response?.data?.error || "Oops, something went wrong");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
+    closeDeleteDialog();
   };
 
-  const handleImageClickOpen = (image) => {
-    setSelectedImage(image);
-    setOpenImageDialog(true);
+  const handleMediaClickOpen = (url, type) => {
+    setSelectedMedia({ url, type });
+    setOpenMediaDialog(true);
   };
 
-  const handleImageClose = () => {
-    setOpenImageDialog(false);
-    setSelectedImage("");
+  const handleMediaClose = () => {
+    setOpenMediaDialog(false);
+    setSelectedMedia({ url: "", type: "" });
   };
 
   return (
@@ -152,13 +145,7 @@ function ManageMedia() {
       <Typography variant="h6" gutterBottom>
         Manage Media
       </Typography>
-      <Box
-        display="flex"
-        flexDirection="row"
-        flexWrap="wrap"
-        gap={2}
-        marginBottom={2}
-      >
+      <Box display="flex" flexDirection="row" flexWrap="wrap" gap={2} marginBottom={2}>
         <TextField
           value={searchTerm}
           onChange={handleSearchChange}
@@ -167,16 +154,13 @@ function ManageMedia() {
           placeholder="Search Event Name"
           style={{ flex: 1 }}
         />
-
         <TextField
           type="date"
           value={startDate}
           onChange={(e) => handleDateChange("start", e.target.value)}
           label="Start Date"
           margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
+          InputLabelProps={{ shrink: true }}
           style={{ flex: 1 }}
         />
         <TextField
@@ -185,9 +169,7 @@ function ManageMedia() {
           margin="normal"
           onChange={(e) => handleDateChange("end", e.target.value)}
           label="End Date"
-          InputLabelProps={{
-            shrink: true,
-          }}
+          InputLabelProps={{ shrink: true }}
           style={{ flex: 1 }}
         />
         <Button
@@ -207,9 +189,9 @@ function ManageMedia() {
           <Typography variant="h6" gutterBottom>
             Media Events
           </Typography>
-          {media?.map((item) => (
+          {media.map((item) => (
             <Box
-              key={item.id}
+              key={item._id}
               marginBottom={2}
               padding={2}
               boxShadow={2}
@@ -219,45 +201,32 @@ function ManageMedia() {
               <Typography variant="h6" marginBottom={1}>
                 {item.name}
               </Typography>
-              <Typography
-                variant="body2"
-                marginBottom={1}
-                sx={{ fontWeight: "semibold" }}
-              >
+              <Typography variant="body2" marginBottom={1} sx={{ fontWeight: "semibold" }}>
                 {new Date(item.createdAt).toLocaleDateString()}
               </Typography>
-              <Typography
-                variant="body1"
-                marginBottom={1}
-                sx={{ fontWeight: "semibold" }}
-              >
+              <Typography variant="body1" marginBottom={1} sx={{ fontWeight: "semibold" }}>
                 {item.description}
               </Typography>
-
-              <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
-                {item?.data.length > 0 ? (
-                  item?.data.map((ele, index) => (
-                    <Grid
-                      item
-                      xs={2}
-                      sm={2}
-                      md={2}
-                      key={ele?._id}
-                      marginRight={2}
-                      sx={{ position: "relative" }}
-                    >
-                      <Box onClick={() => handleImageClickOpen(`https://delightfulbroadband.com${ele.href}`)}>
-                        <img
-                          src={`https://delightfulbroadband.com${ele.href}`}
-                          alt={`Media Event ${index + 1}`}
-                          loading="lazy"
-                          style={{
-                            width: "100%",
-                            height: "120px",
-                            objectFit: "cover",
-                            cursor: "pointer"
-                          }}
-                        />
+              <Grid container spacing={2}>
+                {item.data.length > 0 ? (
+                  item.data.map((ele, index) => (
+                    <Grid item xs={2} key={ele._id} sx={{ position: "relative" }}>
+                      <Box onClick={() => handleMediaClickOpen(`https://delightfulbroadband.com${ele.href}`, ele.type)}>
+                        {ele.type === "Photo" ? (
+                          <img
+                            src={`https://delightfulbroadband.com${ele.href}`}
+                            alt={`Media Event ${index + 1}`}
+                            loading="lazy"
+                            style={{ width: "100%", height: "120px", objectFit: "cover", cursor: "pointer" }}
+                          />
+                        ) : (
+                          <video
+                            src={`https://delightfulbroadband.com${ele.href}`}
+                        
+                            style={{ width: "100%", height: "120px", objectFit: "cover", cursor: "pointer" }}
+                            alt={`Media Event ${index + 1}`}
+                          />
+                        )}
                       </Box>
                     </Grid>
                   ))
@@ -265,7 +234,6 @@ function ManageMedia() {
                   <Typography variant="body2">No data</Typography>
                 )}
               </Grid>
-
               <IconButton
                 aria-label="delete"
                 size="small"
@@ -284,7 +252,7 @@ function ManageMedia() {
         </Box>
       )}
       <Box>
-        {paginationData?.total > 1 && (
+        {paginationData.total > 1 && (
           <Pagination
             pagination={paginationData}
             setPageNo={setPage}
@@ -310,11 +278,11 @@ function ManageMedia() {
         </DialogActions>
       </Dialog>
 
-      <Dialog open={openImageDialog} onClose={handleImageClose} maxWidth="md" fullWidth>
+      <Dialog open={openMediaDialog} onClose={handleMediaClose} maxWidth="md" fullWidth>
         <DialogTitle>
           <IconButton
             aria-label="close"
-            onClick={handleImageClose}
+            onClick={handleMediaClose}
             sx={{
               position: 'absolute',
               right: 3,
@@ -326,11 +294,19 @@ function ManageMedia() {
           </IconButton>
         </DialogTitle>
         <DialogContent dividers>
-          <img
-            src={selectedImage}
-            alt="Selected"
-            style={{ width: '100%', height: 'auto' }}
-          />
+          {selectedMedia.type === "Photo" ? (
+            <img
+              src={selectedMedia.url}
+              alt="Selected"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          ) : selectedMedia.type === "Video" ? (
+            <video
+              src={selectedMedia.url}
+              controls
+              style={{ width: '100%', height: 'auto' }}
+            />
+          ) : null}
         </DialogContent>
       </Dialog>
     </Container>

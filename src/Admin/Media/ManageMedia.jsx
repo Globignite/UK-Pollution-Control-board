@@ -301,11 +301,13 @@ function ManageMedia() {
               style={{ width: '100%', height: 'auto' }}
             />
           ) : selectedMedia.type === "Video" ? (
-            <video
+            <div style={{display:"flex", justifyContent:"center"}}>
+             <video
               src={selectedMedia.url}
               controls
-              style={{ width: '100%', height: 'auto' }}
+              style={{ width: 'auto',maxWidth:"100%",height:"auto", maxHeight:"80vh" }}
             />
+            </div>
           ) : null}
         </DialogContent>
       </Dialog>

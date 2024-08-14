@@ -79,19 +79,14 @@ export default function Gallery() {
                     </>
                   ) : (
                     <>
-                      <Box sx={{ position: 'relative', height: '200px', overflow: 'hidden' }}>
                         <video
                           src={`https://delightfulbroadband.com${event?.data[0]?.href}`}
                           alt={event?.name}
-                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                          controls
+                          style={{ width: "100%", height: "200px", objectFit: "cover" }}
                         />
-                        <OverlayBox />
-                      </Box>
                       <TitleBox>{event?.name}</TitleBox>
                     </>
                   )}
-
                 </Paper>
               </Link>
             </Grid>

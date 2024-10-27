@@ -61,7 +61,7 @@ function EventGallery() {
       >
         {event?.name}
       </Typography>
-      <Typography variant="body2">{event?.createdAt}</Typography>
+      <Typography variant="body2">{event?.createdAt?.split("T")[0]}</Typography>
 
       <Typography variant="body2" sx={{ my: 2 }}>
         {event?.description}
@@ -85,7 +85,7 @@ function EventGallery() {
                 ) : (
                   <CardMedia
                     component="video"
-                    controls
+                    
                     style={{ borderRadius: '8px', cursor: 'pointer' }}
                     alt={item.title}
                     height="140"

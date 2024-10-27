@@ -63,7 +63,7 @@ function Events() {
         }
       );
       setMedia(response?.data?.data);
-      setHasMore(response.data.pagination.hasNextPage);
+      setHasMore(response?.data?.pagination?.hasNextPage);
     } catch (error) {
       console.error("Error fetching media:", error.response ? error.response.data : error.message);
     } finally {
@@ -121,8 +121,8 @@ function Events() {
                 <Box sx={{ margin: "20px 0px", borderRadius: "8px" }}>  
                   {event.data[0].type === "Photo" ? (
                     <img
-                      src={`https://delightfulbroadband.com${event.data[0].href}`}
-                      alt={event.name}
+                      src={`https://delightfulbroadband.com${event?.data[0]?.href}`}
+                      alt={event?.name}
                       loading="lazy"
                       style={{
                         width: "100%",
@@ -133,7 +133,7 @@ function Events() {
                     />
                   ) : (
                     <video
-                      src={`https://delightfulbroadband.com${event.data[0].href}`}
+                      src={`https://delightfulbroadband.com${event?.data[0]?.href}`}
                       loading="lazy"
                       style={{
                         width: "100%",
